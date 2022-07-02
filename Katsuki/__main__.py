@@ -1,5 +1,5 @@
 import config
-from Katsuki import Katsuki as bot
+from Katsuki import katsuki
 import Katsuki.plugins
 
 
