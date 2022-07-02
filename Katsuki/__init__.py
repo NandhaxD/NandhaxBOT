@@ -10,6 +10,8 @@ logging.basicConfig(
               logging.StreamHandler()],
     level=logging.INFO)
 
+SESSION = config.SESSION
+API_ID = config.API_ID
+API_HASH = config.API_HASH
 
-
-Kasuki = Client(session_string=config.SESSION, api_id=config.API_ID, api_hash=config.API_HASH, name="Katsuki")
+Kasuki = Client(session_string=SESSION, api_id=API_ID, api_hash=API_HASH, name="Katsuki")
