@@ -1,3 +1,5 @@
+import os 
+import logging
 from pyrogram import Client
 
 # enable logging
