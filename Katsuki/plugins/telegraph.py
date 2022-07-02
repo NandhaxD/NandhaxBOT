@@ -1,3 +1,4 @@
+from telegraph import upload_file
 from pyrogram import filters
 from Katsuki import katsuki
 from config import HANDLER,  OWNER_ID
