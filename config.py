@@ -6,3 +6,5 @@ class config(object):
   API_ID = os.environ.get("API_ID", None)
   API_HASH = os.environ.get("API_HASH", None)
   SESSION = os.environ.get("SESSION", None) 
+  ALIVE_NAME = os.enviorn.get("ALIVE_NAME", "𝙆𝘼𝙏𝙎𝙐𝙆𝙄")
+  OWNER_USERNAME = os.enviorn.get("OWNER_USERNAME", None)
