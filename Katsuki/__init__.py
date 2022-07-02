@@ -10,8 +10,9 @@ logging.basicConfig(
               logging.StreamHandler()],
     level=logging.INFO)
 
-SESSION = config.SESSION
-API_ID = config.API_ID
-API_HASH = config.API_HASH
+
+API_ID = os.environ.get("API_ID", None)
+API_HASH = os.environ.get("API_HASH", None)
+SESSION = os.environ.get("SESSION", None) 
 
 Kasuki = Client(session_string=SESSION, api_id=API_ID, api_hash=API_HASH, name="Katsuki")
