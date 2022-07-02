@@ -1,4 +1,4 @@
-from  config import LOG_GROUP_ID
+from config import LOG_GROUP_ID
 from Katsuki import katsuki, bot
 import Katsuki.plugins
 
