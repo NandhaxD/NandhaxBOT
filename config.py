@@ -2,4 +2,4 @@ class config(object):
   
   LOG_GROUP_ID = -1001696319819
   USER = [5555573352, 1491497760, 2006619406]
-  HANDLER = ["~","."]
+  HANDLER = "~"
