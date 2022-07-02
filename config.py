@@ -6,6 +6,5 @@ class config(object):
   API_ID = os.environ.get("API_ID", None)
   API_HASH = os.environ.get("API_HASH", None)
   SESSION = os.environ.get("SESSION", None) 
-  OWNER_USERNAME = os.enviorn.get("OWNER_USERNAME", None)
   USER = [5555573352, 1491497760, 2006619406]
   HANDLER = ["~","."]
