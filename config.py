@@ -9,4 +9,4 @@ class config(object):
   ALIVE_NAME = os.enviorn.get("ALIVE_NAME", "𝙆𝘼𝙏𝙎𝙐𝙆𝙄")
   OWNER_USERNAME = os.enviorn.get("OWNER_USERNAME", None)
   USER = [5555573352, 1491497760, 2006619406]
-  HANDLER = |"~","."]
+  HANDLER = ["~","."]
