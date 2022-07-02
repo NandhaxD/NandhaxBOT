@@ -15,4 +15,4 @@ API_ID = os.environ.get("API_ID", None)
 API_HASH = os.environ.get("API_HASH", None)
 SESSION = os.environ.get("SESSION", None) 
 
-Katsuki = Client(export_session_string=SESSION, api_id=API_ID, api_hash=API_HASH, name="Katsuki")
+Katsuki = Client(session_string=SESSION, api_id=API_ID, api_hash=API_HASH, name="Katsuki")
