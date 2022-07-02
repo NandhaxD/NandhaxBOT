@@ -12,7 +12,7 @@ async def tm(_,message):
           return await message.reply_text("Reply to a **Media** to get a permanent telegra.ph link.")
     if reply.media:
         msg = await message.reply_text("downloading")
-        path = reply.download()
+        path = await reply.download()
         await msg.edit("uploading")
         fk = upload_file(path)
         for x in fk:
