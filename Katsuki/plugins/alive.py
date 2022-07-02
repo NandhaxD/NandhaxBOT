@@ -1,4 +1,4 @@
-from config import HANDLER, USER
+from config import HANDLER, OWNER
 from pyrogram import filters 
 from Katsuki import katsuki
 
