@@ -18,6 +18,13 @@ async def id(_, m):
                text += f"**ᴍᴇssᴀɢᴇ ɪᴅ**: `{m.id}`"
                await m.reply_text(text=(text))
                return 
+         elif reply.animation:
+               text = f"**ʏᴏᴜʀ ɪᴅ**: `{m.from_user.id}`\n\n"
+               text += f"**ʀᴇᴘʟɪᴇᴅ ɪᴅ**: `{reply.from_user.id}`\n\n"
+               text += f"**ᴄʜᴀᴛ ɪᴅ**: `{m.chat.id}`\n\n"
+               text += f"**ᴍᴇssᴀɢᴇ ɪᴅ**: `{m.id}`\n\n\n"
+               text += f"**ɢɪғ ɪᴅ**: `{reply.animation.file_id}`"
+               await m.reply_text(text=(text)) 
          elif reply.sticker:
                   text = f"**ʏᴏᴜʀ ɪᴅ**: `{m.from_user.id}`\n\n"
                   text += f"**ʀᴇᴘʟɪᴇᴅ ɪᴅ**: `{reply.from_user.id}`\n\n"
@@ -26,11 +33,5 @@ async def id(_, m):
                   text += f"**sᴛɪᴄᴋᴇʀ ɪᴅ**: `{reply.sticker.file_id}`"
                   await m.reply_text(text=(text)) 
                   return 
-         elif reply.animation:
-               text = f"**ʏᴏᴜʀ ɪᴅ**: `{m.from_user.id}`\n\n"
-               text += f"**ʀᴇᴘʟɪᴇᴅ ɪᴅ**: `{reply.from_user.id}`\n\n"
-               text += f"**ᴄʜᴀᴛ ɪᴅ**: `{m.chat.id}`\n\n"
-               text += f"**ᴍᴇssᴀɢᴇ ɪᴅ**: `{m.id}`\n\n\n"
-               text += f"**ɢɪғ ɪᴅ**: `{reply.animation.file_id}`"
-               await m.reply_text(text=(text)) 
-               return 
+         
+               
