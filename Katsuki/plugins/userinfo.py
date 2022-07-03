@@ -54,7 +54,6 @@ async def get_user_info(user, already=False):
     dc_id = user.dc_id
     is_bot = user.is_bot
     photo_id = user.photo.big_file_id if user.photo else None
-    is_dev = user_id in dev_user
     body = { 
         "✪ ID": user_id,
         "✪ DC": dc_id,
@@ -62,7 +61,6 @@ async def get_user_info(user, already=False):
         "✪ Username": [("@" + username) if username else "Null"],
         "✪ Mention": [mention],
         "✪ Bot": is_bot,
-        "✪ Developer": is_dev,
         "✪ Bio": userss.bio,
     }
     caption = section("User info results", body)
