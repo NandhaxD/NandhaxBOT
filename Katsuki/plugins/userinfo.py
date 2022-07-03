@@ -39,13 +39,13 @@ async def cinfo(_, m):
             await katsuki.send_photo(m.chat.id,photo,caption=(text))
             await message.delete()
               
-no_reply_user = """ ╒═══「 Appraisal results:\n 」
+no_reply_user = """ ╒═══「 Appraisal results:」
 **ɪᴅ**: `{}`
 **ᴅᴄ**: `{}`
-**ғɪʀsᴛ ɴᴀᴍᴇ**: `{}`
-**ᴜsᴇʀɴᴀᴍᴇ**: `{}`
+**ғɪʀsᴛ ɴᴀᴍᴇ**: {}
+**ᴜsᴇʀɴᴀᴍᴇ**: @{}
 **ᴘᴇʀᴍᴀʟɪɴᴋ**: {}
-**ᴜsᴇʀʙɪᴏ**: `{}`
+**ᴜsᴇʀʙɪᴏ**: {}
 """
 
               
@@ -58,14 +58,26 @@ async def info(_, m):
             id_user = m.text.split(" ")[1]
             msg =  await m.reply_text("ɪɴғᴏʀᴍᴀᴛɪᴏɴ ɢᴀᴛʜᴇʀɪɴɢ!")
             info = await katsuki.get_chat(id_user)
-            user_id = info.id
-            first_name = info.first_name
-            username = info.username
-            user_bio = info.bio
-            dc_id = info.dc_id
-            user_link = f"[link](tg://user?id={user_id})"
-            await m.reply_text(text=no_reply_user.format(user_id,
-            dc_id, first_name, username, user_link, user_bio))
+            if info.photo:
+                   file_id = info.photo.big_file_id
+               photo = katsuki.download_media(file_id)
+               user_id = info.id
+               first_name = info.first_name
+               username = info.username 
+               user_bio = info.bio
+               dc_id = info.dc_id
+               user_link = f"[link](tg://user?id={user_id})"
+               await katsuki.send_photo(m.chat.id,photo,text=no_reply_user.format(user_id,
+               dc_id, first_name, username, user_link, user_bio))
+            elif not info.photo:
+                   user_id = info.id
+                   first_name = info.first_name
+                   username = info.username 
+                   user_bio = info.bio
+                   dc_id = info.dc_id
+                   user_link = f"[link](tg://user?id={user_id})"
+                   await m.reply_text(text=no_reply_user.format(user_id,
+                      dc_id, first_name, username, user_link, user_bio))
             await msg.delete()
 
 
