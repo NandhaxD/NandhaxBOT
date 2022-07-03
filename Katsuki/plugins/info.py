@@ -121,7 +121,7 @@ async def info(_, message):
     try:
         user = await bot.get_users(get_user)
     except PeerIdInvalid:
-        await message.edit("`ɴᴏ  ɪᴅᴇᴀ  ᴡʜᴏ  ᴛʜɪs  ᴜsᴇʀ  ɪs.  ʏᴏᴜ'ʟʟ  ʙᴇ  ᴀʙʟᴇ  ᴛᴏ  ɪɴᴛᴇʀᴀᴄᴛ  ᴡɪᴛʜ  ᴛʜᴇᴍ  ɪғ  ʏᴏᴜ  ʀᴇᴘʟʏ  ᴛᴏ  ᴛʜᴀᴛ  ᴘᴇʀsᴏɴ's  ᴍᴇssᴀɢᴇ  ɪɴsᴛᴇᴀᴅ,  ᴏʀ  ғᴏʀᴡᴀʀᴅ  ᴏɴᴇ  ᴏғ  ᴛʜᴀᴛ  ᴜsᴇʀ's  ᴍᴇssᴀɢᴇs.`")
+        await message.edit_text("`ɴᴏ  ɪᴅᴇᴀ  ᴡʜᴏ  ᴛʜɪs  ᴜsᴇʀ  ɪs.  ʏᴏᴜ'ʟʟ  ʙᴇ  ᴀʙʟᴇ  ᴛᴏ  ɪɴᴛᴇʀᴀᴄᴛ  ᴡɪᴛʜ  ᴛʜᴇᴍ  ɪғ  ʏᴏᴜ  ʀᴇᴘʟʏ  ᴛᴏ  ᴛʜᴀᴛ  ᴘᴇʀsᴏɴ's  ᴍᴇssᴀɢᴇ  ɪɴsᴛᴇᴀᴅ,  ᴏʀ  ғᴏʀᴡᴀʀᴅ  ᴏɴᴇ  ᴏғ  ᴛʜᴀᴛ  ᴜsᴇʀ's  ᴍᴇssᴀɢᴇs.`")
         await asyncio.sleep(2)
         await message.delete()
         return
