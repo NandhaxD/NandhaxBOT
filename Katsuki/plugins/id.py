@@ -19,6 +19,8 @@ async def id(_, m):
                _reply += f"**ʀᴇᴘʟɪᴇᴅ ɪᴅ**: `{reply.from_user.id}`\n\n"
                _reply += f"**ᴄʜᴀᴛ ɪᴅ**: `{m.chat.id}`\n\n"
                _reply += f"**ʀᴇᴘʟɪᴇᴅ ᴍsɢ ɪᴅ**: `{reply.id}`\n\n"
+         if reply.sender_chat:
+                _reply += f"\n\n**ᴄʜᴀɴɴᴇʟ  ɪᴅ**: `{reply.sender_chat.id}`"
          if reply.sticker:
                 _reply += f"**sᴛɪᴄᴋᴇʀ ɪᴅ**: `{reply.sticker.file_id}`"
          elif reply.animation:
@@ -27,8 +29,6 @@ async def id(_, m):
                 _reply += f"**ᴅᴏᴄᴜᴍᴇɴᴛ ɪᴅ**: `{reply.document.file_id}`"
          elif reply.photo:
                 _reply += f"**ᴘʜᴏᴛᴏ ɪᴅ**: `{reply.photo.file_id}`"
-         elif reply.sender_chat:
-                _reply += f"**ᴄʜᴀɴɴᴇʟ  ɪᴅ**: `{reply.sender_chat.id}`"
          await reply.reply_text(_reply)
          await m.delete()
                    
