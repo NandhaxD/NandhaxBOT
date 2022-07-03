@@ -64,7 +64,7 @@ async def info(_, m):
             user_bio = info.bio
             dc_id = info.dc_id
             user_link = f"[link](tg://user?id={user_id})"
-            await m.reply_text(text=no_reply_user.format(user.id,
+            await m.reply_text(text=no_reply_user.format(user_id,
             dc_id, first_name, username, user_link, user_bio))
             await msg.delete()
 
