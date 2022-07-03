@@ -3,7 +3,7 @@ from config import HANDLER, OWNER_ID
 from Katsuki import katsuki
 
 
-@katsuki.on_message(filters.command("webss",perfixes=HANDLER) & filters.user(OWNER_ID))
+@katsuki.on_message(filters.command("webss",prefixes=HANDLER) & filters.user(OWNER_ID))
 async def take_ss(_, message):
     try:
         if len(message.command) != 2:
