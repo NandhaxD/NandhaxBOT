@@ -9,12 +9,12 @@ from config import HANDLER, OWNER_ID
 async def id(_, m):
          reply = m.reply_to_message
          _reply = ""
-         if not reply:
+         if not reply.from_user:
                no_reply = f"**ʏᴏᴜʀ ɪᴅ**: `{m.from_user.id}`\n\n"
                no_reply += f"**ᴄʜᴀᴛ ɪᴅ**: `{m.chat.id}`\n\n"
                no_reply += f"**ᴍᴇssᴀɢᴇ ɪᴅ**: `{m.id}`"
                await reply.reply_text(text=(no_reply)) 
-         if reply:
+         if reply.from_user:
                _reply += f"**ʏᴏᴜʀ ɪᴅ**: `{m.from_user.id}`\n\n"
                _reply += f"**ʀᴇᴘʟɪᴇᴅ ɪᴅ**: `{reply.from_user.id}`\n\n"
                _reply += f"**ᴄʜᴀᴛ ɪᴅ**: `{m.chat.id}`\n\n"
@@ -27,6 +27,10 @@ async def id(_, m):
                 _reply += f"**ᴅᴏᴄᴜᴍᴇɴᴛ ɪᴅ**: `{reply.document.file_id}`"
          elif reply.photo:
                 _reply += f"**ᴘʜᴏᴛᴏ ɪᴅ**: `{reply.photo.file_id}`"
+         if reply.sender_chat:
+                _reply += f"**ᴄʜᴀɴɴᴇʟ  ɪᴅ**: `{reply.sender_chat.id}`"
+         elif not reply.sender_chat:
+                 _reply += f"**ᴄʜᴀɴɴᴇʟ  ɪᴅ**: `{m.sender_chat.id}`"
          await reply.reply_text(_reply)
          await m.delete()
                    
