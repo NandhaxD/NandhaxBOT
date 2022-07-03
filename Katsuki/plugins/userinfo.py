@@ -67,7 +67,7 @@ async def info(_, m):
                    user_bio = info.bio
                    dc_id = info.dc_id
                    user_link = f"[link](tg://user?id={user_id})"
-                   await katsuki.send_photo(m.chat.id,photo,text=no_reply_user.format(user_id,
+                   await katsuki.send_photo(m.chat.id,photo,caption=no_reply_user.format(user_id,
                        dc_id, first_name, username, user_link, user_bio))
             elif not info.photo:
                    user_id = info.id
