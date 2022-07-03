@@ -1,14 +1,25 @@
-import time 
 import random 
 from config import HANDLER, OWNER_ID, KATSUKI, ALIVE_TEXT
-from pyrogram import filters, __version__ as pyrover
-from Katsuki import katsuki, get_readable_time, StartTime
-
+from pyrogram import filters
+from pyrogram.types import Message
+from Katsuki import katsuki
+from platform import python_version as pyver
+      
 @katsuki.on_message(filters.command("alive",prefixes=HANDLER) & filters.user(OWNER_ID))
-async def alive(_, m):
-    start_time = time.time()
-    img = "https://telegra.ph/file/fb6a277156b2956f26aa1.jpg"
-    end_time = time.time()
-    ping_time = round((end_time - start_time) * 1000, 3)
-    uptime = get_readable_time((time.time() - StartTime))
-    await m.reply_photo(random.choice(KATSUKI),caption=ALIVE_TEXT.format(pyrover,start_time,end_time,uptime))
+async def restart(client, m: Message):
+    await m.delete()
+    accha = await m.reply("⚡")
+    await asyncio.sleep(1)
+    await accha.edit("ᴀʟɪᴠɪɴɢ..")
+    await asyncio.sleep(0.1)
+    await accha.edit("ᴀʟɪᴠɪɴɢ...")
+    await accha.delete()
+    await asyncio.sleep(0.1)
+    umm = await m.reply_sticker("CAACAgUAAx0CachlIwABBRm8Yrh0oK50UFlHP-z3nZwnGMZvlicAArIDAAJUc9lXWW-s0PALuYIpBA")
+    await umm.delete()
+    await asyncio.sleep(0.1)
+    await m.reply_photo(
+        random.choice(KATSUKI),
+        caption=ALIVE_TEXT,
+    )      
+      
