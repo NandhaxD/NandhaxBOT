@@ -13,7 +13,7 @@ async def id(_, m):
                no_reply = f"**ʏᴏᴜʀ ɪᴅ**: `{m.from_user.id}`\n\n"
                no_reply += f"**ᴄʜᴀᴛ ɪᴅ**: `{m.chat.id}`\n\n"
                no_reply += f"**ᴍᴇssᴀɢᴇ ɪᴅ**: `{m.id}`"
-               await m.reply_text(text=(no_reply)) 
+               await reply.reply_text(text=(no_reply)) 
          if reply:
                _reply += f"**ʏᴏᴜʀ ɪᴅ**: `{m.from_user.id}`\n\n"
                _reply += f"**ʀᴇᴘʟɪᴇᴅ ɪᴅ**: `{reply.from_user.id}`\n\n"
@@ -23,7 +23,8 @@ async def id(_, m):
                 _reply += f"**sᴛɪᴄᴋᴇʀ ɪᴅ**: `{reply.sticker.file_id}`"
          elif reply.animation:
                 _reply += f"**ᴀɴɪᴍᴀᴛɪᴏɴ ɪᴅ**: `{reply.animation.file_id}`"
-         await m.reply_text(_reply)
+         await reply.reply_text(_reply)
+         await m.delete()
                    
 
          
