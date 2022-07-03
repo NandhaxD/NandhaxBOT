@@ -32,7 +32,7 @@ async def id(_, m):
                await reply.reply_text(text=(_id))
          if reply:
                  _id += f"**ʀᴇᴩʟɪᴇᴅ ᴜsᴇʀ ɪᴅ**:\n\n"
-         file_info = get_id(message.reply_to_message)
+         file_info = get_id(m.reply_to_message)
          elif file_info:
                    _id += f"**{file_info.message_type}**:\n{file_info.file_id}"
          await m.reply_text(_id) 
