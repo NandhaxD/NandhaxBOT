@@ -1,8 +1,8 @@
-import config
+from config import OWNER_ID, HANDLER
 from Katsuki import bot, katsuki
 from pyrogram filters 
 
-@katsuki.on_message(filters.command("cinfo",prefixes=CMD) & filters.user(dev_user))
+@katsuki.on_message(filters.command("cinfo",prefixes=HANDLER) & filters.user(OWNER_ID))
 async def cinfo(_, m):
        reply = m.reply_to_message
        if not reply:
