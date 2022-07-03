@@ -60,7 +60,7 @@ async def info(_, m):
             info = await katsuki.get_chat(id_user)
             if info.photo:
                    file_id = info.photo.big_file_id
-                   photo = katsuki.download_media(file_id)
+                   photo = await katsuki.download_media(file_id)
                    user_id = info.id
                    first_name = info.first_name
                    username = info.username 
