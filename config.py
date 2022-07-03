@@ -1,6 +1,16 @@
 LOG_GROUP_ID = -1001696319819
 OWNER_ID = [5555573352, 1491497760, 2006619406]
 HANDLER = ["~", ".",","]
+ALIVE_TEXT = """ **~  ᴋᴀᴛsᴜᴋɪ  sʏsᴛᴇᴍ:**
+
+~ **ᴠᴇʀsɪᴏɴ:** {}
+~ **sᴛᴀʀᴛ ᴛɪᴍᴇ:** {}
+~ **ᴇɴᴅ ᴛɪᴍᴇ:** {}
+~ **ᴜᴘᴛɪᴍᴇ:** {}
+
+( [ᴍᴀᴅᴇ  ʙʏ  ᴋᴀᴛsᴜᴋɪ ᴛᴇᴀᴍ](https://t.me/team_katsuki) )
+"""
+
 KATSUKI = [ 
 "https://telegra.ph/file/ceb6116f965695779c287.jpg",
 "https://telegra.ph/file/ccddf45a1243f807722ee.jpg",
