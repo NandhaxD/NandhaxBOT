@@ -19,7 +19,7 @@ async def id(_, m):
                _reply += f"**ʀᴇᴘʟɪᴇᴅ ɪᴅ**: `{reply.from_user.id}`\n\n"
                _reply += f"**ᴄʜᴀᴛ ɪᴅ**: `{m.chat.id}`\n\n"
                _reply += f"**ᴍᴇssᴀɢᴇ ɪᴅ**: `{m.id}`"
-         elif reply.sticker:
+         if reply.sticker:
                 _reply += f"**sᴛɪᴄᴋᴇʀ ɪᴅ**: `{reply.sticker.file_id}`"
          await m.reply_text(_reply)
                    
