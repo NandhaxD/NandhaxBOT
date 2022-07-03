@@ -18,7 +18,7 @@ async def id(_, m):
                text += f"**ᴍᴇssᴀɢᴇ ɪᴅ**: `{m.id}`"
                await reply.reply_text(text=(text))
                return 
-         elif reply.animation:
+         elif reply.animation and not reply.sticker:
                text = f"**ʏᴏᴜʀ ɪᴅ**: `{m.from_user.id}`\n\n"
                text += f"**ʀᴇᴘʟɪᴇᴅ ɪᴅ**: `{reply.from_user.id}`\n\n"
                text += f"**ᴄʜᴀᴛ ɪᴅ**: `{m.chat.id}`\n\n"
