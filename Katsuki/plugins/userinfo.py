@@ -43,8 +43,8 @@ async def cinfo(_, m):
               
 async def get_user_info(user, already=False):
     if not already:
-        userss = await bot.get_chat(user)
-        user = await bot.get_users(user)
+        userss = await katsuki.get_chat(user)
+        user = await katsuki.get_users(user)
     if not user.first_name:
         return ["Deleted account", None]
     user_id = user.id
