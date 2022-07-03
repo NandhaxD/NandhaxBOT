@@ -13,6 +13,6 @@ def alive(_, m):
     end_time = time.time()
     ping_time = round((end_time - start_time) * 1000, 3)
     uptime = get_readable_time((time.time() - StartTime))
-    m.reply_photo(random.choice(KATSUKI),caption=ALIVE_TEXT.format(you.mention,pyrover,ping_time,uptime))
+    m.reply_animation(KATSUKI,caption=ALIVE_TEXT.format(you.mention,pyrover,ping_time,uptime))
 
       
