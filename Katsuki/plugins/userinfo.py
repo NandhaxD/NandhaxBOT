@@ -1,6 +1,6 @@
 from config import OWNER_ID, HANDLER
 from Katsuki import bot, katsuki
-from pyrogram filters 
+from pyrogram import filters 
 
 @katsuki.on_message(filters.command("cinfo",prefixes=HANDLER) & filters.user(OWNER_ID))
 async def cinfo(_, m):
