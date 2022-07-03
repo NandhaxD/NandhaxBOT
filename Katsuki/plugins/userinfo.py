@@ -52,8 +52,8 @@ no_reply_user = """ ╒═══「 Appraisal results:」
 **ᴄᴏᴍᴍᴏɴ ᴄʜᴀᴛs:** {}
 """
 
-async def commons(bot: katsuki, get_user):
-    common = await bot.send(
+async def commons(katsuki, get_user):
+    common = await katsuki.send(
         functions.messages.commonsChats(
             user_id=await bot.resolve_peer(get_user), max_id=0, limit=0
         )
