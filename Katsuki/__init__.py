@@ -18,3 +18,4 @@ BOT_TOKEN = os.environ.get("BOT_TOKEN", None)
 
 bot = Client("KatsukiBot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN, plugins=dict(root="{}/plugins".format(__name__)))
 katsuki = Client(session_string=SESSION, api_id=API_ID, api_hash=API_HASH, name="Katsuki")
+you = katsuki.get_me()
