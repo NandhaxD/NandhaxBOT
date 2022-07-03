@@ -1,11 +1,3 @@
-from Katsuki import katsuki
-
-you = katsuki.get_me()
-
-USERNAME = you.username
-FIRST_NAME = you.first_name
-ID = you.id
-
 
 LOG_GROUP_ID = -1001696319819
 OWNER_ID = [5555573352, 1491497760, 2006619406]
