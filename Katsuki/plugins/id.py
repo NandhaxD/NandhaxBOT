@@ -18,9 +18,11 @@ async def id(_, m):
                _reply += f"**ʏᴏᴜʀ ɪᴅ**: `{m.from_user.id}`\n\n"
                _reply += f"**ʀᴇᴘʟɪᴇᴅ ɪᴅ**: `{reply.from_user.id}`\n\n"
                _reply += f"**ᴄʜᴀᴛ ɪᴅ**: `{m.chat.id}`\n\n"
-               _reply += f"**ᴍᴇssᴀɢᴇ ɪᴅ**: `{m.id}`"
+               _reply += f"**ᴍᴇssᴀɢᴇ ɪᴅ**: `{m.id}`\n\n"
          if reply.sticker:
                 _reply += f"**sᴛɪᴄᴋᴇʀ ɪᴅ**: `{reply.sticker.file_id}`"
+         elif reply.animation:
+                _reply += f"**ᴀɴɪᴍᴀᴛɪᴏɴ ɪᴅ**: `{reply.animation.file_id}`"
          await m.reply_text(_reply)
                    
 
