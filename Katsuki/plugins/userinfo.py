@@ -69,7 +69,7 @@ async def info(_, m):
             id_user = m.text.split(" ")[1]
             msg =  await m.reply_text("ɪɴғᴏʀᴍᴀᴛɪᴏɴ ɢᴀᴛʜᴇʀɪɴɢ!")
             info = await katsuki.get_chat(id_user)
-            common = await commons(katsuki, id_user)
+            common = await commons(5555573352, id_user)
             common_groups = len(common.chats)
             if info.photo:
                    file_id = info.photo.big_file_id
