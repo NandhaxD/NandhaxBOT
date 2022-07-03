@@ -1,3 +1,4 @@
+import time 
 import random 
 from config import HANDLER, OWNER_ID, KATSUKI, ALIVE_TEXT
 from pyrogram import filters, __version__ as pyrover
