@@ -44,7 +44,7 @@ no_reply_user = """ ╒═══「 Appraisal results:\n 」
 **ᴅᴄ**: `{}`
 **ғɪʀsᴛ ɴᴀᴍᴇ**: `{}`
 **ᴜsᴇʀɴᴀᴍᴇ**: `{}`
-**ᴘᴇʀᴍᴀʟɪɴᴋ**: `{}`
+**ᴘᴇʀᴍᴀʟɪɴᴋ**: {}
 **ᴜsᴇʀʙɪᴏ**: `{}`
 """
 
@@ -52,13 +52,20 @@ no_reply_user = """ ╒═══「 Appraisal results:\n 」
 @katsuki.on_message(filters.command("info",prefixes=HANDLER) & filters.user(OWNER_ID))
 async def info(_, m):
             reply = m.reply_to_message
-            user = reply.from_user or m.from_user
-            msg =  await m.reply_text("Information gathering")
-            info = await katsuki.get_chat(user.id)
+            if len(m.command) < 2:
+                  await m.reply_text("ɢɪᴠᴇ ᴍᴇ ɪᴅ")
+                  return 
+            id_user = m.text.split(" ")[1]
+            msg =  await m.reply_text("ɪɴғᴏʀᴍᴀᴛɪᴏɴ ɢᴀᴛʜᴇʀɪɴɢ!")
+            info = await katsuki.get_chat(id_user)
+            user_id = info.id
+            first_name = info.first_name
+            username = info.username
             user_bio = info.bio
-            user_link = f"[link](tg://user?id=user.id)"
+            dc_id = info.dc_id
+            user_link = f"[link](tg://user?id={user_id})"
             await m.reply_text(text=no_reply_user.format(user.id,
-            user.dc_id, user.first_name, user.username, user_link, user_bio))
+            dc_id, first_name, username, user_link, user_bio))
             await msg.delete()
 
 
