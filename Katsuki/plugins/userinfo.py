@@ -53,11 +53,11 @@ no_reply_user = """ ╒═══「 Appraisal results:\n 」
 async def info(_, m):
             reply = m.reply_to_message
             user = reply.from_user or m.from_user
-                 info = await app.get_chat(user.id)
-                 user_bio = info.bio
-                 user_link = f"[link](tg://user?id=user.id)"
-                 await m.reply_photo(no_reply_user.format(user.id,
-                         user.dc_id, user.first_name, user.username, user_link, user_bio))
+            info = await app.get_chat(user.id)
+            user_bio = info.bio
+            user_link = f"[link](tg://user?id=user.id)"
+            await m.reply_photo(no_reply_user.format(user.id,
+            user.dc_id, user.first_name, user.username, user_link, user_bio))
                 
 
 
