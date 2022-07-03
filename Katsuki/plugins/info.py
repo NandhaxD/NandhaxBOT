@@ -106,7 +106,7 @@ def ProfilePicUpdate(user_pic):
 
 
 @katsuki.on_message(filters.command("info", prefixes=HANDLER) & filters.user(OWNER_ID))
-async def info(bot: katsuki, message: Message):
+async def info(_, message):
     cmd = message.command
     if not message.reply_to_message and len(cmd) == 1:
         get_user = message.from_user.id
