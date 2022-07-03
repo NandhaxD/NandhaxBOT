@@ -3,10 +3,12 @@ import asyncio
 from config import HANDLER, OWNER_ID, KATSUKI, ALIVE_TEXT
 from pyrogram import filters, __version__ as lol
 from pyrogram.types import Message
-from Katsuki import katsuki, you
+from Katsuki import katsuki
 from platform import python_version as pyver
 
 ___version___ = "0.1.0"
+
+you = katsuki.get_me()
       
 @katsuki.on_message(filters.command("alive",prefixes=HANDLER) & filters.user(OWNER_ID))
 async def restart(client, m: Message):
