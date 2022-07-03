@@ -9,7 +9,7 @@ from config import HANDLER, OWNER_ID
 async def id(_, m):
          reply = m.reply_to_message
          _reply = ""
-         if not reply.from_user: 
+         if not reply: 
                no_reply = f"**ʏᴏᴜʀ ɪᴅ**: `{m.from_user.id}`\n\n"
                no_reply += f"**ᴄʜᴀᴛ ɪᴅ**: `{m.chat.id}`\n\n"
                no_reply += f"**ᴍsɢ ɪᴅ**: `{m.id}`"
