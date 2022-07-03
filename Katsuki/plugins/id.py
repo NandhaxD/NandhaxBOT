@@ -1,5 +1,6 @@
 from Katsuki import katsuki 
 from pyrogram import filters 
+from pyrogram.types import Message
 from config import HANDLER, OWNER_ID
 
 
@@ -38,3 +39,7 @@ async def id(_, m):
          await m.reply_text(_id) 
                    
          
+
+
+
+#twst
