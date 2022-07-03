@@ -1,9 +1,6 @@
 from config import OWNER_ID, HANDLER
 from Katsuki import katsuki
-from Katsuki.utils import section
 from pyrogram import filters 
-from pyrogram.raw import functions
-from pyrogram.errors import PeerIdInvalid
 
 @katsuki.on_message(filters.command("cinfo",prefixes=HANDLER) & filters.user(OWNER_ID))
 async def cinfo(_, m):
@@ -42,6 +39,7 @@ async def cinfo(_, m):
             await message.delete()
               
 no_reply_user = """ ╒═══「 Appraisal results:」
+
 **ɪᴅ**: `{}`
 **ᴅᴄ**: `{}`
 **ғɪʀsᴛ ɴᴀᴍᴇ**: {}
@@ -49,17 +47,9 @@ no_reply_user = """ ╒═══「 Appraisal results:」
 **ᴘᴇʀᴍᴀʟɪɴᴋ**: {}
 **ᴜsᴇʀʙɪᴏ**: {}
 
-**ᴄᴏᴍᴍᴏɴ ᴄʜᴀᴛs:** {}
+( [ᴍᴀᴅᴇ  ʙʏ  ᴋᴀᴛsᴜᴋɪ ᴛᴇᴀᴍ](https://t.me/team_katsuki) )
 """
 
-async def commons(bot: katsuki, get_user):
-    common = await bot.send(
-        functions.messages.commonsChats(
-            user_id=await bot.resolve_peer(get_user), max_id=0, limit=0
-        )
-    )
-    return common
-              
 @katsuki.on_message(filters.command("info",prefixes=HANDLER) & filters.user(OWNER_ID))
 async def info(_, m):
             reply = m.reply_to_message
@@ -69,8 +59,6 @@ async def info(_, m):
             id_user = m.text.split(" ")[1]
             msg =  await m.reply_text("ɪɴғᴏʀᴍᴀᴛɪᴏɴ ɢᴀᴛʜᴇʀɪɴɢ!")
             info = await katsuki.get_chat(id_user)
-            common = await commons(5555573352, id_user)
-            common_groups = len(common.chats)
             if info.photo:
                    file_id = info.photo.big_file_id
                    photo = await katsuki.download_media(file_id)
@@ -81,7 +69,7 @@ async def info(_, m):
                    dc_id = info.dc_id
                    user_link = f"[link](tg://user?id={user_id})"
                    await katsuki.send_photo(m.chat.id,photo,caption=no_reply_user.format(user_id,
-                       dc_id, first_name, username, user_link, user_bio, common_groups))
+                       dc_id, first_name, username, user_link, user_bio))
             elif not info.photo:
                    user_id = info.id
                    first_name = info.first_name
@@ -90,7 +78,7 @@ async def info(_, m):
                    dc_id = info.dc_id
                    user_link = f"[link](tg://user?id={user_id})"
                    await m.reply_text(text=no_reply_user.format(user_id,
-                      dc_id, first_name, username, user_link, user_bio, common_groups))
+                      dc_id, first_name, username, user_link, user_bio))
             await msg.delete()
 
 
