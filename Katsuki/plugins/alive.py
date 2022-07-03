@@ -1,4 +1,5 @@
 import random 
+import asyncio
 from config import HANDLER, OWNER_ID, KATSUKI, ALIVE_TEXT
 from pyrogram import filters
 from pyrogram.types import Message
