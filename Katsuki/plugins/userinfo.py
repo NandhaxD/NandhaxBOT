@@ -56,7 +56,7 @@ async def info(_, m):
             info = await app.get_chat(user.id)
             user_bio = info.bio
             user_link = f"[link](tg://user?id=user.id)"
-            await m.reply_photo(no_reply_user.format(user.id,
+            await m.reply_text(text=no_reply_user.format(user.id,
             user.dc_id, user.first_name, user.username, user_link, user_bio))
                 
 
