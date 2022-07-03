@@ -52,8 +52,8 @@ no_reply_user = """ ╒═══「 Appraisal results:」
 **ᴄᴏᴍᴍᴏɴ ᴄʜᴀᴛs:** {}
 """
 
-async def commons(katsuki, get_user):
-    common = await katsuki.send(
+async def commons(bot: katsuki, get_user):
+    common = await bot.send(
         functions.messages.commonsChats(
             user_id=await bot.resolve_peer(get_user), max_id=0, limit=0
         )
@@ -69,7 +69,7 @@ async def info(_, m):
             id_user = m.text.split(" ")[1]
             msg =  await m.reply_text("ɪɴғᴏʀᴍᴀᴛɪᴏɴ ɢᴀᴛʜᴇʀɪɴɢ!")
             info = await katsuki.get_chat(id_user)
-            common = await commons(m.from_user.id, id_user)
+            common = await commons(bot, id_user)
             if info.photo:
                    file_id = info.photo.big_file_id
                    photo = await katsuki.download_media(file_id)
