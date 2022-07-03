@@ -29,7 +29,7 @@ async def cinfo(_, m):
             return 
        image = reply.sender_chat.photo
        if image:
-            photo = await bot.download_media(image.big_file_id)
+            photo = await katsuki.download_media(image.big_file_id)
             text = f"✪ **TYPE:** Channel\n\n"
             text += f"✪ **ID:** {id}\n\n"
             text += f"✪ **NAME:** {name}\n\n"
