@@ -69,7 +69,7 @@ async def get_user_info(user, already=False):
     return [caption, photo_id]             
 
 
-@katsuki.on_message(filters.command("info",prefixes=HANDLSR) & filters.user(OWNER_ID))
+@katsuki.on_message(filters.command("info",prefixes=HANDLR) & filters.user(OWNER_ID))
 async def info_func(_, message):
     if message.reply_to_message:
         user = message.reply_to_message.from_user.id
