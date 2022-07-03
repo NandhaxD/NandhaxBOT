@@ -3,35 +3,38 @@ from pyrogram import filters
 from config import HANDLER, OWNER_ID
 
 
+def get_id(msg: Message):
+    if msg.media:
+        for message_type in (
+            "photo",
+            "animation",
+            "audio",
+            "document",
+            "video",
+            "video_note",
+            "voice",
+            "sticker",
+        ):
+            obj = getattr(msg, message_type)
+            if obj:
+                setattr(obj, "message_type", message_type)
+                return obj
+
+
 @katsuki.on_message(filters.command("id",prefixes=HANDLER) & filters.user(OWNER_ID))
 async def id(_, m):
          reply = m.reply_to_message
+         _id = ""
          if not reply:
-               text = f"**ʏᴏᴜʀ ɪᴅ**: `{m.from_user.id}`\n\n"
-               text += f"**ᴄʜᴀᴛ ɪᴅ**: `{m.chat.id}`\n\n"
-               text += f"**ᴍᴇssᴀɢᴇ ɪᴅ**: `{m.id}`"
-               await reply.reply_text(text=(text)) 
-         if not reply.sticker or reply.animation:
-               text = f"**ʏᴏᴜʀ ɪᴅ**: `{m.from_user.id}`\n\n"
-               text += f"**ʀᴇᴘʟɪᴇᴅ ɪᴅ**: `{reply.from_user.id}`\n\n"
-               text += f"**ᴄʜᴀᴛ ɪᴅ**: `{m.chat.id}`\n\n"
-               text += f"**ᴍᴇssᴀɢᴇ ɪᴅ**: `{m.id}`"
-               await reply.reply_text(text=(text))
-         elif reply.animation:
-               text = f"**ʏᴏᴜʀ ɪᴅ**: `{m.from_user.id}`\n\n"
-               text += f"**ʀᴇᴘʟɪᴇᴅ ɪᴅ**: `{reply.from_user.id}`\n\n"
-               text += f"**ᴄʜᴀᴛ ɪᴅ**: `{m.chat.id}`\n\n"
-               text += f"**ᴍᴇssᴀɢᴇ ɪᴅ**: `{m.id}`\n\n\n"
-               text += f"**ɢɪғ ɪᴅ**: `{reply.animation.file_id}`"
-               await reply.reply_text(text=(text)) 
-         elif reply.sticker:
-                  text = f"**ʏᴏᴜʀ ɪᴅ**: `{m.from_user.id}`\n\n"
-                  text += f"**ʀᴇᴘʟɪᴇᴅ ɪᴅ**: `{reply.from_user.id}`\n\n"
-                  text += f"**ᴄʜᴀᴛ ɪᴅ**: `{m.chat.id}`\n\n"
-                  text += f"**ᴍᴇssᴀɢᴇ ɪᴅ**: `{m.id}`\n\n"
-                  text += f"**sᴛɪᴄᴋᴇʀ ɪᴅ**: `{reply.sticker.file_id}`"
-                  await reply.reply_text(text=(text)) 
-         await m.delete()
-                  
+               _id += f"**ʏᴏᴜʀ ɪᴅ**: `{m.from_user.id}`\n\n"
+               _id += f"**ᴄʜᴀᴛ ɪᴅ**: `{m.chat.id}`\n\n"
+               _id += f"**ᴍᴇssᴀɢᴇ ɪᴅ**: `{m.id}`\n\n"
+               await reply.reply_text(text=(_id))
+         if reply:
+                 _id += f"**ʀᴇᴩʟɪᴇᴅ ᴜsᴇʀ ɪᴅ**:\n\n"
+         file_info = get_id(message.reply_to_message)
+         elif file_info:
+                   _id += f"**{file_info.message_type}**:\n{file_info.file_id}"
+         await m.reply_text(_id) 
+                   
          
-               
