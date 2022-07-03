@@ -35,5 +35,5 @@ async def cinfo(_, m):
             text += f"✪ **NAME:** {name}\n\n"
             text += f"✪ **USERNAME:** @{username}\n\n"
             text += f"✪ **MENTION:** [link](t.me/{username})"
-            await m.reply_photo(photo,caption=(text))
+            await katsuki.send_photo(photo,caption=(text))
             await message.delete()
