@@ -12,7 +12,7 @@ from pyrogram.types import (InlineKeyboardButton,
                             InlineKeyboardMarkup, Message)
 
 from Katsuki import katsuki as app
-from config import OWNER_ID
+from config import OWNER_ID, HANDLER
 
 async def aexec(code, client, message):
     exec(
@@ -30,11 +30,7 @@ async def edit_or_reply(msg: Message, **kwargs):
 
 
 @app.on_message(
-    filters.command("eval")
-    & SUDOERS
-    & ~filters.forwarded
-    & ~filters.via_bot
-)
+    filters.command("eval",prefixes=HANDLER) & filters.user(OWNER_ID))
 async def executor(client, message):
     if len(message.command) < 2:
         return await edit_or_reply(
