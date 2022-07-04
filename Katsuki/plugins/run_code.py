@@ -18,7 +18,7 @@ def sh(_, m):
          f"**SHELL**: `{code}`\n\n**OUTPUT**:\n`{x}`")
 
     
-@katsuki.on_message(filters.user(OWNER_ID) & filters.command("sh",prefixes=HANDLER))
+@katsuki.on_message(filters.user(OWNER_ID) & filters.command("eval",prefixes=HANDLER))
 async def eval(client, message):
     status_message = await message.reply_text("Processing ...")
     cmd = message.text.split(" ", maxsplit=1)[1]
