@@ -2,6 +2,7 @@ from pyrogram.types import Message
 from pyrogram import filters
 from Katsuki import katsuki, aiohttpsession as aiosession
 from asyncio import gather
+from config ( OWNER_ID, HANDLER) 
 from io import BytesIO
 
 
@@ -13,7 +14,7 @@ async def make_carbon(code):
     return image
 
 
-@katsuki.on_message(filters.command("carbon"))
+@katsuki.on_message(filters.command("carbon",prefixes=HANDLER) & filters.user(OWNER_ID))
 async def carbon_func(_, message):
     if not message.reply_to_message:
         return await message.reply_text("ʀᴇᴩʟʏ ᴛᴏ ᴀ ᴛᴇxᴛ ᴛᴏ ɢᴇɴᴇʀᴀᴛᴇ ᴄᴀʀʙᴏɴ.")
