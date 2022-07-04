@@ -6,7 +6,7 @@ from config import ( OWNER_ID, HANDLER)
 def join_chat(_, m):
           link =  m.text.split(" ")[1]
           katsuki.join_chat(link)
-          chat = await katsuki.get_chat(link)
+          chat = katsuki.get_chat(link)
           username = chat.username
           m.reply_text(f"Successfully joined @{username}")
 
