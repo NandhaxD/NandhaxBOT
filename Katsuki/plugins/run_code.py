@@ -13,9 +13,9 @@ from pyrogram import filters
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("logs",prefixes=HANDLER))
 def logs(_, m):
        logs = run("tail logs.txt")
-       msg = m.reply_text("ʟᴏɢs sᴇɴᴅɪɴɢ...")
-       m.reply_document("logs.text")
-       msg.delete()
+       msg = m.reply_text("ɢᴇᴛᴛɪɴɢ ʟᴏɢs...")
+       msg.edit_text(logs)
+  
 
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("sh",prefixes=HANDLER))
 def sh(_, m):
