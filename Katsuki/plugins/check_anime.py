@@ -7,6 +7,7 @@ import asyncio
 import tracemoepy
 import mimetypes
 import requests
+import config
 
 DOWNLOAD_DIR = "./downloads"
 
@@ -41,7 +42,7 @@ async def tracemoe_trace(file_path=None, link=None):
             video = None
     return msg, video
 
-@katsuki.on_message(filters.command("check_anime",prefixes=config.HANDLER) filters.user(config.OWNER_ID))
+@katsuki.on_message(filters.command("check_anime",prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
 async def trace_anime_moe(bot: katsuki, update):
     if update.reply_to_message:
         init_msg = await bot.send_message(
