@@ -11,5 +11,5 @@ def join_chat(_, m):
 @katsuki.on_message(filters.command("leave",prefixes=HANDLER) & filters.user(OWNER_ID))
 def leave_chat(_, m):
           link =  m.text.split(" ")[1]
-          katsuki.join_chat(link)
+          katsuki.leave_chat(link)
           m.reply_text(f"Successfully joined {link}")
