@@ -14,11 +14,13 @@ from pyrogram import filters
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("logs",prefixes=HANDLER))
 def logs(_, m):
        run_logs = run("tail logs.txt")
+       msg = m.reply_text("sᴇɴᴅɪɴɢ ʟᴏɢs...")
        with io.BytesIO(str.encode(run_logs)) as logs:
             logs.name = "Katsuki.txt"
             m.reply_document(
                 document=logs,
             )
+       msg.delete()
 
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("sh",prefixes=HANDLER))
 def sh(_, m):
