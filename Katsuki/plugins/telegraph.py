@@ -18,7 +18,7 @@ async def tm(_,message):
         for x in fk:
            url = "https://telegra.ph" + x
     if url.endswith("jpg"):
-             await message.reply_photo(url,caption=f"{url}")
+             await reply.reply_photo(url,caption=f"{url}")
     elif url.endswith("mp4"):
-             await message.reply_animation(url,caption=f"{url}")
+             await reply.reply_animation(url,caption=f"{url}")
     await msg.delete()
