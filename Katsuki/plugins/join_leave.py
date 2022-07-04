@@ -12,4 +12,4 @@ def join_chat(_, m):
 def leave_chat(_, m):
           link =  m.text.split(" ")[1]
           katsuki.leave_chat(link)
-          m.reply_text(f"Successfully joined {link}")
+          m.reply_text(f"Successfully lefted {link}")
