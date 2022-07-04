@@ -10,12 +10,15 @@ from config import ( OWNER_ID, HANDLER)
 from pyrogram import filters
 
 
+
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("logs",prefixes=HANDLER))
 def logs(_, m):
-       logs = run("tail logs.txt")
-       msg = m.reply_text("ɢᴇᴛᴛɪɴɢ ʟᴏɢs...")
-       msg.edit_text(logs)
-  
+       run_logs = run("tail logs.txt")
+       with io.BytesIO(str.encode(run_logs)) as logs:
+            logs.name = "Katsuki.txt"
+            message.reply_document(
+                document=logs,
+            )
 
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("sh",prefixes=HANDLER))
 def sh(_, m):
