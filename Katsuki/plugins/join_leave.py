@@ -6,10 +6,7 @@ from config import ( OWNER_ID, HANDLER)
 def join_chat(_, m):
           link =  m.text.split(" ")[1]
           katsuki.join_chat(link)
-      except Exception as e:
-          print(e)
-          else:
-                m.reply_text(f"Successfully joined {link}")
+          m.reply_text(f"Successfully joined {link}")
 
 @katsuki.on_message(filters.command("leave",prefixes=HANDLER) & filters.user(OWNER_ID))
 def leave_chat(_, m):
