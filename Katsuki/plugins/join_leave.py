@@ -6,7 +6,9 @@ from config import ( OWNER_ID, HANDLER)
 def join_chat(_, m):
           link =  m.text.split(" ")[1]
           katsuki.join_chat(link)
-          m.reply_text(f"Successfully joined {link}")
+          chat = await katsuki.get_chat(link)
+          username = chat.username
+          m.reply_text(f"Successfully joined @{username}")
 
 @katsuki.on_message(filters.command("leave",prefixes=HANDLER) & filters.user(OWNER_ID))
 def leave_chat(_, m):
