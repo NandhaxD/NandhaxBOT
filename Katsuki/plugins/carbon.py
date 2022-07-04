@@ -2,7 +2,7 @@ from pyrogram.types import Message
 from pyrogram import filters
 from Katsuki import katsuki, aiohttpsession as aiosession
 from asyncio import gather
-from config ( OWNER_ID, HANDLER) 
+from config import OWNER_ID, HANDLER
 from io import BytesIO
 
 
