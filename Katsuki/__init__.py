@@ -1,8 +1,9 @@
-import config
+
 import os 
 import time
 import logging
 from pyrogram import Client
+from aiohttp import ClientSession
 
 # enable logging
 logging.basicConfig(
@@ -40,6 +41,9 @@ API_ID = os.environ.get("API_ID", None)
 API_HASH = os.environ.get("API_HASH", None)
 SESSION = os.environ.get("SESSION", None) 
 BOT_TOKEN = os.environ.get("BOT_TOKEN", None) 
+
+
+aiohttpsession = ClientSession()
 
 bot = Client("KatsukiBot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN, plugins=dict(root="{}/plugins".format(__name__)))
 katsuki = Client(session_string=SESSION, api_id=API_ID, api_hash=API_HASH, name="Katsuki")
