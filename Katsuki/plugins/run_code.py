@@ -10,6 +10,13 @@ from config import ( OWNER_ID, HANDLER)
 from pyrogram import filters
 
 
+@katsuki.on_message(filters.user(OWNER_ID) & filters.command("logs",prefixes=HANDLER))
+def logs(_, m):
+       logs = run("tail logs.txt")
+       msg = m.reply_text("ʟᴏɢs sᴇɴᴅɪɴɢ...")
+       m.reply_document("logs.text")
+       msg.delete()
+
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("sh",prefixes=HANDLER))
 def sh(_, m):
     code = m.text.replace(m.text.split(" ")[0], "")
