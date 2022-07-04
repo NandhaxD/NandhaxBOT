@@ -20,10 +20,10 @@ hack_ani = [
 async def hack(_, m):
          reply = m.reply_to_message
          if not reply:
-               await m.reply_text("reply to someone hack!")
+               await m.reply_text("ʀᴇᴘʟʏ ᴛᴏ sᴏᴍᴇᴏɴᴇ ʜᴀᴄᴋ!")
                return 
          if reply:
-                 msg = await m.reply_text("Started Hacking...")
+                 msg = await m.reply_text("ʜᴀᴄᴋ ʙᴇᴇɴ sᴛᴀʀᴛᴇᴅ...")
                  for x in range(9):
                        await msg.edit_text(hack_ani[x%9])
                        time.sleep(1)
