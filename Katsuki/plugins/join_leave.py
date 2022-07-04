@@ -7,11 +7,16 @@ def join_chat(_, m):
           link =  m.text.split(" ")[1]
           katsuki.join_chat(link)
           chat = katsuki.get_chat(link)
-          username = chat.username
-          m.reply_text(f"Successfully joined @{username}")
+          name = chat.title
+          m.reply_text(f"Successfully joined @{name}")
 
 @katsuki.on_message(filters.command("leave",prefixes=HANDLER) & filters.user(OWNER_ID))
 def leave_chat(_, m):
           link =  m.text.split(" ")[1]
           katsuki.leave_chat(link)
-          m.reply_text(f"Successfully lefted {link}")
+          chat = katsuki.get_chat(link)
+          name = chat.title
+          m.reply_text(f"Successfully left @{name}")
+
+
+#ok I made it
