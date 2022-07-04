@@ -34,7 +34,7 @@ async def edit_or_reply(msg: Message, **kwargs):
 async def executor(client, message):
     if len(message.command) < 2:
         return await edit_or_reply(
-            message, text="**ᴡʜᴀᴛ ʏᴏᴜ ᴡᴀɴɴᴀ ᴇxᴇᴄᴜᴛᴇ ʙᴀʙʏ ?**"
+            message, text="**ᴡʜᴀᴛ ʏᴏᴜ ᴡᴀɴɴᴀ ᴇxᴇᴄᴜᴛᴇ?**"
         )
     try:
         cmd = message.text.split(" ", maxsplit=1)[1]
@@ -69,46 +69,15 @@ async def executor(client, message):
         with open(filename, "w+", encoding="utf8") as out_file:
             out_file.write(str(evaluation.strip()))
         t2 = time()
-        keyboard = InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(
-                        text="⏳",
-                        callback_data=f"runtime {t2-t1} Seconds",
-                    )
-                ]
-            ]
-        )
         await message.reply_document(
             document=filename,
             caption=f"**INPUT:**\n`{cmd[0:980]}`\n\n**OUTPUT:**\n`Attached Document`",
-            quote=False,
-            reply_markup=keyboard,
+            quote=False
         )
         await message.delete()
         os.remove(filename)
     else:
         t2 = time()
-        keyboard = InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(
-                        text="⏳",
-                        callback_data=f"runtime {round(t2-t1, 3)} Seconds",
-                    ),
-                    InlineKeyboardButton(
-                        text="🗑",
-                        callback_data=f"forceclose abc|{message.from_user.id}",
-                    ),
-                ]
-            ]
-        )
         await edit_or_reply(
-            message, text=final_output, reply_markup=keyboard
-        )
+            message, text=final_output)
 
-
-@app.on_callback_query(filters.regex(r"runtime"))
-async def runtime_func_cq(_, cq):
-    runtime = cq.data.split(None, 1)[1]
-    await cq.answer(runtime, show_alert=True)
