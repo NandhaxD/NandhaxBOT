@@ -1,7 +1,7 @@
 
 
 import pyrogram
-from katsuki import BOT_USERNAME, DOWNLOAD_DIR
+from Katsuki import katsuki
 from pyrogram import Client, filters
 import asyncio
 import tracemoepy
@@ -48,7 +48,7 @@ async def trace_anime_moe(bot: katsuki, update):
         init_msg = await bot.send_message(
             chat_id=update.chat.id,
             text="Downloading .......",
-            reply_to_message_id=update.message_id
+            reply_to_message_id=update.message.id
         )
         file_path = await bot.download_media(
             message=update.reply_to_message,
@@ -56,13 +56,13 @@ async def trace_anime_moe(bot: katsuki, update):
         )
         await bot.edit_message_text(
             chat_id=update.chat.id,
-            message_id=init_msg.message_id,
+            message_id=init_msg.message.id,
             text="Scanning........Uwu........"
         )
         msg, video_link = await tracemoe_trace(file_path)
         await bot.edit_message_text(
             chat_id=update.chat.id,
-            message_id=init_msg.message_id,
+            message_id=init_msg.message.id,
             text=msg
         )
         if video_link:
