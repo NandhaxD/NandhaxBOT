@@ -1,4 +1,5 @@
 aiofiles
-pyrogram
+aiohttp
+pyrogram 
 tgcrypto
 telegraph 
