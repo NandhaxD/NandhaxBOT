@@ -16,7 +16,7 @@ def logs(_, m):
        run_logs = run("tail logs.txt")
        with io.BytesIO(str.encode(run_logs)) as logs:
             logs.name = "Katsuki.txt"
-            message.reply_document(
+            m.reply_document(
                 document=logs,
             )
 
