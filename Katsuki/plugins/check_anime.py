@@ -47,8 +47,7 @@ async def trace_anime_moe(bot: katsuki, update):
     if update.reply_to_message:
         init_msg = await bot.send_message(
             chat_id=update.chat.id,
-            text="Downloading .......",
-            reply_to_message_id=update.message_id
+            text="Downloading ......."
         )
         file_path = await bot.download_media(
             message=update.reply_to_message,
