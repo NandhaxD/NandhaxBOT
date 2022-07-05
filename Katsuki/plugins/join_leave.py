@@ -5,7 +5,7 @@ from config import ( OWNER_ID, HANDLER)
 @katsuki.on_message(filters.command("join",prefixes=HANDLER) & filters.user(OWNER_ID))
 def join_chat(_, m):
           if len(m.command) < 2:
-               await m.reply_text("ɢɪᴠᴇ ᴀ ᴊᴏɪɴ ɢʀᴏᴜᴘ ᴜsᴇʀɴᴀᴍᴇ ᴏʀ ɪɴᴠɪᴛᴇ  ʟɪɴᴋ")
+               m.reply_text("ɢɪᴠᴇ ᴀ ᴊᴏɪɴ ɢʀᴏᴜᴘ ᴜsᴇʀɴᴀᴍᴇ ᴏʀ ɪɴᴠɪᴛᴇ  ʟɪɴᴋ")
                return 
           link =  m.text.split(" ")[1]
           katsuki.join_chat(link)
@@ -16,7 +16,7 @@ def join_chat(_, m):
 @katsuki.on_message(filters.command("leave",prefixes=HANDLER) & filters.user(OWNER_ID))
 def leave_chat(_, m):
           if len(m.command) < 2:
-               await m.reply_text("ɢɪᴠᴇ ᴀ ʟᴇғᴛ ɢʀᴏᴜᴘ ᴜsᴇʀɴᴀᴍᴇ ᴏʀ ɪɴᴠɪᴛᴇ  ʟɪɴᴋ")
+               m.reply_text("ɢɪᴠᴇ ᴀ ʟᴇғᴛ ɢʀᴏᴜᴘ ᴜsᴇʀɴᴀᴍᴇ ᴏʀ ɪɴᴠɪᴛᴇ  ʟɪɴᴋ")
                return 
           link =  m.text.split(" ")[1]
           katsuki.leave_chat(link)
