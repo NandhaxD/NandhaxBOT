@@ -47,6 +47,4 @@ async def member_ban(client: Client, message: Message):
                     return
         else:
             await message.edit_text("**ᴘᴇʀᴍɪssɪᴏɴ ᴅᴇɴɪᴇᴅ**")
-            return
-    else:
-        await message.delete()
+            
