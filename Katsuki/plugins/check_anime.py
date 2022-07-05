@@ -55,13 +55,11 @@ async def trace_anime_moe(bot: katsuki, update):
         )
         await bot.edit_message_text(
             chat_id=update.chat.id,
-            message_id=init_msg.message.id,
             text="Scanning........Uwu........"
         )
         msg, video_link = await tracemoe_trace(file_path)
         await bot.edit_message_text(
             chat_id=update.chat.id,
-            message_id=init_msg.message.id,
             text=msg
         )
         if video_link:
