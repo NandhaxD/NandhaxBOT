@@ -72,7 +72,6 @@ async def logo(_, message):
         fill=(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)),
     )
     file_name = "LogoBy@KatsukiBoy.png"
-    await katsuki.send_chat_action(message.chat.id, "upload_photo")
     img.save(file_name, "png")
     if message.reply_to_message:
         await katsuki.send_photo(
