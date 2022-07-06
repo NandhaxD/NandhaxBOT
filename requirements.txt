@@ -1,6 +1,7 @@
 aiofiles
 aiohttp
 pyrogram 
+Pillow
 gpytranslate
 tgcrypto
 telegraph 
