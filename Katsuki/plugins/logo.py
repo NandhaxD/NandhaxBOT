@@ -69,7 +69,7 @@ async def logo(_, message):
         ((image_widthz - w) / 2, (image_heightz - h) / 2),
         text,
         font=font,
-        fill=(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)),
+        fill=(random.randint(0, 150), random.randint(0, 150), random.randint(0, 150)),
     )
     file_name = "LogoBy@KatsukiBoy.png"
     img.save(file_name, "png")
