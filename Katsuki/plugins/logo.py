@@ -2,7 +2,6 @@ import os
 import wget
 import random
 
-from handlers.help import *
 from pyrogram import Client, filters
 from pyrogram.types import *
 
