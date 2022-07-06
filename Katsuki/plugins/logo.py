@@ -59,7 +59,7 @@ async def logo(_, message):
         )
         return
     font_ = choose_random_font()
-    img = Image.open(".Katsuki/katsuki_help/IMG_20220701_185623_542.jpg")
+    img = Image.open("./Katsuki/katsuki_help/IMG_20220701_185623_542.jpg")
     draw = ImageDraw.Draw(img)
     font = ImageFont.truetype(font_, 220)
     image_widthz, image_heightz = img.size
