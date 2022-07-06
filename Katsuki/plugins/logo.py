@@ -36,7 +36,7 @@ def choose_random_font():
     random_s = random.choice(fonts_)
     return wget.download(random_s)
 
-def get_text(_, message) -> [None, str]:
+def get_text(message) -> [None, str]:
     """Extract Text From Commands"""
     text_to_return = message.text
     if message.text is None:
