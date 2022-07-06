@@ -84,7 +84,6 @@ async def logo(_, message):
         await katsuki.send_photo(
             message.chat.id, photo=file_name, caption="Made by Katsuki"
         )
-    await katsuki.send_chat_action(message.chat.id, "cancel")
     await event.delete()
     if os.path.exists(file_name):
         os.remove(file_name)
