@@ -10,7 +10,7 @@ from Katsuki import katsuki
 import config
 
 
-async def edit_or_reply(message, text, parse_mode="md"):
+async def edit_or_reply(message, text):
     """Edit Message If Its From Self, Else Reply To Message, (Only Works For Sudo's)"""
     if not message:
         return await message.edit(text)
@@ -36,7 +36,7 @@ def choose_random_font():
     random_s = random.choice(fonts_)
     return wget.download(random_s)
 
-def get_text(message: Message) -> [None, str]:
+def get_text(_, message) -> [None, str]:
     """Extract Text From Commands"""
     text_to_return = message.text
     if message.text is None:
