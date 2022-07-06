@@ -10,6 +10,21 @@ from helpers.basic import edit_or_reply, get_text
 from PIL import Image, ImageDraw, ImageFont
 
 
+async def edit_or_reply(message, text, parse_mode="md"):
+    """Edit Message If Its From Self, Else Reply To Message, (Only Works For Sudo's)"""
+    if not message:
+        return await message.edit(text)
+    if not message.from_user:
+        return await message.edit(text)
+    if message.from_user.id:
+        if message.reply_to_message:
+            kk = message.reply_to_message.message.id
+            return await message.reply_text(
+                text, reply_to_message_id=kk
+            )
+        return await message.reply_text(text)
+    return await message.edit(text)
+
 def choose_random_font():
     fonts_ = [
         "https://github.com/DevsExpo/FONTS/raw/main/Ailerons-Typeface.otf",
@@ -21,6 +36,18 @@ def choose_random_font():
     random_s = random.choice(fonts_)
     return wget.download(random_s)
 
+def get_text(message: Message) -> [None, str]:
+    """Extract Text From Commands"""
+    text_to_return = message.text
+    if message.text is None:
+        return None
+    if " " in text_to_return:
+        try:
+            return message.text.split(None, 1)[1]
+        except IndexError:
+            return None
+    else:
+        return None
 
 @Client.on_message(filters.command('rlogo', ["."]) & filters.me)
 async def rlogo(client: Client, message: Message):
@@ -32,7 +59,7 @@ async def rlogo(client: Client, message: Message):
         )
         return
     font_ = choose_random_font()
-    img = Image.open(".Katsuki/katsuki_help/")
+    img = Image.open(".Katsuki/katsuki_help/IMG_20220701_185623_542.jpg")
     draw = ImageDraw.Draw(img)
     font = ImageFont.truetype(font_, 220)
     image_widthz, image_heightz = img.size
@@ -52,10 +79,10 @@ async def rlogo(client: Client, message: Message):
             message.chat.id,
             photo=file_name,
             caption="Made by Katsuki",
-            reply_to_message_id=message.reply_to_message.message_id,
+            reply_to_message_id=message.reply_to_message.message.id,
         )
     else:
-        await client.send_photo(
+        await katsuki.send_photo(
             message.chat.id, photo=file_name, caption="Made by Katsuki"
         )
     await katsuki.send_chat_action(message.chat.id, "cancel")
