@@ -5,9 +5,10 @@ import random
 from handlers.help import *
 from pyrogram import Client, filters
 from pyrogram.types import *
-from helpers.basic import edit_or_reply, get_text
 
 from PIL import Image, ImageDraw, ImageFont
+from Katsuki import katsuki
+import config
 
 
 async def edit_or_reply(message, text, parse_mode="md"):
@@ -49,8 +50,8 @@ def get_text(message: Message) -> [None, str]:
     else:
         return None
 
-@Client.on_message(filters.command('rlogo', ["."]) & filters.me)
-async def rlogo(client: Client, message: Message):
+@katsuki.on_message(filters.command("logo",prefixes=config.HANDLER) & filters.me)
+async def logo(_, message):
     event = await edit_or_reply(message, "`Processing.....`")
     text = get_text(message)
     if not text:
