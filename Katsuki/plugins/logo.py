@@ -1,5 +1,5 @@
 import config 
-import requests 
+from requests import get 
 from Katsuki import katsuki
 from pyrogram import filters 
 
