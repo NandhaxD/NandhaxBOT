@@ -4,7 +4,7 @@ from Katsuki import katsuki
 from pyrogram import filters 
 
 
-@katsuki.on_message(filters.command("logo",prefixes=config.HANDLER) &  filters.user(OWNER_ID))
+@katsuki.on_message(filters.command("logo",prefixes=config.HANDLER) &  filters.user(config.OWNER_ID))
 async def logomaker(_, m):
              if len(m.command) < 2:
                      await m.reply_text("ɢɪᴠᴇ ᴍᴇ ᴀ ᴛᴇxᴛ ᴛᴏ ɢᴇɴᴇʀᴀᴛᴇ ʟᴏɢᴏ")
