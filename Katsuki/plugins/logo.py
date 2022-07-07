@@ -12,4 +12,4 @@ async def logomaker(_, m):
              msg = await m.reply_text("ʏᴏᴜʀ ʟᴏɢᴏ ᴀs ɢᴇɴᴇʀᴀᴛɪɴɢ")
              image = get((f"https://single-developers.up.railway.app/logohq?name={text}").replace(' ','%20')).history[1].url
              await m.reply_photo(image)
-             msg.delete()
+             await msg.delete()
