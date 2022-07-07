@@ -10,6 +10,6 @@ async def logomaker(_, m):
                      await m.reply_text("ɢɪᴠᴇ ᴍᴇ ᴀ ᴛᴇxᴛ ᴛᴏ ɢᴇɴᴇʀᴀᴛᴇ ʟᴏɢᴏ")
              text = m.text.split(None, 1)[1]
              msg = await m.reply_text("ʏᴏᴜʀ ʟᴏɢᴏ ᴀs ɢᴇɴᴇʀᴀᴛɪɴɢ")
-             image = get(f"https://single-developers.up.railway.app/logo?name={text}").replace(' ','%20')).history[1].url
+             image = get((f"https://single-developers.up.railway.app/logohq?name={text}").replace(' ','%20')).history[1].url
              await m.reply_photo(image)
              msg.delete()
