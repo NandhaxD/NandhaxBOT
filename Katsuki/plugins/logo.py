@@ -1,5 +1,5 @@
 import config 
-from requests import get 
+import requests 
 from Katsuki import katsuki
 from pyrogram import filters 
 
@@ -10,6 +10,7 @@ async def logomaker(_, m):
                      await m.reply_text("ɢɪᴠᴇ ᴍᴇ ᴀ ᴛᴇxᴛ ᴛᴏ ɢᴇɴᴇʀᴀᴛᴇ ʟᴏɢᴏ")
              text = m.text.split(None, 1)[1]
              msg = await m.reply_text("ʏᴏᴜʀ ʟᴏɢᴏ ᴀs ɢᴇɴᴇʀᴀᴛɪɴɢ")
-             image = get((f"https://single-developers.up.railway.app/logohq?name={text}").replace(' ','%20')).history[1].url
-             await m.reply_photo(image)
+             image = requests.get((f"https://single-developers.up.railway.app/logohq?name={text}").replace(" ","%20")).history[1].url
+             if image:
+                 await m.reply_photo(image)
              await msg.delete()
