@@ -14,4 +14,4 @@ ALIVE_TEXT = """ **~  ᴋᴀᴛsᴜᴋɪ  sʏsᴛᴇᴍ:**
 ( [ᴍᴀᴅᴇ  ʙʏ  ᴋᴀᴛsᴜᴋɪ ᴛᴇᴀᴍ](https://t.me/team_katsuki) )
 """
 
-KATSUKI = "https://telegra.ph/file/438c244bd22b358f4ef35.mp4"
+KATSUKI = "https://telegra.ph/file/c16460c0b23b46f34bd8b.mp4"
