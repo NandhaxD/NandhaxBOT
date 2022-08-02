@@ -19,6 +19,6 @@ async def id(_, m):
          if not reply: 
                await m.reply_text("Wʜᴏᴍ sʜᴏᴜʟᴅ ɪ ʙʟᴏᴄᴋ ᴋɪᴅᴅᴏ") 
          if reply:
-            await reply.reply_text(f'Bʟᴏᴄᴋᴇᴅ ᴛʜɪs ɴɪɢɢᴀ {reply.from_user.first_name}')
+            await reply.reply_text(f'Uɴʙʟᴏᴄᴋᴇᴅ ᴛʜɪs ɴɪɢɢᴀ {reply.from_user.first_name}')
             await app.unblock_user(reply.from_user.id)
             await m.delete()
