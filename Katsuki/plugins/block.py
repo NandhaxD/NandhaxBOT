@@ -13,7 +13,7 @@ async def id(_, m):
             await m.delete()
             
             
-@katsuki.on_message(filters.command("block",prefixes=HANDLER) & filters.user(OWNER_ID))
+@katsuki.on_message(filters.command("unblock",prefixes=HANDLER) & filters.user(OWNER_ID))
 async def id(_, m):
          reply = m.reply_to_message
          if not reply: 
