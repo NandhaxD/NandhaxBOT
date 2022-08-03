@@ -1,6 +1,7 @@
 from Katsuki import katsuki
 from pyrogram import filters
 import time
+import config 
 
 hack_ani = [
                 "`Hacking... 0%\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `\n\n\n  TERMINAL:\nDownloading Bruteforce-Telegram-0.1.tar.gz (9.3 kB)",
@@ -15,7 +16,7 @@ hack_ani = [
             ]
 
 
-@katsuki.on_message(filters.command("hack",prefixes=HANDLER) & filters.user(OWNER_ID))
+@katsuki.on_message(filters.command("hack",prefixes=config.HANDLER) & filters.user(OWNER_ID))
 async def hack(_, m):
          reply = m.reply_to_message
          if not reply:
@@ -26,7 +27,7 @@ async def hack(_, m):
                  for x in range(9):
                        await msg.edit_text(hack_ani[x%9])
                        time.sleep(1)
-                       await msg.edit_text(f"**Sᴜᴄᴄᴇssғᴜʟʟʏ ʜᴀᴄᴋᴇᴅ!**\n[{reply.from_user.first_name}](tg://user?id={reply.from_user.id})")
+                       await msg.edit_text(f"**Sᴜᴄᴄᴇssғᴜʟʟʏ Hᴀᴄᴋᴇᴅ!**\n[{reply.from_user.first_name}](tg://user?id={reply.from_user.id})")
 
 love_ani = [
              "1 ❤️ love story",
@@ -45,7 +46,7 @@ love_ani = [
 ]
 
 
-@katsuki.on_message(filters.command("love",prefixes=HANDLER) & filters.user(OWNER_ID))
+@katsuki.on_message(filters.command("love",config.prefixes=HANDLER) & filters.user(OWNER_ID))
 async def love(_, m):
          msg = await m.reply_text("💑")
          for x in range(13):
