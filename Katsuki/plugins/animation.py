@@ -46,7 +46,7 @@ love_ani = [
 ]
 
 
-@katsuki.on_message(filters.command("love",config.prefixes=HANDLER) & filters.user(OWNER_ID))
+@katsuki.on_message(filters.command("love",prefixes=config.HANDLER) & filters.user(OWNER_ID))
 async def love(_, m):
          msg = await m.reply_text("💑")
          for x in range(13):
