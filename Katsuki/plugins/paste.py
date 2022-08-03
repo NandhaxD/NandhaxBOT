@@ -34,8 +34,7 @@ async def ezup(content):
     )
     return link
 
-HASTEBIN_URL = "https://www.toptal.com/developers/hastebin/documents"
-HASTEBIN = "https://www.toptal.com/developers/hastebin/{}"
+
 
 @katsuki.on_message(filters.command("paste",prefixes=HANDLER) & filters.user(OWNER_ID))
 async def paste(_, m):
@@ -60,8 +59,5 @@ async def paste(_, m):
           text = reply.text or reply.caption
           spacebin_url = spacebin(text)
           link = await ezup(text)
-          key = requests.post(HASTEBIN_URL, data=text.encode("UTF-8"), ).json()
-          key = key.get("key") 
-          url = HASTEBIN.format(key)
-          caption = f"[SPACEBIN]({spacebin_url}) | [EZUP.DEV]({link})\n         [HASTEBIN]({url})"
+          caption = f"[SPACEBIN]({spacebin_url}) | [EZUP.DEV]({link})"
           await m.reply_text(text=caption,disable_web_page_preview=True)
