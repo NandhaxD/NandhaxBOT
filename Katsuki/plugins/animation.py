@@ -16,7 +16,7 @@ hack_ani = [
             ]
 
 
-@katsuki.on_message(filters.command("hack",prefixes=config.HANDLER) & filters.user(OWNER_ID))
+@katsuki.on_message(filters.command("hack",prefixes=config.HANDLER) & filters.user(config.OWNER_ID)) # filters.me 
 async def hack(_, m):
          reply = m.reply_to_message
          if not reply:
