@@ -83,7 +83,7 @@ async def info(_, m):
 
 
 
-@CLIENT1.on_message(filters.command("cname",prefixes=HANDLER) & filters.user(OWNER_ID))
+@katsuki.on_message(filters.command("cname",prefixes=HANDLER) & filters.user(OWNER_ID))
 async def setname(c: katsuki, e: Message): 
       KATSUKI = "".join(e.text.split(maxsplit=1)[1:]).split(" ", 2)
       if len(KATSUKI) == 1:
