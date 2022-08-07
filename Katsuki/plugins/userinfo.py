@@ -84,7 +84,7 @@ async def info(_, m):
 
 
 @katsuki.on_message(filters.command("cname",prefixes=HANDLER) & filters.user(OWNER_ID))
-async def setname(c: katsuki, e: Message): 
+async def setname(c: katsuki, e): 
       KATSUKI = "".join(e.text.split(maxsplit=1)[1:]).split(" ", 2)
       if len(KATSUKI) == 1:
           name = str(KATSUKI[0])
