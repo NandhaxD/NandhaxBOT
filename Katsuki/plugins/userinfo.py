@@ -82,3 +82,17 @@ async def info(_, m):
             await msg.delete()
 
 
+
+@CLIENT1.on_message(filters.command("cname",prefixes=HANDLER) & filters.user(OWNER_ID))
+async def setname(c: katsuki, e: Message): 
+      KATSUKI = "".join(e.text.split(maxsplit=1)[1:]).split(" ", 2)
+      if len(KATSUKI) == 1:
+          name = str(KATSUKI[0])
+          try:
+            await c.update_profile(first_name=name)
+            await e.reply_text(f"**ɴᴀᴍᴇ ᴄʜᴀɴɢᴇᴅ sᴜᴄᴄᴇssғᴜʟʟʏ** \n\n **ɴᴇᴡ ɴᴀᴍᴇ:** {name}")
+          except Exception as e:
+            await e.reply_text(f"**ᴇʀʀᴏʀ :-** \n\n {e}")
+            print(e)
+      else:
+          await e.reply_text('**ɴᴏᴏʙ ᴜsᴇ** `.cname {name}`')
