@@ -37,13 +37,13 @@ def get_readable_time(seconds: int) -> str:
     return ping_time
                   
 
-API_ID = os.environ.get("API_ID", None)
-API_HASH = os.environ.get("API_HASH", None)
-SESSION = os.environ.get("SESSION", None) 
-BOT_TOKEN = os.environ.get("BOT_TOKEN", None) 
+API_ID = os.getenv("API_ID")
+API_HASH = os.getenv("API_HASH")
+SESSION = os.getenv("SESSION") 
+BOT_TOKEN = os.getenv("BOT_TOKEN") 
 
 
 aiohttpsession = ClientSession()
 
-bot = Client("KatsukiBot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN, plugins=dict(root="{}/plugins".format(__name__)))
-katsuki = Client(session_string=SESSION, api_id=API_ID, api_hash=API_HASH, name="Katsuki")
+bot = Client(name="KatsukiBot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN, plugins=dict(root="Katsuki/plugins"),)
+katsuki = Client(name="Katsuki", session_string=SESSION, api_id=API_ID, api_hash=API_HASH, plugins=dict(root="Katsuki/plugins"),)
