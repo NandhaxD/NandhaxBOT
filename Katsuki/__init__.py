@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO, handlers=[logging.FileHandler('logs.txt'
               logging.StreamHandler()], format=FORMAT)
 
 
-
+StartTime = time.time()
 
 def get_readable_time(seconds: int) -> str:
     count = 0
