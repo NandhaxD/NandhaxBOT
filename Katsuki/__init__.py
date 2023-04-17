@@ -3,18 +3,14 @@ import os
 import time
 import logging
 from pyrogram import Client
-from aiohttp import ClientSession
 
-# enable logging
-logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[logging.FileHandler('logs.txt'),
-              logging.StreamHandler()],
-    level=logging.INFO)
+FORMAT = "[Katsuki]: %(message)s"
 
-#bot =  [uptime,starttime,endtime]
+logging.basicConfig(level=logging.INFO, handlers=[logging.FileHandler('logs.txt'),
+              logging.StreamHandler()], format=FORMAT)
 
-StartTime = time.time()
+
+
 
 def get_readable_time(seconds: int) -> str:
     count = 0
@@ -40,10 +36,5 @@ def get_readable_time(seconds: int) -> str:
 API_ID = os.getenv("API_ID")
 API_HASH = os.getenv("API_HASH")
 SESSION = os.getenv("SESSION") 
-BOT_TOKEN = os.getenv("BOT_TOKEN") 
 
-
-aiohttpsession = ClientSession()
-
-bot = Client(name="KatsukiBot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN, plugins=dict(root="Katsuki/plugins"),)
-katsuki = Client(name="Katsuki", session_string=SESSION, api_id=API_ID, api_hash=API_HASH, plugins=dict(root="Katsuki/plugins"),)
+katsuki = Client(name="Katsuki", session_string=SESSION, api_id=API_ID, api_hash=API_HASH, plugins=dict(root="Katsuki"),)
