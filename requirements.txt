@@ -1,5 +1,3 @@
-aiofiles
-aiohttp
 pyrogram 
 Pillow
 gpytranslate
