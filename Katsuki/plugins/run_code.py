@@ -10,17 +10,26 @@ from config import ( OWNER_ID, HANDLER)
 from pyrogram import filters
 
 
+async def aexec(code, client, message):
+    exec(
+        "async def __aexec(client, message): "
+        + "".join(f"\n {l_}" for l_ in code.split("\n"))
+    )
+    return await locals()["__aexec"](client, message)
+
+
 
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("logs",prefixes=HANDLER))
 async def logs(_, message):
        run_logs = run("tail logs.txt")
        msg = await message.reply_text("processing...")
+       thumb_id =./Katsuki/katsuki_help/IMG_20220701_185623_542.jpg"
        with io.BytesIO(str.encode(run_logs)) as logs:
             logs.name = "Katsuki.txt"
             return await message.reply_document(
-                document=logs,
+                document=logs, thumb=thumb_id
             )
-       await msg.delete()
+       return await msg.delete()
 
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("sh",prefixes=HANDLER))
 async def sh(_, message):
@@ -77,13 +86,6 @@ async def eval(client, message):
                 document=out_file, caption=cmd, disable_notification=True
             )
     else:
-        await reply_to_.reply_text(final_output)
-    await status_message.delete()
+        return await status_message.edit(final_output)
 
 
-async def aexec(code, client, message):
-    exec(
-        "async def __aexec(client, message): "
-        + "".join(f"\n {l_}" for l_ in code.split("\n"))
-    )
-    return await locals()["__aexec"](client, message)
