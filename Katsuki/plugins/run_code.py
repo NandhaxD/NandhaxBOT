@@ -23,7 +23,7 @@ async def aexec(code, client, message):
 async def logs(_, message):
        run_logs = run("tail logs.txt")
        msg = await message.reply_text("processing...")
-       thumb_id =./Katsuki/katsuki_help/IMG_20220701_185623_542.jpg"
+       thumb_id = "./Katsuki/katsuki_help/IMG_20220701_185623_542.jpg"
        with io.BytesIO(str.encode(run_logs)) as logs:
             logs.name = "Katsuki.txt"
             return await message.reply_document(
@@ -39,7 +39,7 @@ async def sh(_, message):
          f"**SHELL**: `{code}`\n\n**OUTPUT**:\n`{x}`")
 
     
-@katsuki.on_message(filters.user(OWNER_ID) & filters.command("eval",prefixes=HANDLER))
+@katsuki.on_message(filters.user(OWNER_ID) & filters.command("e",prefixes=HANDLER))
 async def eval(client, message):
     status_message = await message.reply_text("Analyzing Code...")
     cmd = message.text.split(message.text.split()[0])[1]
