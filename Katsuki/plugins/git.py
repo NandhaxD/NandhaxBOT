@@ -29,4 +29,5 @@ async def git(_, message):
 
     await message.reply_photo(f"{user}.jpg", caption=data)
     os.remove(f"{user}.jpg")
-     
+    await message.delete()
+    return 
