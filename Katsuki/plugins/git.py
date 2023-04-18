@@ -1,8 +1,9 @@
 from pyrogram import filters 
 from Katsuki import katsuki 
-import config
 from requests import get
+
 import os
+import config
 
 @katsuki.on_message(filters.user(config.OWNER_ID) & filters.command("git",prefixes=config.HANDLER))
 async def git(_, message):
