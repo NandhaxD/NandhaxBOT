@@ -1,5 +1,6 @@
 import time 
 import random 
+import asyncio
 from config import HANDLER, OWNER_ID, KATSUKI, ALIVE_TEXT
 from pyrogram import filters, __version__ as pyrover
 from Katsuki import katsuki, get_readable_time, StartTime
@@ -10,8 +11,9 @@ async def alive(_, message):
     name = (await katsuki.get_me()).first_name
     alive = await message.reply_animation(KATSUKI, caption="")
     mm = ["💀","⚔️","💔","🥸","👾"]
-    for x in range(mm):
+    for x in range(5):
          await alive.edit_caption(mm[x%5])
+         await asyncio.sleep(3)
     await alive.edit_caption(f"Hello Master, **{name}**,\nYou Are Using Katsuki And Your Current Pyrogram Version is {pyrover}! ❤️")
 
 
