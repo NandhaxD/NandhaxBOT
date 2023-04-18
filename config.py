@@ -14,4 +14,4 @@ ALIVE_TEXT = """ **~  ᴋᴀᴛsᴜᴋɪ  sʏsᴛᴇᴍ:**
 ( [ᴍᴀᴅᴇ  ʙʏ  ᴋᴀᴛsᴜᴋɪ ᴛᴇᴀᴍ](https://t.me/team_katsuki) )
 """
 
-KATSUKI = "https://graph.org/file//file/56bb59a1057c3021ae8cd.mp4"
+KATSUKI = "https://graph.org/file/56bb59a1057c3021ae8cd.mp4"
