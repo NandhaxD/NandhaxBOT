@@ -5,7 +5,7 @@ from pyrogram import filters
 
 
 async def FileType(message):
-    if message.documemt:
+    if message.document:
           return message.document.mime_type.split("/")[1]
     elif message.photo:
           return message.photo.mime_type.split("/")[1]
