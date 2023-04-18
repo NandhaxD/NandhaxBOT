@@ -6,7 +6,8 @@ from pyrogram import filters
 
 async def FileType(message):
     if message.document:
-          return message.document.mime_type.split("/")[1]
+        type = message.document.mime_type
+        return ["txt" if type == "text/plain" else type.split("/")[1]][0]
     elif message.photo:
           return "jpg"
     elif message.animation:
