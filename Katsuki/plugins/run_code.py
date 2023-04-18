@@ -34,7 +34,7 @@ async def logs(_, message):
 
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("sh",prefixes=HANDLER))
 async def sh(_, message):
-    msg = await message.reply("processing...")
+    msg = await message.edit("processing...")
     code = message.text.split(message.text.split()[0])[1]
     x = run(code)
     try:
