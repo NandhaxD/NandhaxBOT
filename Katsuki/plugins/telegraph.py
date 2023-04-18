@@ -14,6 +14,6 @@ async def tm(_, message):
         path = await message.reply_to_message.download()
         grap = upload_file(path)
         for code in grap:
-              url = "https://graph.org/file/"+code
+              url = "https://graph.org"+code
         return await message.edit(str(url))
         
