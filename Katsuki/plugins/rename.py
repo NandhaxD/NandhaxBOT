@@ -31,8 +31,9 @@ async def rename(_, message):
         filename = "{name}.{filetype}".format(name=name, filetype=filetype)
     msg = await message.reply_text("⬇️ File has downloading...")
     path = await message.reply_to_message.download(file_name=filename)
+    thumb_id = "./Katsuki/katsuki_help/IMG_20220701_185623_542.jpg"
     await msg.edit_text("⬆️ File has uplaoding")
-    await message.reply_document(document=path)
+    await message.reply_document(document=path, thumb=thumb_id)
     await msg.delete()
     os.remove(path)
     return 
