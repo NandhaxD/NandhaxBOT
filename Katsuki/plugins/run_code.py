@@ -8,7 +8,7 @@ import traceback
 from Katsuki import katsuki
 from config import ( OWNER_ID, HANDLER) 
 from pyrogram import filters
-from pyrogram.errors improt MessageTooLong
+from pyrogram.errors import MessageTooLong
 
 
 async def aexec(code, client, message):
