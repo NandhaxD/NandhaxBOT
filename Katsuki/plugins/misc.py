@@ -9,15 +9,14 @@ import requests
 @katsuki.on_message(filters.command(["ud","define"],prefixes=HANDLER) & filters.user(OWNER_ID))
 async def ud(_, message):
         if len(message.command) < 2:
-             await message.reply("ɢɪᴠᴇ ᴍᴇ ᴀ ᴛᴇxᴛ")
-             return
+             return await message.edit("where you input the text?")         
         text = message.text.split(None, 1)[1]
         try:
           results = requests.get(
             f'https://api.urbandictionary.com/v0/define?term={text}').json()
-        except Exception as e: return await message.reply_text(f"Somthing wrong Happens:\n`{e}`")
+        except Exception as e: return await message.edit_text(f"Somthing wrong Happens:\n`{e}`")
         reply_text = f'**results: {text}**\n\n{results["list"][0]["definition"]}\n\n_{results["list"][0]["example"]}_'
-        ud = await message.reply_text("Exploring....")
+        ud = await message.edit_text("Exploring....")
         await ud.edit_text(reply_text)
         
         
