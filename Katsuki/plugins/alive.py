@@ -14,7 +14,7 @@ async def alive(_, message):
     for x in range(5):
          await alive.edit_caption(mm[x%5])
          await asyncio.sleep(3)
-    await alive.edit_caption(f"Hello Master, **{name}**,\nYou Are Using Katsuki And Your Current Pyrogram Version is {pyrover}! ❤️")
+    await alive.edit_caption(f"Hello Master, **{name}**,\nYou Are Using Katsuki And Your Current Pyrogram Version is {pyrover}!")
 
 
 @katsuki.on_message(filters.command("ping",prefixes=HANDLER) & filters.user(OWNER_ID))
@@ -23,5 +23,5 @@ async def ping(_, message):
      end_time = time.time()
      ping_time = round((end_time - start_time) * 1000, 3)
      uptime = get_readable_time((time.time() - StartTime))
-     await message.edit(f"🔔 **Pong**: {ping_time}\n⬆️ **Uptime**: {uptime}")
+     await message.edit(f"👾 system uptime & ping\n🔔 **Pong**: {ping_time}\n⬆️ **Uptime**: {uptime}")
 
