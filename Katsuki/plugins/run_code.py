@@ -8,6 +8,7 @@ import traceback
 from Katsuki import katsuki
 from config import ( OWNER_ID, HANDLER) 
 from pyrogram import filters
+from pyrogram.errors improt MessageTooLong
 
 
 async def aexec(code, client, message):
@@ -25,7 +26,7 @@ async def logs(_, message):
        msg = await message.reply_text("processing...")
        thumb_id = "./Katsuki/katsuki_help/IMG_20220701_185623_542.jpg"
        with io.BytesIO(str.encode(run_logs)) as logs:
-            logs.name = "Katsuki.txt"
+            logs.name = "logs.txt"
             return await message.reply_document(
                 document=logs, thumb=thumb_id
             )
@@ -33,15 +34,22 @@ async def logs(_, message):
 
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("sh",prefixes=HANDLER))
 async def sh(_, message):
+    msg = await message.reply("processing...")
     code = message.text.split(message.text.split()[0])[1]
     x = run(code)
-    return await message.reply_text(
-         f"**SHELL**: `{code}`\n\n**OUTPUT**:\n`{x}`")
-
+    try:
+       return await message.edit_text(
+             f"**SHELL**: `{code}`\n\n**OUTPUT**:\n`{x}`")
+    except MessageTooLong:
+         with io.BytesIO(str.encode(run_logs)) as logs:
+               logs.name = "shell.txt"
+               await message.reply_document(
+                   document=logs, thumb=thumb_id)
+               return await msg.delete()
     
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("e",prefixes=HANDLER))
 async def eval(client, message):
-    status_message = await message.reply_text("Analyzing Code...")
+    status_message = await message.edit_text("Analyzing Code...")
     cmd = message.text.split(message.text.split()[0])[1]
 
     reply_to_ = message
