@@ -27,7 +27,7 @@ async def logs(_, message):
        thumb_id = "./Katsuki/katsuki_help/IMG_20220701_185623_542.jpg"
        with io.BytesIO(str.encode(run_logs)) as logs:
             logs.name = "logs.txt"
-            return await message.reply_document(
+            await message.reply_document(
                 document=logs, thumb=thumb_id
             )
        return await msg.delete()
@@ -82,7 +82,7 @@ async def eval(client, message):
     else:
         evaluation = "Success ✅"
 
-    final_output = "<b>👨‍💻 Eval</b>: "
+    final_output = "<b>⚔ Eval ⚔</b>: "
     final_output += f"<code>{cmd}</code>\n\n"
     final_output += "<b>❤️ Result</b>:\n"
     final_output += f"<code>{evaluation.strip()}</code> \n"
