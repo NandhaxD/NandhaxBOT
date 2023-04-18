@@ -12,21 +12,21 @@ from pyrogram import filters
 
 
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("logs",prefixes=HANDLER))
-def logs(_, m):
+async def logs(_, message):
        run_logs = run("tail logs.txt")
-       msg = m.reply_text("sᴇɴᴅɪɴɢ ʟᴏɢs...")
+       msg = await message.reply_text("processing...")
        with io.BytesIO(str.encode(run_logs)) as logs:
             logs.name = "Katsuki.txt"
-            m.reply_document(
+            return await message.reply_document(
                 document=logs,
             )
-       msg.delete()
+       await msg.delete()
 
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("sh",prefixes=HANDLER))
-def sh(_, m):
+async def sh(_, message):
     code = message.text.split(message.text.split()[0])[1]
     x = run(code)
-    m.reply_text(
+    return await message.reply_text(
          f"**SHELL**: `{code}`\n\n**OUTPUT**:\n`{x}`")
 
     
@@ -63,7 +63,7 @@ async def eval(client, message):
     elif stdout:
         evaluation = stdout
     else:
-        evaluation = "Success"
+        evaluation = "Success ✅"
 
     final_output = "<b>EVAL</b>: "
     final_output += f"<code>{cmd}</code>\n\n"
