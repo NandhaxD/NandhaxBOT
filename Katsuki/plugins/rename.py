@@ -8,11 +8,11 @@ async def FileType(message):
     if message.document:
           return message.document.mime_type.split("/")[1]
     elif message.photo:
-          return message.photo.mime_type.split("/")[1]
+          return "jpg"
     elif message.animation:
           return message.animation.mime_type.split("/")[1]
     elif message.video:
-         return message.vedio.mime_type.split("/")[1]
+         return message.video.mime_type.split("/")[1]
     else:
          return False
 
