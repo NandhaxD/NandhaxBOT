@@ -7,7 +7,7 @@ import traceback
 
 from Katsuki import katsuki
 from config import ( OWNER_ID, HANDLER) 
-from pyrogram import filters
+from pyrogram import filters, enums
 from pyrogram.errors import MessageTooLong
 
 
@@ -82,9 +82,9 @@ async def eval(client, message):
     else:
         evaluation = "Success ✅"
 
-    final_output = "<b>EVAL</b>: "
+    final_output = "<b>👨‍💻 Eval</b>: "
     final_output += f"<code>{cmd}</code>\n\n"
-    final_output += "<b>OUTPUT</b>:\n"
+    final_output += "<b>❤️ Result</b>:\n"
     final_output += f"<code>{evaluation.strip()}</code> \n"
 
     if len(final_output) > 4096:
@@ -94,6 +94,6 @@ async def eval(client, message):
                 document=out_file, caption=cmd, disable_notification=True
             )
     else:
-        return await status_message.edit(final_output)
+        return await status_message.edit_text(final_output, parse_mode=enums.ParseMode.HTML)
 
 
