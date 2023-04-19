@@ -13,7 +13,7 @@ async def delete_message(_, message):
             await message.reply_to_message.delete()
             await message.delete()
          except Exception as e:
-        return await message.edit(f"Somthing wrong Happens:\n{e}")
+            return await message.edit(f"Somthing wrong Happens:\n{e}")
      else:
          return await message.edit("No Reply?")
 
