@@ -7,6 +7,7 @@ from Katsuki import katsuki
 
 @katsuki.on_message(filters.command("admins", prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
 async def admins_list(_, message):
+     """Get Chat Administrators"""
      chat_id = message.chat.id
      msg = await message.edit("Analyzing Admins...")
      mm = "👮 Admin:\n"
@@ -18,8 +19,6 @@ async def admins_list(_, message):
            return await msg.edit(f"Somthing Wrong Happens:\n{e}")
      return await msg.edit(mm)
      
-   
-
 
 @katsuki.on_message(filters.command("del", prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
 async def delete_message(_, message):
