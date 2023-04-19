@@ -9,8 +9,9 @@ from Katsuki import katsuki
 async def admins_list(_, message):
      """Get Chat Administrators"""
      chat_id = message.chat.id
+     title = message.chat.title
      msg = await message.edit("Analyzing Admins...")
-     mm = "👮 Admin:\n"
+     mm = f"👮 Admins ( in {title} ):\n"
      try:
         async for m in katsuki.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
               if m.user.is_bot != True:
