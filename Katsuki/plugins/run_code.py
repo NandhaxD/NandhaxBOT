@@ -52,7 +52,7 @@ async def sh(_, message):
     
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("e",prefixes=HANDLER))
 async def eval(client, message):
-    status_message = await message.edit_text("Analyzing Code...")
+    await message.edit_text("Analyzing Code...")
     try:
       cmd = message.text.split(message.text.split()[0])[1]
     except:
@@ -88,18 +88,18 @@ async def eval(client, message):
     else:
         evaluation = "Success ✅"
 
-    final_output = "<b>⚔ Eval ⚔</b>: "
-    final_output += f"<code>{cmd}</code>\n\n"
-    final_output += "<b>❤️ Result</b>:\n"
-    final_output += f"<code>{evaluation.strip()}</code> \n"
+    final_output = "**🖥️ Code**: "
+    final_output += f"`{cmd}`\n\n"
+    final_output += "**📝 Result**:\n"
+    final_output += f"`{evaluation.strip()}`\n"
 
     if len(final_output) > 4096:
         with io.BytesIO(str.encode(final_output)) as out_file:
-            out_file.name = "eval.text"
+            out_file.name = "eval.txt"
             await reply_to_.reply_document(
-                document=out_file, caption=cmd, disable_notification=True
-            )
+                document=out_file, caption=cmd)
+            return await message.delete()
     else:
-        return await status_message.edit_text(final_output, parse_mode=enums.ParseMode.HTML)
+        return await message.edit_text(final_output, parse_mode=enums.ParseMode.MARKDOWN)
 
 
