@@ -86,7 +86,7 @@ async def ban_member(_, message):
     return await message.edit(f"=> {name} has been banned!")
 
 
-@katsuki.on_message(filters.command("unban") & filters.user(config.OWNER_ID))
+@katsuki.on_message(filters.command("unban", prefixes=HANDLER) & filters.user(config.OWNER_ID))
 async def unban_member(_, message):
     """UnBan the user from Chat"""
     if message.reply_to_message:
