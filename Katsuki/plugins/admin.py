@@ -23,10 +23,10 @@ async def message_pins(_, message):
              return await message.edit(f"Successfully [Pinned]({link})!")
          elif command == "unpin":
                try:
-                   await message.reply_to_message.pin()
+                   await message.reply_to_message.unpin()
                except Exception as e:
                    return await message.edit_text(f"Somthing Wrong Happens:\n{e}")
-               return await message.edit(f"Successfully [Pinned]({link})")
+               return await message.edit(f"Successfully [UnPinned]({link})")
 
 
 @katsuki.on_message(filters.command("invite", prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
@@ -62,6 +62,7 @@ async def delete_message(_, message):
             await message.reply_to_message.delete()
          except Exception as e:
               return await message.edit(f"Somthing wrong Happens:\n{e}")
+         return await message.delete()
      else:
          return await message.edit("No Reply?")
 
