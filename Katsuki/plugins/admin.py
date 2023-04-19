@@ -19,7 +19,7 @@ async def ban_member(_, message):
     except Exception as e:
         return await message.edit(f"Somthing wrong Happens:\n{e}")
     name = (await katsuki.get_users(user_id)).first_name
-    return await message.edit(f"{name} has been banned!")
+    return await message.edit(f"=> {name} has been banned!")
 
 
 @katsuki.on_message(filters.command("unban") & filters.user(config.OWNER_ID))
@@ -37,14 +37,14 @@ async def unban_member(_, message):
     except Exception as e:
         return await message.edit(f"Somthing wrong Happens:\n{e}")
     name = (await katsuki.get_users(user_id)).first_name
-    return await message.edit(f"{name} Has Been UnBanned!")
+    return await message.edit(f"=> {name} Has Been UnBanned!")
 
 
 @katsuki.on_message(filters.command("purge", prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
 async def purge(_, message):
     chat_id = message.chat.id
     if not message.reply_to_message:
-        return await message.edit_text("Reply?")
+        return await message.edit_text("No Reply?")
     else:
         reply_msg_id = message.reply_to_message.id
         message_id = message.id
@@ -55,6 +55,6 @@ async def purge(_, message):
            await katsuki.delete_messages(chat_id=chat_id, message_ids=message_ids)
         except Exception as e:
               return await message.edit(f"Somthing wrong Happens:\n{e}")
-        return await message.edit(f"Purged {len(message_ids)} ✅")
+        return await message.edit(f"=> Purged {len(message_ids)} Message(s)")
        
 
