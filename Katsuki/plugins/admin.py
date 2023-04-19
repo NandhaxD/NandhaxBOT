@@ -4,6 +4,39 @@ from pyrogram import filters, enums
 from Katsuki import katsuki
 
 
+@katsuki.on_message(filters.command(["pin","unpin"], prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
+async def message_pins(_, message):
+      """ Reply to Messages for pin either unpin """
+      if not message.reply_to_message:
+           return message.edit("No Reply?")
+      else:
+         try:
+            command = message.text[1:].casefold()
+         except Exception as e:
+              return await message.reply_text(f"Somthing Wrong Happens:\n{e}")
+         link = message.reply_to_message.link
+         if command == "pin":    
+             try:
+                 await message.reply_to_message.pin()
+             except Exception as e:
+                 return await message.edit_text(f"Somthing Wrong Happens:\n{e}")
+             return await message.edit(f"Successfully [Pinned]({link})!")
+         elif command == "unpin":
+               try:
+                   await message.reply_to_message.pin()
+               except Exception as e:
+                   return await message.edit_text(f"Somthing Wrong Happens:\n{e}")
+               return await message.edit(f"Successfully [Pinned]({link})")
+
+
+@katsuki.on_message(filters.command("invite", prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
+async def invite_link(_, message):
+     chat_id = message.chat.id
+     try:
+        link = (await katsuki.get_chat(chat_id)).invite_link
+     except Exception as e: 
+         return await message.edit(f"Somthing Wrong Happens:\n{e}")
+     return await message.edit(str(link))
 
 @katsuki.on_message(filters.command("admins", prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
 async def admins_list(_, message):
