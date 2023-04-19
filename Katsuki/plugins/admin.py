@@ -8,12 +8,12 @@ from Katsuki import katsuki
 async def message_pins(_, message):
       """ Reply to Messages for pin either unpin """
       if not message.reply_to_message:
-           return message.edit("No Reply?")
+           return await message.edit("No Reply?")
       else:
          try:
             command = message.text[1:].casefold()
          except Exception as e:
-              return await message.reply_text(f"Somthing Wrong Happens:\n{e}")
+              return await message.edit_text(f"Somthing Wrong Happens:\n{e}")
          link = message.reply_to_message.link
          if command == "pin":    
              try:
@@ -62,8 +62,6 @@ async def delete_message(_, message):
             await message.reply_to_message.delete()
          except Exception as e:
               return await message.edit(f"Somthing wrong Happens:\n{e}")
-         await message.delete()
-         return 
      else:
          return await message.edit("No Reply?")
 
