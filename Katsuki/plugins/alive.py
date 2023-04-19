@@ -10,10 +10,12 @@ from Katsuki import katsuki, get_readable_time, StartTime
 async def alive(_, message):
     name = (await katsuki.get_me()).first_name
     alive = await message.reply_animation(KATSUKI, caption="")
-    mm = ["💀","⚔️","💔","🥸","👾"]
-    for x in range(5):
-         await alive.edit_caption(mm[x%5])
+    string = ["N","a","n","d","h","a"]
+    caption = ""
+    for x in string:
+         caption += x
          await asyncio.sleep(3)
+         await alive.edit_caption(caption)
     await alive.edit_caption(f"Hello Master, **{name}**,\nYou Are Using Katsuki And Your Current Pyrogram Version is {pyrover}!")
 
 
@@ -23,5 +25,5 @@ async def ping(_, message):
      end_time = time.time()
      ping_time = round((end_time - start_time) * 1000, 3)
      uptime = get_readable_time((time.time() - StartTime))
-     await message.edit(f"👾 system uptime & ping\n🔔 **Pong**: {ping_time}\n⬆️ **Uptime**: {uptime}")
+     await message.edit(f"👾 **System uptime & ping**\n🔔 **Pong**: {ping_time}\n⬆️ **Uptime**: {uptime}")
 
