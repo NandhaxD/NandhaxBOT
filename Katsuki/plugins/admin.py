@@ -1,11 +1,38 @@
 
 import config
 from pyrogram import filters, enums
+from pyrogram.types import ChatPrivileges
 from Katsuki import katsuki
 
 
+@katsuki.on_message(filters.command(["promote","fpromote"], prefixes=config.HANDLER) & filters.user(OWNER_ID))
+async def promote_member(_, message):
+     if message.reply_to_message:
+          user_id = message.reply_to_message
+     else:
+        try:
+           user_id = message.command[1]
+        except:
+            return await message.edit("Input Username Or Id!")
+     if message.command[0:].split()[0] == "fpromote":
+          my_privileges = (await katsuki.get_chat_member(
+                 chat_id=chat_id, user_id=user_id)).privileges
+          if not my_privileges:
+                 return await message.edit("Sorry you can't ):")
+          else:
+               await message.chat.promote_member(user_id,
+                     privileges=ChatPrivileges(
+                        can_delete_messages=True, 
+                        can_restrict_members=True,
+                        can_change_info=True,
+                        can_invite_users=True,
+                        can_pin_messages=True,),)
+               name = (await katsuki.get_users(user_id)).first_name
+               return await message.edit(f"{name} Has Been Promoted!")
+
+
 @katsuki.on_message(filters.command(["pin","unpin"], prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
-async def message_pins(_, message):
+async def messages_pin(_, message):
       """ Reply to Messages for pin either unpin """
       if not message.reply_to_message:
            return await message.edit("No Reply?")
