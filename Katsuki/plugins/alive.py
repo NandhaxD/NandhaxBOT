@@ -5,17 +5,45 @@ from config import HANDLER, OWNER_ID, KATSUKI, ALIVE_TEXT
 from pyrogram import filters, __version__ as pyrover
 from Katsuki import katsuki, get_readable_time, StartTime
 
+s1 = """
+
+┏━┓╋┏┓╋╋╋╋╋╋╋┏┳┓
+┃┃┗┓┃┃╋╋╋╋╋╋╋┃┃┃
+┃┏┓┗┛┣━━┳━┓┏━┛┃┗━┳━━┓
+┃┃┗┓┃┃┏┓┃┏┓┫┏┓┃┏┓┃┏┓┃
+┃┃╋┃┃┃┏┓┃┃┃┃┗┛┃┃┃┃┏┓┃
+┗┛╋┗━┻┛┗┻┛┗┻━━┻┛┗┻┛┗┛
+"""
+
+s2 = """
+
+╭━╮╱╭╮╱╱╱╱╱╱╱╭┳╮
+┃┃╰╮┃┃╱╱╱╱╱╱╱┃┃┃
+┃╭╮╰╯┣━━┳━╮╭━╯┃╰━┳━━╮
+┃┃╰╮┃┃╭╮┃╭╮┫╭╮┃╭╮┃╭╮┃
+┃┃╱┃┃┃╭╮┃┃┃┃╰╯┃┃┃┃╭╮┃
+╰╯╱╰━┻╯╰┻╯╰┻━━┻╯╰┻╯╰╯
+"""
+
+s3 = """
+
+╔═╦╗──────╔╦╗
+║║║╠═╗╔═╦╦╝║╚╦═╗
+║║║║╬╚╣║║║╬║║║╬╚╗
+╚╩═╩══╩╩═╩═╩╩╩══╝
+"""
 
 @katsuki.on_message(filters.command("alive",prefixes=HANDLER) & filters.user(OWNER_ID))
 async def alive(_, message):
     name = (await katsuki.get_me()).first_name
+    await message.edit(s1)
+    await asyncio.sleep(3)
+    await message.edit(s2)
+    await asyncio.sleep(3)
+    await message.edit(s3)
+    await asyncio.sleep(3)
+    await message.delete()
     alive = await message.reply_animation(KATSUKI, caption="")
-    string = name.split()
-    caption = ""
-    for x in string:
-         caption += x
-         await asyncio.sleep(3)
-         await alive.edit_caption(caption)
     await alive.edit_caption(f"Hello Master, **{name}**,\nYou Are Using Katsuki And Your Current Pyrogram Version is {pyrover}!")
 
 
