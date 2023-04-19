@@ -4,9 +4,24 @@ from pyrogram import filters
 from Katsuki import katsuki
 
 
+
+@katsuki.on_message(filters.command("del", prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
+async def delete_message(_, message):
+     """delete reply to the message and itself"""
+     if message.reply_to_message:
+         try:
+            await message.reply_to_message.delete()
+            await message.delete()
+         except Exception as e:
+        return await message.edit(f"Somthing wrong Happens:\n{e}")
+     else:
+         return await message.edit("No Reply?")
+
+
+
 @katsuki.on_message(filters.command("ban", prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
 async def ban_member(_, message):
-    
+    """Ban the user from chat"""
     if message.reply_to_message:
          user_id = message.reply_to_message.from_user.id  
     else:
@@ -24,7 +39,7 @@ async def ban_member(_, message):
 
 @katsuki.on_message(filters.command("unban") & filters.user(config.OWNER_ID))
 async def unban_member(_, message):
-    
+    """UnBan the user from Chat"""
     if message.reply_to_message:
          user_id = message.reply_to_message.from_user.id  
     else:
@@ -42,6 +57,7 @@ async def unban_member(_, message):
 
 @katsuki.on_message(filters.command("purge", prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
 async def purge(_, message):
+    """Purge Message(s) Reply to"""
     chat_id = message.chat.id
     if not message.reply_to_message:
         return await message.edit_text("No Reply?")
