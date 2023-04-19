@@ -35,7 +35,10 @@ async def logs(_, message):
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("sh",prefixes=HANDLER))
 async def sh(_, message):
     msg = await message.edit("processing...")
-    code = message.text.split(message.text.split()[0])[1]
+    try:
+      code = message.text.split(message.text.split()[0])[1]
+    except:
+        return await message.edit("No?")
     x = run(code)
     try:
        return await message.edit_text(
@@ -50,7 +53,10 @@ async def sh(_, message):
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("e",prefixes=HANDLER))
 async def eval(client, message):
     status_message = await message.edit_text("Analyzing Code...")
-    cmd = message.text.split(message.text.split()[0])[1]
+    try:
+      cmd = message.text.split(message.text.split()[0])[1]
+    except:
+         return await message.edit("No?")
 
     reply_to_ = message
     if message.reply_to_message:
