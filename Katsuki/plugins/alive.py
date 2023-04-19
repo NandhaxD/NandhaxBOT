@@ -10,7 +10,7 @@ from Katsuki import katsuki, get_readable_time, StartTime
 async def alive(_, message):
     name = (await katsuki.get_me()).first_name
     alive = await message.reply_animation(KATSUKI, caption="")
-    string = ["N","a","n","d","h","a"]
+    string = name.split()
     caption = ""
     for x in string:
          caption += x
