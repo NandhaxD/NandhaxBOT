@@ -5,7 +5,7 @@ from pyrogram.types import ChatPrivileges
 from Katsuki import katsuki
 
 
-@katsuki.on_message(filters.command(["promote","fpromote"], prefixes=config.HANDLER) & filters.user(OWNER_ID))
+@katsuki.on_message(filters.command(["promote","fpromote"], prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
 async def promote_member(_, message):
      if message.reply_to_message:
           user_id = message.reply_to_message
