@@ -23,7 +23,7 @@ async def aexec(code, client, message):
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("logs",prefixes=HANDLER))
 async def logs(_, message):
        run_logs = run("tail logs.txt")
-       msg = await message.reply_text("processing...")
+       msg = await message.edit_text("Analyzing logging...")
        thumb_id = "./Katsuki/katsuki_help/IMG_20220701_185623_542.jpg"
        with io.BytesIO(str.encode(run_logs)) as logs:
             logs.name = "logs.txt"
@@ -34,7 +34,7 @@ async def logs(_, message):
 
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("sh",prefixes=HANDLER))
 async def sh(_, message):
-    msg = await message.edit("processing...")
+    msg = await message.edit("Analyzing code...")
     try:
       code = message.text.split(message.text.split()[0])[1]
     except:
