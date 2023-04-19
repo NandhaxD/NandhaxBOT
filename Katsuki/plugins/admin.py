@@ -49,6 +49,8 @@ async def purge(_, message):
         reply_msg_id = message.reply_to_message.id
         message_id = message.id
         message_ids = []
+        for ids in range(reply_msg_id, message_id):
+            message_ids.append(ids)
         try:
            await katsuki.delete_messages(chat_id=chat_id, message_ids=message_ids)
         except Exception as e:
