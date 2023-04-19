@@ -40,7 +40,7 @@ async def unban_member(_, message):
     return await message.edit(f"{name} Has Been UnBanned!")
 
 
-@katsuki.on_message(filters.command("purge", prefixes=config.HANDLSR) & filters.user(config.OWNER_ID))
+@katsuki.on_message(filters.command("purge", prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
 async def purge(_, message):
     chat_id = message.chat.id
     if not message.reply_to_message:
