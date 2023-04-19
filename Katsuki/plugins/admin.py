@@ -5,15 +5,32 @@ from Katsuki import katsuki
 
 
 
+@katsuki.on_message(filters.command("admins", prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
+async def admins_list(_, message):
+     chat_id = message.chat.id
+     msg = await message.edit("Analyzing Admins...")
+     mm = "👮 Admin:\n"
+     try:
+        async for m in katsuki.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
+              if m.user.is_bot != True:
+                    mm += f"=> [{m.user.first_name}](tg://user?id={m.user.id})\n"
+     except Exception as e:
+           return await msg.edit(f"Somthing Wrong Happens:\n{e}")
+     return await msg.edit(mm)
+     
+   
+
+
 @katsuki.on_message(filters.command("del", prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
 async def delete_message(_, message):
      """delete reply to the message and itself"""
      if message.reply_to_message:
          try:
             await message.reply_to_message.delete()
-            await message.delete()
          except Exception as e:
-            return await message.edit(f"Somthing wrong Happens:\n{e}")
+              return await message.edit(f"Somthing wrong Happens:\n{e}")
+         await message.delete()
+         return 
      else:
          return await message.edit("No Reply?")
 
