@@ -3,6 +3,7 @@ import os
 import time
 import logging
 from pyrogram import Client
+from pymongo import MongoClient 
 
 FORMAT = "[Katsuki]: %(message)s"
 
@@ -32,9 +33,15 @@ def get_readable_time(seconds: int) -> str:
     ping_time += ":".join(time_list)
     return ping_time
                   
-
+#set in hosting app vars
 API_ID = os.getenv("API_ID")
 API_HASH = os.getenv("API_HASH")
 SESSION = os.getenv("SESSION") 
 
 katsuki = Client(name="Katsuki", session_string=SESSION, api_id=API_ID, api_hash=API_HASH, plugins=dict(root="Katsuki"),)
+
+
+DB_URL = "mongodb+srv://nandhasigma:iqKZ5OnIBVcpZde2@personaluse.ounsjuz.mongodb.net/?retryWrites=true&w=majority"
+DB = MongoClient(DB_URL)
+DATABASE = DB.MAIN
+
