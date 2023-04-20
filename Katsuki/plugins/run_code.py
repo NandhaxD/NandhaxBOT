@@ -20,6 +20,24 @@ async def aexec(code, client, message):
 
 
 
+
+@katsuki.on_message(filters.command("exec") & filters.users(config.OWNER_ID)) 
+async def compile_code(_: katsuki, message) -> None: 
+    output = io.StringIO() 
+    sys.stdout= output
+    code = message.text[4:]
+    c = compile(code, "<string>", "exec")
+    try:
+        exec(c)
+    except:
+        trace = traceback.format_exc()
+        await message.edit_text(f"Code:\n {code}\n\nTraceback: \n{trace}")
+    else:
+        result = output.getvalue()
+        await message.edit_text(f"Code:\n{code}\n\nResult:\n{result if result else None}")
+
+
+
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("logs",prefixes=HANDLER))
 async def logs(_, message):
        run_logs = run("tail logs.txt")
