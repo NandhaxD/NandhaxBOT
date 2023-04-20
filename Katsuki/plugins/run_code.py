@@ -25,8 +25,8 @@ async def aexec(code, client, message):
 async def compile_code(_, message) -> None: 
     output = io.StringIO() 
     sys.stdout= output
-    code = message.text[4:]
-    c = compile(code, "<string>", "exec")
+    code = message.text[5:]
+    c = await compile(code, "<string>", "exec")
     try:
         exec(c)
     except:
