@@ -19,24 +19,20 @@ async def aexec(code, client, message):
     return await locals()["__aexec"](client, message)
 
 
-
-async def run_code(code):
-    c = compile(code, "<string>", "exec")
-    exec(c)
-
 @katsuki.on_message(filters.command("exec", prefixes=HANDLER) & filters.user(OWNER_ID)) 
 async def compile_code(_, message) -> None: 
     output = io.StringIO() 
     sys.stdout= output
     code = message.text[5:]   
     try:
-        await run_code(code)
+        c = compile(code, "<string>", "exec")
+        exec(c)
     except:
         trace = traceback.format_exc()
-        await message.edit_text(f"Code:\n {code}\n\nTraceback: \n{trace}")
+        message.edit_text(f"Code:\n {code}\n\nTraceback: \n{trace}")
     else:
         result = output.getvalue()
-        await message.edit_text(f"Code:\n{code}\n\nResult:\n{result if result else None}")
+        message.edit_text(f"Code:\n{code}\n\nResult:\n{result if result else None}")
 
 
 
