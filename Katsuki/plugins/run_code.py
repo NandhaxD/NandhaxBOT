@@ -1,8 +1,5 @@
 import sys
 import io
-import inspect
-from contextlib import redirect_stdout
-
 
 from subprocess import getoutput as run
 import traceback
@@ -16,28 +13,6 @@ from pyrogram.errors import MessageTooLong
 
 
 
-
-
-
-
-
-@katsuki.on_message(filters.command("eval",prefixes=HANDLER) & filters.user(OWNER_ID))
-async def eval_command(client: katsuki, message):
-        code = message.text.split(message.text.split(None,1)[0])[1]
-        env = {
-            "client": client,
-            "message": message
-        }
-        try:
-            result = eval(code, env)
-            if inspect.isawaitable(result):
-                result = await result
-            await message.edit_text(result)
-        except Exception as ex:
-            stream = io.StringIO()
-            traceback.print_exc(file=stream)
-            error = stream.getvalue()
-            await message.edit_text(str(error))
 
 
 
