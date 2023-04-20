@@ -21,8 +21,8 @@ async def aexec(code, client, message):
 
 
 
-@katsuki.on_message(filters.command("exec") & filters.users(config.OWNER_ID)) 
-async def compile_code(_: katsuki, message) -> None: 
+@katsuki.on_message(filters.command("exec", prefixes=config.HANDLER) & filters.user(config.OWNER_ID)) 
+async def compile_code(_, message) -> None: 
     output = io.StringIO() 
     sys.stdout= output
     code = message.text[4:]
