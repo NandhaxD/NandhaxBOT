@@ -20,7 +20,7 @@ async def aexec(code, client, message):
 
 
 
-async run_code(code):
+async def run_code(code):
     c = compile(code, "<string>", "exec")
     exec(c)
 
