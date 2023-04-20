@@ -1,5 +1,7 @@
 import sys
 import io
+import inspect
+from contextlib import redirect_stdout
 
 
 from subprocess import getoutput as run
@@ -11,6 +13,37 @@ from pyrogram import filters, enums
 from pyrogram.errors import MessageTooLong
 
 
+
+
+
+
+
+
+
+
+@katsuki.on_message(filters.command("eval",prefixes=HANDLER) & filters.user(OWNER_ID))
+async def eval_command(client: katsuki, message):
+        code = message.text.split(message.text.split(None,1)[0])[1]
+        env = {
+            "client": client,
+            "message": message
+        }
+        try:
+            result = eval(code, env)
+            if inspect.isawaitable(result):
+                result = await result
+            await message.edit_text(result)
+        except Exception as ex:
+            stream = io.StringIO()
+            traceback.print_exc(file=stream)
+            error = stream.getvalue()
+            await message.edit_text(str(error))
+
+
+
+
+
+
 async def aexec(code, client, message):
     exec(
         "async def __aexec(client, message): "
@@ -18,21 +51,6 @@ async def aexec(code, client, message):
     )
     return await locals()["__aexec"](client, message)
 
-
-@katsuki.on_message(filters.command("exec", prefixes=HANDLER) & filters.user(OWNER_ID)) 
-def compile_code(katsuki, message): 
-    output = io.StringIO() 
-    sys.stdout= output
-    code = message.text[5:]   
-    try:
-        c = compile(code, "<string>", "exec")
-        exec(c)
-    except:
-        trace = traceback.format_exc()
-        message.edit_text(f"Code:\n {code}\n\nTraceback: \n{trace}")
-    else:
-        result = output.getvalue()
-        message.edit_text(f"Code:\n{code}\n\nResult:\n{result if result else None}")
 
 
 
