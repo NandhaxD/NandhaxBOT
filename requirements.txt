@@ -1,4 +1,6 @@
 pyrogram 
+pymongo
+pymongo[srv]
 asyncio
 gpytranslate
 tgcrypto
