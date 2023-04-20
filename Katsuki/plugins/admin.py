@@ -7,28 +7,30 @@ from Katsuki import katsuki
 
 @katsuki.on_message(filters.command(["promote","fpromote"], prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
 async def promote_member(_, message):
+     #promote member to admin in chat
      if message.reply_to_message:
           user_id = message.reply_to_message
      else:
         try:
            user_id = message.command[1]
         except:
-            return await message.edit("Input Username Or Id!")
-     if message.command[0:].split()[0] == "fpromote":
-          my_privileges = (await katsuki.get_chat_member(
-                 chat_id=chat_id, user_id=user_id)).privileges
-          if not my_privileges:
-                 return await message.edit("Sorry you can't ):")
-          else:
-               await message.chat.promote_member(user_id,
-                     privileges=ChatPrivileges(
-                        can_delete_messages=True, 
-                        can_restrict_members=True,
-                        can_change_info=True,
-                        can_invite_users=True,
-                        can_pin_messages=True,),)
-               name = (await katsuki.get_users(user_id)).first_name
-               return await message.edit(f"{name} Has Been Promoted!")
+            return await message.edit("Input username either id!")
+     try:
+         my_privileges = (await message.chat.get_member(user_id=message.from_user.id)).privileges 
+         can_promote_members = [True if my_privileges and my_privileges.can_promote_members else False][0]
+      except:
+           return await message.edit("You aren't admin else ( you didn't have `can_promote_members` rights )")
+      command = message.command[0]
+      if command == "fpromote" and can_promote_members:
+              await message.chat.promote_member(user_id=user_id, privileges=my_privileges)
+              return await message.edit("=> Fully Promoted! (:")
+      elif command == "promote" and can_promote_members:
+             privileges = ChatPrivileges(
+                        can_delete_messages=True, can_restrict_members=True,
+                        can_change_info=True, can_invite_users=True, can_pin_messages=True)
+             await message.chat.promote_member(user_id=user_id, privileges=privileges)
+             return await message.edit("=> Promoted! (:")
+                     
 
 
 @katsuki.on_message(filters.command(["pin","unpin"], prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
