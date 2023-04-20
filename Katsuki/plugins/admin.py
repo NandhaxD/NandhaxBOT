@@ -7,9 +7,9 @@ from Katsuki import katsuki
 
 @katsuki.on_message(filters.command(["promote","fpromote"], prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
 async def promote_member(_, message):
-     #promote member to admin in chat
+     #promote a member to be admin in chat
      if message.reply_to_message:
-          user_id = message.reply_to_message
+          user_id = message.reply_to_message.from_user.id
      else:
         try:
            user_id = message.command[1]
