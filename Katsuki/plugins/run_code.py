@@ -26,7 +26,7 @@ async def compile_code(_, message) -> None:
     output = io.StringIO() 
     sys.stdout= output
     code = message.text[5:]
-    c = await compile(code, "<string>", "exec")
+    c = compile(code, "<string>", "exec")
     try:
         exec(c)
     except:
