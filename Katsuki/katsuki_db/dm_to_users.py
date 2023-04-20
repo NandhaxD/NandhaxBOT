@@ -4,7 +4,7 @@ from Katsuki import DATABASE
 db = DATABASE["DM"]
 
 
-async get_allowed_users():
+async def get_allowed_users():
     mm = [x["user_id"] for x in db.find()]
     return mm
 
