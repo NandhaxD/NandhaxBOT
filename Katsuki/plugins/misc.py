@@ -63,12 +63,12 @@ async def cc_checker(_, message):
        response = requests.request("GET", url, headers=headers, data=payload)
        details = response.text
        string = (
-          f"Bank name: {}n\".format(details["bank_name"]
-          f"Country: {}\n".format(details["country"]
-          f"Url: {}\n".format(details["url"]
-          f"Type: {}\n".format(details["type"]
-          f"Scheme: {}\n".format(details["scheme"]
-          f"bin: {}\n".format(details["bin"]
+          f"Bank name: {}n\".format(details["bank_name"])
+          f"Country: {}\n".format(details["country"])
+          f"Url: {}\n".format(details["url"])
+          f"Type: {}\n".format(details["type"])
+          f"Scheme: {}\n".format(details["scheme"])
+          f"bin: {}\n".format(details["bin"])
 )
        return await message.edit(string)
     except Exception as e:
