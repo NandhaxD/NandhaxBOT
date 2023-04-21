@@ -51,3 +51,18 @@ async def translate(_, message) -> None:
     await message.delete()
     await reply_msg.reply_text(reply)
     return 
+
+
+@katsuki.on_message(filters.command("cc", prefixes=HANDLER) & filters.user(OWNER_ID))
+async def cc_checker(_, message):
+    try:
+       bin_code = int(message.command[1])
+       url = f"https://api.apilayer.com/bincheck/{bin_code}"
+       payload = {}
+       headers= {"apikey": "W0R8IB1PpOLEj7vsng0lvF7nlrqgecXA"}
+       response = requests.request("GET", url, headers=headers, data=payload)
+       return await message.edit(response.text)
+    except Exception as e:
+           return await message.edit(str(e))
+
+
