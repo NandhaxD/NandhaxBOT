@@ -12,8 +12,8 @@ allowed_to_dm, disallowed_to_dm, get_allowed_users )
 async def no_dm(_, message):
      user_id = message.from_user.id
      allowed_users = await get_allowed_users()
-     if not user_id == config.OWNER_ID and user_id not in allowed_users:
-          return await message.reply_text("UwU You Are Not Allowed To Dm ( Get Approval To Dm! )")
+     if user_id != config.OWNER_ID and user_id not in allowed_users:
+          return await message.reply_text("UwU You Are Not Allowed To Dm ( Get Approval To Dm! )", quote=True)
 
 
 
