@@ -7,14 +7,12 @@ from Katsuki.katsuki_db.dm_allow import (
 allowed_to_dm, disallowed_to_dm, get_allowed_users )
 
 
-
 @katsuki.on_message(filters.private, group=10)
 async def no_dm(_, message):
      user_id = message.from_user.id
      allowed_users = await get_allowed_users()
      if user_id != config.OWNER_ID and user_id not in allowed_users:
           return await message.reply_text("UwU You Are Not Allowed To Dm ( Get Approval To Dm! )", quote=True)
-
 
 
 @katsuki.on_message(filters.command("allow", config.HANDLER) & filters.user(config.OWNER_ID))
@@ -29,6 +27,7 @@ async def allow_users_dm(_, message):
             return await message.edit("=> Allowed To Access Dm!")
      else:
          return await message.edit("=> Already Allowed To Dm!")
+
   
 @katsuki.on_message(filters.command("disallow", config.HANDLER) & filters.user(config.OWNER_ID))
 async def disallow_users_dm(_, message):
