@@ -63,7 +63,7 @@ async def cc_checker(_, message):
        response = requests.request("GET", url, headers=headers, data=payload)
        details = response.text
        string = (
-          f"Bank name: {}n\".format(details["bank_name"])
+          f"Bank name: {}\n".format(details["bank_name"])
           f"Country: {}\n".format(details["country"])
           f"Url: {}\n".format(details["url"])
           f"Type: {}\n".format(details["type"])
