@@ -40,8 +40,7 @@ SESSION = os.getenv("SESSION")
 
 katsuki = Client(name="Katsuki", session_string=SESSION, api_id=API_ID, api_hash=API_HASH, plugins=dict(root="Katsuki"),)
 
-
-DB_URL = "mongodb+srv://nandhasigma:iqKZ5OnIBVcpZde2@personaluse.ounsjuz.mongodb.net/?retryWrites=true&w=majority"
+DB_URL = "mongodb+srv://nandhasigma:iqKZ5OnIBVcpZde2@cluster0.gt47zau.mongodb.net/?retryWrites=true&w=majority"
 DB = MongoClient(DB_URL)
 DATABASE = DB.MAIN
 
