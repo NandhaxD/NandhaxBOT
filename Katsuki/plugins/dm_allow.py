@@ -8,12 +8,12 @@ allowed_to_dm, disallowed_to_dm, get_allowed_users )
 
 
 
-@katsuki.on_message(filters.private)
+@katsuki.on_message(filters.private, group=10)
 async def no_dm(_, message):
      user_id = message.from_user.id
      allowed_users = await get_allowed_users()
      if not user_id == config.OWNER_ID and user_id not in allowed_users:
-          return await message.reply_text("UwU your not allowed dm wait for ( get approval to dm! )")
+          return await message.reply_text("UwU You Are Not Allowed To Dm ( Get Approval To Dm! )")
 
 
 
@@ -26,7 +26,7 @@ async def allow_users_dm(_, message):
      allowed_users = await get_allowed_users()
      if user_id not in allowed_users:
             await allowed_to_dm(user_id)
-            return await message.edit("Allowed To Access Dm!")
+            return await message.edit("=> Allowed To Access Dm!")
      else:
          return await message.edit("=> Already Allowed To Dm!")
   
@@ -39,7 +39,7 @@ async def disallow_users_dm(_, message):
      allowed_users = await get_allowed_users()
      if user_id in allowed_users:
             await disallowed_to_dm(user_id)
-            return await message.edit("Disallowed To Access Dm!")
+            return await message.edit("=> Disallowed To Access Dm!")
      else:
          return await message.edit("=> Already (: Disallowed To Dm!")
 
