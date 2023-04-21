@@ -3,7 +3,7 @@ import config
 
 from pyrogram import filters, enums
 from Katsuki import katsuki
-from Katsuki.katusuki_db.dm_allow import (
+from Katsuki.katsuki_db.dm_allow import (
 allowed_to_dm, disallowed_to_dm, get_allowed_users )
 
 
