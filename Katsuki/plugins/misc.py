@@ -61,7 +61,15 @@ async def cc_checker(_, message):
        payload = {}
        headers= {"apikey": "W0R8IB1PpOLEj7vsng0lvF7nlrqgecXA"}
        response = requests.request("GET", url, headers=headers, data=payload)
-       return await message.edit(response.text)
+       string = (
+          f"Bank name: {response.text.bank_name}\n"
+          f"Country: {response.text.country}\n"
+          f"Url: {response.text.url}\n"
+          f"Type: {response.text.type}\n"
+          f"Scheme: {response.text.scheme}\n"
+          f"bin: {response.text.bin}\n"
+)
+       return await message.edit(string)
     except Exception as e:
            return await message.edit(str(e))
 
