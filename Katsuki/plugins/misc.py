@@ -60,7 +60,7 @@ async def cc(_, m):
         code = m.command[1]
      except:
          return await m.edit("input the bin code!")
-     api = "https://spamx.id/gen/?bin={code}&limit=50"
+     api = requests.get("https://spamx.id/gen/?bin={code}&limit=50").json()
      bank = api.get("Bank Info")
      bank_name = bank.get("bank")
      bin_code = bank.get("bin")
