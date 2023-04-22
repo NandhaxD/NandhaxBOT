@@ -74,6 +74,6 @@ async def cc_checker(_, message):
        await asyncio.sleep(5)
        return await message.edit(string)
     except Exception as e:
-           #return await message.edit(str(e))
+           return await message.edit(str(e))
 
 
