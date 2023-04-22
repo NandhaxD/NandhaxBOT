@@ -22,7 +22,7 @@ async def check(_, message):
          return await message.edit(str(e))
 
     bank_name = response["bank"]["name"]
-    bank_brand = response["brand"]
+    brand = response["brand"]
     country_emoji = response["country"]["emoji"]
     country_alpha2 = response["country"]["alpha2"]
     country_currency = response["country"]["currency"]
@@ -35,7 +35,7 @@ async def check(_, message):
     scheme = response["scheme"]
     type = response["type"]
     string = f"**Bank name**: {bank_name}\n"
-    string += f"**Bank brand**: {bank_brans}\n"
+    string += f"**Bank brand**: {brand}\n"
     string += f"**Country flag**: {country_emoji}\n"
     string += f"**Country alpha2**: {country_alpha2}\n"
     string += f"**Country currency**: {country_currency}\n"
