@@ -6,17 +6,23 @@ from requests import get
 
 @katsuki.on_message(filters.user(config.OWNER_ID) & filters.command("check", config.HANDLER))
 async def check(_, message):
-    bin_code = message.command[1]
+    try:
+       bin_code = message.command[1]
+    except:
+        return await message.edit("=> Enter bin code...")
+
     if bin_code.isnumeric():
-        msg = await message.edit("=> checking bin")
+        msg = await message.edit("=> checking bin...")
     else:
         return await message.edit("oof please input only integers")
+
     try:
        response = get(f"https://spamx.id/bin2/?bin={bin_code}").json()
     except Exception as e:
          return await message.edit(str(e))
+
     bank_name = response["bank"]["name"]
-    bank_brand = response["bank"]["brand"]
+    bank_brand = response["brand"]
     country_emoji = response["country"]["emoji"]
     country_alpha2 = response["country"]["alpha2"]
     country_currency = response["country"]["currency"]
@@ -41,6 +47,7 @@ async def check(_, message):
     string += f"**Prepaid**: {prepaid}\n"
     string += f"**Scheme**: {scheme}\n"
     string += f"**Type**: {type}\n"
+
     return await message.edit(string)
      
 
