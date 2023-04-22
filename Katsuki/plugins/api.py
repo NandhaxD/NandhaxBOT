@@ -34,8 +34,10 @@ async def check(_, message):
       prepaid = response["prepaid"]
       scheme = response["scheme"]
       type = response["type"]
-  except: pass
-    try:
+
+  except:
+        pass
+  try:
        string = f"**Bank name**: {bank_name}\n"
        string += f"**Bank brand**: {brand}\n"
        string += f"**Country flag**: {country_emoji}\n"
@@ -49,10 +51,10 @@ async def check(_, message):
        string += f"**Prepaid**: {prepaid}\n"
        string += f"**Scheme**: {scheme}\n"
        string += f"**Type**: {type}\n"
-    except: 
-        pass
-   
-    return await message.edit(string)
+  except: 
+     pass
+
+  return await message.edit(string)
      
 
     
