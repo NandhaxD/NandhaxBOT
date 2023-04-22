@@ -49,7 +49,8 @@ async def check(_, message):
        string += f"**Prepaid**: {prepaid}\n"
        string += f"**Scheme**: {scheme}\n"
        string += f"**Type**: {type}\n"
-    except: pass
+    except: 
+        pass
    
     return await message.edit(string)
      
