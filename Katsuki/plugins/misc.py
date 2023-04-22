@@ -76,6 +76,7 @@ async def cc(_, m):
      type = bank.get("type")
      vendor = bank.get("vendor")
      string = f"""\u0020
+=> Bin details:
 🏦 **Bank**: {bank_name}
 💳 **Bin**: {bin_code}
 🌍 **Country**: {country}
@@ -84,9 +85,9 @@ async def cc(_, m):
 ⬆️ **Level**: {level}
 🧐 **Prepaid**: {prepaid}
 🧮 **Type**: {type}
-❤️ **Vendor**: {vendor}
+❤️ **Vendor**: {vendor}\n
 
-**Here credit cards**:
+=> **Here credit cards**:
 {cc}
 """
      return await m.edit(string)
