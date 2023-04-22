@@ -20,41 +20,40 @@ async def check(_, message):
        response = get(f"https://spamx.id/bin2/?bin={bin_code}").json()
     except Exception as e:
          return await message.edit(str(e))
-  try:
-      bank_name = response["bank"]["name"]
-      brand = response["brand"]
-      country_emoji = response["country"]["emoji"]
-      country_alpha2 = response["country"]["alpha2"]
-      country_currency = response["country"]["currency"]
-      country_latitude = response["country"]["latitude"]
-      country_longitude = response["country"]["longitude"]
-      country_name = response["country"]["name"]
-      country_numeric = response["country"]["numeric"]
-      number = response["number"]
-      prepaid = response["prepaid"]
-      scheme = response["scheme"]
-      type = response["type"]
-
-  except:
+    try:
+       bank_name = response["bank"]["name"]
+       brand = response["brand"]
+       country_emoji = response["country"]["emoji"]
+       country_alpha2 = response["country"]["alpha2"]
+       country_currency = response["country"]["currency"]
+       country_latitude = response["country"]["latitude"]
+       country_longitude = response["country"]["longitude"]
+       country_name = response["country"]["name"]
+       country_numeric = response["country"]["numeric"]
+       number = response["number"]
+       prepaid = response["prepaid"]
+       scheme = response["scheme"]
+       type = response["type"]
+    except:
         pass
-  try:
-       string = f"**Bank name**: {bank_name}\n"
-       string += f"**Bank brand**: {brand}\n"
-       string += f"**Country flag**: {country_emoji}\n"
-       string += f"**Country alpha2**: {country_alpha2}\n"
-       string += f"**Country currency**: {country_currency}\n"
-       string += f"**Country latitude**: {country_latitude}\n"
-       string += f"**Country longitude**: {country_longitude}\n"
-       string += f"**Country name**: {country_name}\n"
-       string += f"**Country numeric**: {country_numeric}\n"
-       string += f"**Number**: {number}\n"
-       string += f"**Prepaid**: {prepaid}\n"
-       string += f"**Scheme**: {scheme}\n"
-       string += f"**Type**: {type}\n"
-  except: 
-     pass
+    try:
+        string = f"**Bank name**: {bank_name}\n"
+        string += f"**Bank brand**: {brand}\n"
+        string += f"**Country flag**: {country_emoji}\n"
+        string += f"**Country alpha2**: {country_alpha2}\n"
+        string += f"**Country currency**: {country_currency}\n"
+        string += f"**Country latitude**: {country_latitude}\n"
+        string += f"**Country longitude**: {country_longitude}\n"
+        string += f"**Country name**: {country_name}\n"
+        string += f"**Country numeric**: {country_numeric}\n"
+        string += f"**Number**: {number}\n"
+        string += f"**Prepaid**: {prepaid}\n"
+        string += f"**Scheme**: {scheme}\n"
+        string += f"**Type**: {type}\n"
+    except: 
+          pass
 
-  return await message.edit(string)
+    return await message.edit(string)
      
 
     
