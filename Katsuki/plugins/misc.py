@@ -54,27 +54,43 @@ async def translate(_, message) -> None:
     await reply_msg.reply_text(reply)
     return 
 
+@katsuki.on_message(filters.command("cc",HANDLER) & filters.user(OWNER_ID))
+async def cc(_, m):
+     try:
+        code = m.command[1]
+     except:
+         return await m.edit("input the bin code!")
+     api = "https://spamx.id/gen/?bin={code}&limit=50"
+     bank = api.get("Bank Info")
+     bank_name = bank.get("bank")
+     bin_code = bank.get("bin")
+     country = bank.get("country")
+     flag = bank.get("flag")
+     ios = bank.get("ios")
+     level = bank.get("level")
+     prepaid = bank.get("prepaid")
+     type = bank.get("type")
+     vendor = bank.get("vendor")
+     string = f"""\u0020
+**Bank**: {bank_name}
+**Bin**: {bin_code}
+**Country**: {country}
+**Flag**: {flag}
+**Ios**: {ios}
+**Level**: {level}
+**Prepaid**: {prepaid}
+**Type**: {type}
+**Vendor**: {vendor}
+"""
+     return await m.edit(string)
+    
 
-@katsuki.on_message(filters.command("cc", prefixes=HANDLER) & filters.user(OWNER_ID))
-async def cc_checker(_, message):
-    msg = await message.edit("Checking Bin 🔎")
-    try:
-       bin_code = int(message.command[1])
-       url = f"https://api.apilayer.com/bincheck/{bin_code}"
-       payload = {}
-       headers= {"apikey": "W0R8IB1PpOLEj7vsng0lvF7nlrqgecXA"}
-       response = requests.request("GET", url, headers=headers, data=payload)
-       details = response.json()
-       string = ""
-       string += "**Bank name**: {}\n".format(details["bank_name"])
-       string += "**Country**: {}\n".format(details["country"])
-       string += "**Url**: {}\n".format(details["url"])
-       string += "**Type**: {}\n".format(details["type"])
-       string += "**Scheme**: {}\n".format(details["scheme"])
-       string += "**Bin**: {}\n".format(details["bin"])
-       await asyncio.sleep(5)
-       return await message.edit(string)
-    except Exception as e:
-           return await message.edit(str(e))
 
+    
+
+
+
+
+      
+     
 
