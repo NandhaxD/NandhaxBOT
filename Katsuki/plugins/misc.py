@@ -55,23 +55,25 @@ async def translate(_, message) -> None:
 
 @katsuki.on_message(filters.command("cc", prefixes=HANDLER) & filters.user(OWNER_ID))
 async def cc_checker(_, message):
-    #try:
+    msg = await message.edit("Checking Bin 🔎")
+    try:
        bin_code = int(message.command[1])
        url = f"https://api.apilayer.com/bincheck/{bin_code}"
        payload = {}
        headers= {"apikey": "W0R8IB1PpOLEj7vsng0lvF7nlrqgecXA"}
        response = requests.request("GET", url, headers=headers, data=payload)
-       details = response.text
+       details = response.json()
        string = (
-          "**Bank name**: {}\n".format(details.bank_name),
-          "**Country**: {}\n".format(details.country),
-          "**Url**: {}\n".format(details.url),
-          "**Type**: {}\n".format(details.type),
-          "**Scheme**: {}\n".format(details.scheme),
-          "**Bin**: {}\n".format(details.bin),
+          "**Bank name**: {}\n".format(details["bank_name"]),
+          "**Country**: {}\n".format(details["country"]),
+          "**Url**: {}\n".format(details["url"]),
+          "**Type**: {}\n".format(details["type"]),
+          "**Scheme**: {}\n".format(details["scheme"]),
+          "**Bin**: {}\n".format(details["bin"]),
 )
+       await asyncio.sleep(5)
        return await message.edit(string)
-    #except Exception as e:
+    except Exception as e:
            #return await message.edit(str(e))
 
 
