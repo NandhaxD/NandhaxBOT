@@ -59,8 +59,8 @@ async def cc(_, m):
      try:
         code = m.command[1]
      except:
-         return await m.edit("input the bin code!")
-     api = requests.get("https://spamx.id/gen/?bin={code}&limit=50").json()
+         return await m.edit("=> Input the bin code")
+     api = requests.get(f"https://spamx.id/gen/?bin={code}&limit=50").json()
      cc = ""
      credits = api["Gen"]
      for x in credits:
@@ -76,15 +76,15 @@ async def cc(_, m):
      type = bank.get("type")
      vendor = bank.get("vendor")
      string = f"""\u0020
-**Bank**: {bank_name}
-**Bin**: {bin_code}
-**Country**: {country}
-**Flag**: {flag}
-**Ios**: {ios}
-**Level**: {level}
-**Prepaid**: {prepaid}
-**Type**: {type}
-**Vendor**: {vendor}
+🏦 **Bank**: {bank_name}
+💳 **Bin**: {bin_code}
+🌍 **Country**: {country}
+⁉️ **Flag**: {flag}
+📛 **Ios**: {ios}
+⬆️ **Level**: {level}
+🧐 **Prepaid**: {prepaid}
+🧮 **Type**: {type}
+❤️ **Vendor**: {vendor}
 
 **Here credit cards**:
 {cc}
