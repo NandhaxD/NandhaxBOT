@@ -65,14 +65,13 @@ async def cc_checker(_, message):
        headers= {"apikey": "W0R8IB1PpOLEj7vsng0lvF7nlrqgecXA"}
        response = requests.request("GET", url, headers=headers, data=payload)
        details = response.json()
-       string = (
-          "**Bank name**: {}\n".format(details["bank_name"]),
-          "**Country**: {}\n".format(details["country"]),
-          "**Url**: {}\n".format(details["url"]),
-          "**Type**: {}\n".format(details["type"]),
-          "**Scheme**: {}\n".format(details["scheme"]),
-          "**Bin**: {}\n".format(details["bin"]),
-)
+       string = ""
+       string += "**Bank name**: {}\n".format(details["bank_name"])
+       string += "**Country**: {}\n".format(details["country"])
+       string += "**Url**: {}\n".format(details["url"])
+       string += "**Type**: {}\n".format(details["type"])
+       string += "**Scheme**: {}\n".format(details["scheme"])
+       string += "**Bin**: {}\n".format(details["bin"])
        await asyncio.sleep(5)
        return await message.edit(string)
     except Exception as e:
