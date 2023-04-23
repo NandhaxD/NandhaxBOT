@@ -49,13 +49,13 @@ async def messages_pin(_, message):
                  await message.reply_to_message.pin()
              except Exception as e:
                  return await message.edit_text(f"Somthing Wrong Happens:\n{e}")
-             return await message.edit(f"Successfully [Pinned]({link})!")
+             return await message.edit("Done!")
          elif command == "unpin":
                try:
                    await message.reply_to_message.unpin()
                except Exception as e:
                    return await message.edit_text(f"Somthing Wrong Happens:\n{e}")
-               return await message.edit(f"Successfully [UnPinned]({link})")
+               return await message.edit("Done!")
 
 
 @katsuki.on_message(filters.command("invite", prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
@@ -77,7 +77,7 @@ async def admins_list(_, message):
      try:
         async for m in katsuki.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
               if m.user.is_bot != True:
-                    mm += f"=> [{m.user.first_name}](tg://user?id={m.user.id})\n"
+                    mm += f" => [{m.user.first_name}](tg://user?id={m.user.id})\n"
      except Exception as e:
            return await msg.edit(f"Somthing Wrong Happens:\n{e}")
      return await msg.edit(mm)
