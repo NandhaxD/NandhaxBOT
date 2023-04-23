@@ -139,7 +139,7 @@ Number: {street_number}
 => **Country**: {country}
 => **Postcode**: {postcode}
 """
-    return await message.edit(string)
+    return await m.edit(string)
 
 
 
