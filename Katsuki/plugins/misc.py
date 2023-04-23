@@ -76,7 +76,8 @@ async def fake_cc(_, m):
      type = bank.get("type")
      vendor = bank.get("vendor")
      string = f"""\u0020
-=> BIN DETAILS:
+=> **BIN DETAILS**:
+
 🏦 **Bank**: {bank_name}
 💳 **Bin**: {bin_code}
 🌍 **Country**: {country}
@@ -119,7 +120,7 @@ async def fake(_, m):
     salt = res.get("login").get("salt")
     password = res.get("login").get("password")
     string = f"""\u0020
-📎 **FAKE ACCOUNT DETAILS**:
+💳 **FAKE ACCOUNT DETAILS**:
 => **Name**: {name}
 => **Age**: {age}
 => **BirthDay**: {date}
