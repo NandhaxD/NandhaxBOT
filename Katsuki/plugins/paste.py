@@ -12,6 +12,7 @@ async def spacebin(text: str):
     return link
 
 
+
 @katsuki.on_message(filters.command("paste",config.HANDLER) & filters.user(config.OWNER_ID))
 async def paste(_, message):
     #share your codes on https://spacebin.in
@@ -19,7 +20,7 @@ async def paste(_, message):
           try:
               text = message.text.split(None,1)[1]
           except:
-               message.edit("=> Input text to paste else reply.")
+               await message.edit("=> Input text to paste else reply.")
                return 
 
           link = await spacebin(text)
