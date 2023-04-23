@@ -105,19 +105,19 @@ async def fake(_, m):
     state = res.get("state")
     gender = res.get("gender")
     email = res.get("email")
-    age = res.get("dob", "age")
-    date = res.get("dob", "date")
-    street_number = res.get("street", "number")
-    street_name = res.get("street", "name")
+    age = res.get("dob").get("age")
+    date = res.get("dob").get("date")
+    street_number = res.get("street").get("number")
+    street_name = res.get("street").get("name")
     phone = res.get("phone")
-    uuid = res.get("login", "uuid")
-    sha256 = res.get("login", "sha256")
-    md5 = res.get("login", "md5")
-    sha1 = res.get("login", "sha1")
-    salt = res.get("login", "salt")
-    password = res.get("login", "password")
+    uuid = res.get("login").get("uuid")
+    sha256 = res.get("login").get("sha256")
+    md5 = res.get("login").get("md5")
+    sha1 = res.get("login").get("sha1")
+    salt = res.get("login").get("salt")
+    password = res.get("login").get("password")
     string = f"""\u0020
-**FAKE ACCOUNT DETAILS**:
+📎 **FAKE ACCOUNT DETAILS**:
 => **Name**: {name}
 => **Age**: {age}
 => **BirthDay**: {date}
