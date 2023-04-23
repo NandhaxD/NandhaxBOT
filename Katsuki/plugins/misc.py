@@ -55,7 +55,7 @@ async def translate(_, message) -> None:
     return 
 
 @katsuki.on_message(filters.command("cc",HANDLER) & filters.user(OWNER_ID))
-async def cc(_, m):
+async def fake_cc(_, m):
      try:
         code = m.command[1]
      except:
@@ -76,7 +76,7 @@ async def cc(_, m):
      type = bank.get("type")
      vendor = bank.get("vendor")
      string = f"""\u0020
-=> Bin details:
+=> BIN DETAILS:
 🏦 **Bank**: {bank_name}
 💳 **Bin**: {bin_code}
 🌍 **Country**: {country}
@@ -87,7 +87,7 @@ async def cc(_, m):
 🧮 **Type**: {type}
 ❤️ **Vendor**: {vendor}\n
 
-=> **Here credit cards**:
+=> **HERE CREDIT CARDS**:
 {cc}
 """
      return await m.edit(string)
@@ -95,7 +95,55 @@ async def cc(_, m):
 
 
     
+@katsuki.on_message(filters.command("fk",HANDLER) & filters.user(OWNER_ID))
+async def fake(_, m):
+    res = requests.get("http://spamx.id/fake/").json()
+    name = "{}, {} {}".format(res["name"]["title"], res["name"]["first"], res["name"]["last"])
+    cell = res.get("cell")
+    country = res.get("country")
+    postcode = res.get("postcode")
+    state = res.get("state")
+    gender = res.get("gender")
+    email = res.get("email")
+    age = res.get("dob", "age")
+    date = res.get("dob", "date")
+    street_number = res.get("street", "number")
+    street_name = res.get("street", "name")
+    phone = res.get("phone")
+    uuid = res.get("login", "uuid")
+    sha256 = res.get("login", "sha256")
+    md5 = res.get("login", "md5")
+    sha1 = res.get("login", "sha1")
+    salt = res.get("login", "salt")
+    password = res.get("login", "password")
+    string = f"""\u0020
+**FAKE ACCOUNT DETAILS**:
+=> **Name**: {name}
+=> **Age**: {age}
+=> **BirthDay**: {date}
+=> **Gender**: {gender} 
+=> **Email**: {email}
+=> **Logins**:
+Passward: {password}
+Uuid: {uuid}
+Sha256: {sha256}
+Sha1: {sha1}
+Salt: {salt}
+Md5: {md5}
+=> **Cell**: {cell}
+=> **Phone**: {phone}
+=> **Street**:
+Name: {street_name}
+Number: {street_number}
+=> **State**: {state}
+=> **Country**: {country}
+=> **Postcode**: {postcode}
+"""
+    return await message.edit(string)
 
+
+
+    
 
 
 
