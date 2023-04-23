@@ -100,15 +100,17 @@ async def fake(_, m):
     res = requests.get("http://spamx.id/fake/").json()
     name = "{}, {} {}".format(res["name"]["title"], res["name"]["first"], res["name"]["last"])
     cell = res.get("cell")
-    country = res.get("country")
-    postcode = res.get("postcode")
-    state = res.get("state")
+    country = res.get("location").get("country")
+    postcode = res.get("location").get("postcode")
+    state = res.get("location").get("state")
+    latitude = res.get(location").get("coordinates").get("latitude")
+    longitude = res.get(location").get("coordinates").get("longitude")
     gender = res.get("gender")
     email = res.get("email")
     age = res.get("dob").get("age")
     date = res.get("dob").get("date")
-    street_number = res.get("street").get("number")
-    street_name = res.get("street").get("name")
+    street_number = res.get("location").get("street").get("number")
+    street_name = res.get("location").get("street").get("name")
     phone = res.get("phone")
     uuid = res.get("login").get("uuid")
     sha256 = res.get("login").get("sha256")
@@ -138,6 +140,8 @@ Number: {street_number}
 => **State**: {state}
 => **Country**: {country}
 => **Postcode**: {postcode}
+=> **Latitude**: {latitude}
+=> **Longitude**: {longitude}
 """
     return await m.edit(string)
 
