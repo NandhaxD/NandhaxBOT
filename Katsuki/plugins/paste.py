@@ -8,7 +8,7 @@ from pyrogram import filters
 async def spacebin(text: str):
     url = "https://spaceb.in/api/v1/documents/"
     response = requests.post(url, data={"content": text, "extension": "txt"})
-    link = f"https://spaceb.in/{response.get('payload').get('id')}"
+    link = "https://spaceb.in/".join(response["payload"]["id"])
     return link
 
 
