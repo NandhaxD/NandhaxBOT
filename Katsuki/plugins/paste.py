@@ -17,11 +17,14 @@ async def paste(_, message):
     #share your codes on https://spacebin.in
     if not message.reply_to_message:
           try:
-              text = message.text.split(message.text.split()[0])[1]
+              text = message.text.split(None,1)[1]
           except:
-               return message.edit("=> Input text to paste else reply.")
+               message.edit("=> Input text to paste else reply.")
+               return 
+
           link = await spacebin(text)
           return await message.edit(link)
+
     elif bool(message.reply_to_message.text or message.reply_to_message.caption):
          
            if message.reply_to_message.text:
