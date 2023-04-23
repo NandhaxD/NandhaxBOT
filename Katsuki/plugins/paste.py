@@ -1,4 +1,4 @@
-
+import requests 
 import config, os
 
 from Katsuki import katsuki
@@ -14,7 +14,7 @@ async def spacebin(text: str):
 
 @katsuki.on_message(filters.command("paste",config.HANDLER) & filters.user(config.OWNER_ID))
 async def paste(_, message):
-  
+    #share your codes on https://spacebin.in
     if not message.reply_to_message:
           try:
               text = message.text.split(message.text.split()[0])[1]
