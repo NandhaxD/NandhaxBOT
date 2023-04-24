@@ -16,16 +16,16 @@ async def spacebin(text: str):
     url = "https://spaceb.in/api/v1/documents/"
     response = requests.post(url, data={"content": text, "extension": "txt"})
     id = response.json().get('payload').get('id')
-    response = requests.get("https://spaceb.in/api/v1/documents/{id}").json()
-    content = response.get("payload").get("content")
-    created_at = int(response.get("payload").get("created_at"))
+    res = requests.get("https://spaceb.in/api/v1/documents/{id}").json()
+    content = res.get("payload").get("content")
+    created_at = int(res.get("payload").get("created_at"))
     link = f"https://spacebin.in/{id}"
     raw = f"https://spaceb.in/api/v1/documents/{id}/raw"
     datetime = await convert_to_datetime(created_at)
     string = f"""\u0020
 **Here's the link**: **[Paste link]({link})**
 **Here's the link**: **[Raw View]({raw})**
-**Created at: {datetime}
+**Created at**: {datetime}
 """
     return string
 
