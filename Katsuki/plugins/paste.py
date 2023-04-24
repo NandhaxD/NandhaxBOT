@@ -45,7 +45,7 @@ async def paste(_, message):
            link = await spacebin(text)
            return await message.edit(link)
     else:
-         return message.edit("=> I cannot paste this.")
+         return await message.edit("=> I am unable to paste this.")
 
 
 
