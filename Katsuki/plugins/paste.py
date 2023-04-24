@@ -57,7 +57,7 @@ async def paste(_, message):
            link = await spacebin(text)
            return await message.edit(link)
 
-    elif bool(message.reply_to_message.document.mime_type.startswith("text/")):
+    elif (message.reply_to_message.document and bool(message.reply_to_message.document.mime_type.startswith("text/"))):
            path = await katsuki.download_media(message.reply_to_message)
            file = open(path, "r")
            text = file.read()
