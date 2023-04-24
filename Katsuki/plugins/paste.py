@@ -1,15 +1,36 @@
 import requests 
 import config, os
+import datetime
 
 from Katsuki import katsuki
 from pyrogram import filters
 
 
+
+async def convert_to_datetime(timestamp): # Unix timestamp
+     date = datetime.datetime.fromtimestamp(timestamp)
+     return date
+
+
 async def spacebin(text: str):
     url = "https://spaceb.in/api/v1/documents/"
     response = requests.post(url, data={"content": text, "extension": "txt"})
-    link = f"https://spaceb.in/{response.json().get('payload').get('id')}"
-    return link
+    id = response.json().get('payload').get('id')
+    response = requests.get("https://spaceb.in/api/v1/documents/{id}").json()
+    content = response.get("payload").get("content")
+    created_at = response.get("payload").get("created_at")
+    link = f"https://spacebin.in/{id}"
+    raw = f"https://spaceb.in/api/v1/documents/{id}/raw"
+    datetime = await convert_to_datetime(created_at)
+    return string = """\u0020
+**Here's the link**: **[Paste link]({link})**
+**Here's the link**: **[Raw View]({raw})**
+**Created at: {datetime}
+"""
+
+    
+    
+    
 
 
 
@@ -36,7 +57,7 @@ async def paste(_, message):
            link = await spacebin(text)
            return await message.edit(link)
 
-    elif message.reply_to_message.document.mime_type.startswith("text/"):
+    elif bool(message.reply_to_message.document.mime_type.startswith("text/")):
            path = await katsuki.download_media(message.reply_to_message)
            file = open(path, "r")
            text = file.read()
