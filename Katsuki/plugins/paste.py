@@ -18,7 +18,7 @@ async def spacebin(text: str):
     id = response.json().get('payload').get('id')
     response = requests.get("https://spaceb.in/api/v1/documents/{id}").json()
     content = response.get("payload").get("content")
-    created_at = response.get("payload").get("created_at")
+    created_at = int(response.get("payload").get("created_at"))
     link = f"https://spacebin.in/{id}"
     raw = f"https://spaceb.in/api/v1/documents/{id}/raw"
     datetime = await convert_to_datetime(created_at)
