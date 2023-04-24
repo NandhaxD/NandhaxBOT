@@ -22,11 +22,12 @@ async def spacebin(text: str):
     link = f"https://spacebin.in/{id}"
     raw = f"https://spaceb.in/api/v1/documents/{id}/raw"
     datetime = await convert_to_datetime(created_at)
-    return string = """\u0020
+    string = f"""\u0020
 **Here's the link**: **[Paste link]({link})**
 **Here's the link**: **[Raw View]({raw})**
 **Created at: {datetime}
 """
+    return string
 
     
     
