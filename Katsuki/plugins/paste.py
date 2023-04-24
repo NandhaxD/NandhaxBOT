@@ -16,7 +16,7 @@ async def spacebin(text: str):
     url = "https://spaceb.in/api/v1/documents/"
     response = requests.post(url, data={"content": text, "extension": "txt"})
     id = response.json().get('payload').get('id')
-    res = requests.get("https://spaceb.in/api/v1/documents/{id}").json()
+    res = requests.get(f"https://spaceb.in/api/v1/documents/{id}").json()
     created_at = res.get("payload").get("created_at")
     link = f"https://spacebin.in/{id}"
     raw = f"https://spaceb.in/api/v1/documents/{id}/raw"
@@ -24,7 +24,7 @@ async def spacebin(text: str):
     string = f"""\u0020
 **Here's the link**: **[Paste link]({link})**
 **Here's the link**: **[Raw View]({raw})**
-**Created at**: {timedate}
+**Created datetime**: {timedate}
 """
     return string
 
