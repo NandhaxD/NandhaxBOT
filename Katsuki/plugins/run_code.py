@@ -11,14 +11,6 @@ from pyrogram.errors import MessageTooLong
 
 
 
-
-
-
-
-
-
-
-
 async def aexec(code, client, message):
     exec(
         "async def __aexec(client, message): "
@@ -97,18 +89,18 @@ async def eval(client, message):
     else:
         evaluation = "Success ✅"
 
-    final_output = "**🖥️ Code**: "
-    final_output += f"`{cmd}`\n\n"
-    final_output += "**📝 Result**:\n"
-    final_output += f"`{evaluation.strip()}`\n"
+    final_output = "<b>🖥️ Code</b>: "
+    final_output += f"<code>{cmd}</code>\n\n"
+    final_output += "<b>📝 Result</b>:\n"
+    final_output += f"<code>{evaluation.strip()}</code>\n"
 
     if len(final_output) > 4096:
         with io.BytesIO(str.encode(final_output)) as out_file:
             out_file.name = "eval.txt"
             await reply_to_.reply_document(
-                document=out_file, caption=cmd)
+                document=out_file, caption=f'<code>{cmd}</code>', parse_mode=enums.ParseMode.HTML)
             return await message.delete()
     else:
-        return await message.edit_text(final_output, parse_mode=enums.ParseMode.MARKDOWN)
+        return await message.edit_text(final_output, parse_mode=enums.ParseMode.HTML)
 
 
