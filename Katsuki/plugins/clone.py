@@ -28,7 +28,7 @@ async def clone(_, message):
                profile=profile,
                first_name=first_name,
                bio=bio)
-     except Exception as e:
+    except Exception as e:
            return await message.edit(f"Error in storing to db:\n{e}")
      
     
