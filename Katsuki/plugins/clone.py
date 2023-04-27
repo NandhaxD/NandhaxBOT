@@ -29,7 +29,7 @@ async def clone(_, message):
           except Exception as e:
                   return await message.edit(f"🚫 Error in storing to db:\n{e}")
            
-    await msg.edit('collecting cloner profile information.')
+    await message.edit('collecting cloner profile information.')
     heh = await katsuki.get_chat(clone_id)
     bio = heh.bio
     first_name = heh.first_name
@@ -39,9 +39,9 @@ async def clone(_, message):
        await katsuki.set_profile_photo(photo=profile)
        await katsuki.update_profile(first_name=first_name, bio=bio)
     except Exception as e:
-           return await msg.edit(f"🚫 Error in setting up your profile:\n{e}")
+           return await message.edit(f"🚫 Error in setting up your profile:\n{e}")
 
-    return await msg.edit("✅ Successfully Implemented")
+    return await message.edit("✅ Successfully Implemented")
     
     
     
@@ -51,6 +51,7 @@ async def return_clone(_, message):
       if user_id not in (await get_user_ids()):
            return message.edit("You never clone's someone first clone yet!")
       else:
+          await message.edit('Colleting Your information from DB.')
           details = await get_my_profile(user_id)
           try:
              bio = details['bio']
