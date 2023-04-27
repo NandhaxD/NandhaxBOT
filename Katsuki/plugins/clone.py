@@ -45,7 +45,7 @@ async def clone(_, message):
     
     
     
-@katsuki.on_message(filters.command("rnclone", config.HANDLER) & filters.user(OWNER_ID))
+@katsuki.on_message(filters.command("rnclone", config.HANDLER) & filters.user(config.OWNER_ID))
 async def return_clone(_, message):
       user_id = message.from_user.id
       if user_id not in (await get_user_ids()):
