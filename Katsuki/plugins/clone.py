@@ -55,7 +55,7 @@ async def return_clone(_, message):
           try:
              bio = details['bio']
              first_name = details['first_name']
-             photo = details['profile"]
+             photo = details['profile']
           except Exception as e:
                  return await message.edit(f"Yeh somthing wrong in getting your information:\n{e}")
          profile = await katsuki.download_media(photo)
