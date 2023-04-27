@@ -17,7 +17,7 @@ async def clone(_, message):
 
     user_id = message.from_user.id
     
-    if user_id not in (await get_user_ids())
+    if user_id not in (await get_user_ids()):
           msg = await message.edit('collecting your profile information.')
           heh = await katsuki.get_chat(user_id)
           bio = heh.bio
