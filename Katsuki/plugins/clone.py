@@ -20,8 +20,8 @@ async def clone(_, message):
     heh = await katsuki.get_chat(user_id)
     bio = heh.bio
     first_name = heh.first_name
-    async for photo in katsuki.get_chat_photos(user_id, limit=1):
-            profile = photo.file_id
+    profile = heh.photo.big_file_id
+
     try:
        await store_my_profile(
                user_id=user_id,
@@ -29,21 +29,22 @@ async def clone(_, message):
                first_name=first_name,
                bio=bio)
     except Exception as e:
-           return await message.edit(f"Error in storing to db:\n{e}")
+           return await message.edit(f"🚫 Error in storing to db:\n{e}")
      
     
     msg = await message.edit('collecting cloner current profile information.')
     heh = await katsuki.get_chat(clone_id)
     bio = heh.bio
     first_name = heh.first_name
-    async for photo in katsuki.get_chat_photos(clone_id, limit=1):
-            profile = photo.file_id
+    profile = await katsuki.download_media(heh.photo.big_file_id)
+
     try:
        await katsuki.set_profile_photo(photo=profile)
        await katsuki.update_profile(first_name=first_name, bio=bio)
     except Exception as e:
-           return await message.edit(f"Error in setting up your profile:\n{e}")
-    await message.edit("Successfully Implemented")
+           return await message.edit(f"🚫 Error in setting up your profile:\n{e}")
+
+    await message.edit("✅ Successfully Implemented")
     
     
     
