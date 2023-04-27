@@ -1,7 +1,7 @@
 
 from Katsuki import katsuki
 from pyrogram import filters
-from katsuki_db.clone import store_my_profile
+from Katsuki.katsuki_db.clone import store_my_profile
 
 import config
 
