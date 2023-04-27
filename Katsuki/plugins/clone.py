@@ -1,11 +1,11 @@
 
-from Katsuki import Katsuki
+from Katsuki import katsuki
 from pyrogram import filters
 from katsuki_db.clone import store_my_profile
 
 import config
 
-@katsuki.on_message(filters.command("clone",config.HANDLER))
+@katsuki.on_message(filters.command("clone",config.HANDLER) & filters.user(config.OWNER_ID))
 async def clone(_, message):
     if not message.reply_to_message:
          try:
