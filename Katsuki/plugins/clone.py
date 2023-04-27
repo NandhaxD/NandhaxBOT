@@ -60,7 +60,7 @@ async def return_clone(_, message):
                  return await message.edit(f"Yeh somthing wrong in getting your information:\n{e}")
           profile = await katsuki.download_media(photo)
           try:
-         N   await katsuki.set_profile_photo(photo=profile)
+             await katsuki.set_profile_photo(photo=profile)
              await katsuki.update_profile(first_name=first_name, bio=bio)
           except Exception as e:
               return await message.edit(f"🚫 Error in setting up your profile:\n{e}")
