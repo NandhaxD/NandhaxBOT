@@ -37,7 +37,7 @@ async def logs(_, message):
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("sh",prefixes=HANDLER))
 async def sh(_, message):
 
-    await message.edit("Analyzing code...")
+    await message.edit("Analyzing Code...")
     
     reply_to_ = message
     if message.reply_to_message:
@@ -52,15 +52,14 @@ async def sh(_, message):
 
     try:
 
-       await reply_to.reply_text(
-             f"**🖥️ Code**: ```{code}```\n\n**📝 Results**:\n```{x}```")
+       await reply_to_.reply_text(f"**🖥️ Code**: ```{code}```\n\n**📝 Results**:\n```{x}```")
        return await message.delete()
 
     except MessageTooLong:
          with io.BytesIO(str.encode(run_logs)) as logs:
                logs.name = "shell.txt"
 
-               await reply_to.reply_document(
+               await reply_to_.reply_document(
                    document=logs, thumb=thumb_id)
 
                return await message.delete()
@@ -68,11 +67,13 @@ async def sh(_, message):
     
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("e",prefixes=HANDLER))
 async def eval(client, message):
-    await message.edit_text("Analyzing Code...")
+
+    msg = await message.edit_text("Analyzing Code...")
+
     try:
-      cmd = message.text.split(message.text.split()[0])[1]
+        cmd = message.text.split(message.text.split()[0])[1]
     except:
-         return await message.edit("can you input the code run my program?")
+         return await msg.edit("can you input the code to run my program?")
 
     reply_to_ = message
     if message.reply_to_message:
@@ -116,7 +117,7 @@ async def eval(client, message):
                 document=out_file, caption=f'<code>{cmd}</code>', parse_mode=enums.ParseMode.HTML)
             return await message.delete()
     else:
-        await reply_to.reply_text(final_output, parse_mode=enums.ParseMode.HTML)
+        await reply_to_.reply_text(final_output, parse_mode=enums.ParseMode.HTML)
         return await message.delete()
 
 
