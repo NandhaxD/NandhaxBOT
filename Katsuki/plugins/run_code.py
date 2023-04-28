@@ -24,7 +24,7 @@ async def aexec(code, client, message):
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("logs",prefixes=HANDLER))
 async def logs(_, message):
        run_logs = run("tail logs.txt")
-       msg = await message.edit_text("Analyzing logging...")
+       msg = await message.edit_text("Analyzing Logging...")
        thumb_id = "./Katsuki/katsuki_help/IMG_20220701_185623_542.jpg"
        with io.BytesIO(str.encode(run_logs)) as logs:
             logs.name = "logs.txt"
@@ -33,23 +33,38 @@ async def logs(_, message):
             )
        return await msg.delete()
 
+
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("sh",prefixes=HANDLER))
 async def sh(_, message):
-    msg = await message.edit("Analyzing code...")
+
+    await message.edit("Analyzing code...")
+    
+    reply_to_ = message
+    if message.reply_to_message:
+        reply_to_ = message.reply_to_message
+
     try:
-      code = message.text.split(message.text.split()[0])[1]
+        code = message.text.split(message.text.split()[0])[1]
     except:
-        return await message.edit("No?")
+        return await message.edit("can you input the code to run my program?")
+
     x = run(code)
+
     try:
-       return await message.edit_text(
-             f"**SHELL**: `{code}`\n\n**OUTPUT**:\n`{x}`")
+
+       await reply_to.reply_text(
+             f"**🖥️ Code**: ```{code}```\n\n**📝 Results**:\n```{x}```")
+       return await message.delete()
+
     except MessageTooLong:
          with io.BytesIO(str.encode(run_logs)) as logs:
                logs.name = "shell.txt"
-               await message.reply_document(
+
+               await reply_to.reply_document(
                    document=logs, thumb=thumb_id)
-               return await msg.delete()
+
+               return await message.delete()
+
     
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("e",prefixes=HANDLER))
 async def eval(client, message):
@@ -57,7 +72,7 @@ async def eval(client, message):
     try:
       cmd = message.text.split(message.text.split()[0])[1]
     except:
-         return await message.edit("No?")
+         return await message.edit("can you input the code run my program?")
 
     reply_to_ = message
     if message.reply_to_message:
@@ -91,7 +106,7 @@ async def eval(client, message):
 
     final_output = "<b>🖥️ Code</b>: "
     final_output += f"<code>{cmd}</code>\n\n"
-    final_output += "<b>📝 Result</b>:\n"
+    final_output += "<b>📝 Results</b>:\n"
     final_output += f"<code>{evaluation.strip()}</code>\n"
 
     if len(final_output) > 4096:
@@ -101,6 +116,7 @@ async def eval(client, message):
                 document=out_file, caption=f'<code>{cmd}</code>', parse_mode=enums.ParseMode.HTML)
             return await message.delete()
     else:
-        return await message.edit_text(final_output, parse_mode=enums.ParseMode.HTML)
+        await reply_to.reply_text(final_output, parse_mode=enums.ParseMode.HTML)
+        return await message.delete()
 
 
