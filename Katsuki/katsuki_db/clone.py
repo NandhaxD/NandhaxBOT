@@ -22,7 +22,7 @@ async def store_profile(user_id: int, profile: str, first_name: str, bio: str):
 
 async def get_profile(user_id: int):
      id = {"user_id": user_id}
-     katsuki = db.fine_one(id)
+     katsuki = db.find_one(id)
      if katsuki:
           return katsuki
      return False
