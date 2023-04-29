@@ -46,7 +46,8 @@ async def save_pfp(_, message):
       user = await katsuki.get_chat(user_id)
       bio = user.bio if user.bio else None
       first_name = user.first_name 
-      photo_id = user.photo.big_file_id if user.photo else None
+      async for file in katsuki.get_chat_photos(user_id, limit=1):
+             photo_id = file.file_id if user.photo else None
       await store_profile(user_id=user_id, profile=photo_id, first_name=first_name, bio=bio)
       return await message.edit("Successfully Saved!")
           
