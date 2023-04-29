@@ -24,7 +24,7 @@ async def clone(_, message):
     await message.edit('collecting Information from Client')
     user = await katsuki.get_chat(clone_id)
     bio = user.bio if user.bio else None
-    first_name = heh.first_name
+    first_name = user.first_name
     photo_id = user.photo.big_file_id if user.photo else None
 
     try:
