@@ -21,7 +21,8 @@ async def clone(_, message):
           return await message.edit_text("You didn't Saved Any Profile. Send ```.savepfp``` and try again.") 
            
           
-    await message.edit('collecting Information from Client')
+    await message.edit('Collecting Information from Client')
+
     user = await katsuki.get_chat(clone_id)
     bio = user.bio if user.bio else None
     first_name = user.first_name
@@ -53,7 +54,7 @@ async def save_pfp(_, message):
 async def return_profile(_, message):
      user_id = message.from_user.id
      if (await get_profile(user_id)) == False:
-         return await message.edit("Use ```.savepfp``` save your information and next do this.")      
+         return await message.edit("Use ```.savepfp``` save your information and try again.")      
      user = await get_profile(user_id)
      bio = user.get("bio")
      first_name = user.get("first_name")
