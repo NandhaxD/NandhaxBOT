@@ -52,7 +52,7 @@ async def save_pfp(_, message):
 @katsuki.on_message(filters.command("rnpfp", config.HANDLER) & filters.user(config.OWNER_ID))
 async def return_profile(_, message):
      user_id = message.from_user.id
-     if (await get_profile(user_id) == False:
+     if (await get_profile(user_id)) == False:
          return await message.edit("Use ```.savepfp``` save your information and next do this.")      
      user = await get_profile(user_id)
      bio = user.get("bio")
