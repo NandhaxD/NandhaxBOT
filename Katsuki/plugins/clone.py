@@ -63,7 +63,7 @@ async def return_profile(_, message):
         profile = await katsuki.download_media(photo_id)
         await katsuki.set_profile_photo(photo=profile)
      except:
-         passs
+         pass
 
      await katsuki.update_profile(first_name=first_name, bio=bio)
      return await message.edit("Successfully Reseted Info!")
