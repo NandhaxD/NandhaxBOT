@@ -1,11 +1,11 @@
 
 from Katsuki import katsuki
 from pyrogram import filters
-from Katsuki.katsuki_db.clone import store_my_profile, get_user_ids, get_my_profile
+from Katsuki.katsuki_db.clone import store_profile, get_profile
 
 import config
 
-@katsuki.on_message(filters.command("clone",config.HANDLER) & filters.user(config.OWNER_ID))
+@katsuki.on_message(filters.command("cpfp",config.HANDLER) & filters.user(config.OWNER_ID))
 async def clone(_, message):
     if not message.reply_to_message:
          try:
@@ -17,57 +17,57 @@ async def clone(_, message):
 
     user_id = message.from_user.id
     
-    if user_id not in (await get_user_ids()):
-          msg = await message.edit('collecting your profile information.')
-          heh = await katsuki.get_chat(user_id)
-          bio = heh.bio
-          first_name = heh.first_name
-          profile = heh.photo.big_file_id
-
-          try:
-             await store_my_profile(user_id=user_id,profile=profile,first_name=first_name,bio=bio)
-          except Exception as e:
-                  return await message.edit(f"🚫 Error in storing to db:\n{e}")
+    if (await get_profile(user_id)) == False:
+          return await message.edit_text("You didn't Saved Any Profile. Send ```.savepfp``` and try again.") 
            
-    await message.edit('collecting cloner profile information.')
-    heh = await katsuki.get_chat(clone_id)
-    bio = heh.bio
+          
+    await message.edit('collecting Information from Client')
+    user = await katsuki.get_chat(clone_id)
+    bio = user.bio if user.bio else None
     first_name = heh.first_name
-    profile = await katsuki.download_media(heh.photo.big_file_id)
+    photo_id = user.photo.big_file_id if user.photo else None
 
     try:
+       profile = await katsuki.download_media(photo_id)
        await katsuki.set_profile_photo(photo=profile)
-       await katsuki.update_profile(first_name=first_name, bio=bio)
-    except Exception as e:
-           return await message.edit(f"🚫 Error in setting up your profile:\n{e}")
-
-    return await message.edit("✅ Successfully Implemented")
+    except:
+        pass
+   
+    await katsuki.update_profile(first_name=first_name, bio=bio)
+    return await message.edit("✅ Successfully Implemented!")
     
     
     
-@katsuki.on_message(filters.command("rnclone", config.HANDLER) & filters.user(config.OWNER_ID))
-async def return_clone(_, message):
+@katsuki.on_message(filters.command("savepfp", config.HANDLER) & filters.user(config.OWNER_ID))
+async def save_pfp(_, message):
       user_id = message.from_user.id
-      if user_id not in (await get_user_ids()):
-           return message.edit("You never clone's someone first clone yet!")
-      else:
-          await message.edit('Colleting Your information from DB.')
-          details = await get_my_profile(user_id)
-          try:
-             bio = details['bio']
-             first_name = details['first_name']
-             photo = details['profile']
-          except Exception as e:
-                 return await message.edit(f"Yeh somthing wrong in getting your information:\n{e}")
-          profile = await katsuki.download_media(photo)
-          try:
-             await katsuki.set_profile_photo(photo=profile)
-             await katsuki.update_profile(first_name=first_name, bio=bio)
-          except Exception as e:
-              return await message.edit(f"🚫 Error in setting up your profile:\n{e}")
+      await message.edit('Saving your information into DB')      
+      user = await katsuki.get_chat(user_id)
+      bio = user.bio if user.bio else None
+      first_name = user.first_name 
+      photo_id = user.photo.big_file_id if user.photo else None
+      await store_profile(user_id=user_id, profile=photo_id, first_name=first_name, bio=bio)
+      return await message.edit("Successfully Saved!")
+          
+@katsuki.on_message(filters.command("rnpfp", config.HANDLER) & filters.user(config.OWNER_ID))
+async def return_profile(_, message):
+     user_id = message.from_user.id
+     if (await get_profile(user_id) == False:
+         return await message.edit("Use ```.savepfp``` save your information and next do this.")      
+     user = await get_profile(user_id)
+     bio = user.get("bio")
+     first_name = user.get("first_name")
+     photo_id = user.get("profile")
+     try:
+        profile = await katsuki.download_media(photo_id)
+        await katsuki.set_profile_photo(photo=profile)
+     except:
+         passs
 
-          return await message.edit("✅ Successfully Implemented")
-    
-       
+     await katsuki.update_profile(first_name=first_name, bio=bio)
+     return await message.edit("Successfully Reseted Info!")
+ 
+
+
 
 
