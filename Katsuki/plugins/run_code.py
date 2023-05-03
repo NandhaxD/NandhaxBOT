@@ -43,11 +43,10 @@ async def sh(_, message):
     if message.reply_to_message:
         reply_to_ = message.reply_to_message
 
-    try:
-        code = message.text.split(message.text.split()[0])[1]
-    except:
-        return await message.edit("can you input the code to run my program?")
+    if len(message.command) == 0:
+           return await message.edit("can you input the code to run program?")
 
+    code = message.text.split(message.command[0])[1]        
     x = run(code)
 
     try:
@@ -70,11 +69,10 @@ async def eval(client, message):
 
     msg = await message.edit_text("Analyzing Code...")
 
-    try:
-        cmd = message.text.split(message.text.split()[0])[1]
-    except:
-         return await msg.edit("can you input the code to run my program?")
+    if len(message.command) == 0:
+           return await message.edit("can you input the code to run program?")
 
+    cmd = message.text.split(message.command[0])[1]
     reply_to_ = message
     if message.reply_to_message:
         reply_to_ = message.reply_to_message
