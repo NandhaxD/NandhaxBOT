@@ -15,16 +15,18 @@ async def promote_member(_, message):
            user_id = message.command[1]
         except:
             return await message.edit("Input username either id!")
-     try:
-         my_privileges = (await message.chat.get_member(user_id=message.from_user.id)).privileges 
-         can_promote_members = [True if my_privileges and my_privileges.can_promote_members else False][0]
-     except Exception as e:
-           return await message.edit("Error:\n"+ str(e))
+     my_privileges = await message.chat.get_member(user_id=message.from_user.id) 
+     if my_privileges.privileges:
+           privileges = my_privileges.privileges.can_promote_members
+           if not can_promote_members:
+                    return await message.edit('You don't add admin right imfao.')               
+     else:
+         return await message.edit('You are not admin anyway.')
      command = message.command[0]
-     if command == "fpromote" and can_promote_members:
+     if command == "fpromote":
               await message.chat.promote_member(user_id=user_id, privileges=my_privileges)
               return await message.edit("=> Fully Promoted! (:")
-     elif command == "promote" and can_promote_members:
+     elif command == "promote":
              privileges = ChatPrivileges(
                         can_delete_messages=True, can_restrict_members=True,
                         can_change_info=True, can_invite_users=True, can_pin_messages=True)
