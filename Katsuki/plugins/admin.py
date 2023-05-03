@@ -24,15 +24,20 @@ async def promote_member(_, message):
          return await message.edit('You are not admin anyway.')
      command = message.command[0]
      if command == "fpromote":
-              await message.chat.promote_member(user_id=user_id, privileges=my_privileges)
-              return await message.edit("=> Fully Promoted! (:")
+            try:
+                await message.chat.promote_member(user_id=user_id, privileges=my_privileges)
+                return await message.edit("=> Fully Promoted! (:")
+            except:
+                pass
      elif command == "promote":
              privileges = ChatPrivileges(
                         can_delete_messages=True, can_restrict_members=True,
                         can_change_info=True, can_invite_users=True, can_pin_messages=True)
-             await message.chat.promote_member(user_id=user_id, privileges=privileges)
-             return await message.edit("=> Promoted! (:")
-                     
+             try:
+                await message.chat.promote_member(user_id=user_id, privileges=privileges)
+                return await message.edit("=> Promoted! (:")
+             except:
+                 pass      
 
 
 @katsuki.on_message(filters.command(["pin","unpin"], prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
