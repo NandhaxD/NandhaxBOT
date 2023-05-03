@@ -19,7 +19,7 @@ async def promote_member(_, message):
      if my_privileges.privileges:
            privileges = my_privileges.privileges.can_promote_members
            if not can_promote_members:
-                    return await message.edit('You don't add admin right imfao.')               
+                    return await message.edit("You don't add admin right imfao.")               
      else:
          return await message.edit('You are not admin anyway.')
      command = message.command[0]
