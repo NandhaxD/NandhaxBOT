@@ -1,8 +1,8 @@
-pyrogram 
-pymongo
+pyrogram==2.0.103 
+pymongo==4.3.3
 pymongo[srv]
-asyncio
-gpytranslate
-tgcrypto
-telegraph 
-wget
+asyncio==3.4.3
+gpytranslate==1.5.1
+tgcrypto==1.2.5
+telegraph==2.2.0
+wget==3.2
