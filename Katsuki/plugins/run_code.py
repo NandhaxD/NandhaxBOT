@@ -65,7 +65,7 @@ async def sh(_, message):
 
     
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("e",prefixes=HANDLER))
-async def evaluate(katsuki: client, message):
+async def evaluate(client: katsuki , message):
     status_message = await message.edit("`Running ...`")
     try:
         cmd = message.text.split(" ", maxsplit=1)[1]
