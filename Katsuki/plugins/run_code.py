@@ -110,7 +110,8 @@ async def evaluate(client: katsuki , message):
         )
         os.remove(filename)
         await status_message.delete()
+        return
     else:
         await status_message.edit(final_output)
-
+        return 
 
