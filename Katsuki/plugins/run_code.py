@@ -68,7 +68,7 @@ async def sh(_, message):
 async def evaluate(client: katsuki , message):
     status_message = await message.edit("`Running ...`")
     try:
-        cmd = message.text.split(" ", maxsplit=1)[1]
+        cmd = message.text.split(maxsplit=1)[1]
     except IndexError:
         await status_message.delete()
         return
@@ -77,8 +77,8 @@ async def evaluate(client: katsuki , message):
         reply_to_id = message.reply_to_message.message.id
     old_stderr = sys.stderr
     old_stdout = sys.stdout
-    redirected_output = sys.stdout = StringIO()
-    redirected_error = sys.stderr = StringIO()
+    redirected_output = sys.stdout = io.StringIO()
+    redirected_error = sys.stderr = io.StringIO()
     stdout, stderr, exc = None, None, None
     try:
         await aexec(cmd, client, message)
