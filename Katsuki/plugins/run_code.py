@@ -4,7 +4,6 @@ import re
 import os
 import subprocess
 import traceback
-
 from Katsuki import katsuki
 from config import ( OWNER_ID, HANDLER) 
 from pyrogram import filters, enums
@@ -12,12 +11,12 @@ from pyrogram.errors import MessageTooLong
 
 
 
-async def aexec(code, client, message):
+async def aexec(code, katsuki, message):
     exec(
-        "async def __aexec(client, message): "
+        "async def __aexec(katsuki, message): "
         + "".join(f"\n {l_}" for l_ in code.split("\n"))
     )
-    return await locals()["__aexec"](client, message)
+    return await locals()["__aexec"](katsuki, message)
 
 
 
@@ -36,7 +35,7 @@ async def logs(_, message):
 
 
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("sh",prefixes=HANDLER))
-async def terminal(client, message):
+async def terminal(katsuki, message):
     if len(message.text.split()) == 1:
         await message.edit(f"Usage: `.sh echo owo`")
         return
@@ -86,7 +85,7 @@ async def terminal(client, message):
         if len(output) > 4096:
             with open("output.txt", "w+") as file:
                 file.write(output)
-            await client.send_document(
+            await katsuki.send_document(
                 message.chat.id,
                 "output.txt",
                 reply_to_message_id=message.id,
@@ -94,14 +93,14 @@ async def terminal(client, message):
             )
             os.remove("output.txt")
             return
-        await message.edit(f"**Output:**\n```{output}```", parse_mode=enums.ParseMode.MARKDOWN)
+        return await message.edit(f"**Output:**\n```{output}```", parse_mode=enums.ParseMode.MARKDOWN)
     else:
-        await message.edit("**Output:**\n`No Output`") 
+        return await message.edit("**Output:**\n`No Output`") 
 
     
     
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("e",prefixes=HANDLER))
-async def evaluate(client: katsuki , message):
+async def evaluate(katsuki , message):
     status_message = await message.edit("`Running ...`")
     try:
         cmd = message.text.split(maxsplit=1)[1]
@@ -117,7 +116,7 @@ async def evaluate(client: katsuki , message):
     redirected_error = sys.stderr = io.StringIO()
     stdout, stderr, exc = None, None, None
     try:
-        await aexec(cmd, client, message)
+        await aexec(cmd, katsuki, message)
     except Exception:
         exc = traceback.format_exc()
     stdout = redirected_output.getvalue()
