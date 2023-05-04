@@ -65,34 +65,29 @@ async def sh(_, message):
 
     
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("e",prefixes=HANDLER))
-async def eval(client, message):
-
-    msg = await message.edit_text("Analyzing Code...")
-
-    if len(message.text.split()) == 0:
-           return await message.edit("can you input the code to run program?")
-
-    cmd = message.text.split(message.text.split()[0])[1]
-    reply_to_ = message
+async def evaluate(katsuki: client, message):
+    status_message = await message.edit("`Running ...`")
+    try:
+        cmd = message.text.split(" ", maxsplit=1)[1]
+    except IndexError:
+        await status_message.delete()
+        return
+    reply_to_id = message.id
     if message.reply_to_message:
-        reply_to_ = message.reply_to_message
-
+        reply_to_id = message.reply_to_message.message.id
     old_stderr = sys.stderr
     old_stdout = sys.stdout
-    redirected_output = sys.stdout = io.StringIO()
-    redirected_error = sys.stderr = io.StringIO()
+    redirected_output = sys.stdout = StringIO()
+    redirected_error = sys.stderr = StringIO()
     stdout, stderr, exc = None, None, None
-
     try:
         await aexec(cmd, client, message)
     except Exception:
         exc = traceback.format_exc()
-
     stdout = redirected_output.getvalue()
     stderr = redirected_error.getvalue()
     sys.stdout = old_stdout
     sys.stderr = old_stderr
-
     evaluation = ""
     if exc:
         evaluation = exc
@@ -101,21 +96,21 @@ async def eval(client, message):
     elif stdout:
         evaluation = stdout
     else:
-        evaluation = "Success ✅"
-
-    final_output = "<b>🖥️ Code: </b>"
-    final_output += f"<code>{cmd}</code>"
-    final_output += "\n\n<b>📝 Results</b>:\n"
-    final_output += f"<code>{evaluation}</code>"
-
+        evaluation = "Success"
+    final_output = f"<b>Command:</b>\n<code>{cmd}</code>\n\n<b>Output</b>:\n<code>{evaluation.strip()}</code>"
     if len(final_output) > 4096:
-        with io.BytesIO(str.encode(final_output)) as out_file:
-            out_file.name = "eval.txt"
-            await reply_to_.reply_document(
-                document=out_file, caption=f'<code>{cmd}</code>', parse_mode=enums.ParseMode.HTML)
-            return await message.delete()
+        filename = "output.txt"
+        with open(filename, "w+", encoding="utf8") as out_file:
+            out_file.write(str(final_output))
+        await message.reply_document(
+            document=filename,
+            caption=cmd,
+            disable_notification=True,
+            reply_to_message_id=reply_to_id,
+        )
+        os.remove(filename)
+        await status_message.delete()
     else:
-        await reply_to_.reply_text(final_output, parse_mode=enums.ParseMode.HTML)
-        return await message.delete()
+        await status_message.edit(final_output)
 
 
