@@ -104,9 +104,9 @@ async def eval(client, message):
         evaluation = "Success ✅"
 
     final_output = "<b>🖥️ Code: </b>"
-    final_output += f"{cmd}"
+    final_output += f"<code>{cmd}</code>"
     final_output += "\n\n<b>📝 Results</b>:\n"
-    final_output += f"{evaluation}"
+    final_output += f"<code>{evaluation}</code>"
 
     if len(final_output) > 4096:
         with io.BytesIO(str.encode(final_output)) as out_file:
