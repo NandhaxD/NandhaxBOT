@@ -94,7 +94,7 @@ async def terminal(client, message):
             )
             os.remove("output.txt")
             return
-        await message.edit(f"**Output:**\n```{output}```", parse_mode="markdown")
+        await message.edit(f"**Output:**\n```{output}```", parse_mode=enums.ParseMode.MARKDOWN)
     else:
         await message.edit("**Output:**\n`No Output`") 
 
