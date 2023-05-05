@@ -1,7 +1,7 @@
 import time 
 import random 
 import asyncio
-from config import HANDLER, OWNER_ID, KATSUKI, ALIVE_TEXT
+from config import HANDLER, OWNER_ID, KATSUKI
 from pyrogram import filters, __version__ as pyrover
 from Katsuki import katsuki, get_readable_time, StartTime
 
