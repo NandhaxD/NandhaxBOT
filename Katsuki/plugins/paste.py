@@ -3,7 +3,7 @@ import config, os
 import datetime
 
 from Katsuki import katsuki
-from pyrogram import filters
+from pyrogram import filters, enums
 
 
 
@@ -21,10 +21,10 @@ async def spacebin(text: str):
     link = f"https://spaceb.in/{id}"
     raw = f"https://spaceb.in/api/v1/documents/{id}/raw"
     timedate = await convert_to_datetime(created_at)
-    string = f"""\u0020
-**Here's the link**: **[Paste link]({link})**
-**Here's the link**: **[Raw View]({raw})**
-**Created datetime**: {timedate}
+    string = f"""\n
+**Paste link**: **[Paste link]({link})**
+**Paste Raw link**: **[Raw View]({raw})**
+**Created at**: {timedate}
 """
     return string
 
@@ -45,7 +45,7 @@ async def paste(_, message):
                return 
 
           link = await spacebin(text)
-          return await message.edit(link)
+          return await message.edit(link, parse_mode=enums.ParseMode.MARKDOWN)
 
     elif bool(message.reply_to_message.text or message.reply_to_message.caption):
          
@@ -55,7 +55,7 @@ async def paste(_, message):
                  text = message.reply_to_message.caption
         
            link = await spacebin(text)
-           return await message.edit(link)
+           return await message.edit(link, parse_mode=enums.ParseMode.MARKDOWN)
 
     elif (message.reply_to_message.document and bool(message.reply_to_message.document.mime_type.startswith("text/"))):
            path = await katsuki.download_media(message.reply_to_message)
@@ -64,7 +64,7 @@ async def paste(_, message):
            file.close()
            os.remove(path)
            link = await spacebin(text)
-           return await message.edit(link)
+           return await message.edit(link, parse_mode=enums.ParseMode.MARKDOWN)
     else:
          return await message.edit("=> I am unable to paste this.")
 
