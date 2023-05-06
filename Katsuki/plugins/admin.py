@@ -17,7 +17,7 @@ async def promote_member(_, message):
             return await message.edit("Input username either id!")
      my_privileges = await message.chat.get_member(user_id=message.from_user.id) 
      if my_privileges.privileges:
-           privileges = my_privileges.privileges.can_promote_members
+           can_promote_members = my_privileges.privileges.can_promote_members
            if not can_promote_members:
                     return await message.edit("You don't add admin right imfao.")               
      else:
