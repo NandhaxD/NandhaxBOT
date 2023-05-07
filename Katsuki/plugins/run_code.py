@@ -109,7 +109,7 @@ async def evaluate(katsuki , message):
         return
     reply_to_id = message.id
     if message.reply_to_message:
-        reply_to_id = message.reply_to_message.message.id
+        reply_to_id = message.reply_to_message.id
     old_stderr = sys.stderr
     old_stdout = sys.stdout
     redirected_output = sys.stdout = io.StringIO()
