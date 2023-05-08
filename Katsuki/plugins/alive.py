@@ -17,7 +17,7 @@ async def alive(_, message):
      caption=f"""\n
      {name}
 
-Hello Master, **{mention}**,
+Hello Master, **{mention}**
 You Are Using Katsuki plus Your
 Current Pyrogram Version is {pyrover}
 """    
@@ -30,7 +30,7 @@ Current Pyrogram Version is {pyrover}
 async def ping(_, message):
      start_time = time.time()
      end_time = time.time()
-     ping_time = round((end_time - start_time) * 1000, 3)
+     ping_time = round((end_time - start_time) * 1000, 5)
      uptime = get_readable_time((time.time() - StartTime))
      string=f"**S Y S T E M**:\n=> **Pong**: {ping_time}\n=> **Uptime**: {uptime}"
      if message.reply_to_message:
