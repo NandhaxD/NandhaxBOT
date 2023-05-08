@@ -13,7 +13,7 @@ from Katsuki.katsuki_help.help_func import get_readable_time, alive_edit_message
 async def alive(_, message):
      animation=config.KATSUKI
      name=strings.BIG_NAME
-     mention=f"[{message.from_user.first_name}]({tg://user?id={message.from_user.id})"
+     mention=f"[{message.from_user.first_name}](tg://user?id={message.from_user.id})"
      caption=f"""\n
      {name}
 
