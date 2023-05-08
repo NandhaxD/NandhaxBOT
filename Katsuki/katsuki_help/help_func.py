@@ -1,9 +1,14 @@
 
+from Katsuki import session 
 
-async def alive_edit_message(message, message_list):
-    for new_message in message_list:
-        await message.edit(new_message)
-        await asyncio.sleep(3)
+#make a carbon image ( input text )
+async def make_carbon(code):
+    url = "https://carbonara.vercel.app/api/cook"
+    async with session.post(url, json={"code": code}) as resp:
+        image = BytesIO(await resp.read())
+    image.name = "carbon.png"
+    return image
+
 
 
 def get_readable_time(seconds: int) -> str:
