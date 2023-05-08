@@ -1,59 +1,28 @@
 import time 
-import random 
-import asyncio
-from config import HANDLER, OWNER_ID, KATSUKI
+import config
+import string
 from pyrogram import filters, __version__ as pyrover
-from Katsuki import katsuki, get_readable_time, StartTime
-
-s1 = """
-
-┏━┓╋┏┓╋╋╋╋╋╋╋┏┳┓
-┃┃┗┓┃┃╋╋╋╋╋╋╋┃┃┃
-┃┏┓┗┛┣━━┳━┓┏━┛┃┗━┳━━┓
-┃┃┗┓┃┃┏┓┃┏┓┫┏┓┃┏┓┃┏┓┃
-┃┃╋┃┃┃┏┓┃┃┃┃┗┛┃┃┃┃┏┓┃
-┗┛╋┗━┻┛┗┻┛┗┻━━┻┛┗┻┛┗┛
-"""
-
-s2 = """
-
-╭━╮╱╭╮╱╱╱╱╱╱╱╭┳╮
-┃┃╰╮┃┃╱╱╱╱╱╱╱┃┃┃
-┃╭╮╰╯┣━━┳━╮╭━╯┃╰━┳━━╮
-┃┃╰╮┃┃╭╮┃╭╮┫╭╮┃╭╮┃╭╮┃
-┃┃╱┃┃┃╭╮┃┃┃┃╰╯┃┃┃┃╭╮┃
-╰╯╱╰━┻╯╰┻╯╰┻━━┻╯╰┻╯╰╯
-"""
-
-s3 = """
-
-╔═╦╗──────╔╦╗
-║║║╠═╗╔═╦╦╝║╚╦═╗
-║║║║╬╚╣║║║╬║║║╬╚╗
-╚╩═╩══╩╩═╩═╩╩╩══╝
-"""
+from Katsuki import katsuki, StartTime
+from Katsuki.katsuki_help.help_func import get_readable_time, alive_edit_message
 
 
-async def edit_message(message, message_list):
-    for new_message in message_list:
-        await message.edit(new_message)
-        await asyncio.sleep(3)
 
-@katsuki.on_message(filters.command("alive",prefixes=HANDLER) & filters.user(OWNER_ID))
+
+
+@katsuki.on_message(filters.command(["alive","live"], prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
 async def alive(_, message):
-    name = (await katsuki.get_me()).first_name
-    await message.edit(s1)
-    await edit_message(message, [s2, s3])
-    await message.delete()
-    alive = await message.reply_animation(KATSUKI, caption="")
-    await alive.edit_caption(f"Hello Master, **{name}**,\nYou Are Using Katsuki And Your Current Pyrogram Version is {pyrover}")
+     animation=config.KATSUKI
+     caption=string.KATSUKI_BIG_NAME
+     if message.reply_to_message:
+          return await message.reply_to_message.reply_animation(animation=animation, quote=True)
+     return await message.reply_animation(animation=animation, quote=True)
+   
 
-
-@katsuki.on_message(filters.command("ping",prefixes=HANDLER) & filters.user(OWNER_ID))
+@katsuki.on_message(filters.command("ping",prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
 async def ping(_, message):
      start_time = time.time()
      end_time = time.time()
      ping_time = round((end_time - start_time) * 1000, 3)
      uptime = get_readable_time((time.time() - StartTime))
-     await message.edit(f"**System**:\n=> **Pong**: {ping_time}\n=> **Uptime**: {uptime}")
+     await message.edit(f"**S Y S T E M**:\n=> **Pong**: {ping_time}\n=> **Uptime**: {uptime}")
 
