@@ -13,10 +13,11 @@ from Katsuki.katsuki_help.help_func import get_readable_time, alive_edit_message
 async def alive(_, message):
      animation=config.KATSUKI
      name=strings.BIG_NAME
+     mention=(await katsuki.get_me()).mention
      caption=f"""\n
      {name}
 
-Hello Master, **{name}**,
+Hello Master, **{mention}**,
 You Are Using Katsuki plus Your
 Current Pyrogram Version is {pyrover}
 """    
