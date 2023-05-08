@@ -24,5 +24,8 @@ async def ping(_, message):
      end_time = time.time()
      ping_time = round((end_time - start_time) * 1000, 3)
      uptime = get_readable_time((time.time() - StartTime))
-     await message.edit(f"**S Y S T E M**:\n=> **Pong**: {ping_time}\n=> **Uptime**: {uptime}")
-
+     string=f"**S Y S T E M**:\n=> **Pong**: {ping_time}\n=> **Uptime**: {uptime}"
+     if message.reply_to_message:
+          return await message.reply_to_message.reply_text(text=string, quote=True, parse_mode=enums.ParseMode.MARKDOWN)
+     return await message.reply_text(text=string, quote=True, parse_mode=enums.ParseMode.MARKDOWN)
+   
