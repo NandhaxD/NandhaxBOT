@@ -14,8 +14,8 @@ async def alive(_, message):
      animation=config.KATSUKI
      caption=strings.BIG_NAME
      if message.reply_to_message:
-          return await message.reply_to_message.reply_animation(animation=animation, quote=True)
-     return await message.reply_animation(animation=animation, quote=True)
+          return await message.reply_to_message.reply_animation(animation=animation, quote=True, caption=caption)
+     return await message.reply_animation(animation=animation, quote=True, caption=caption)
    
 
 @katsuki.on_message(filters.command("ping",prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
