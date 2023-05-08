@@ -10,7 +10,7 @@ import requests
 
 
 @katsuki.on_message(filters.command("carbon", prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
-async def make_carbon(_, message):
+async def carbon_highlights(_, message):
      REPLY=message.reply_to_message
      if not REPLY:
           if not len(message.text.split()) == 2:
@@ -21,7 +21,10 @@ async def make_carbon(_, message):
                return await message.edit('reply to message text only.')
          text = REPLY.caption or REPLY.caption
      msg = await message.edit('IMAGE GENERATING...')
-     IMAGE= await make_carbon(text)
+     try:
+         IMAGE= await make_carbon(text)
+     except Exception as e:
+          return await message.edit(str(e))
      await message.reply_photo(photo=IMAGE, quote=True)
      return await msg.delete()
 
