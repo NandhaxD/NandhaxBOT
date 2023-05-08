@@ -21,8 +21,8 @@ You Are Using Katsuki plus Your
 Current Pyrogram Version is {pyrover}
 """    
      if message.reply_to_message:
-          return await message.reply_to_message.reply_animation(animation=animation, quote=True, caption=caption)
-     return await message.reply_animation(animation=animation, quote=True, caption=caption)
+          return await message.reply_to_message.reply_animation(animation=animation, quote=True, caption=caption, parse_mode=enums.ParseMode.MARKDOWN)
+     return await message.reply_animation(animation=animation, quote=True, caption=caption, parse_mode=enums.ParseMode.MARKDOWN)
    
 
 @katsuki.on_message(filters.command("ping",prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
