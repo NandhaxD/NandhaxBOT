@@ -17,7 +17,7 @@ async def make_carbon(_, message):
                  return await message.edit('```.carbon katsuki```')
           text = message.text.split(maxsplit=1)[1]
      else:
-         if not REPLY.text or REPLY.caption:
+         if not REPLY.text or not REPLY.caption:
                return await message.edit('reply to message text only.')
          text = REPLY.caption or REPLY.caption
      msg = await message.edit('IMAGE GENERATING...')
