@@ -8,7 +8,7 @@ from Katsuki import session
 async def make_carbon(code):
     url = "https://carbonara.solopov.dev/api/cook"
     async with session.post(url, json={"code": code}) as resp:
-        image = BytesIO(await resp.read())
+        image = io.BytesIO(await resp.read())
     image.name = "carbon.png"
     return image
 
