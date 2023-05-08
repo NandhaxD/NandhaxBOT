@@ -21,11 +21,7 @@ async def make_carbon(_, message):
                return await message.edit('reply to message text only.')
          text = REPLY.caption or REPLY.caption
      msg = await message.edit('IMAGE GENERATING...')
-     try:
-        IMAGE=await make_carbon(text)
-     except Exception as e:
-          return await message.edit(str(e))
-
+     IMAGE= await make_carbon(text)
      await message.reply_photo(photo=IMAGE, quote=True)
      return await msg.delete()
 
