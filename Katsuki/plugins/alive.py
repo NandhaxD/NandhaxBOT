@@ -17,9 +17,15 @@ async def alive(_, message):
      caption=f"""\n
      {name}
 
-Hello Master, **{mention}**
-You Are Using Katsuki plus Your
-Current Pyrogram Version is {pyrover}
+Greetings, Master {name}! 
+I, Katsuki, am an anime-themed user bot
+who possesses an abundance of commands
+at your service. Let me aid you in your 
+endeavors with my unique skills and 
+abilities. Together, we shall conquer
+the digital universe!
+
+> Live Pyrogram Version is {pyrover}
 """    
      if message.reply_to_message:
           return await message.reply_to_message.reply_animation(animation=animation, quote=True, caption=caption, parse_mode=enums.ParseMode.MARKDOWN)
