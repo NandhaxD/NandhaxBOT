@@ -12,7 +12,14 @@ from Katsuki.katsuki_help.help_func import get_readable_time, alive_edit_message
 @katsuki.on_message(filters.command(["alive","live"], prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
 async def alive(_, message):
      animation=config.KATSUKI
-     caption=strings.BIG_NAME
+     name=strings.BIG_NAME
+     caption=f"""\n
+     {name}
+
+Hello Master, **{name}**,
+You Are Using Katsuki plus Your
+Current Pyrogram Version is {pyrover}
+"""    
      if message.reply_to_message:
           return await message.reply_to_message.reply_animation(animation=animation, quote=True, caption=caption)
      return await message.reply_animation(animation=animation, quote=True, caption=caption)
