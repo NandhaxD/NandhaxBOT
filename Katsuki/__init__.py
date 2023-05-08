@@ -5,10 +5,15 @@ import logging
 from pyrogram import Client
 from pymongo import MongoClient 
 
+
+StartTime = time.time()
+
+
 FORMAT = "[Katsuki]: %(message)s"
 
 logging.basicConfig(level=logging.INFO, handlers=[logging.FileHandler('logs.txt'),
               logging.StreamHandler()], format=FORMAT)
+
 
 
 
