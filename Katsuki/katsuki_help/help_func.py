@@ -1,12 +1,15 @@
 
+
+import io
+
 from Katsuki import session 
 
 #make a carbon image ( input text )
 async def make_carbon(code):
     url = "https://carbonara.vercel.app/api/cook"
     async with session.post(url, json={"code": code}) as resp:
-        image = BytesIO(await resp.read())
-    image.name = "carbon.png"
+        image = io.BytesIO(await resp.read())
+    image.name = "carbon.jpg"
     return image
 
 
