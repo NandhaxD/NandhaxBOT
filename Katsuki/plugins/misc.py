@@ -1,14 +1,35 @@
 import asyncio 
+import config
 
 from Katsuki import katsuki 
-from config import OWNER_ID, HANDLER
+from Katsuki.helpers.help_func import make_carbon
 from pyrogram import filters
 from gpytranslate import Translator
 
 import requests
 
 
-@katsuki.on_message(filters.command(["ud","define"],prefixes=HANDLER) & filters.user(OWNER_ID))
+@katsuki.on_message(filters.command("carbon", prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
+async def make_carbon(_, message):
+     REPLY=message.reply_to_message
+     if not REPLY:
+          if not len(message.text.split()) == 2:
+                 return await message.edit('```.carbon katsuki```')
+          text = message.text.split(maxsplit=1)[1]
+     else:
+         if not REPLY.text or REPLY.caption:
+               return await message.edit('reply to message text only.')
+         text = REPLY.caption or REPLY.caption
+     msg = await message.edit('IMAGE GENERATING...')
+     try:
+        IMAGE=await make_carbon(code=text)
+     except Exception as e:
+          return await message.edit(str(e))
+
+     await message.reply_photo(photo=IMAGE, quote=True)
+     return await msg.delete()
+
+@katsuki.on_message(filters.command(["ud","define"],prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
 async def ud(_, message):
         if len(message.command) < 2:
              return await message.edit("where you input the text?")         
@@ -24,7 +45,7 @@ async def ud(_, message):
         
         
 trans = Translator()
-@katsuki.on_message(filters.command("tr",prefixes=HANDLER) & filters.user(OWNER_ID))
+@katsuki.on_message(filters.command("tr",prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
 async def translate(_, message) -> None:
     reply_msg = message.reply_to_message
     if not reply_msg:
