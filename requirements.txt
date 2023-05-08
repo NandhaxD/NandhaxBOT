@@ -5,4 +5,5 @@ asyncio==3.4.3
 gpytranslate==1.5.1
 tgcrypto==1.2.5
 telegraph==2.2.0
-wget==3.2
+aiohttp==3.8.4
+requests==2.30.0
