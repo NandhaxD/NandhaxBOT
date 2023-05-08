@@ -1,5 +1,11 @@
 
 
+async def alive_edit_message(message, message_list):
+    for new_message in message_list:
+        await message.edit(new_message)
+        await asyncio.sleep(3)
+
+
 def get_readable_time(seconds: int) -> str:
     count = 0
     ping_time = ""
