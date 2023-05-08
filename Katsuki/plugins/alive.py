@@ -1,6 +1,6 @@
 import time 
 import config
-import string
+import strings
 from pyrogram import filters, __version__ as pyrover
 from Katsuki import katsuki, StartTime
 from Katsuki.katsuki_help.help_func import get_readable_time, alive_edit_message
@@ -12,7 +12,7 @@ from Katsuki.katsuki_help.help_func import get_readable_time, alive_edit_message
 @katsuki.on_message(filters.command(["alive","live"], prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
 async def alive(_, message):
      animation=config.KATSUKI
-     caption=string.BIG_NAME
+     caption=strings.BIG_NAME
      if message.reply_to_message:
           return await message.reply_to_message.reply_animation(animation=animation, quote=True)
      return await message.reply_animation(animation=animation, quote=True)
