@@ -20,16 +20,16 @@ async def aexec(code, katsuki, message):
 
 
 
+THUMB_ID = "./IMG_20220701_185623_542.jpg"
 
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("logs",prefixes=HANDLER))
 async def logs(_, message):
        run_logs = run("tail logs.txt")
-       msg = await message.edit_text("Analyzing Logging...")
-       thumb_id = "./Katsuki/katsuki_help/IMG_20220701_185623_542.jpg"
+       msg = await message.edit_text("Analyzing Logging...")       
        with io.BytesIO(str.encode(run_logs)) as logs:
             logs.name = "logs.txt"
             await message.reply_document(
-                document=logs, thumb=thumb_id
+                document=logs, thumb=THUMB_ID
             )
        return await msg.delete()
 
@@ -87,7 +87,8 @@ async def terminal(katsuki, message):
                 file.write(output)
             await katsuki.send_document(
                 message.chat.id,
-                "output.txt",
+                document="output.txt",
+                thumb=THUMB_ID,
                 reply_to_message_id=message.id,
                 caption="`Output file`",
             )
@@ -139,6 +140,7 @@ async def evaluate(katsuki , message):
             out_file.write(str(final_output))
         await message.reply_document(
             document=filename,
+            thumb=THUMB_ID,
             caption=cmd,
             disable_notification=True,
             reply_to_message_id=reply_to_id,
