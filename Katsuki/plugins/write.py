@@ -19,7 +19,7 @@ async def writing(_, message):
          text = REPLY.caption or REPLY.text
      
         
-     img_width = 300
+     img_width = 350
      img_height = 350
      font_size = 30
      # Replace with your preferred font file path
