@@ -33,7 +33,7 @@ async def run_code(_, inline_query):
           language=result['language']
           info=result['info']
           errors=result['error']
-          output=result['oupput']
+          output=result['output']
           text = "**🖥️ Code**:\n"
           text += f"`{code}`\n\n"
           text += f"⌨️ **Language**: `{info}`\n\n"
