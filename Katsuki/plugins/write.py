@@ -9,7 +9,7 @@ import config
 async def writing(_, message):
      REPLY=message.reply_to_message
      if not REPLY:
-        if len(message.text.split()) == 2:
+        if len(message.text.split()) == 1:
              return await message.edit('`.write hello`')
         text = message.text.split(maxsplit=1)[1]
      else:
