@@ -8,7 +8,7 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 USERS = []
 
-@app.on_message(filters.command("start") | filters.incoming  & filters.private)
+@app.on_message(filters.command("start") & filters.private)
 async def start(_, message):
      user_id = message.from_user.id
      info = await katsuki_info()
