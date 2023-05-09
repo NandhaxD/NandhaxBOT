@@ -18,6 +18,7 @@ async def paste(_, inline_query):
     await app.answer_inline_query(
        inline_query.id,
        cache_time=0,
+       switch_pm_text="paste [text]",
     results=[
        InlineQueryResultArticle(
             "Here the Is The Paste!",
