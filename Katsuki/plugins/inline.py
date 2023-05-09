@@ -19,5 +19,6 @@ async def hello(_, inline_query):
     results=[
        InlineQueryResultArticle(
             "Here the Is The Paste!",
-            InputTextMessageContent(message_text=MMMM, disable_web_page_preview=True))])
+            InputTextMessageContent(message_text=MMMM, disable_web_page_preview=True),
+     reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(")]]))])
 
