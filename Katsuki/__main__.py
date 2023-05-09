@@ -1,9 +1,10 @@
-from Katsuki import katsuki
+from Katsuki import katsuki, app
+
+async def run_clients():
+      await app.start()
+      await katsuki.start()
+      await pyrogram.idle()
 
 
 if __name__ == "__main__":
-   katsuki.run()
-   print("KATSUKI STARTED!")
-   with katsuki:
-          katsuki.send_message("me", text="Awake Now! 💀")
-
+    katsuki.loop.run_until_complete(run_clients())
