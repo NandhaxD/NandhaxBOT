@@ -16,10 +16,10 @@ from pyrogram.raw.types import KeyboardButtonSwitchInline
 async def paste(_, inline_query):
     string = inline_query.query
     try:
-       STRING = string.split(maxsplit=2)[1]
+       CONTENT = string.split(maxsplit=2)[1]
     except:
-       pass
-    mm = await spacebin(STRING)
+       return 
+    mm = await spacebin(CONTENT)
     link = mm["result"]["link"]
     raw = mm["result"]["raw"]
     await app.answer_inline_query(
