@@ -37,7 +37,7 @@ async def writing(_, message):
      draw = ImageDraw.Draw(img)
 
      # Split text into lines and calculate y positions
-     lines = text.split("\n")
+     lines = text.split("|")
      y_pos = top_margin
      for line in lines:
      # Draw text line by line with line spacing
