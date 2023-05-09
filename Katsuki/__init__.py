@@ -4,7 +4,6 @@ import time
 import logging
 from pyrogram import Client
 from pymongo import MongoClient 
-from aiohttp import ClientSession
 
 StartTime = time.time()
 
@@ -31,6 +30,3 @@ DB = MongoClient(DB_URL)
 print("=> MONGO DB CONNECTED")
 DATABASE = DB.MAIN
 
-# aiohttp session
-session = ClientSession()
-print("=> AIOHTTP SESSION CONNECTED!")
