@@ -1,5 +1,5 @@
 from pyrogram import filters, enums
-from Katsuki import app, katsuki_info , mention 
+from Katsuki import app, katsuki_info , katsuki 
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
