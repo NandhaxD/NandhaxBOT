@@ -44,5 +44,10 @@ except ConnectionFailure:
 DATABASE = DB.MAIN
 
 
-
+# MENTION GENERATE 
+async def mention():
+    info = await katsuki.get_me()
+    name = info.first_name
+    id = = info.id
+    x = "[{name}](tg://user?id={id})"
 
