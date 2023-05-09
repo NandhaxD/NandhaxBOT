@@ -26,7 +26,7 @@ async def paste(_, inline_query):
        STRING = string.split(maxsplit=2)[1]
     except:
         results = await error_inline_query(text="paste hello world")
-        return await inline_query.answer(results, cache_time=2)
+        return await app.answer_inline_query(inline_query.id, results=results, cache_time=2)
     mm = await spacebin(STRING)
     link = mm["result"]["link"]
     raw = mm["result"]["raw"]
