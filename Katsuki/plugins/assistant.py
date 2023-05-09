@@ -18,7 +18,7 @@ async def start(_, message):
          return await message.reply("DON'T SPAM HERE!")
      USERS.append(user_id)
      await message.forward(config.LOG_GROUP_ID)
-     mention = "[{name}](tg://user?id={id})"
+     mention = f"[{name}](tg://user?id={id})"
      BUTTON=InlineKeyboardMarkup([[
      InlineKeyboardButton("Source 👾", url="https://github.com/nandhaxd/Katsuki"),]])
      return await message.reply_text(f"""\n
