@@ -18,14 +18,7 @@ async def paste(_, inline_query):
     try:
        STRING = string.split(maxsplit=2)[1]
     except:
-
-        return await app.answer_inline_query(inline_query.id, results= [
-        InlineQueryResultArticle(
-           "🥴 Somthing wrong Happens!",
-        InputTextMessageContent("CLICK BELOW BUTTON!", disable_web_page_preview=True),
-         reply_markup=InlineKeyboardMarkup([[KeyboardButtonSwitchInline(text="TAP 👈", query="paste hello"),]]))]
-, cache_time=2)
-
+       pass
     mm = await spacebin(STRING)
     link = mm["result"]["link"]
     raw = mm["result"]["raw"]
