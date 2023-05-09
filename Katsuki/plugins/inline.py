@@ -3,7 +3,8 @@ import config
 from Katsuki import app
 from pyrogram import filters
 
-from pyrogram.types import InlineQueryResultArticle
+from pyrogram.types import [ 
+InlineQueryResultArticle, InputTextMessageContent]
 
 @app.on_inline_query(filters.regex("hello") & filters.user(config.OWNER_ID))
 async def hello(_, query):
