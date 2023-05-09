@@ -48,10 +48,10 @@ async def writing(_, message):
      img.show()
      path = "write.jpg"
      img.save(path)
-     if os.path.exsits(path):
-           await message.reply_photo("write.jpg")
+     if os.path.exists(path):
+           await message.reply_photo(photo=path)
            os.remove(path)
            return await message.delete()
      else:
-        return await message.edit("path doesn't exists.")
+        return await message.edit("PATH DOESN'T EXISTS.")
           
