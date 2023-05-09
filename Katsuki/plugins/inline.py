@@ -28,7 +28,8 @@ async def run_code(_, inline_query):
        'language': language,
        'input': ''}
      response = requests.post(url, data=payload)
-     if response.ok:
+     if 
+response.ok:
           result=response.json()
           language=result['language']
           info=result['info']
@@ -50,7 +51,8 @@ async def run_code(_, inline_query):
             "💥 Results 💥",
             InputTextMessageContent(message_text="BELOW BUTTONS TO VIEW PASTE!", disable_web_page_preview=True),
      reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("➡️ Share", url=share)]]))])
-
+     else:
+       return 
 
 
 
