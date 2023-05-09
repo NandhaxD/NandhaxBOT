@@ -1,20 +1,22 @@
 import config 
+import asyncio
 
 from pyrogram import filters, enums
 from Katsuki import app, katsuki_info , katsuki 
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
-x = []
+USERS = []
 
 @app.on_message(filters.command("start") | filters.incoming  & filters.private)
 async def start(_, message):
+     user_id = message.from_user.id
      info = await katsuki_info()
      name = info.first_name
      id = info.id
-     if message.from_user.id in x:
+     if user_id in USERS:
          return await message.reply("DON'T SPAM HERE!")
-     x.append(message.from_user.id)
+     USERS.append(user_id)
      await message.forward(config.LOG_GROUP_ID)
      mention = "[{name}](tg://user?id={id})"
      BUTTON=InlineKeyboardMarkup([[
@@ -23,6 +25,6 @@ async def start(_, message):
 Hello, I am Assistant for **{mention}**
 You can deploy Your Own, To Use Me.
 """,quote=True, reply_markup=BUTTON ,parse_mode=enums.ParseMode.MARKDOWN)
-     await asyncio.sleep(20)
-     x.remove(message.from_user.id)
+     await asyncio.sleep(10)
+     USERS.remove(user_id)
      return 
