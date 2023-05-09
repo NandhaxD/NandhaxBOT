@@ -12,7 +12,9 @@ InlineQueryResultArticle, InputTextMessageContent )
 async def hello(_, inline_query):
     string = inline_query.query
     STRING = string.split(maxsplit=2)[2]
-    MMMM = await spacebin(STRING)
+    mm = await spacebin(STRING)
+    link = mm["result"]["link"]
+    raw = mm["result"]["raw"]
     await app.answer_inline_query(
        inline_query.id,
        cache_time=0,
@@ -20,5 +22,6 @@ async def hello(_, inline_query):
        InlineQueryResultArticle(
             "Here the Is The Paste!",
             InputTextMessageContent(message_text=MMMM, disable_web_page_preview=True),
-     reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(")]]))])
+     reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("➡️ PAST", url=link),
+       InlineKeyboardButton("➡️ RAW", url=raw)]]))])
 
