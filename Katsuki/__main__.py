@@ -1,3 +1,4 @@
+import pyrogram 
 from Katsuki import katsuki, app
 
 async def run_clients():
