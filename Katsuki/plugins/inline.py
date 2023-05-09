@@ -28,8 +28,7 @@ async def run_code(_, inline_query):
        'language': language,
        'input': ''}
      response = requests.post(url, data=payload)
-     if 
-response.ok:
+     if response.ok:
           result=response.json()
           language=result['language']
           info=result['info']
