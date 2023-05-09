@@ -21,7 +21,7 @@ async def writing(_, message):
         
      img_width = 800
      img_height = 600
-     font_size = 25
+     font_size = 30
      # Replace with your preferred font file path
      font_path = "./Please write me a song.ttf"         
          
