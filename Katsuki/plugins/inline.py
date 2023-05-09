@@ -10,7 +10,7 @@ InlineQueryResultArticle, InputTextMessageContent, InlineKeyboardMarkup, InlineK
 
 from pyrogram.raw.types import KeyboardButtonSwitchInline
 
-def error_inline_query(app, inline_query, text):
+async def error_inline_query(app, inline_query, text):
      Inline = await app.answer_inline_query(
      inline_query.id,
      cache_time=0,
