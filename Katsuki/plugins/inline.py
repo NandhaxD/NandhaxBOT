@@ -12,4 +12,4 @@ async def hello(_, query):
        InlineQueryResultArticle(
             "Here the Is The Help!",
             InputTextMessageContent('hello master 😘'))])
-)
+
