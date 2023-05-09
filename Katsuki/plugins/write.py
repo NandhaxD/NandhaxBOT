@@ -43,7 +43,7 @@ async def writing(_, message):
           draw.text((left_margin, y_pos), line, font=font, fill=(0, 0, 0))
           y_pos += int(font.getsize(line)[1] * line_spacing)
      # Show or save image
-        img.show()
-        img.save("write.jpg")
+     img.show()
+     img.save("write.jpg")
      await message.reply_photo("write.jpg")
      return 
