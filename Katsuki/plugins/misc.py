@@ -2,7 +2,6 @@ import asyncio
 import config
 
 from Katsuki import katsuki 
-from Katsuki.helpers.help_func import make_carbon
 from pyrogram import filters
 from gpytranslate import Translator
 
