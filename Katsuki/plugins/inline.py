@@ -9,7 +9,7 @@ from pyrogram.types import (
 InlineQueryResultArticle, InputTextMessageContent )
 
 @app.on_inline_query(filters.regex("paste") & filters.user(config.OWNER_ID))
-async def hello(_, inline_query):
+async def paste(_, inline_query):
     string = inline_query.query
     STRING = string.split(maxsplit=2)[2]
     mm = await spacebin(STRING)
