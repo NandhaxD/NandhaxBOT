@@ -8,24 +8,6 @@ from gpytranslate import Translator
 import requests
 
 
-@katsuki.on_message(filters.command("carbon", prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
-async def carbon_highlights(_, message):
-     REPLY=message.reply_to_message
-     if not REPLY:
-          if not len(message.text.split()) == 2:
-                 return await message.edit('=> `.carbon katsuki`')
-          text = message.text.split(maxsplit=1)[1]
-     else:
-         if not REPLY.text and not REPLY.caption:
-               return await message.edit('reply to message text only.')
-         text = REPLY.caption or REPLY.caption
-     msg = await message.edit('IMAGE GENERATING...')
-     try:
-         IMAGE= await make_carbon(text)
-     except Exception as e:
-          return await message.edit(str(e))
-     await message.reply_photo(photo=IMAGE, quote=True)
-     return await msg.delete()
 
 @katsuki.on_message(filters.command(["ud","define"],prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
 async def ud(_, message):
