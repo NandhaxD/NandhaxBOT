@@ -1,0 +1,31 @@
+
+
+{
+
+
+"name": "Katsuki",
+"description": "Telegram User Bot using Pyrogram formwork",
+"logo": "https://graph.org/file/d2378d747050e2963b95a.jpg",
+"repository": "https://gitHub.com/nandhaxd/katsuki",
+"env": {
+    API_ID: {
+      "description": "api id get from my.telegram.org/apps",
+      "value": "",
+      "required": True
+    },
+    API_HASH: {
+      "description": "api hash get from my.telegram.org/app",
+      "value": "",
+      "required": True
+    },
+    SESSION: {
+      "description": "Pyrogram String Session",
+      "value": "",
+      "required": True
+    },
+    TOKEN: {
+       "description": "create your bot in @botfather",
+       "value": "",
+       "required": True
+    }
+}}
