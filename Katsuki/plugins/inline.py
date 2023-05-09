@@ -6,7 +6,7 @@ from Katsuki.helpers.help_func import spacebin
 from pyrogram import filters
 
 from pyrogram.types import (
-InlineQueryResultArticle, InputTextMessageContent )
+InlineQueryResultArticle, InputTextMessageContent, InlineKeyboardMarkup, InlineKeyboardButton )
 
 @app.on_inline_query(filters.regex("paste") & filters.user(config.OWNER_ID))
 async def paste(_, inline_query):
