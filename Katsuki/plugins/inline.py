@@ -10,7 +10,7 @@ InlineQueryResultArticle, InputTextMessageContent, InlineKeyboardMarkup, InlineK
 
 from pyrogram.raw.types import KeyboardButtonSwitchInline
 
-async def error_inline_query(app, inline_query, text):
+def error_inline_query(app, inline_query, text):
      INLINE = app.answer_inline_query(
      inline_query.id,
      cache_time=0,
@@ -28,7 +28,7 @@ async def paste(_, inline_query):
     try:
        STRING = string.split(maxsplit=2)[1]
     except:
-        return await error_inline_query(app=app, inline_query=inline_query, text="paste hello")
+        return error_inline_query(app=app, inline_query=inline_query, text="paste hello")
     mm = await spacebin(STRING)
     link = mm["result"]["link"]
     raw = mm["result"]["raw"]
