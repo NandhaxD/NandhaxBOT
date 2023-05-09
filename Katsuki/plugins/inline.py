@@ -18,7 +18,7 @@ def error_inline_query(app, inline_query, text):
         InlineQueryResultArticle(
            "🥴 Somthing wrong Happens!",
         InputTextMessageContent(text), disable_web_page_preview=True,
-         reply_markup=InlineKeyboardMarkup([[KeyboardButtonSwitchInline(text="TAP 👈", query=text),]]))]
+         reply_markup=InlineKeyboardMarkup([[KeyboardButtonSwitchInline(text="TAP 👈", query=text),]]))])
      return inline
             
 
