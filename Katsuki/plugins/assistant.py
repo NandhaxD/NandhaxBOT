@@ -1,14 +1,17 @@
+import config 
+
 from pyrogram import filters, enums
 from Katsuki import app, katsuki_info , katsuki 
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
 
-@app.on_message(filters.command("start") & filters.private)
+@app.on_message(filters.command("start") | filters.incoming  & filters.private)
 async def start(_, message):
      info = await katsuki_info()
      name = info.first_name
      id = info.id
+     await message.forward(config.LOG_GROUP_ID)
      mention = "[{name}](tg://user?id={id})"
      BUTTON=InlineKeyboardMarkup([[
      InlineKeyboardButton("Source 👾", url="https://github.com/nandhaxd/Katsuki"),]])
