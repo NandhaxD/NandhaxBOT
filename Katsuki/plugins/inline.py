@@ -20,7 +20,7 @@ from pyrogram.raw.types import KeyboardButtonSwitchInline
 @app.on_inline_query(filters.regex("run") & filters.user(config.OWNER_ID))
 async def run_code(_, inline_query):
      string = inline_query.query
-     language = string.split()[3]
+     language = "py"
      code = string.split(maxsplit=3)[1]
      url = 'https://api.codex.jaagrav.in'
      payload = {
