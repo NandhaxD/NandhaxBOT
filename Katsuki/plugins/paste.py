@@ -3,6 +3,7 @@ import config, os
 import datetime
 
 from Katsuki import katsuki
+from Katsuki.helpers.help_func import convert_to_datetime, spacebin
 from pyrogram import filters, enums
 
 
