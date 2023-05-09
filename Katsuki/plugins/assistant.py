@@ -20,7 +20,7 @@ async def start(_, message):
      await message.forward(config.LOG_GROUP_ID)
      mention = f"[{name}](tg://user?id={id})"
      BUTTON=InlineKeyboardMarkup([[
-     InlineKeyboardButton("Source 👾", url="https://github.com/nandhaxd/Katsuki"),]])
+     InlineKeyboardButton("Source 👾", url=config.SOURCE),]])
      return await message.reply_text(f"""\n
 Hello, I am Assistant for **{mention}**
 You can deploy Your Own, To Use Me.
