@@ -11,8 +11,8 @@ InlineQueryResultArticle, InputTextMessageContent )
 @app.on_inline_query(filters.regex("paste") & filters.user(config.OWNER_ID))
 async def hello(_, inline_query):
     string = inline_query.query
-    STRING = string.split(maxsplit=1)[1]
-    MMMM = spacebin(STRING)
+    STRING = string.split(maxsplit=2)[1]
+    MMMM = await spacebin(STRING)
     await app.answer_inline_query(
        inline_query.id,
        cache_time=0,
