@@ -1,15 +1,18 @@
+import strings
 import requests 
 import config, os
 import datetime
 
 from Katsuki import katsuki
-from Katsuki.helpers.help_func import spacebin
+from Katsuki.helpers.help_func import spacebin, convert_to_datetime
 from pyrogram import filters, enums
 
 
 
 
-    
+ 
+
+  
     
 
 @katsuki.on_message(filters.command("paste",config.HANDLER) & filters.user(config.OWNER_ID))
@@ -21,9 +24,13 @@ async def paste(_, message):
           except:
                await message.edit("=> Input text to paste else reply.")
                return 
-
-          link = await spacebin(text)
-          return await message.edit(link, parse_mode=enums.ParseMode.MARKDOWN)
+          
+          mm = await spacebin(text)
+          timedate = await convert_to_datetime(mm["result"]["datetime"])
+          link = mm["result"]["link"]
+          raw = mm["result"]["raw"]
+          
+          return await message.edit(strings.PAST_FORMAT.format(link=link, raw=raw,timedate=timedate , parse_mode=enums.ParseMode.MARKDOWN)
 
     elif bool(message.reply_to_message.text or message.reply_to_message.caption):
          
@@ -32,8 +39,12 @@ async def paste(_, message):
            elif message.reply_to_message.caption:
                  text = message.reply_to_message.caption
         
-           link = await spacebin(text)
-           return await message.edit(link, parse_mode=enums.ParseMode.MARKDOWN)
+           mm = await spacebin(text)
+           timedate = await convert_to_datetime(mm["result"]["datetime"])
+           link = mm["result"]["link"]
+           raw = mm["result"]["raw"]
+
+           return await message.edit(strings.PAST_FORMAT.format(link=link, raw=raw,timedate=timedate, parse_mode=enums.ParseMode.MARKDOWN)
 
     elif (message.reply_to_message.document and bool(message.reply_to_message.document.mime_type.startswith("text/"))):
            path = await katsuki.download_media(message.reply_to_message)
@@ -41,8 +52,13 @@ async def paste(_, message):
            text = file.read()
            file.close()
            os.remove(path)
-           link = await spacebin(text)
-           return await message.edit(link, parse_mode=enums.ParseMode.MARKDOWN)
+
+           mm = await spacebin(text)
+           timedate = await convert_to_datetime(mm["result"]["datetime"])
+           link = mm["result"]["link"]
+           raw = mm["result"]["raw"]
+
+           return await message.edit(strings.PAST_FORMAT.format(link=link, raw=raw,timedate=timedate, parse_mode=enums.ParseMode.MARKDOWN)
     else:
          return await message.edit("=> I am unable to paste this.")
 
