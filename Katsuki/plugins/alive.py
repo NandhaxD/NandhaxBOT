@@ -14,21 +14,12 @@ async def alive(_, message):
      animation=config.KATSUKI
      name=strings.BIG_NAME
      mention=f"[{message.from_user.first_name}](tg://user?id={message.from_user.id})"
-     caption=f"""\n
-     {name}
-
-Greetings, Master {mention}! 
-I, Katsuki, am an anime-themed user bot
-who possesses an abundance of commands at your service. 
-Let me aid you in your endeavors with my unique skills and abilities. Together, 
-we shall conquer the digital universe!
-
-> Live Pyrogram Version is {pyrover}
-"""    
+     caption=strings.ALIVE_TEXT.format(name=name, mention=mention, pyrover=pyrover)
      if message.reply_to_message:
-          return await message.reply_to_message.reply_animation(animation=animation, quote=True, caption=caption, parse_mode=enums.ParseMode.MARKDOWN)
-     return await message.reply_animation(animation=animation, quote=True, caption=caption, parse_mode=enums.ParseMode.MARKDOWN)
-   
+          await message.reply_to_message.reply_animation(animation=animation, quote=True, caption=caption, parse_mode=enums.ParseMode.MARKDOWN)
+          return await message.delete()
+     await message.reply_animation(animation=animation, quote=True, caption=caption, parse_mode=enums.ParseMode.MARKDOWN)
+     return await message.delete()
 
 @katsuki.on_message(filters.command("ping",prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
 async def ping(_, message):
@@ -38,6 +29,7 @@ async def ping(_, message):
      uptime = get_readable_time((time.time() - StartTime))
      string=f"**S Y S T E M**:\n=> **Pong**: {ping_time}\n=> **Uptime**: {uptime}"
      if message.reply_to_message:
-          return await message.reply_to_message.reply_text(text=string, quote=True, parse_mode=enums.ParseMode.MARKDOWN)
-     return await message.reply_text(text=string, quote=True, parse_mode=enums.ParseMode.MARKDOWN)
+          await message.reply_to_message.reply_text(text=string, quote=True, parse_mode=enums.ParseMode.MARKDOWN)
+          return await message.delete()
+     return await message.edit_text(text=string, quote=True, parse_mode=enums.ParseMode.MARKDOWN)
    
