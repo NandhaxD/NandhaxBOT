@@ -1,5 +1,5 @@
 
-LOG_GROUP_ID = 6129152989
+LOG_GROUP_ID = -635484650
 OWNER_ID = [6129152989]
 HANDLER = ["~", ".","!","?","@","$"]
 KATSUKI = "https://graph.org/file/56bb59a1057c3021ae8cd.mp4"
