@@ -11,7 +11,10 @@ InlineQueryResultArticle, InputTextMessageContent )
 @app.on_inline_query(filters.regex("paste") & filters.user(config.OWNER_ID))
 async def paste(_, inline_query):
     string = inline_query.query
-    STRING = string.split(maxsplit=2)[2]
+    try:
+       STRING = string.split(maxsplit=2)[2]
+    except:
+        pass
     mm = await spacebin(STRING)
     link = mm["result"]["link"]
     raw = mm["result"]["raw"]
@@ -22,7 +25,7 @@ async def paste(_, inline_query):
     results=[
        InlineQueryResultArticle(
             "Here the Is The Paste!",
-            InputTextMessageContent(message_text=MMMM, disable_web_page_preview=True),
+            InputTextMessageContent(message_text="CLICK BELOW BUTTONS TO VIEW PASTE!", disable_web_page_preview=True),
      reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("➡️ PAST", url=link),
        InlineKeyboardButton("➡️ RAW", url=raw)]]))])
 
