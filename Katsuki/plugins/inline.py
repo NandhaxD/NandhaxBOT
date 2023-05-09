@@ -10,16 +10,13 @@ InlineQueryResultArticle, InputTextMessageContent, InlineKeyboardMarkup, InlineK
 
 from pyrogram.raw.types import KeyboardButtonSwitchInline
 
-def error_inline_query(app, inline_query, text):
-     INLINE = app.answer_inline_query(
-     inline_query.id,
-     cache_time=0,
+async def error_inline_query(app, text):
      results = [
         InlineQueryResultArticle(
            "🥴 Somthing wrong Happens!",
         InputTextMessageContent(text, disable_web_page_preview=True),
-         reply_markup=InlineKeyboardMarkup([[KeyboardButtonSwitchInline(text="TAP 👈", query=text),]]))])
-     return INLINE
+         reply_markup=InlineKeyboardMarkup([[KeyboardButtonSwitchInline(text="TAP 👈", query=text),]]))]
+     return results
             
 
 @app.on_inline_query(filters.regex("paste") & filters.user(config.OWNER_ID))
@@ -28,7 +25,7 @@ async def paste(_, inline_query):
     try:
        STRING = string.split(maxsplit=2)[1]
     except:
-        return error_inline_query(app=app, inline_query=inline_query, text="paste hello")
+        return await inline_query.answer(error_inline_query(app=app, text="paste hello world"), cache_time=2)
     mm = await spacebin(STRING)
     link = mm["result"]["link"]
     raw = mm["result"]["raw"]
