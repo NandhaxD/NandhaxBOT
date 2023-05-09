@@ -20,7 +20,7 @@ from pyrogram.raw.types import KeyboardButtonSwitchInline
 @app.on_inline_query(filters.regex("run") & filters.user(config.OWNER_ID))
 async def run_code(_, inline_query):
      string = inline_query.query
-     language = string.split()[2]
+     language = string.split()[3]
      code = string.split(maxsplit=3)[1]
      url = 'https://api.codex.jaagrav.in'
      payload = {
@@ -35,8 +35,8 @@ async def run_code(_, inline_query):
           errors=result['error']
           output=result['oupput']
           text = "**🖥️ Code**:\n"
-          text += f"`{code}`"
-          text += f"⌨️ **Language**: `{info}`"
+          text += f"`{code}`\n\n"
+          text += f"⌨️ **Language**: `{info}`\n\n"
           if errors:
               text += f"**Output**:\n`{errors}`"
           else:
@@ -48,7 +48,7 @@ async def run_code(_, inline_query):
     results=[
        InlineQueryResultArticle(
             "💥 Results 💥",
-            InputTextMessageContent(message_text="BELOW BUTTONS TO VIEW PASTE!", disable_web_page_preview=True),
+            InputTextMessageContent(message_text=text, disable_web_page_preview=True),
      reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("➡️ Share", url=share)]]))])
      else:
        return 
