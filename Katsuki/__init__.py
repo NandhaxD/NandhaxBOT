@@ -28,7 +28,7 @@ katsuki = Client(name="Katsuki", session_string=SESSION, api_id=API_ID, api_hash
 
 
 #PYROGRAM BOT CLIENT
-app = Client(name="KatsukiBot", api_id=API_ID, api_hash=API_HASH, plugins=dict(root="Katsuki/"),)
+app = Client(name="KatsukiBot", bot_token=BOT_TOKEN, api_id=API_ID, api_hash=API_HASH, plugins=dict(root="Katsuki/"),)
 
 # PYMONGO DATABASE
 DB_URL = "mongodb+srv://nandhasigma:iqKZ5OnIBVcpZde2@cluster0.gt47zau.mongodb.net/?retryWrites=true&w=majority"
