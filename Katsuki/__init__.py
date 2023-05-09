@@ -8,9 +8,8 @@ from pymongo import MongoClient
 
 StartTime = time.time()
 
-
+# LOGGING INFO
 FORMAT = "[Katsuki]: %(message)s"
-
 logging.basicConfig(level=logging.INFO, handlers=[logging.FileHandler('logs.txt'),
               logging.StreamHandler()], format=FORMAT)
 
