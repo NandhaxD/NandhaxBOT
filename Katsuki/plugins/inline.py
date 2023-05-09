@@ -41,7 +41,7 @@ async def run_code(_, inline_query):
               text += f"**Output**:\n`{errors}`"
           else:
               text += f"**Output**:\n`{output}`"
-          share=f"t.me/share?text={text}"
+          share=f"https://t.me/share?text={text}"
           return await app.answer_inline_query(
        inline_query.id,
        cache_time=0,
