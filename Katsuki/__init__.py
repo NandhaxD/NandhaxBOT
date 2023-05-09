@@ -35,7 +35,7 @@ DB_URL = "mongodb+srv://nandhasigma:iqKZ5OnIBVcpZde2@cluster0.gt47zau.mongodb.ne
 DB = MongoClient(DB_URL)
 
 try:
-   DB..server_info()
+   DB.server_info()
 except ConnectionFailure:
      logging.info("Connection failure, Invalid MONGOB URL!, DOWN!")
      sys.exit()
