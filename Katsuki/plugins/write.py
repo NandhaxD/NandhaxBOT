@@ -42,8 +42,15 @@ async def writing(_, message):
      # Draw text line by line with line spacing
           draw.text((left_margin, y_pos), line, font=font, fill=(0, 0, 0))
           y_pos += int(font.getsize(line)[1] * line_spacing)
+
      # Show or save image
      img.show()
-     img.save("write.jpg")
-     await message.reply_photo("write.jpg")
-     return 
+     path = "write.jpg"
+     img.save(path)
+     if os.path.exsits(path):
+           await message.reply_photo("write.jpg")
+           os.remove(path)
+           return await message.delete()
+     else:
+          return await message.edit('path doesn't exists')
+          
