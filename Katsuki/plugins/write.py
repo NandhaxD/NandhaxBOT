@@ -1,9 +1,10 @@
-
+import os
+import config
 
 from pyrogram import filters 
 from PIL import Image, ImageFont, ImageDraw
 from Katsuki import katsuki
-import config
+
 
 @katsuki.on_message(filters.command("write",prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
 async def writing(_, message):
