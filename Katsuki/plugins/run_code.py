@@ -10,7 +10,6 @@ from pyrogram import filters, enums
 from pyrogram.errors import MessageTooLong
 
 
-
 async def aexec(code, katsuki, message):
     exec(
         "async def __aexec(katsuki, message): "
@@ -24,7 +23,7 @@ THUMB_ID = "./IMG_20220701_185623_542.jpg"
 
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("logs",prefixes=HANDLER))
 async def logs(_, message):
-       run_logs = run("tail logs.txt")
+       run_logs = subprocess.getoutput("tail logs.txt")
        msg = await message.edit_text("Analyzing Logging...")       
        with io.BytesIO(str.encode(run_logs)) as logs:
             logs.name = "logs.txt"
