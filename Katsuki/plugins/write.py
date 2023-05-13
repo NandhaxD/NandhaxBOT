@@ -3,10 +3,10 @@ import config
 
 from pyrogram import filters 
 from PIL import Image, ImageFont, ImageDraw
-from Katsuki import katsuki
+from Katsuki import app
 
 
-@katsuki.on_message(filters.command("write",prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
+@app.on_message(filters.command("write",prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
 async def writing(_, message):
      REPLY=message.reply_to_message
      if not REPLY:
@@ -52,7 +52,7 @@ async def writing(_, message):
      path = "write.jpg"
      img.save(path)
      if os.path.exists(path):
-           await message.reply_photo(photo=path)
+           await message.reply_photo(photo=path, quote=True)
            os.remove(path)
            return await message.delete()
      else:
