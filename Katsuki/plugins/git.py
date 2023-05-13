@@ -1,5 +1,5 @@
 from pyrogram import filters 
-from Katsuki import apl
+from Katsuki import app
 from requests import get
 
 import os
