@@ -21,7 +21,7 @@ async def aexec(code, app, message):
 
 THUMB_ID = "./IMG_20220701_185623_542.jpg"
 
-@app.on_message(filters.me & filters.command("logs",prefixes=HANDLER))
+@app.on_message(filters.me & filters.command("logs",prefixes=config.HANDLER))
 async def logs(_, message):
        run_logs = subprocess.getoutput("tail logs.txt")
        msg = await message.edit_text("Analyzing Logging...", quote=True)       
@@ -33,7 +33,7 @@ async def logs(_, message):
        return await msg.delete()
 
 
-@app.on_message(filters.me & filters.command("sh", prefixes=HANDLER))
+@app.on_message(filters.me & filters.command("sh", prefixes=config.HANDLER))
 async def terminal(katsuki, message):
 	 
      if len(message.text.split()) <= 1:
@@ -61,7 +61,7 @@ Results:
 
 
     
-@app.on_message(filters.me & filters.command("e",prefixes=HANDLER))
+@app.on_message(filters.me & filters.command("e",prefixes=config.HANDLER))
 async def evaluate(app , message):
     status_message = await message.edit("`Running ...`", quote=True)
     try:
