@@ -1,6 +1,27 @@
 
 import requests 
 import datetime 
+import pytz
+
+
+async def railway_to_normal(time_str):
+    hour = int(time_str[:2])
+    minute = time_str[3:5]
+    suffix = "AM" if hour < 12 else "PM"
+    hour = hour % 12 if hour != 12 else hour
+    return "{}:{} {}".format(hour, minute, suffix)
+
+
+
+async get_time():
+    timezone = pytz.timezone("Asia/Kolkata")
+    time = str(datetime.datetime.now(timezone)).split()[1]
+    result = await railway_to_normal(time)
+    return result 
+
+
+
+print(convert(str((tz)).split()[1]))
 
 async def convert_to_datetime(timestamp): # Unix timestamp
      date = datetime.datetime.fromtimestamp(timestamp)
