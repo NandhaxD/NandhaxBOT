@@ -17,8 +17,8 @@ if ENV:
    GROUP_ID = os.getenv("GROUP_ID")
    KATSUKI = os.getenv("KATSUKI")
    HANDLER = os.getenv("HANDLER").split(",")
-   LIST = ["API_ID", "API_HASH", "TOKEN", "SESSION", "OWNER_ID", "GROUP_ID", "KATSUKI", "HANDLER"]   
-   for var in :
+   LIST_OF_VARIABLE = ["API_ID", "API_HASH", "TOKEN", "SESSION", "OWNER_ID", "GROUP_ID", "KATSUKI", "HANDLER"]   
+   for var in LIST_OF_VARIABLE:
       try:
           locals()[var] = os.getenv[var]
       except KeyError:
