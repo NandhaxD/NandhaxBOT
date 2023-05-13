@@ -23,6 +23,6 @@ async def hack(_, message):
     "Hacking... 93.50%\n[█████████████████░░░]",
     "hacking....  100%\n[████████████████████]",
 ]
-    for string in HACK_STRING:
+    for string in range(6):
           await asyncio.sleep(4)
           await message.edit(HACK_STRING[string % 6])
