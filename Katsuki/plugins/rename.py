@@ -1,5 +1,5 @@
-from Katsuki import katsuki
-from config import OWNER_ID, HANDLER
+from Katsuki import app
+import config
 import os
 from pyrogram import filters
 
@@ -19,7 +19,8 @@ async def FileType(message):
     else:
          return False
 
-@katsuki.on_message(filters.command("rename",prefixes=HANDLER) & filters.user(OWNER_ID))
+@katsuki.on_message(filters.command("rename",prefixes=config
+HANDLER) & filters.me)
 async def rename(_, message):
     try:
        filename = message.text.split(None,1)[1]
