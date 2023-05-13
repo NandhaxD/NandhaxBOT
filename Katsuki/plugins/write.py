@@ -6,7 +6,7 @@ from PIL import Image, ImageFont, ImageDraw
 from Katsuki import app
 
 
-@app.on_message(filters.command("write",prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
+@app.on_message(filters.command("write",prefixes=config.HANDLER) & filters.me)
 async def writing(_, message):
      REPLY=message.reply_to_message
      if not REPLY:
