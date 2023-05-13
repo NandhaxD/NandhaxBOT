@@ -1,11 +1,15 @@
 import pyrogram 
-from Katsuki import katsuki, app
+from Katsuki import bot , app
 
 async def run_clients():
+      await bot.start()
       await app.start()
-      await katsuki.start()
       await pyrogram.idle()
+      await bot.send_message(
+           chat_id=config.GROUP_ID,
+           text=strings.RESTART_TEXT)
+      
 
 
 if __name__ == "__main__":
-    katsuki.loop.run_until_complete(run_clients())
+    app.loop.run_until_complete(run_clients())
