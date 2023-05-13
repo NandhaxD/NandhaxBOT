@@ -36,8 +36,8 @@ async def logs(_, message):
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("sh", prefixes=HANDLER))
 async def terminal(katsuki, message):
 	 
-	 if len(message.text.split()) <= 1:
-	 	  return await message.edit("I can't run code with code!")
+if len(message.text.split()) <= 1:
+	 	  return await message.delete()
      code = message.text.split(maxsplit=1)[1]
      output = subprocess.getoutput(code)
      if len(output) > 4096:
