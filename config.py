@@ -16,8 +16,9 @@ if ENV:
    OWNER_ID = os.getenv("OWNER_ID")
    GROUP_ID = os.getenv("GROUP_ID")
    KATSUKI = os.getenv("KATSUKI")
+   DB_URL = os.getenv("DB_URL")
    HANDLER = os.getenv("HANDLER").split(",")
-   LIST_OF_VARIABLE = ["API_ID", "API_HASH", "TOKEN", "SESSION", "OWNER_ID", "GROUP_ID", "KATSUKI", "HANDLER"]   
+   LIST_OF_VARIABLE = ["API_ID", "API_HASH", "TOKEN", "SESSION", "OWNER_ID", "GROUP_ID", "KATSUKI", "HANDLER", "DB_URL"]   
    for var in LIST_OF_VARIABLE:
       try:
           locals()[var] = os.getenv[var]
