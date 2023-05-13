@@ -18,11 +18,12 @@ logging.basicConfig(level=logging.INFO, handlers=[logging.FileHandler('logs.txt'
 
 
 # PYROGRAM USER CLIENT 
-katsuki = Client(name="Katsuki", session_string=config.SESSION, api_id=config.API_ID, api_hash=config.API_HASH, plugins=dict(root="Katsuki/"),)
+app = Client(name="katsuki", session_string=config.SESSION, api_id=config.API_ID, api_hash=config.API_HASH, plugins=dict(root="Katsuki/"),)
 
 
 #PYROGRAM BOT CLIENT
-app = Client(name="KatsukiBot", bot_token=config.BOT_TOKEN, api_id=.config.API_ID, api_hash=config.API_HASH, plugins=dict(root="Katsuki/"),)
+
+bot = Client(name="KatsukiBot", bot_token=config.BOT_TOKEN, api_id=.config.API_ID, api_hash=config.API_HASH, plugins=dict(root="Katsuki/"),)
 
 # PYMONGO DATABASE
 DB = MongoClient(config.DB_URL)
@@ -38,11 +39,12 @@ DATABASE = DB.MAIN
 
 
 # INFO FUNC
+class INFO:
+    async def app():
+         info = await app.get_me()
+         return info
 
-async def katsuki_info():
-    info = await katsuki.get_me()
-    return info
-
-async def app_info():
-    info = await app.get_me()
-    return info
+    async def bot():
+         info = await bot.get_me()
+         return info
+ 
