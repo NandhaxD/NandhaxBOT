@@ -6,7 +6,7 @@ import logging
 import config
 
 from pyrogram import Client
-from pymongo import MongoClient 
+from pymongo import MongoClient, errors 
 
 StartTime = time.time()
 
@@ -30,7 +30,7 @@ DB = MongoClient(config.DB_URL)
 
 try:
    DB.server_info()
-except pymongo.errors.ConnectionFailure:
+except errors.ConnectionFailure:
      logging.info("Connection failure, Invalid MONGOB URL!, DOWN!")
      sys.exit()
 
