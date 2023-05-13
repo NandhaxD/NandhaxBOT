@@ -19,10 +19,10 @@ if ENV:
    HANDLER = os.getenv("HANDLER").split(",")
    LIST = ["API_ID", "API_HASH", "TOKEN", "SESSION", "OWNER_ID", "GROUP_ID", "KATSUKI", "HANDLER"]   
    for var in :
-    try:
-        locals()[var] = os.getenv[var]
-    except KeyError:
-        print(f"The {var} environment variable is missing.")
+      try:
+          locals()[var] = os.getenv[var]
+      except KeyError:
+          print(f"The {var} environment variable is missing.")
 else:
    API_ID = 1234567
    API_HASH = "<hash>"
