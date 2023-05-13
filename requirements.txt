@@ -1,6 +1,7 @@
 pyrogram==2.0.103 
 pymongo==4.3.3
 Pillow==9.5.0
+pytz==2023.3
 pymongo[srv]
 asyncio==3.4.3
 gpytranslate==1.5.1
