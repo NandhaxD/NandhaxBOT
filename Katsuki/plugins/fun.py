@@ -3,7 +3,7 @@
 
 import config, asyncio 
 
-from Katsuki katsuki
+from Katsuki import katsuki
 from pyrogram import filters
 
 
