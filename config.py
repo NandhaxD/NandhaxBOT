@@ -5,7 +5,7 @@ import os, sys
 
 """ CHANGE TO FALSE IF YOU DON'T WANNA ADD VARIABLES IN HOSTING SITE """
 
-ENV = os.getenv("ENV" True)
+ENV = os.getenv("ENV" TRUE)
 
 
 if ENV:    
