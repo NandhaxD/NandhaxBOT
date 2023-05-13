@@ -9,8 +9,7 @@ THUMB_ID = "./IMG_20220701_185623_542.jpg"
 
 
 
-@app.on_message(filters.command("rename",prefixes=config
-HANDLER) & filters.me)
+@app.on_message(filters.command("rename",prefixes=config.HANDLER) & filters.me)
 async def rename(_, message):
     try:
        filename = message.text.split(None,1)[1]
