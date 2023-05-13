@@ -4,36 +4,36 @@ import re
 import os
 import subprocess
 import traceback
-from Katsuki import katsuki
-from config import ( OWNER_ID, HANDLER) 
+import config
+from Katsuki import app
 from pyrogram import filters, enums
 from pyrogram.errors import MessageTooLong
 
 
-async def aexec(code, katsuki, message):
+async def aexec(code, app, message):
     exec(
         "async def __aexec(katsuki, message): "
         + "".join(f"\n {l_}" for l_ in code.split("\n"))
     )
-    return await locals()["__aexec"](katsuki, message)
+    return await locals()["__aexec"](app, message)
 
 
 
 THUMB_ID = "./IMG_20220701_185623_542.jpg"
 
-@katsuki.on_message(filters.user(OWNER_ID) & filters.command("logs",prefixes=HANDLER))
+@app.on_message(filters.me & filters.command("logs",prefixes=HANDLER))
 async def logs(_, message):
        run_logs = subprocess.getoutput("tail logs.txt")
-       msg = await message.edit_text("Analyzing Logging...")       
+       msg = await message.edit_text("Analyzing Logging...", quote=True)       
        with io.BytesIO(str.encode(run_logs)) as logs:
             logs.name = "logs.txt"
             await message.reply_document(
-                document=logs, thumb=THUMB_ID
+                document=logs, thumb=THUMB_ID, quote=True
             )
        return await msg.delete()
 
 
-@katsuki.on_message(filters.user(OWNER_ID) & filters.command("sh", prefixes=HANDLER))
+@app.on_message(filters.me & filters.command("sh", prefixes=HANDLER))
 async def terminal(katsuki, message):
 	 
      if len(message.text.split()) <= 1:
@@ -61,9 +61,9 @@ Results:
 
 
     
-@katsuki.on_message(filters.user(OWNER_ID) & filters.command("e",prefixes=HANDLER))
-async def evaluate(katsuki , message):
-    status_message = await message.edit("`Running ...`")
+@app.on_message(filters.me & filters.command("e",prefixes=HANDLER))
+async def evaluate(app , message):
+    status_message = await message.edit("`Running ...`", quote=True)
     try:
         cmd = message.text.split(maxsplit=1)[1]
     except IndexError:
@@ -103,7 +103,7 @@ async def evaluate(katsuki , message):
             document=filename,
             thumb=THUMB_ID,
             caption=cmd,
-            disable_notification=True,
+            disable_notification=True, quote=True,
             reply_to_message_id=reply_to_id,
         )
         os.remove(filename)
