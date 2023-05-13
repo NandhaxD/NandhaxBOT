@@ -1,7 +1,7 @@
 import asyncio 
 import config
 
-from Katsuki import katsuki 
+from Katsuki import app
 from pyrogram import filters
 from gpytranslate import Translator
 
@@ -9,7 +9,7 @@ import requests
 
 
 
-@katsuki.on_message(filters.command(["ud","define"],prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
+@app.on_message(filters.command(["ud","define"],prefixes=config.HANDLER) & filters.me)
 async def ud(_, message):
         if len(message.command) < 2:
              return await message.edit("where you input the text?")         
@@ -20,12 +20,12 @@ async def ud(_, message):
           reply_text = f'**results: {text}**\n\n{results["list"][0]["definition"]}\n\n_{results["list"][0]["example"]}_'
         except Exception as e: 
               return await message.edit_text(f"Somthing wrong Happens:\n`{e}`")
-        ud = await message.edit_text("Exploring....")
+        ud = await message.edit_text("Exploring....", quote=True)
         await ud.edit_text(reply_text)
         
         
 trans = Translator()
-@katsuki.on_message(filters.command("tr",prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
+@app.on_message(filters.command("tr",prefixes=config.HANDLER) & filters.me)
 async def translate(_, message) -> None:
     reply_msg = message.reply_to_message
     if not reply_msg:
