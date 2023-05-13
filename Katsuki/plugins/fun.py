@@ -4,7 +4,7 @@
 import config, asyncio 
 
 from Katsuki import app
-from pyrogram import filters
+from pyrogram import filters, enums
 
 
 """ ANIMATION HACKS """
@@ -18,13 +18,13 @@ async def hack(_, message):
     HACK_STRING = [
     "Looking for WhatsApp databases in targeted person...",
     "User online: True\nTelegram access: True\nRead Storage: True ",
-    "Hacking... 20.63%\n[███░░░░░░░░░░░░░░░░░]",
-    "Hacking... 56.21%\n[█████████░░░░░░░░░░░]",
-    "Hacking... 86.21%\n[███████████████░░░░░]",
-    "Hacking... 93.50%\n[█████████████████░░░]",
-    "hacking...  100%\n[████████████████████]",
-    "hacking... COMPLE. ✅",
+    "Hacking... 20.63%\n`[███░░░░░░░░░░░░░░░░░]`",
+    "Hacking... 56.21%\n`[█████████░░░░░░░░░░░]`",
+    "Hacking... 86.21%\n`[███████████████░░░░░]`",
+    "Hacking... 93.50%\n`[█████████████████░░░]`",
+    "hacking...  100%\n`[████████████████████]`",
+    "**HACKING... COMPLE. **✅",
 ]
     for string in range(8):
           await asyncio.sleep(4)
-          await message.edit(HACK_STRING[string % 8])
+          await message.edit(HACK_STRING[string % 8], parse_mode=enums.ParseMode.MARKDOWN)
