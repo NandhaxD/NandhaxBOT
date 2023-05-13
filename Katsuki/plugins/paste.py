@@ -3,7 +3,7 @@ import requests
 import config, os
 import datetime
 
-from Katsuki import katsuki
+from Katsuki import app
 from Katsuki.helpers.help_func import spacebin, convert_to_datetime
 from pyrogram import filters, enums
 
@@ -15,7 +15,7 @@ from pyrogram import filters, enums
   
     
 
-@katsuki.on_message(filters.command("paste",config.HANDLER) & filters.user(config.OWNER_ID))
+@app.on_message(filters.command("paste",config.HANDLER) & filters.me)
 async def paste(_, message):
     #share your codes on https://spacebin.in
 
