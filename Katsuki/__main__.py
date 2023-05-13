@@ -2,7 +2,7 @@ import pyrogram
 import strings
  
 from Katsuki import bot , app
-from Katsuki.helpers.help_func import get_time
+from Katsuki.helpers.help_func import datetime 
 
 async def run_clients():
       await bot.start()
