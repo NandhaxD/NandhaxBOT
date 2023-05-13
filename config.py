@@ -4,6 +4,7 @@ import os, sys
 
 
 """ CHANGE TO FALSE IF YOU DON'T WANNA ADD VARIABLES IN HOSTING SITE """
+
 ENV = os.getenv("ENV" True)
 
 
@@ -15,7 +16,6 @@ if ENV:
    OWNER_ID = os.getenv("OWNER_ID")
    GROUP_ID = os.getenv("GROUP_ID")
    KATSUKI = os.getenv("KATSUKI")
-   """ YOU VALUE MOST LIKE THIS '.,!,?,' """
    HANDLER = os.getenv("HANDLER").split(",")
 else:
    API_ID = 1234567
