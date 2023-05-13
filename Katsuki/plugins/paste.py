@@ -43,8 +43,7 @@ async def paste(_, message):
            link = mm["result"]["link"]
            raw = mm["result"]["raw"]
 
-           return await message.edit(strings.PAST_FORMAT.format(link=link, raw=raw,timedate=timedate), parse_mode=enums.ParseMode.MARKDOWN,
-disable_web_page_preview=True)
+           return await message.edit(strings.PAST_FORMAT.format(link=link, raw=raw,timedate=timedate), parse_mode=enums.ParseMode.MARKDOWN, disable_web_page_preview=True)
 
     elif bool(message.reply_to_message.text or message.reply_to_message.caption):
 
@@ -59,8 +58,7 @@ disable_web_page_preview=True)
            link = mm["result"]["link"]
            raw = mm["result"]["raw"]
 
-           return await message.edit(strings.PAST_FORMAT.format(link=link, raw=raw,timedate=timedate), parse_mode=enums.ParseMode.MARKDOWN,
-disable_web_page_preview=True)
+           return await message.edit(strings.PAST_FORMAT.format(link=link, raw=raw,timedate=timedate), parse_mode=enums.ParseMode.MARKDOWN, disable_web_page_preview=True)
     else:
          return await message.edit("=> I am unable to paste this.")
 
