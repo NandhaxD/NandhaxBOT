@@ -13,7 +13,7 @@ async def railway_to_normal(time_str):
 
 
 
-async def get_time():
+async def get_datetime():
     timezone = pytz.timezone("Asia/Kolkata")
     kkk = str(datetime.datetime.now(timezone))
     TIME = kkk.split()[1]
