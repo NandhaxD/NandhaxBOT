@@ -19,10 +19,12 @@ async def hack(_, message):
     "Looking for WhatsApp databases in targeted person...",
     " User online: True\nTelegram access: True\nRead Storage: True ",
     "Hacking... 20.63%\n[███░░░░░░░░░░░░░░░░░]",
+    "Hacking... 56.21%\n[█████████░░░░░░░░░░░]",
     "Hacking... 86.21%\n[███████████████░░░░░]",
     "Hacking... 93.50%\n[█████████████████░░░]",
-    "hacking....  100%\n[████████████████████]",
+    "hacking...  100%\n[████████████████████]","
+    "hacking... COMPLE. ✅",
 ]
-    for string in range(6):
+    for string in range(8):
           await asyncio.sleep(4)
-          await message.edit(HACK_STRING[string % 6])
+          await message.edit(HACK_STRING[string % 8])
