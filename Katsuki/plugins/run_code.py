@@ -33,71 +33,33 @@ async def logs(_, message):
        return await msg.delete()
 
 
-@katsuki.on_message(filters.user(OWNER_ID) & filters.command("sh",prefixes=HANDLER))
+@katsuki.on_message(filters.user(OWNER_ID) & filters.command("sh", prefixes=HANDLER))
 async def terminal(katsuki, message):
-    if len(message.text.split()) == 1:
-        await message.edit(f"Usage: `.sh echo owo`")
-        return
-    args = message.text.split(None, 1)
-    teks = args[1]
-    if "\n" in teks:
-        code = teks.split("\n")
-        output = ""
-        for x in code:
-            shell = re.split(""" (?=(?:[^'"]|'[^']*'|"[^"]*")*$)""", x)
-            try:
-                process = subprocess.Popen(
-                    shell, stdout=subprocess.PIPE, stderr=subprocess.PIPE
-                )
-            except Exception as err:
-                print(err)
-                await message.edit(
-                    """
-**Error:**
-```{}```
-""".format(
-                        err
-                    )
-                )
-            output += "**{}**\n".format(code)
-            output += process.stdout.read()[:-1].decode("utf-8")
-            output += "\n"
-    else:
-        shell = re.split(""" (?=(?:[^'"]|'[^']*'|"[^"]*")*$)""", teks)
-        for a in range(len(shell)):
-            shell[a] = shell[a].replace('"', "")
-        try:
-            process = subprocess.Popen(
-                shell, stdout=subprocess.PIPE, stderr=subprocess.PIPE
-            )
-        except Exception as err:
-            exc_type, exc_obj, exc_tb = sys.exc_info()
-            errors = traceback.format_exception(
-                etype=exc_type, value=exc_obj, tb=exc_tb
-            )
-            await message.edit("""**Error:**\n```{}```""".format("".join(errors)))
-            return
-        output = process.stdout.read()[:-1].decode("utf-8")
-    if str(output) == "\n":
-        output = None
-    if output:
-        if len(output) > 4096:
-            with open("output.txt", "w+") as file:
-                file.write(output)
-            await katsuki.send_document(
-                message.chat.id,
-                document="output.txt",
-                thumb=THUMB_ID,
-                reply_to_message_id=message.id,
-                caption="`Output file`",
-            )
-            os.remove("output.txt")
-            return
-        return await message.edit(f"**Output:**\n```{output}```", parse_mode=enums.ParseMode.MARKDOWN)
-    else:
-        return await message.edit("**Output:**\n`No Output`") 
+	 
+	 if len(message.text.split()) <= 1:
+	 	  return await message.edit("I can't run code with code!")
+     code = message.text.split(maxsplit=1)[1]
+     output = subprocess.getoutput(code)
+     if len(output) > 4096:
+     	filename = 'shell.txt'
+     	file = open(filename, 'w+')
+     	file.write(output)
+     	file.close()
+     	await message.reply_document(document=filename,
+     	thumb=THUMB_ID, quote=True, caption=f"`{code}`", parse_mode=enums.ParseMode.MARKDOWN)
+     	return await message.delete()
+     else:
+     	string = f"""\n
+Command:
+`{code}`
 
-    
+Results:
+`{output}`
+"""
+     	await message.edit(text=string, parse_mode=enums.ParseMode.MARKDOWN)
+
+
+
     
 @katsuki.on_message(filters.user(OWNER_ID) & filters.command("e",prefixes=HANDLER))
 async def evaluate(katsuki , message):
