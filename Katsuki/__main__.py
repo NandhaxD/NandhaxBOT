@@ -1,6 +1,7 @@
 import pyrogram
 import strings
- 
+import config
+
 from Katsuki import bot , app
 from Katsuki.helpers.help_func import get_datetime 
 
