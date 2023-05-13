@@ -2,22 +2,22 @@ import config
 import asyncio
 
 from pyrogram import filters, enums
-from Katsuki import app, katsuki_info , katsuki 
+from Katsuki import bot, INFO , app
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
 USERS = []
 
-@app.on_message(filters.command("start") & filters.private)
+@bot.on_message(filters.command("start") & filters.private)
 async def start(_, message):
      user_id = message.from_user.id
-     info = await katsuki_info()
+     info = await INFO.app()
      name = info.first_name
      id = info.id
      if user_id in USERS:
          return await message.reply("DON'T SPAM HERE!")
      USERS.append(user_id)
-     await message.forward(config.LOG_GROUP_ID)
+     await message.forward(config.GROUP_ID)
      mention = f"[{name}](tg://user?id={id})"
      BUTTON=InlineKeyboardMarkup([[
      InlineKeyboardButton("Source 👾", url=config.SOURCE),]])
