@@ -4,6 +4,9 @@
 
 
 RESTART_TEXT = """\n
+
+SYSTEM AWAKEN !!!
+
 📅 DATE: {date}
 ⏰ TIME: {time}
 """
