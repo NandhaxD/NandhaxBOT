@@ -1,11 +1,11 @@
 from pyrogram import filters 
-from Katsuki import katsuki 
+from Katsuki import apl
 from requests import get
 
 import os
 import config
 
-@katsuki.on_message(filters.user(config.OWNER_ID) & filters.command("git",prefixes=config.HANDLER))
+@app.on_message(filters.me & filters.command("git",prefixes=config.HANDLER))
 async def git(_, message):
     if len(message.command) < 2:
         return await message.reply_text("where you input the username?\n")
@@ -27,7 +27,7 @@ async def git(_, message):
         kek = get(res['avatar_url']).content
         f.write(kek)
 
-    await message.reply_photo(f"{user}.jpg", caption=data)
+    await message.reply_photo(f"{user}.jpg", caption=data, quote=True)
     os.remove(f"{user}.jpg")
     await message.delete()
     return 
