@@ -30,7 +30,7 @@ DB = MongoClient(config.DB_URL)
 
 try:
    DB.server_info()
-except ConnectionFailure:
+except pymongo.errors.ConnectionFailure:
      logging.info("Connection failure, Invalid MONGOB URL!, DOWN!")
      sys.exit()
 
