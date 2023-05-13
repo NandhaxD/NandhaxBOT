@@ -15,9 +15,11 @@ async def railway_to_normal(time_str):
 
 async def get_time():
     timezone = pytz.timezone("Asia/Kolkata")
-    time = str(datetime.datetime.now(timezone)).split()[1]
-    result = await railway_to_normal(time)
-    return result 
+    kkk = str(datetime.datetime.now(timezone))
+    TIME = kkk.split()[1]
+    date = kkk.split()[0]
+    time = await railway_to_normal(TIME)
+    return {"date": date, "time": time}
 
 
 
