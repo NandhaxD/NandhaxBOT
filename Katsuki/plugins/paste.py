@@ -31,9 +31,7 @@ async def paste(_, message):
           raw = mm["result"]["raw"]          
           return await message.edit(strings.PAST_FORMAT.format(link=link, raw=raw,timedate=timedate), parse_mode=enums.ParseMode.MARKDOWN, disable_web_page_preview=True)
 
-    elif bool(message.reply_to_message.text or message.reply_to_message.caption):
-         
-           if (message.reply_to_message.document and bool(message.reply_to_message.document.mime_type.startswith("text/"))):
+    elif (message.reply_to_message.document and bool(message.reply_to_message.document.mime_type.startswith("text/"))):
            path = await katsuki.download_media(message.reply_to_message)
            file = open(path, "r")
            text = file.read()
@@ -48,7 +46,10 @@ async def paste(_, message):
            return await message.edit(strings.PAST_FORMAT.format(link=link, raw=raw,timedate=timedate), parse_mode=enums.ParseMode.MARKDOWN,
 disable_web_page_preview=True)
 
-    elif message.reply_to_message.text:
+    elif bool(message.reply_to_message.text or message.reply_to_message.caption):
+
+
+           if message.reply_to_message.text:
                  text = message.reply_to_message.text
            elif message.reply_to_message.caption:
                  text = message.reply_to_message.caption
