@@ -1,9 +1,9 @@
 from telegraph import upload_file
 from pyrogram import filters
-from Katsuki import katsuki
-from config import HANDLER,  OWNER_ID
+from Katsuki import app
+import config
 
-@katsuki.on_message(filters.command("tm", prefixes=HANDLER) & filters.user(OWNER_ID))
+@app.on_message(filters.command("tm", prefixes=config.HANDLER) & filters.me)
 async def tm(_, message):
     await message.edit('processing...')
     reply_is = message.reply_to_message
