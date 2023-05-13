@@ -3,12 +3,12 @@
 
 import config, asyncio 
 
-from Katsuki import katsuki
+from Katsuki import app
 from pyrogram import filters
 
 
 """ ANIMATION HACKS """
-@katsuki.on_message(filters.command("hack",config.HANDLER) & filters.user(config.OWNER_ID))
+@app.on_message(filters.command("hack",config.HANDLER) & filters.me)
 async def hack(_, message):
     
     if message.reply_to_message:
