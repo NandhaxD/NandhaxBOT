@@ -13,11 +13,11 @@ if ENV:
    API_HASH = os.getenv("API_HASH")
    BOT_TOKEN = os.getenv("BOT_TOKEN")
    SESSION = os.getenv("SESSION")
-   GROUP_ID = os.getenv("GROUP_ID", -1001717881477)
-   KATSUKI = os.getenv("KATSUKI", "https://graph.org/file/56bb59a1057c3021ae8cd.mp4")
+   GROUP_ID = os.environ.get("GROUP_ID", -1001717881477)
+   KATSUKI = os.environ.get("KATSUKI", "https://graph.org/file/56bb59a1057c3021ae8cd.mp4")
    DB_URL = os.getenv("DB_URL")
-   HANDLER = os.getenv("HANDLER", "['.','!']")
-   LIST_OF_VARIABLE = ["API_ID", "API_HASH", "BOT_TOKEN", "SESSION", "GROUP_ID", "KATSUKI", "HANDLER", "DB_URL"]   
+   HANDLER = ["~", ".","!","?","@","$"]
+   LIST_OF_VARIABLE = ["API_ID", "API_HASH", "BOT_TOKEN", "SESSION", "GROUP_ID", "KATSUKI", "DB_URL"]   
    for var in LIST_OF_VARIABLE:
       if os.getenv(var) == None:
            print(f"The {var} environment variable is missing.")
