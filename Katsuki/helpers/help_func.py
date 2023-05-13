@@ -23,7 +23,6 @@ async def get_datetime():
 
 
 
-print(convert(str((tz)).split()[1]))
 
 async def convert_to_datetime(timestamp): # Unix timestamp
      date = datetime.datetime.fromtimestamp(timestamp)
