@@ -17,7 +17,7 @@ async def hack(_, message):
       return await message.edit("who should I hack ?")
     HACK_STRING = [
     "Looking for WhatsApp databases in targeted person...",
-    " User online: True\nTelegram access: True\nRead Storage: True ",
+    "User online: True\nTelegram access: True\nRead Storage: True ",
     "Hacking... 20.63%\n[███░░░░░░░░░░░░░░░░░]",
     "Hacking... 56.21%\n[█████████░░░░░░░░░░░]",
     "Hacking... 86.21%\n[███████████████░░░░░]",
