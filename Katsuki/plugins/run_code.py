@@ -63,7 +63,7 @@ Results:
     
 @app.on_message(filters.me & filters.command("e",prefixes=config.HANDLER))
 async def evaluate(app , message):
-    status_message = await message.edit("`Running ...`", quote=True)
+    status_message = await message.edit("`Running ...`")
     try:
         cmd = message.text.split(maxsplit=1)[1]
     except IndexError:
