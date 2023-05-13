@@ -1,4 +1,4 @@
-
+"""
 import config 
 import requests
 
@@ -74,4 +74,5 @@ async def paste(_, inline_query):
             InputTextMessageContent(message_text="BELOW BUTTONS TO VIEW PASTE!", disable_web_page_preview=True),
      reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("➡️ PAST", url=link),
        InlineKeyboardButton("➡️ RAW", url=raw)]]))])
+"""
 
