@@ -20,10 +20,8 @@ if ENV:
    HANDLER = os.getenv("HANDLER", "['.','!']")
    LIST_OF_VARIABLE = ["API_ID", "API_HASH", "BOT_TOKEN", "SESSION", "OWNER_ID", "GROUP_ID", "KATSUKI", "HANDLER", "DB_URL"]   
    for var in LIST_OF_VARIABLE:
-      try:
-          locals()[var] = os.getenv(var)
-      except KeyError:
-          print(f"The {var} environment variable is missing.")
+      if os.getenv(var) == None:
+           print(f"The {var} environment variable is missing.")
 else:
    API_ID = 1234567
    API_HASH = "<hash>"
