@@ -7,8 +7,8 @@ from Katsuki import katsuki
 from pyrogram import filters
 
 
-"""ANIMATION HACKS """
-@app.on_message(filters.command("hack",config.HANDLER) & filters.user(config.OWNER_ID))
+""" ANIMATION HACKS """
+@katsuki.on_message(filters.command("hack",config.HANDLER) & filters.user(config.OWNER_ID))
 async def hack(_, message):
     
     if message.reply_to_message:
