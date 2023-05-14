@@ -3,7 +3,7 @@
 
 import config, asyncio 
 
-from Katsuki import app
+from Katsuki import app, MODULE 
 from pyrogram import filters, enums
 
 
