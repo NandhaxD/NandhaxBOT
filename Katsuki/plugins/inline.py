@@ -24,7 +24,7 @@ async def help_cmds(_, inline_query):
       cache_time=0,
       results = [
      InlineQueryResultArticle(
-        "🆘 Help Commands",  InputTextMessageContent(message_text="Help Commands!"),reply_markup=InlineKeyboardMarkup(buttons))])
+        "🆘 Help Commands",  InputTextMessageContent(message_text="Help Commands!"), thumb_url="https://graph.org/file/b136511bda43b1d8db7d2.jpg",reply_markup=InlineKeyboardMarkup(buttons))])
 
 
 @bot.on_inline_query(filters.regex("paste"))
@@ -46,7 +46,7 @@ async def paste(_, inline_query):
     results=[
        InlineQueryResultArticle(
             "Paste Success ✅",
-            InputTextMessageContent(message_text="BELOW BUTTONS TO VIEW PASTE!", disable_web_page_preview=True),
+            InputTextMessageContent(message_text="BELOW BUTTONS TO VIEW PASTE!", disable_web_page_preview=True), thumb_url="https://graph.org/file/4f71af878a085505e8faf.jpg",
      reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("➡️ PASTE", url=link),
        InlineKeyboardButton("➡️ RAW", url=raw)]]))])
 
