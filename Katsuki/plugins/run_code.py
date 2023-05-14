@@ -5,7 +5,7 @@ import os
 import subprocess
 import traceback
 import config
-from Katsuki import app
+from Katsuki import app, MODULE
 from pyrogram import filters, enums
 from pyrogram.errors import MessageTooLong
 
@@ -117,15 +117,13 @@ async def evaluate(app , message):
 
 __mod_name__ = "DEVS" 
   
- __help__ = """\n 
+
+__help__ = """\n 
 - e: evaluate codes
 - sh: shell codes
 - logs: logging info
-
- """ 
+""" 
   
-  
-  
-  
- string = {"module": __mod_name__, "help": __help__}  
- MODULE.append(string)
+ 
+string = {"module": __mod_name__, "help": __help__}
+MODULE.append(string)
