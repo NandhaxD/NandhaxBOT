@@ -3,7 +3,7 @@ import config
 import requests
 
 
-from Katsuki import bot
+from Katsuki import bot, INFO as GET_INFO
 from Katsuki.helpers.help_func import spacebin
 from pyrogram import filters
 
@@ -11,8 +11,11 @@ from pyrogram.types import (
 InlineQueryResultArticle, InputTextMessageContent, InlineKeyboardMarkup, InlineKeyboardButton )
 
 
-@bot.on_inline_query(filters.regex("paste") & filters.me)
+@bot.on_inline_query(filters.regex("paste"))
 async def paste(_, inline_query):
+    user_id = (await GET_INFO.clone()).id
+    if not inline_query.from_user.id == user_id:
+       return 
     string = inline_query.query
     try:
        CONTENT = string.split(maxsplit=2)[1]
