@@ -4,6 +4,17 @@ import strings
 from Katsuki import bot, MODULE, INFO as GET_INFO
 from pyrogram import filters, enums 
 
+
+
+
+@bot.on_back_query(filters.regex("help_back"))
+async def help_back(_, query):
+   user_id = (await GET_INFO.app()).id
+   if not query.from_user.id == int(user_id):
+       return await query.answer("😤 You aren't my master")
+   
+     
+
 @bot.on_callback_query(filters.regex('^help'))
 async def help_commnds(_, query):
    user_id = (await GET_INFO.app()).id
