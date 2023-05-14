@@ -2,6 +2,18 @@
 import requests 
 import datetime 
 import pytz
+import re
+
+
+
+
+async def pypi_search(query):
+         content=requests.get(f"https://pypi.org/search/?q={query}").content.decode('utf-8')
+
+
+
+
+
 
 async def FileType(message):
     if message.document:
