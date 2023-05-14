@@ -23,7 +23,7 @@ async def help_cmds(_, inline_query):
       inline_query.id,
       cache_time=0,
       results = [
-     InlineQueryResultArticel(
+     InlineQueryResultArticle(
         "🆘 Help Commands",  InputTextMessageContent(message_text="Help Commands!"),reply_markup=buttons)])
 
 
