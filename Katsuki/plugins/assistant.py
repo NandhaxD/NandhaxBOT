@@ -1,4 +1,4 @@
-import config 
+import config, strings
 import asyncio
 
 from pyrogram import filters, enums
@@ -21,10 +21,7 @@ async def start(_, message):
      mention = f"[{name}](tg://user?id={id})"
      BUTTON=InlineKeyboardMarkup([[
      InlineKeyboardButton("Source 👾", url=config.SOURCE),]])
-     return await message.reply_text(f"""\n
-Hello, I am Assistant for **{mention}**
-You can deploy Your Own, To Use Me.
-""",quote=True, reply_markup=BUTTON ,parse_mode=enums.ParseMode.MARKDOWN)
+     return await message.reply_text(text=strings.BOT_START,quote=True, reply_markup=BUTTON ,parse_mode=enums.ParseMode.MARKDOWN)
      await asyncio.sleep(5)
      SPAM.remove(user_id)
      return 
