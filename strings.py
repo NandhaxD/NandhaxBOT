@@ -3,8 +3,7 @@
 
 HELP_CMD = """
 **Module**: `{module}`
-**Commands**:
-{help}
+**Commands**:\n{help}
 """
 
 
