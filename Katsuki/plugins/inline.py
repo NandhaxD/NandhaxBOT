@@ -21,15 +21,15 @@ async def paste(_, inline_query):
     mm = await spacebin(CONTENT)
     link = mm["result"]["link"]
     raw = mm["result"]["raw"]
-    buttons = [[
-       InlineKeyboardButton("➡️ PASTE", url=link),
-       InlineKeyboardButton("➡️ RAW", url=raw)]]
     await app.answer_inline_query(
        inline_query.id,
        cache_time=0,
     results=[
        InlineQueryResultArticle(
-            title="Paste Success ✅",         InputTextMessageContent(message_text="BELOW BUTTONS TO VIEW PASTE!", disable_web_page_preview=True),
-     reply_markup=InlineKeyboardMarkup(buttons))])
+            "Paste Success ✅",
+            InputTextMessageContent(message_text="BELOW BUTTONS TO VIEW PASTE!", disable_web_page_preview=True),
+     reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("➡️ PASTE", url=link),
+       InlineKeyboardButton("➡️ RAW", url=raw)]]))])
+
 
 
