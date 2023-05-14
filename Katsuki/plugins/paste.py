@@ -31,7 +31,7 @@ async def paste(_, message):
           return await message.edit(strings.PAST_FORMAT.format(link=link, raw=raw,timedate=timedate), parse_mode=enums.ParseMode.MARKDOWN, disable_web_page_preview=True)
 
     elif (message.reply_to_message.document and bool(message.reply_to_message.document.mime_type.startswith("text/"))):
-           path = await katsuki.download_media(message.reply_to_message)
+           path = await app.download_media(message.reply_to_message)
            file = open(path, "r")
            text = file.read()
            file.close()
@@ -59,7 +59,7 @@ async def paste(_, message):
 
            return await message.edit(strings.PAST_FORMAT.format(link=link, raw=raw,timedate=timedate), parse_mode=enums.ParseMode.MARKDOWN, disable_web_page_preview=True)
     else:
-         return await message.edit("=> I am unable to paste this.")
+         return await message.edit("=> I am UNABLE to paste this.")
 
 
 
