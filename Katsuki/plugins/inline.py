@@ -24,7 +24,7 @@ async def help_cmds(_, inline_query):
       cache_time=0,
       results = [
      InlineQueryResultArticle(
-        "🆘 Help Commands",  InputTextMessageContent(message_text="Help Commands!"),reply_markup=buttons)])
+        "🆘 Help Commands",  InputTextMessageContent(message_text="Help Commands!"),reply_markup=InlineKeyboardMarkup(buttons))])
 
 
 @bot.on_inline_query(filters.regex("paste"))
