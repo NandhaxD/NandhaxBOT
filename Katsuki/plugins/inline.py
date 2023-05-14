@@ -21,7 +21,7 @@ async def paste(_, inline_query):
     mm = await spacebin(CONTENT)
     link = mm["result"]["link"]
     raw = mm["result"]["raw"]
-    await app.answer_inline_query(
+    await bot.answer_inline_query(
        inline_query.id,
        cache_time=0,
     results=[
