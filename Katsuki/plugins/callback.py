@@ -13,8 +13,8 @@ async def help_back(_, query):
    user_id = (await GET_INFO.app()).id
    if not query.from_user.id == int(user_id):
        return await query.answer("😤 You aren't my master")
-       buttons = [[InlineKeyboardButton(x['module'], callback_data=f"help:{x.get('module')}")] for x in MODULE]
-       return bot.edit_inline_text(
+   buttons = [[InlineKeyboardButton(x['module'], callback_data=f"help:{x.get('module')}")] for x in MODULE]
+   return bot.edit_inline_text(
        inline_message_id=query.inline_message_id, text="HELP COMMANDS!", reply_markup=InlineKeyboardMarkup(buttons), parse_mode=enums.ParseMode.MARKDOWN)
        
      
