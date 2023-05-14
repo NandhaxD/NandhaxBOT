@@ -8,7 +8,7 @@ InlineKeyboardButton InlineKeyboardMarkup)
 async def help_commnds(_, query):
    user_id = (await GET_INFO.app()).id
    if not query.from_user.id == int(user_id):
-       return await query.answer('😤 You aren't my master')
+       return await query.answer("😤 You aren't my master")
    CB_NAME = query.data.split(':')[1].casefold()
    data = [x for x in MODULE if x['module'].casefold() == CB_NAME]
    if len(data) == 0:
