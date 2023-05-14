@@ -18,7 +18,7 @@ async def help_cmds(_, inline_query):
     user_id = (await GET_INFO.app()).id
     if not inline_query.from_user.id == user_id:
         return  
-    buttons = [[InlineKeyboardButton(x['module'], callback_data=f"help:{x['module']}")] for x in MODULE]
+    buttons = [[InlineKeyboardButton(x['module'], callback_data=f"help:{x.get('module')}")] for x in MODULE]
     await bot.answer_inline_query(
       inline_query.id,
       cache_time=0,
