@@ -1,7 +1,7 @@
 import asyncio 
 import config
 
-from Katsuki import app
+from Katsuki import app, MODULE 
 from pyrogram import filters
 from gpytranslate import Translator
 
