@@ -13,7 +13,7 @@ InlineQueryResultArticle, InputTextMessageContent, InlineKeyboardMarkup, InlineK
 
 @bot.on_inline_query(filters.regex("paste"))
 async def paste(_, inline_query):
-    user_id = (await GET_INFO.clone()).id
+    user_id = (await GET_INFO.app()).id
     if not inline_query.from_user.id == user_id:
        return 
     string = inline_query.query
