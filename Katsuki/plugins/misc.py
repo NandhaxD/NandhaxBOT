@@ -93,6 +93,7 @@ __help__ = """\n
 - tr {code}: reply to the message 
 - ud: urban dictionary 
 - write: unruled-note handwriting
+- tm: telegraph upload
 """  
     
     
