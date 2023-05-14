@@ -12,8 +12,8 @@ async def help_commnds(_, query):
        return await query.answer("🤔 somthing wrong.")
    module = data[0]['module']
    help = data[0]['help']
-   return await query.message.edit(strings.HELP_CMD)
-       else:
+   return await query.message.edit(strings.HELP_CMD.format(module=module, help=help))
+       
             
             
 
