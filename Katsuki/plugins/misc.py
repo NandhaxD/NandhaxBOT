@@ -8,7 +8,7 @@ from gpytranslate import Translator
 import requests
 
 @app.on_message(filters.me & filters.command("git",prefixes=config.HANDLER)) 
- async def git(_, message): 
+async def git(_, message): 
      if len(message.command) < 2: 
          return await message.reply_text("where you input the username?\n") 
      user = message.text.split(None, 1)[1] 
