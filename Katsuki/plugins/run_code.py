@@ -118,7 +118,7 @@ async def evaluate(app , message):
 __mod_name__ = "DEVS" 
   
 
-__help__ = """\n 
+__help__ = """
 - e: evaluate codes
 - sh: shell codes
 - logs: logging info
