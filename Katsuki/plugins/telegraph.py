@@ -42,6 +42,6 @@ async def graph_text(_, message):
                 text = (message.reply_to_message.text or message.reply_to_message.caption)
           else:
               return await message.edit('reply to the text for give some text to upload telegraph')
-          response = telegraph.create_page(first_name, html_content=text)
-          page_url = response['url']
-          return await message.edit(page_url)
+     response = telegraph.create_page(first_name, html_content=text)
+     page_url = response['url']
+     return await message.edit(page_url)
