@@ -15,7 +15,7 @@ async def get_commands(_, message):
    string = "Module: {module}\nHelp:\n{help}"
    for x in MODULE:
        await message.edit(string.format(
-          module=x['__mod_name__'], help=x['__help__']), parse_mode=Enums.ParseMode.MARKDOWN)
+          module=x['module'], help=x['help']), parse_mode=Enums.ParseMode.MARKDOWN)
 
 
 
