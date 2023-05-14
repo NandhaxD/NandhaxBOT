@@ -6,6 +6,17 @@ import re
 
 
 
+async def emoji_convert(query):
+     if query==True
+         return "✅"
+     elif query==False:
+         return "❌"
+     elif query==None:
+         return "🤷"
+     else:
+          return "🤔"
+
+
 async def pypi_search(query):
     results = []
     content = requests.get(f"https://pypi.org/search/?q={query}").content.decode('utf-8')
