@@ -32,7 +32,7 @@ async def hack(_, message):
 
 __mod_name__ = "FUN"
 
-__help__ = """\n
+__help__ = """
 - hack: reply to the user
 """
 
