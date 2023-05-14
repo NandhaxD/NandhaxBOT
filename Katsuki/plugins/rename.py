@@ -14,7 +14,7 @@ async def rename(_, message):
     try:
        filename = message.text.split(None,1)[1]
     except:
-        name = "Katsuki"
+        name = config.NAME
         try:
           if (await FileType(message=message.reply_to_message)) != False:
                filetype = await FileType(message=message.reply_to_message)
