@@ -1,6 +1,12 @@
 
 
 
+HELP_CMD = """\n
+Module: {module}
+
+Commands:
+{help}
+"""
 
 
 BOT_START = """\n
@@ -8,9 +14,8 @@ Hello, I am Assistant for **{mention}**
 You can deploy Your Own, To Use Me.
 
 **ADDITIONAL INFO**:
-
-bot is live: {botlive}
-app is live: {applive}
+🤖 BOT LIVE: {botlive} 
+🥸 APP LIVE: {applive}
 """
 
 RESTART_TEXT = """\n
