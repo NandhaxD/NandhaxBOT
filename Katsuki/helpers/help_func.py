@@ -8,9 +8,21 @@ import re
 
 
 async def pypi_search(query):
-         content=requests.get(f"https://pypi.org/search/?q={query}").content.decode('utf-8')
+    content=requests.get(f"https://pypi.org/search/?q={query}").content.decode('utf-8')
 
-
+    # Define regex patterns to extract the required data
+    pattern_title = r'<span class="package-snippet__name">(.+?)<\/span>'
+    pattern_version = r'<span class="package-snippet__version">(.+?)<\/span>'
+    pattern_created = r'<time datetime="(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+\d{4})".*?>'
+    pattern_description = r'<p class="package-snippet__description">(.+?)<\/p>'
+    package_snippets = re.findall(r'<a class="package-snippet".*?>(.*?)<\/a>', content, re.DOTALL)
+    for snippet in package_snippets:
+    title = re.search(pattern_title, snippet).group(1)
+    version = re.search(pattern_version, snippet).group(1)
+    created = re.search(pattern_created, snippet).group(1)
+    created = created.replace('T', ' ').replace('+0000', '') # Format the datetime string
+    description = re.search(pattern_description, snippet).group(1)
+   
 
 
 
