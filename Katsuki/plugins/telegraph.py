@@ -38,7 +38,7 @@ async def graph_text(_, message):
      if len(message.text.split()) >= 2:
            text = message.text.split(maxsplit=1)[1]
      else:
-          if (message.reply_to_message and message.reply_to_message.text or message.reply_to_message.caption):
+          if message.reply_to_message and (message.reply_to_message.text or message.reply_to_message.caption):
                 text = (message.reply_to_message.text or message.reply_to_message.caption)
           else:
               return await message.edit('reply to the text for give some text to upload telegraph')
