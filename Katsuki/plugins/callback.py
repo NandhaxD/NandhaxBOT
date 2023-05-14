@@ -1,7 +1,4 @@
 from Katsuki import bot, MODULE, INFO as GET_INFO
-from pyrogram.types import (
-InlineKeyboardButton InlineKeyboardMarkup)
-
 
 
 @bot.on_callback_queey(filters.regex('^help'))
