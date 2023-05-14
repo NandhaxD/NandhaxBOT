@@ -4,7 +4,7 @@ import strings
 from Katsuki import bot, MODULE, INFO as GET_INFO
 
 
-@bot.on_callback_queey(filters.regex('^help'))
+@bot.on_callback_query(filters.regex('^help'))
 async def help_commnds(_, query):
    user_id = (await GET_INFO.app()).id
    if not query.from_user.id == int(user_id):
