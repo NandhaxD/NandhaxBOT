@@ -3,7 +3,7 @@ import config
 import requests
 
 
-from Katsuki import bot, INFO as GET_INFO
+from Katsuki import MODULE, bot, INFO as GET_INFO
 from Katsuki.helpers.help_func import spacebin
 from pyrogram import filters
 
@@ -23,8 +23,7 @@ async def help_cmds(_, inline_query):
       inline_queey.id,
       cache_time=0,
       results = [
-     
-    InlineQueryResultArticel(
+     InlineQueryResultArticel(
         "🆘 Help Commands",  InputTextMessageContent(message_text="Help Commands!"),reply_markup=buttons)])
 
 
