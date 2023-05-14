@@ -30,7 +30,7 @@ async def hack(_, message):
           await message.edit(HACK_STRING[string % 8], parse_mode=enums.ParseMode.MARKDOWN)
 
 
-__mod_name__ = "fun"
+__mod_name__ = "FUN"
 
 __help__ = """\n
 - hack: reply to the user
