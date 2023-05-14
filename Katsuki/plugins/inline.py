@@ -3,7 +3,7 @@ import config
 import requests
 
 
-from Katsuki import app
+from Katsuki import bot
 from Katsuki.helpers.help_func import spacebin
 from pyrogram import filters
 
