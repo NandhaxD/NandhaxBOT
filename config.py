@@ -13,14 +13,14 @@ if ENV:
    API_HASH = os.getenv("API_HASH")
    BOT_TOKEN = os.getenv("BOT_TOKEN")
    SESSION = os.getenv("SESSION")
-   GROUP_ID = os.environ.get("GROUP_ID", -1001717881477)
-   KATSUKI = os.environ.get("KATSUKI", "https://graph.org/file/56bb59a1057c3021ae8cd.mp4")
+   GROUP_ID = os.getenv("GROUP_ID")
    DB_URL = os.getenv("DB_URL")
    HANDLER = ["~", ".","!","?","@","$"]
-   LIST_OF_VARIABLE = ["API_ID", "API_HASH", "BOT_TOKEN", "SESSION", "GROUP_ID", "KATSUKI", "DB_URL"]   
+   LIST_OF_VARIABLE = ["API_ID", "API_HASH", "BOT_TOKEN", "SESSION", "GROUP_ID", "DB_URL"]   
    for var in LIST_OF_VARIABLE:
-      if os.getenv(var) == None:
-           print(f"The {var} environment variable is missing.")
+      if not os.getenv(var):
+           sys.exit()
+           print(f"THE {var} ENVIRONMENT VARIABLE IS MISSING.")
 else:
    API_ID = 1234567
    API_HASH = "<hash>"
@@ -34,7 +34,7 @@ else:
 
 
 
-SOURCE = "https://gitHub.com/nandhaxd/katsuki"
+SOURCE = "https://github.com/nandhaxd/katsuki"
 
 
 
