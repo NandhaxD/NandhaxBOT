@@ -8,7 +8,7 @@ HELP_CMD = """
 """
 
 
-BOT_START = """\n
+BOT_START = """
 Hello, I am Assistant for **{mention}**
 You can deploy Your Own, To Use Me.
 
@@ -17,7 +17,7 @@ You can deploy Your Own, To Use Me.
 🥸 APP LIVE: {applive}
 """
 
-RESTART_TEXT = """\n
+RESTART_TEXT = """
 SYSTEM AWAKEN !!!
 
 📅 DATE: {date}
@@ -26,7 +26,7 @@ SYSTEM AWAKEN !!!
 
 
 
-ALIVE_TEXT = """\n
+ALIVE_TEXT = """
      {name}
 
 Greetings, Master {mention}! 
@@ -39,7 +39,7 @@ we shall conquer the digital universe!
 > Live Pyrogram Version is {pyrover}
 """    
 
-PAST_FORMAT = """\n
+PAST_FORMAT = """
 **Paste link**: **[Paste link]({link})**
 **Paste Raw link**: **[Raw View]({raw})**
 **Created at**: {timedate}
