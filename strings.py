@@ -1,7 +1,7 @@
 
 
 
-HELP_CMD = """\n
+HELP_CMD = """
 **Module**: `{module}`
 **Commands**:
 {help}
