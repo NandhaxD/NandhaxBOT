@@ -15,7 +15,7 @@ async def help_commnds(_, query):
        return await query.answer("🤔 somthing wrong.")
    module = data[0]['module']
    help = data[0]['help']
-   return await bot.inline_text_edit(inline_message_id=query.message.id, text=strings.HELP_CMD.format(module=module, help=help), parse_mode=enums.ParseMode.MARKDOWN)
+   return await bot.edit_inline_text(inline_message_id=query.message.id, text=strings.HELP_CMD.format(module=module, help=help), parse_mode=enums.ParseMode.MARKDOWN)
        
             
             
