@@ -2,7 +2,7 @@
 import strings
 
 from Katsuki import bot, MODULE, INFO as GET_INFO
-from pyrogram import filters
+from pyrogram import filters, enums 
 
 @bot.on_callback_query(filters.regex('^help'))
 async def help_commnds(_, query):
@@ -15,7 +15,7 @@ async def help_commnds(_, query):
        return await query.answer("🤔 somthing wrong.")
    module = data[0]['module']
    help = data[0]['help']
-   return await query.message.edit(strings.HELP_CMD.format(module=module, help=help))
+   return await query.message.edit(strings.HELP_CMD.format(module=module, help=help), parse_mode=enums.ParseMode.MARKDOWN)
        
             
             
