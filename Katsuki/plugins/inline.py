@@ -29,9 +29,7 @@ async def paste(_, inline_query):
        cache_time=0,
     results=[
        InlineQueryResultArticle(
-            title="Paste Success ✅",
-            thumb_url="https://graph.org/file/1cad98a3f492adba64650.jpg",
-            InputTextMessageContent(message_text="BELOW BUTTONS TO VIEW PASTE!", disable_web_page_preview=True),
+            title="Paste Success ✅",         InputTextMessageContent(message_text="BELOW BUTTONS TO VIEW PASTE!", disable_web_page_preview=True),
      reply_markup=InlineKeyboardMarkup(buttons))])
 
 
