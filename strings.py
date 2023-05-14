@@ -11,7 +11,6 @@ You can deploy Your Own, To Use Me.
 
 bot is live: {botlive}
 app is live: {applive}
-
 """
 
 RESTART_TEXT = """\n
