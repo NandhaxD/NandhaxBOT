@@ -94,6 +94,7 @@ __help__ = """\n
 - ud: urban dictionary 
 - write: unruled-note handwriting
 - tm: telegraph upload
+- paste: spacebin paste
 """  
     
     
