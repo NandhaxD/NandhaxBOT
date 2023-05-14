@@ -16,7 +16,7 @@ async def pypi_search(query):
     pattern_title = r'<span class="package-snippet__name">(.+?)<\/span>'
     pattern_version = r'<span class="package-snippet__version">(.+?)<\/span>'
     pattern_created = r'<time datetime="(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+\d{4})".*?>'
-    pattern_description = r'<p class="package-snippet__description">(.+?)<\/p>'
+    pattern_description = r'<p class="package-snippet__description">(.+?)<\/p>?'
     package_snippets = re.findall(r'<a class="package-snippet".*?>(.*?)<\/a>', content,re.DOTALL)
     for snippet in package_snippets:
          title = re.search(pattern_title, snippet).group(1)
