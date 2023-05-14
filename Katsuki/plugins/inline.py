@@ -20,7 +20,7 @@ async def help_cmds(_, inline_query):
         return  
     buttons = [[InlineKeyboardButton(x['module'], callback_data=f"help:{x['module']}")] for x in MODULE]
     await bot.answer_inline_query(
-      inline_queey.id,
+      inline_query.id,
       cache_time=0,
       results = [
      InlineQueryResultArticel(
