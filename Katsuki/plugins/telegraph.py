@@ -35,7 +35,7 @@ telegraph.create_account(short_name=config.NAME)
 async def graph_text(_, message):
      
      first_name=message.from_user.first_name
-     if len(message.text.split()) <= 2:
+     if len(message.text.split()) >= 2:
            text = message.text.split(maxsplit=1)[1]
      else:
           if (message.reply_to_message and message.reply_to_message.text or message.reply_to_message.caption):
