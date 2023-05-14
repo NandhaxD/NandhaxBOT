@@ -3,6 +3,7 @@ import asyncio
 
 from pyrogram import filters, enums
 from Katsuki import bot, INFO , app
+from Katsuki.helpers.help_func import emoji_convert
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
@@ -12,8 +13,8 @@ SPAM = []
 async def start(_, message):
      user_id = message.from_user.id
      info = await INFO.app()
-     botlive = bot.is_connected
-     applive = app.is_connected
+     botlive = await emoji_convert(bot.is_connected)
+     applive = await emoji_convert(app.is_connected)
      name = info.first_name
      id = info.id
      if user_id in SPAM:
