@@ -58,21 +58,4 @@ async def paste(_, message):
          return await message.edit("=> I am UNABLE to paste this.")
 
 
-__mod_name__ = "PASTE"  
-    
-__help__ = """\n  
-- paste: spacebin
-
-SUPPORTS:
-include a text message,
-reply to message text,
-reply to the text file,
-"""  
-    
-    
-    
-    
-string = {"module": __mod_name__, "help": __help__}   
-MODULE.append(string)
-        
     
