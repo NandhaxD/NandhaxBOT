@@ -10,6 +10,8 @@ from pymongo import MongoClient, errors
 
 StartTime = time.time()
 
+MODULE = []
+
 # LOGGING INFO
 FORMAT = "[Katsuki Client]: %(message)s"
 logging.basicConfig(level=logging.INFO, handlers=[logging.FileHandler('logs.txt'),
