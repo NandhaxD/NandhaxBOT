@@ -2,7 +2,7 @@
 import strings
 
 from Katsuki import bot, MODULE, INFO as GET_INFO
-
+from pyrogram import filters
 
 @bot.on_callback_query(filters.regex('^help'))
 async def help_commnds(_, query):
