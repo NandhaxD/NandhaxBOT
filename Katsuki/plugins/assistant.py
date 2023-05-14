@@ -12,6 +12,8 @@ SPAM = []
 async def start(_, message):
      user_id = message.from_user.id
      info = await INFO.app()
+     botlive = bot.is_connected
+     applive = app.is_connected
      name = info.first_name
      id = info.id
      if user_id in SPAM:
@@ -21,7 +23,7 @@ async def start(_, message):
      mention = f"[{name}](tg://user?id={id})"
      BUTTON=InlineKeyboardMarkup([[
      InlineKeyboardButton("Source 👾", url=config.SOURCE),]])
-     return await message.reply_text(text=strings.BOT_START,quote=True, reply_markup=BUTTON ,parse_mode=enums.ParseMode.MARKDOWN)
+     return await message.reply_text(text=strings.BOT_START.format(mention=mention, applive=applive, botlive=botlive),quote=True, reply_markup=BUTTON ,parse_mode=enums.ParseMode.MARKDOWN)
      await asyncio.sleep(5)
      SPAM.remove(user_id)
      return 
