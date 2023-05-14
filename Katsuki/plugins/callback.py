@@ -4,7 +4,8 @@ import strings
 from Katsuki import bot, MODULE, INFO as GET_INFO
 from pyrogram import filters, enums 
 
-
+from pyrogram.types import ( 
+InlineKeyboardMarkup, InlineKeyboardButton )
 
 
 @bot.on_back_query(filters.regex("help_back"))
@@ -13,6 +14,9 @@ async def help_back(_, query):
    if not query.from_user.id == int(user_id):
        return await query.answer("😤 You aren't my master")
        buttons = [[InlineKeyboardButton(x['module'], callback_data=f"help:{x.get('module')}")] for x in MODULE]
+       return bot.edit_inline_text(
+        inline_message_id, query.inline_message_id,
+       
      
 
 @bot.on_callback_query(filters.regex('^help'))
