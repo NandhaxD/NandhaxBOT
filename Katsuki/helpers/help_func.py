@@ -7,8 +7,7 @@ import re
 
 
 
-async def pypi_search(query):
-    content=requests.get(f"https://pypi.org/search/?q={query}").content.decode('utf-8')
+async def pypi_search(query):    content=requests.get(f"https://pypi.org/search/?q={query}").content.decode('utf-8')
 
     # Define regex patterns to extract the required data
     pattern_title = r'<span class="package-snippet__name">(.+?)<\/span>'
