@@ -35,6 +35,6 @@ else:
 
 
 SOURCE = "https://github.com/nandhaxd/katsuki"
-
+NAME = "Nandha"
 
 
