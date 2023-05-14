@@ -113,3 +113,19 @@ async def evaluate(app , message):
         await status_message.edit(final_output)
         return 
 
+
+
+__mod_name__ = "DEVS" 
+  
+ __help__ = """\n 
+- e: evaluate codes
+- sh: shell codes
+- logs: logging info
+
+ """ 
+  
+  
+  
+  
+ string = {"module": __mod_name__, "help": __help__}  
+ MODULE.append(string)
