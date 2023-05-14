@@ -40,7 +40,6 @@ DATABASE = DB.MAIN
 
 
 # CLASS FOR INFO GETTING
-
 class INFO:
     """ USER CLIENT INFO """
     async def app():
