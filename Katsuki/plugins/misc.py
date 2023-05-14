@@ -104,7 +104,7 @@ async def translate(_, message) -> None:
 
 __mod_name__ = "MISC"  
     
-__help__ = """\n  
+__help__ = """  
 - git: find github user 
 - tr {code}: reply to the message 
 - ud: urban dictionary 
