@@ -109,7 +109,8 @@ __help__ = """
 - tr {code}: reply to the message 
 - ud: urban dictionary 
 - write: unruled-note handwriting
-- tm: telegraph upload
+- tm: telegraph media upload
+- txt: telegraph text upload
 - paste: spacebin paste
 """  
     
