@@ -18,7 +18,7 @@ async def paste(_, inline_query):
        return 
     string = inline_query.query
     try:
-       CONTENT = string.split(maxsplit=2)[2]
+       CONTENT = string.split(maxsplit=1)[1]
     except:
        return 
     mm = await spacebin(CONTENT)
