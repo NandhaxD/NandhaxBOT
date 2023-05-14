@@ -7,6 +7,18 @@ from gpytranslate import Translator
 
 import requests
 
+
+
+@app.on_message(filters.me & filters.command('help', prefixes=config.HANDLER))
+async def get_commands(_, message):
+    
+   string = "Module: {module}\nHelp:\n{help}"
+   for x in MODULE:
+       await message.edit(string.format(
+          module=x['__mod_name__'], help=x['__help__']), parse_mode=Enums.ParseMode.MARKDOWN)
+
+
+
 @app.on_message(filters.me & filters.command("git",prefixes=config.HANDLER)) 
 async def git(_, message): 
      if len(message.command) < 2: 
