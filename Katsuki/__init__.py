@@ -42,15 +42,15 @@ DATABASE = DB.MAIN
 
 class INFO:
     """ USER CLIENT INFO """
-    def app():
+    async def app():
          info = app.get_me()
          return info
     """ BOT CLIENT INFO """
-    def bot():
+    async def bot():
          info = bot.get_me()
          return info
     """ CLONE CLIENT INFO """
-    def clone():
+    async def clone():
          info = Client.get_me()
          return info 
  
