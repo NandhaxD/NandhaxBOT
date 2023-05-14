@@ -7,7 +7,7 @@ import re
 
 
 async def emoji_convert(query):
-     if query==True
+     if query==True:
          return "✅"
      elif query==False:
          return "❌"
