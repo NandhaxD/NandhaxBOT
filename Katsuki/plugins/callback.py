@@ -8,7 +8,7 @@ from pyrogram.types import (
 InlineKeyboardMarkup, InlineKeyboardButton )
 
 
-@bot.on_back_query(filters.regex("help_back"))
+@bot.on_callback_query(filters.regex("help_back"))
 async def help_back(_, query):
    user_id = (await GET_INFO.app()).id
    if not query.from_user.id == int(user_id):
