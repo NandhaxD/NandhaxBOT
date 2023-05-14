@@ -14,16 +14,12 @@ MODULE = []
 
 
 
-class CustomFilter(logging.Filter):
-    def filter(self, record):
-        if "Loaded Plugins from" in record.msg:  # replace the message
-            record.msg = record.msg.replace("Loaded Plugins from", "Plugins loaded from")
-        return True
+# LOGGING INFO
 
-logging.getLogger("pyrogram").setLevel(logging.DEBUG)  # set logging level
-handler = logging.FileHandler("logs.txt")  # create file handler
-handler.setFormatter(logging.Formatter("%(asctime)s [%(name)s]: %(message)s"))  # use default formatter
-handler.addFilter(CustomFilter())  # add custom filter to handler
+FORMAT = f"[{config.NAME}] %(message)s"
+logging.basicConfig(level=logging.INFO, handlers=[logging.FileHandler('logs.txt'),
+              logging.StreamHandler()], format=FORMAT)
+
 
 
 
