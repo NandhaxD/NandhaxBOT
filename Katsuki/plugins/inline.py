@@ -11,6 +11,23 @@ from pyrogram.types import (
 InlineQueryResultArticle, InputTextMessageContent, InlineKeyboardMarkup, InlineKeyboardButton )
 
 
+ 
+
+@bot.on_inline_query(filters.regex("help"))
+async def help_cmds(_, inline_query):
+    user_id = (await GET_INFO.app()).id
+    if not inline_query.from_user.id == user_id:
+        return  
+    buttons = [[InlineKeyboardButton(x['module'], callback_data=f"help:{x['module']}")] for x in MODULE]
+    await bot.answer_inline_query(
+      inline_queey.id,
+      cache_time=0,
+      results = [
+     
+    InlineQueryResultArticel(
+        "🆘 Help Commands",  InputTextMessageContent(message_text="Help Commands!"),reply_markup=buttons)])
+
+
 @bot.on_inline_query(filters.regex("paste"))
 async def paste(_, inline_query):
     user_id = (await GET_INFO.app()).id
