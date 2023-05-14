@@ -6,7 +6,7 @@ import logging
 import config
 
 from pyrogram import Client
-from pymongo import MongoClient, errors 
+from pymongo import MongoClient, errors as Mongoerrors
 
 StartTime = time.time()
 
@@ -20,20 +20,19 @@ logging.basicConfig(level=logging.INFO, handlers=[logging.FileHandler('logs.txt'
 
 
 # PYROGRAM USER CLIENT 
-app = Client(name="katsuki", session_string=config.SESSION, api_id=config.API_ID, api_hash=config.API_HASH, plugins=dict(root="Katsuki/"),)
+app = Client(name="katsuki", session_string=config.SESSION, api_id=config.API_ID, api_hash=config.API_HASH, plugins=dict(root="Katsuki"),)
 
 
 #PYROGRAM BOT CLIENT
-
-bot = Client(name="KatsukiBot", bot_token=config.BOT_TOKEN, api_id=config.API_ID, api_hash=config.API_HASH, plugins=dict(root="Katsuki/"),)
+bot = Client(name="KatsukiBot", bot_token=config.BOT_TOKEN, api_id=config.API_ID, api_hash=config.API_HASH, plugins=dict(root="Katsuki"),)
 
 # PYMONGO DATABASE
 DB = MongoClient(config.DB_URL)
 
 try:
    DB.server_info()
-except errors.ConnectionFailure:
-     logging.info("Connection failure, Invalid MONGOB URL!, DOWN!")
+except Mongoerrors.ConnectionFailure:
+     print("Connection failure, INVALID MONGO DB URL!, DOWN!")
      sys.exit()
 
 
