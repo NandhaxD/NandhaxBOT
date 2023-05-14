@@ -6,7 +6,7 @@ InlineKeyboardButton InlineKeyboardMarkup)
 
 @bot.on_callback_queey(filters.regex('^help'))
 async def help_commnds(_, query):
-   user_id = (await GET_INFO()).id
+   user_id = (await GET_INFO.app()).id
    if not query.from_user.id == int(user_id):
        return await query.answer('😤 You aren't my master')
    CB_NAME = query.data.split(':')[1].casefold()
