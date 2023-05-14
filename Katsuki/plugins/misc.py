@@ -12,11 +12,15 @@ import requests
 @app.on_message(filters.me & filters.command('help', prefixes=config.HANDLER))
 async def get_commands(_, message):
     
-   string = "Module: {module}\nHelp:\n{help}"
-   for x in MODULE:
-       await message.edit(string.format(
-          module=x['module'], help=x['help']), parse_mode=enums.ParseMode.MARKDOWN)
 
+   string = ""
+   type = "Module: {module}\nHelp:\n{help}\n\n"
+   for x in MODULE:
+       string += type.format(
+          module=x['module'],
+          help=x['help'],)
+   await message.edit(string)
+                                      
 
 
 @app.on_message(filters.me & filters.command("git",prefixes=config.HANDLER)) 
