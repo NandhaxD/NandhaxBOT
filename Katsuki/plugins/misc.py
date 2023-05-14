@@ -88,12 +88,12 @@ async def translate(_, message) -> None:
 
 __mod_name__ = "MISC"  
     
-  __help__ = """\n  
- - git: find github user 
- - tr {code}: reply to the message 
- - ud: urban dictionary 
-  
-  """  
+__help__ = """\n  
+- git: find github user 
+- tr {code}: reply to the message 
+- ud: urban dictionary 
+- write: unruled-note handwriting
+"""  
     
     
     
