@@ -6,7 +6,7 @@ from Katsuki import bot, INFO , app
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
-USERS = []
+SPAM = []
 
 @bot.on_message(filters.command("start") & filters.private)
 async def start(_, message):
@@ -14,9 +14,9 @@ async def start(_, message):
      info = await INFO.app()
      name = info.first_name
      id = info.id
-     if user_id in USERS:
+     if user_id in SPAM:
          return await message.reply("DON'T SPAM HERE!")
-     USERS.append(user_id)
+     SPAM.append(user_id)
      await message.forward(config.GROUP_ID)
      mention = f"[{name}](tg://user?id={id})"
      BUTTON=InlineKeyboardMarkup([[
@@ -25,6 +25,6 @@ async def start(_, message):
 Hello, I am Assistant for **{mention}**
 You can deploy Your Own, To Use Me.
 """,quote=True, reply_markup=BUTTON ,parse_mode=enums.ParseMode.MARKDOWN)
-     await asyncio.sleep(10)
-     USERS.remove(user_id)
+     await asyncio.sleep(5)
+     SPAM.remove(user_id)
      return 
