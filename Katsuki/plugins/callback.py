@@ -1,3 +1,6 @@
+
+import strings
+
 from Katsuki import bot, MODULE, INFO as GET_INFO
 
 
