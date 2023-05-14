@@ -38,13 +38,19 @@ except errors.ConnectionFailure:
 DATABASE = DB.MAIN
 
 
-# INFO FUNC
-class INFO:
-    async def app():
-         info = await app.get_me()
-         return info
+# CLASS FOR INFO GETTING
 
-    async def bot():
-         info = await bot.get_me()
+class INFO:
+    """ USER CLIENT INFO """
+    def app():
+         info = app.get_me()
          return info
+    """ BOT CLIENT INFO """
+    def bot():
+         info = bot.get_me()
+         return info
+    """ CLONE CLIENT INFO """
+    def clone():
+         info = Client.get_me()
+         return info 
  
