@@ -112,6 +112,7 @@ __help__ = """
 - tm: telegraph media upload
 - txt: telegraph text upload
 - paste: spacebin paste
+- rename: rename a file with extension
 """  
     
     
