@@ -10,7 +10,7 @@ from Katsuki import app
 
 def admin_only(func): 
          @wrapt.decorator 
-         async def wrapped(wrapped, client: app, message: Message, *args, **kwargs): 
+         async def wrapped(wrapped, client=app, message=Message, *args, **kwargs): 
              chat_id=message.chat.id 
              user_id=message.from_user.id 
              if message.chat.type==enums.ChatType.PRIVATE: 
