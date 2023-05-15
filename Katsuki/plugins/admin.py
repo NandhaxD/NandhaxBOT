@@ -7,8 +7,8 @@ from Katsuki.helpers.decorator import admin_only
 
 
 
-@admin_only
 @app.on_message(filters.command("ban", config.HANDLER) & filters.me)
+@admin_only
 async def ban(_, message):
    
    if len(message.text.split()) >= 2:
@@ -22,6 +22,6 @@ async def ban(_, message):
            chat_id=message.chat.id,
            user_id=user_id)
    except Exception as e:
-         return await message.edit("[`ERROR`: `{e}`]")
+         return await message.edit(f"[`ERROR`: `{e}`]")
    
   
