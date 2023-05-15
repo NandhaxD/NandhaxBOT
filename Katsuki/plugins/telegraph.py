@@ -39,15 +39,14 @@ async def graph_text(_, message):
            text = message.text.split(maxsplit=1)[1]
      else:
               if (message.reply_to_message.document and bool(message.reply_to_message.document.mime_type.startswith("text/"))): 
-              path = await app.download_media(message.reply_to_message) 
-              file = open(path, "r") 
-              text = file.read() 
-              file.close() 
-              os.remove(path)
-          elif message.reply_to_message and (message.reply_to_message.text or message.reply_to_message.caption):
+                path = await app.download_media(message.reply_to_message              file = open(path, "r") 
+                text = file.read() 
+                file.close() 
+                os.remove(path)
+              elif message.reply_to_message and (message.reply_to_message.text or message.reply_to_message.caption):
                 text = (message.reply_to_message.text or message.reply_to_message.caption)
-          else:
-              return await message.edit('reply to the text document or for give some text to upload telegraph')
+              else:
+                  return await message.edit('reply to the text document or for give some text to upload telegraph')
      response = telegraph.create_page(first_name, html_content=text)
      page_url = response['url']
      return await message.edit(page_url)
