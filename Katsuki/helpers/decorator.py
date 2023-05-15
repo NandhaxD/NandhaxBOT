@@ -10,19 +10,19 @@ from Katsuki import app
 
 def admin_only(func): 
          @wrapt.decorator 
-         async def wrapped(wrapped, client=app, message=Message, *args, **kwargs): 
+         async def wrapped(client=app, message=Message): 
              chat_id=message.chat.id 
              user_id=message.from_user.id 
              if message.chat.type==enums.ChatType.PRIVATE: 
                  return await message.edit("[`THIS COMMAND NOT FOR GROUP`]") 
              check=await message.chat.get_member(user_id) 
              is_admin=check.status==enums.ChatMemberStatus.ADMINISTRATOR 
-             if is_admin: 
-                 return True 
+             if not is_admin: 
+                 return await message.edit("[`YOU ARE NOT ADMIN`]")
              else: 
-                 return await message.edit("[`YOU ARE NOT ADMIN`]") 
-             return func(wrapped, client=app, message=Message, *args, **kwargs) 
-  
+                 
+                 return func(client=app, message=Message)  
+               
          return wrapped 
 
         
