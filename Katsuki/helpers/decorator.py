@@ -21,7 +21,7 @@ def admin_only(func):
                  return True 
              else: 
                  return await message.edit("[`YOU ARE NOT ADMIN`]") 
-             return func(wrapped, client: app, message: Message, *args, **kwargs) 
+             return func(wrapped, client=app, message:=Message, *args, **kwargs) 
   
          return wrapped 
 
