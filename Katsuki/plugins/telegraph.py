@@ -38,7 +38,7 @@ async def graph_text(_, message):
      if len(message.text.split()) >= 2:
            text = message.text.split(maxsplit=1)[1]
      else:
-              if (message.reply_to_message.document and bool(message.reply_to_message.document.mime_type.startswith("text/"))): 
+              if message.reply_to_message and (message.reply_to_message.document and bool(message.reply_to_message.document.mime_type.startswith("text/"))): 
                   path = await app.download_media(message.reply_to_message)
                   file = open(path, "r") 
                   text = file.read() 
