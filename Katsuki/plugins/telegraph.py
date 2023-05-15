@@ -1,7 +1,7 @@
 from telegraph import upload_file, Telegraph
 from pyrogram import filters
 from Katsuki import app
-import config
+import config, os
 
 
 
@@ -38,10 +38,16 @@ async def graph_text(_, message):
      if len(message.text.split()) >= 2:
            text = message.text.split(maxsplit=1)[1]
      else:
-          if message.reply_to_message and (message.reply_to_message.text or message.reply_to_message.caption):
+              if (message.reply_to_message.document and bool(message.reply_to_message.document.mime_type.startswith("text/"))): 
+              path = await app.download_media(message.reply_to_message) 
+              file = open(path, "r") 
+              text = file.read() 
+              file.close() 
+              os.remove(path)
+          elif message.reply_to_message and (message.reply_to_message.text or message.reply_to_message.caption):
                 text = (message.reply_to_message.text or message.reply_to_message.caption)
           else:
-              return await message.edit('reply to the text for give some text to upload telegraph')
+              return await message.edit('reply to the text document or for give some text to upload telegraph')
      response = telegraph.create_page(first_name, html_content=text)
      page_url = response['url']
      return await message.edit(page_url)
