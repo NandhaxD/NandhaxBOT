@@ -39,10 +39,10 @@ async def graph_text(_, message):
            text = message.text.split(maxsplit=1)[1]
      else:
               if (message.reply_to_message.document and bool(message.reply_to_message.document.mime_type.startswith("text/"))): 
-                path = await app.download_media(message.reply_to_message              file = open(path, "r") 
-                text = file.read() 
-                file.close() 
-                os.remove(path)
+                  path = await app.download_media(message.reply_to_message                file = open(path, "r") 
+                  text = file.read() 
+                  file.close() 
+                  os.remove(path)
               elif message.reply_to_message and (message.reply_to_message.text or message.reply_to_message.caption):
                 text = (message.reply_to_message.text or message.reply_to_message.caption)
               else:
