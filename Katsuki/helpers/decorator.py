@@ -1,3 +1,5 @@
+import wrapt
+
 from pyrogram import enums
 from pyrogram.types import Message 
 from Katsuki import app
