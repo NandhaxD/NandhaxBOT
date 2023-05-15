@@ -5,6 +5,7 @@ from Katsuki import app
 
 
 
+""" CHECK YOUR ACC HAS ADMIN IN CHAT """
 
 def admin_only(func):
 	@wrapt.decorator
