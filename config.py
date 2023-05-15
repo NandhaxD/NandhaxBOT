@@ -15,6 +15,7 @@ if ENV:
    SESSION = os.getenv("SESSION")
    GROUP_ID = os.getenv("GROUP_ID")
    DB_URL = os.getenv("DB_URL")
+   NAME = os.getenv("NAME")
    HANDLER = os.getenv("HANDLER")
    LIST_OF_VARIABLE = ["API_ID", "API_HASH", "BOT_TOKEN", "SESSION", "GROUP_ID", "DB_URL"]   
    for var in LIST_OF_VARIABLE:
@@ -29,6 +30,7 @@ else:
    GROUP_ID = None #int() menthod | your group id
    KATSUKI = None # your alive photo
    HANDLER = None # example ".,?".split(",")
+   NAME = None str() # "nandha"
    DB_URL = None # get from mongodb.com
 
 
@@ -36,12 +38,14 @@ else:
 
 if not HANDLER:
      HANDLER = ["~", ".","!","?","@","$"]
+if not NAME:
+    NAME = "Katsuki"
 
 
 
 """ REQUIRED VARIABLES """
 
 SOURCE = "https://github.com/nandhaxd/katsuki"
-NAME = "Katsuki"
+
 
 
