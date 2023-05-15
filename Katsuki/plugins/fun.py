@@ -36,7 +36,7 @@ async def hack(_, message):
     "**HACK PROCESS COMPLE. **✅",
 ]
     for string in range(8):
-          await asyncio.sleep(4)
+          await asyncio.sleep(2)
           await message.edit(HACK_STRING[string % 8], parse_mode=enums.ParseMode.MARKDOWN)
 
 
