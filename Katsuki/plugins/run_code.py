@@ -19,12 +19,14 @@ async def aexec(code, app, message):
 
 
 
+
+""" GET LOGGING VIA COMMAND """
 THUMB_ID = "./IMG_20220701_185623_542.jpg"
 
 @app.on_message(filters.me & filters.command("logs",prefixes=config.HANDLER))
 async def logs(_, message):
        run_logs = subprocess.getoutput("tail logs.txt")
-       msg = await message.edit_text("Analyzing Logging...", quote=True)       
+       msg = await message.edit_text("Analyzing Logging...")       
        with io.BytesIO(str.encode(run_logs)) as logs:
             logs.name = "logs.txt"
             await message.reply_document(
@@ -32,6 +34,9 @@ async def logs(_, message):
             )
        return await msg.delete()
 
+
+
+""" SHELL COMMAND ARE USED FOR PIP AND SOME MORE THOUGH """
 
 @app.on_message(filters.me & filters.command("sh", prefixes=config.HANDLER))
 async def terminal(katsuki, message):
@@ -60,6 +65,8 @@ Results:
 
 
 
+
+""" EVALUATE USED TO RUN YOUR CODES ON IT """
     
 @app.on_message(filters.me & filters.command("e",prefixes=config.HANDLER))
 async def evaluate(app , message):
@@ -117,7 +124,6 @@ async def evaluate(app , message):
 
 __mod_name__ = "DEVS" 
   
-
 __help__ = """
 - e: evaluate codes
 - sh: shell codes
