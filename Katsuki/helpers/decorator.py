@@ -7,7 +7,8 @@ from Katsuki import app
 
 """ CHECK YOUR ACC HAS ADMIN IN CHAT """ 
   
- def admin_only(func): 
+
+def admin_only(func): 
          @wrapt.decorator 
          async def wrapped(wrapped, client: app, message: Message, *args, **kwargs): 
              chat_id=message.chat.id 
