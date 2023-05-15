@@ -37,7 +37,7 @@ else:
 """ DEFAULT VARIABLES """
 
 if not HANDLER:
-     HANDLER = ["~", ".","!","?","@","$"]
+    HANDLER = ["~", ".","!","?","@","$"]
 if not NAME:
     NAME = "Katsuki"
 
