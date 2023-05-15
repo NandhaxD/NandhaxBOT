@@ -33,7 +33,7 @@ async def hack(_, message):
     "Hacking... 86.21%\n`[███████████████░░░░░]`",
     "Hacking... 93.50%\n`[█████████████████░░░]`",
     "hacking...  100%\n`[████████████████████]`",
-    "**HACKING... COMPLE. **✅",
+    "**HACK PROCESS COMPLE. **✅",
 ]
     for string in range(8):
           await asyncio.sleep(4)
