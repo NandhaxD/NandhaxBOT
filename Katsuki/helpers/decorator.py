@@ -1,4 +1,3 @@
-import wrapt
 
 from pyrogram import enums
 from pyrogram.types import Message 
@@ -13,7 +12,7 @@ def admin_only(func):
              chat_id=message.chat.id 
              user_id=message.from_user.id 
              if message.chat.type==enums.ChatType.PRIVATE: 
-                 return await message.edit("[`THIS COMMAND NOT FOR GROUP`]") 
+                 return await message.edit("[`THIS COMMAND ONLY FOR GROUP`]") 
              check=await message.chat.get_member(user_id) 
              is_admin=check.status==enums.ChatMemberStatus.ADMINISTRATOR 
              if not is_admin: 
