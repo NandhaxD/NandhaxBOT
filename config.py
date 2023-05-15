@@ -32,7 +32,7 @@ else:
    GROUP_ID = None #int() menthod | your group id
    KATSUKI = None # your alive photo
    HANDLER = None # example ".,?".split(",")
-   NAME = None str() # "nandha"
+   NAME = None  # str() "nandha"
    DB_URL = None # get from mongodb.com
 
 
