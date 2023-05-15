@@ -3,7 +3,7 @@ import config
 
 from pyrogram import filters
 from Katsuki import app
-from Katsuki.helpers.decorators import admin_only
+from Katsuki.helpers.decorator import admin_only
 
 
 
