@@ -23,7 +23,7 @@ def admin_only(func):
              is_admin=check.status==enums.ChatMemberStatus.ADMINISTRATOR 
              if not is_admin: 
                  return await message.edit("[`YOU ARE NOT ADMIN`]")
-             return await func(app:app, message:Message)                 
+             return await func(app, message)                 
          return wrapped 
 
         
