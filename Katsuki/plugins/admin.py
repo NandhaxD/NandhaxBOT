@@ -17,7 +17,7 @@ from Katsuki.helpers.decorator import admin_only
 
 @app.on_message(filters.command("ban", config.HANDLER) & filters.me)
 @admin_only
-async def ban_member(_, message):
+async def ban_chat_member(app, message):
    
    if len(message.text.split()) >= 2:
         user_id = message.from_user.id
