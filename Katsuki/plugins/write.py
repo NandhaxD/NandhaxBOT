@@ -18,14 +18,14 @@ async def writing(_, message):
      REPLY=message.reply_to_message
      if not REPLY:
         if len(message.text.split()) == 1:
-             return await message.edit('`.write hello`')
+             return await message.edit('[`.write hello`]')
         text = message.text.split(maxsplit=1)[1]
      elif REPLY:
          if len(message.text.split()) > 1:
              text = message.text.split(maxsplit=1)[1]
          else:
             if not REPLY.caption and not REPLY.text:
-                   return await message.edit('reply to message only!')
+                   return await message.edit('[`REPLY TO THE TEXT MESSAGE `]')
             text = REPLY.caption or REPLY.text
      
         
