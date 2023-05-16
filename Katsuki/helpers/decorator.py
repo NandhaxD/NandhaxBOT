@@ -24,6 +24,28 @@ def admin_only(func):
              if not is_admin: 
                  return await message.edit("[`YOU ARE NOT ADMIN`]")
              return await func(app, message)                 
+         return wrapped
+
+
+
+
+
+def can_restrict_members(func): 
+         async def wrapped(app:app, message:Message): 
+             chat_id=message.chat.id 
+             user_id=message.from_user.id 
+             if message.chat.type==enums.ChatType.PRIVATE: 
+                 return await message.edit("[`THIS COMMAND ONLY FOR GROUP`]") 
+             check=await message.chat.get_member(user_id) 
+             is_admin=check.status==enums.ChatMemberStatus.ADMINISTRATOR 
+             if not is_admin: 
+                 return await message.edit("[`YOU ARE NOT ADMIN`]")
+             elif not is_admin.can_restrict_members:
+                 return await message.edit("[`YOU CAN'T BAN PEOPLE'S HERE`]")
+             return await func(app, message)                 
          return wrapped 
+
+
+
 
         
