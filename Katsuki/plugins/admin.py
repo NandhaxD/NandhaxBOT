@@ -11,12 +11,12 @@ import config
 
 from pyrogram import filters
 from Katsuki import app
-from Katsuki.helpers.decorator import admin_only
+from Katsuki.helpers.decorator import admin_only, can_restrict_members
 
 
 
 @app.on_message(filters.command("ban", config.HANDLER) & filters.me)
-@admin_only
+@can_restrict_members
 async def ban_chat_member(app, message):
    
    if len(message.text.split()) >= 2:
