@@ -14,7 +14,7 @@ async def tm(_, message):
     await message.edit('processing...')
     reply_is = message.reply_to_message
     if not reply_is:
-         return await message.edit_text("💔 Reply To The Media!")
+         return await message.edit_text("[`REPLY TO THE MEDIA`]")
     types = [True if reply_is.document else True if reply_is.photo else True if reply_is.animation else False][0]
     if types:
         path = await message.reply_to_message.download()
@@ -47,7 +47,7 @@ async def graph_text(_, message):
               elif message.reply_to_message and (message.reply_to_message.text or message.reply_to_message.caption):
                     text = (message.reply_to_message.text or message.reply_to_message.caption)
               else:
-                  return await message.edit('reply to the text document or for give some text to upload telegraph')
+                  return await message.edit('[`REPLY TO THE TEXT OR DOCUMENT`]')
      response = telegraph.create_page(first_name, html_content=text)
      page_url = response['url']
      return await message.edit(page_url)
