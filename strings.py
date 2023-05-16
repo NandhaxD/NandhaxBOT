@@ -6,7 +6,7 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 
 HELP_CMD = """
 **Module**: [`{module}`]
-**Commands**:{help}
+**Commands**:[`{help}`]
 """
 
 
@@ -14,17 +14,15 @@ BOT_START = """
 Hello, I am Assistant for **{mention}**
 You can deploy Your Own, To Use Me.
 
-**ADDITIONAL INFO**:
-
-🤖 BOT LIVE: {botlive} 
-🥸 APP LIVE: {applive}
+🤖 BOT STATUS: [{botlive}]
+🥸 APP STATUS: [{applive}]
 """
 
 RESTART_TEXT = """
-SYSTEM AWAKEN !!!
+[`SYSTEM AWAKEN`]
 
-📅 DATE: {date}
-⏰ TIME: {time}
+📅 DATE: [`{date}`]
+⏰ TIME: [`{time}`]
 """
 
 
