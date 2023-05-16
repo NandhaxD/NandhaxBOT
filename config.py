@@ -18,7 +18,7 @@ if ENV:
    GROUP_ID = os.getenv("GROUP_ID")
    DB_URL = os.getenv("DB_URL")
    NAME = os.getenv("NAME")
-   HANDLER = os.getenv("HANDLER")
+   HANDLER = os.getenv("HANDLER").split() # ".,?,!,"
    LIST_OF_VARIABLE = ["API_ID", "API_HASH", "BOT_TOKEN", "SESSION", "GROUP_ID", "DB_URL"]   
    for var in LIST_OF_VARIABLE:
       if not os.getenv(var):
