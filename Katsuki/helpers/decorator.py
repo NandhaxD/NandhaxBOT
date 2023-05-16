@@ -14,7 +14,7 @@ from Katsuki import app
   
 
 def admin_only(func): 
-         async def wrapped(client=app, message=Message): 
+         async def wrapped(app, message=Message): 
              chat_id=message.chat.id 
              user_id=message.from_user.id 
              if message.chat.type==enums.ChatType.PRIVATE: 
@@ -23,7 +23,7 @@ def admin_only(func):
              is_admin=check.status==enums.ChatMemberStatus.ADMINISTRATOR 
              if not is_admin: 
                  return await message.edit("[`YOU ARE NOT ADMIN`]")
-             return await func(client=app, message=Message)                 
+             return await func(app, message=Message)                 
          return wrapped 
 
         
