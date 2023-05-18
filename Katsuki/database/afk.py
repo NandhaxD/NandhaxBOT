@@ -39,11 +39,11 @@ async def is_afk(user_id: int):
 
 async def get_afk_reason(user_id: int):
 	  string = {"user_id": user_id}
- 	 afk=db.find_one(string) 	 
- 	 if afk:     
-         reason=afk['reason']
-         return reason 
+ 	 afk=db.find_one(string)
+  if afk:     
+     reason=afk['reason']
+     return reason 
   else:
-         return False
+     return False
       
  
