@@ -34,13 +34,13 @@ async def update_delete(user_id: int, is_delete: bool):
  
 
 
+
 async def is_afk(user_id: int):
    string = {"user_id": user_id}
    is_afk=db.find_one(string)
    if is_afk:
- 		    return True
+       return True
    return False
-
 
 
 
