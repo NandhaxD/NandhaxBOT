@@ -13,7 +13,8 @@ async def afk(_, message):
 	
     user_id = message.from_user.id
     
-	if not len(message.text.split()) >= 2:
+	   
+    if not len(message.text.split()) >= 2:
 		 reason=random.choice(strings.REASON_STRING)
     else:
          reason = message.text.split(maxsplit=1)[1]
@@ -42,15 +43,15 @@ async def afkmod(_, message):
       	return await message.edit("[`INVALID`]")
       mm = message.text.split()[1]
       if not mm in pattern:
-      	return await message.edit("[`INVALID`]")
+          	return await message.edit("[`INVALID`]")
       	
       is_delete = mm
       
       if (await is_afk(user_id)):
-      	  await update_delete(user_id=user_id, is_delete=is_delete)
-            return await message.edit(f"[`UPDATED`: `{is_delete}`]", parse_mode=enums.ParseMode.MARKDOWN)         
+        	  await update_delete(user_id=user_id, is_delete=is_delete)
+           return await message.edit(f"[`UPDATED`: `{is_delete}`]", parse_mode=enums.ParseMode.MARKDOWN)         
       else:      	
-      	return message.edit("[`NO ACTIVE AFK`]")
+      	    return message.edit("[`NO ACTIVE AFK`]")
 
 
 
