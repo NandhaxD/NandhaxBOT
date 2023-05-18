@@ -1,7 +1,10 @@
 
 
 
+from Katsuki import DATABASE
+
 db = DATABASE["AFK"]
+
 
 
 async def add_afk(user_id: int, reason: str, datetime: datetime, is_delete: bool):	 
