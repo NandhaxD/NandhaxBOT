@@ -43,7 +43,7 @@ async def get_afk_reason(user_id: int):
  	 if afk:     
          reason=afk['reason']
          return reason 
-      else:
+  else:
          return False
       
  
