@@ -24,9 +24,9 @@ async def remove_afk(user_id: int):
 async def update_delete(user_id: int, is_delete: bool):
      find = {"user_id": user_id}
      if db.file_one(find):
-     	update = {"$set": {"is_delete": is_delete}}
-     	db.update_one(filter=find, update=update)
-      return True
+     	  update = {"$set": {"is_delete": is_delete}}
+     	  db.update_one(filter=find, update=update)
+        return True
      return False
      
 
