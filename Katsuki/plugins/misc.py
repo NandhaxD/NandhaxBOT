@@ -21,8 +21,7 @@ import requests
 @app.on_message(filters.me & filters.command("help", prefixes=config.HANDLER))
 async def help_command(_, message):	
 	query="help"
-	result = await app.get_inline_bot_results(
-	      bot=config.BOT_USERNAME, query=query)
+	result = await app.get_inline_bot_results(bot=config.BOT_USERNAME, query=query)
 	await app.send_inline_bot_result(chat_id=message.chat.id, query_id=result.query_id, result_id=result[0].id, reply_to_message_id=message.id)
         return await message.delete()
 	
