@@ -26,7 +26,7 @@ async def help_command(_, message):
 	await app.send_inline_bot_result(
 	     chat_id=message.chat.id, result.query_id,
 	     result[0].id, reply_to_message_id=message.id)
-    return await message.delete()
+ return await message.delete()
 	
 	         
 
