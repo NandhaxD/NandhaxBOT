@@ -36,11 +36,11 @@ def can_restrict_members(func):
              user_id=message.from_user.id 
              if message.chat.type==enums.ChatType.PRIVATE: 
                  return await message.edit("[`THIS COMMAND ONLY FOR GROUP`]") 
-             check=await message.chat.get_member(user_id) 
-             is_admin=check.status==enums.ChatMemberStatus.ADMINISTRATOR 
+             check = await message.chat.get_member(user_id) 
+             is_admin = check.status==enums.ChatMemberStatus.ADMINISTRATOR 
              if not is_admin: 
-                 return await message.edit("[`YOU ARE NOT ADMIN`]")
-             elif not is_admin.can_restrict_members:
+                   return await message.edit("[`YOU ARE NOT ADMIN`]")
+             elif not check.privileges.can_restrict_members:
                  return await message.edit("[`YOU CAN'T BAN PEOPLE'S HERE`]")
              return await func(app, message)                 
          return wrapped 
