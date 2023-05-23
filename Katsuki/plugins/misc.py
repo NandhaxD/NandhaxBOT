@@ -68,7 +68,7 @@ async def ud(_, message):
           reply_text = f'**results: {text}**\n\n{results["list"][0]["definition"]}\n\n_{results["list"][0]["example"]}_'
         except Exception as e: 
               return await message.edit_text(f"Somthing wrong Happens:\n`{e}`")
-        ud = await message.edit_text("Exploring....", quote=True)
+        ud = await message.edit_text("Exploring....")
         await ud.edit_text(reply_text)
         
         
