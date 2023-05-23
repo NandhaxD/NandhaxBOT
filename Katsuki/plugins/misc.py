@@ -16,19 +16,19 @@ from gpytranslate import Translator
 import requests
 
 
+ 
 
-@app.on_message(filters.me & filters.command('help', prefixes=config.HANDLER))
-async def get_commands(_, message):
-    
-
-   string = ""
-   type = "Module: {module}\nHelp:\n{help}\n\n"
-   for x in MODULE:
-       string += type.format(
-          module=x['module'],
-          help=x['help'],)
-   await message.edit(string)
-                                      
+@app.on_message(filters.me & filters.command("help", prefixes=config.HANDLER))
+async def help_command(_, message):	
+	query="help"
+	result=await app.get_inline_bot_results(
+	      bot=config.BOT_USERNAME, query=query)
+	await app.send_inline_bot_result(
+	     chat_id=message.chat.id, result.query_id,
+	     result[0].id, reply_to_message_id=message.id)
+    return await message.delete()
+	
+	         
 
 
 @app.on_message(filters.me & filters.command("git",prefixes=config.HANDLER)) 
