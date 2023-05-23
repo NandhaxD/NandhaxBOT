@@ -46,7 +46,7 @@ async def git(_, message):
  **Acc Created**: {res['created_at']} 
  """ 
      with open(f"{user}.jpg", "wb") as f: 
-         kek = get(res['avatar_url']).content 
+         kek = requests.get(res['avatar_url']).content 
          f.write(kek) 
   
      await message.reply_photo(f"{user}.jpg", caption=data, quote=True) 
