@@ -69,7 +69,7 @@ class INFO:
           }
  
     """ BOT CLIENT INFO """
-    def app():
+      def bot():
          info = bot.get_me()
          bot_id = info.id
          bot_username = info.username
