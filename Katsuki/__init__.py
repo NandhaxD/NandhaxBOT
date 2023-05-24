@@ -53,7 +53,7 @@ DATABASE = DB.MAIN
 
 class INFO:
    """ USER CLIENT INFO """
-      def app():
+     def app():
          info = app.get_me()
          app_id = info.id
          app_username = info.username
@@ -69,7 +69,7 @@ class INFO:
           }
  
     """ BOT CLIENT INFO """
-      def bot():
+     def bot():
          info = bot.get_me()
          bot_id = info.id
          bot_username = info.username
