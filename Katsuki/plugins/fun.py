@@ -51,12 +51,12 @@ async def simplify(_, message):
            return await message.edit('.sfy 2x - 3')
      else:
          query = message.text.split(None,1)[1]
-         api = requests.get(f'https://newton.vercel.app/api/v2/simplify/{query}').json()
+         api = requests.get(f"https://newton.vercel.app/api/v2/simplify/{query}").json()
          result = api['result']
          if "Stop" in result:
-             return await message.edit('**ERROR**:\n{result}')
+             return await message.edit(f"**ERROR**:\n{result}")
          else:
-            return await message.edit('**Result**:\{result}')
+            return await message.edit(f"**Result**:\{result}")
 
 
 __mod_name__ = "FUN"
