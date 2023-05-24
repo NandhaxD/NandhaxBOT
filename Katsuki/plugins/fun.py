@@ -64,7 +64,7 @@ async def simplify(_, message):
 
 
 @app.on_message(filters.me & filters.command('factor', config.HANDLER)) 
- async def factor(_, message): 
+async def factor(_, message): 
       if not len(message.text.split()) >= 2: 
             return await message.edit('.factor x^2-1') 
       else: 
