@@ -2,9 +2,7 @@
 Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modification, distribution, or republication of this file without prior written permission from @NandhaBots is strictly prohibited. The Katsuki Telegram user bot has been developed with the Pyrogram library and utilizing Python programming language, making it a safe and secure option for users. Unauthorized use of this bot or any part of it may result in legal action. This project is owned by @Nandha, and any unauthorized use or distribution of this bot is strictly prohibited.
 """
 
-import os, sys
-
-from Katsuki import INFO 
+import os, sys 
 
 
 """ CHANGE TO FALSE IF YOU DON'T WANNA ADD VARIABLES IN HOSTING SITE """
@@ -39,21 +37,6 @@ else:
 HANDLER = ["~", ".","!","?","@","$"] 
 
   
-app = Katsuki.INFO.app()
-APP_ID = app['id']
-APP_NAME = app['name']
-APP_USERNAME = app['username']
-APP_DC = app['dc_id']
-
-
-bot = Katsuki.INFO.bot()
-BOT_ID = bot['id']
-BOT_NAME = bot['name']
-BOT_DC = bot['dc_id']
-BOT_USERNAME = bot['username']
-
-
-
 
 """ REQUIRED VARIABLES """
 
