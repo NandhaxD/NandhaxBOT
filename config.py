@@ -34,9 +34,22 @@ else:
 """ DEFAULT VARIABLES """
 
 
-HANDLER = ["~", ".","!","?","@","$"]   
-NAME = Katsuki.INFO.app()['name']
-BOT_USERNAME = Katsuki.INFO.bot()['username']
+HANDLER = ["~", ".","!","?","@","$"] 
+
+  
+app = Katsuki.INFO.app()
+APP_ID = app['id']
+APP_NAME = app['name']
+APP_USERNAME = app['username']
+APP_DC = app['dc_id']
+
+
+bot = Katsuki.INFO.bot()
+BOT_ID = bot['id']
+BOT_NAME = bot['name']
+BOT_DC = bot['dc_id']
+BOT_USERNAME = bot['username']
+
 
 
 
