@@ -4,11 +4,21 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 
 
 
+
 HELP_CMD = """
 **Module**: [`{module}`]
 **Commands**:[`{help}`]
 """
 
+
+AFK_STRING = """
+Bruh AFK!
+
+reason: [`{reason}`]
+
+Date: [`{date}`]
+Time: [`{time}`]
+"""
 
 BOT_START = """
 Hello, I am Assistant for **{mention}**
