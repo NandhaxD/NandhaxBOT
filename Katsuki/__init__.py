@@ -22,7 +22,7 @@ MODULE = []
 
 # LOGGING INFO
 
-FORMAT = f"[{config.NAME}] %(message)s"
+FORMAT = f"[katsuki] %(message)s"
 logging.basicConfig(level=logging.INFO, handlers=[logging.FileHandler('logs.txt'),
               logging.StreamHandler()], format=FORMAT)
 
@@ -54,45 +54,24 @@ DATABASE = DB.MAIN
 class INFO:
    def app():
       info = app.get_me()
-      app_id = info.id
-      app_username = info.username
-      app_name = info.first_name
-      app_dc = info.dc_id
-      app_photo = info.photo.big_file_id
-      return {
-          "id": app_id,
-          "name": app_name,
-          "username": app_username,
-          "dc_id": app_dc,
-          "photo_id": app_photo 
-          }
+      return info   
+     
    def bot():
       info = bot.get_me()
-      bot_id = info.id
-      bot_username = info.username
-      bot_name = info.first_name
-      bot_dc = info.dc_id
-      bot_photo = info.photo.big_file_id
-      return {
-          "id": bot_id,
-          "name": bot_name,
-          "username": bot_username,
-          "dc_id": bot_dc,
-          "photo_id": bot_photo 
-          }
-
+      return info
 
 
 app = INFO.app()
-APP_ID = app['id']
-APP_NAME = app['name']
-APP_USERNAME = app['username']
-APP_DC = app['dc_id']
-
+APP_ID = info.id
+APP_USERNAME = info.username
+APP_NAME = info.first_name
+APP_DC = info.dc_id
+APP_PHOTO = info.photo.big_file_id
 
 bot = INFO.bot()
-BOT_ID = bot['id']
-BOT_NAME = bot['name']
-BOT_DC = bot['dc_id']
-BOT_USERNAME = bot['username']
-
+BOT_ID = info.id
+BOT_USERNAME = info.username
+BOT_NAME = info.first_name
+BOT_DC = info.dc_id
+BOT_PHOTO = info.photo.big_file_id
+      
