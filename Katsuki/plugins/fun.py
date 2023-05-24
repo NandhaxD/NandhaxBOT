@@ -56,7 +56,7 @@ async def simplify(_, message):
          if "Stop" in result:
              return await message.edit(f"**ERROR**:\n{result}")
          else:
-            return await message.edit(f"**Result**:\{result}")
+            return await message.edit(f"**Result**:\n{result}")
 
 
 
@@ -74,7 +74,7 @@ async def factor(_, message):
           if "Stop" in result: 
               return await message.edit(f"**ERROR**:\n{result}") 
           else: 
-             return await message.edit(f"**Result**:\{result}")
+             return await message.edit(f"**Result**:\n{result}")
 
 __mod_name__ = "FUN"
 
