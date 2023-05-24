@@ -1,6 +1,6 @@
 from telegraph import upload_file, Telegraph
 from pyrogram import filters
-from Katsuki import app, APP_NAME
+from Katsuki import app
 import config, os
 
 
