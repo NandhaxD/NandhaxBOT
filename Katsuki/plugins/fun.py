@@ -45,36 +45,25 @@ async def hack(_, message):
 
 """ MATH TOOLS """
 
-@app.on_message(filters.me & filters.command('sfy', config.HANDLER))
-async def simplify(_, message):
+@app.on_message(filters.me & filters.command(['simplify','factor'], prefixes=config.HANDLER))
+async def mathematics(_, message):
+     
+     pertten = message.text[1:].split()[0]
      if not len(message.text.split()) >= 2:
-           return await message.edit('.sfy 2x - 3')
+           return await message.edit(f'{pertten} query')
      else:
          query = message.text.split(None,1)[1]
-         api = requests.get(f"https://newton.vercel.app/api/v2/simplify/{query}").json()
+         api = requests.get(f"https://newton.vercel.app/api/v2/{pertten}/{query}").json()
          result = api['result']
          if "Stop" in result:
-             return await message.edit(f"**ERROR**:\n{result}")
+              return await message.edit(f"**ERROR**:\n{result}")
          else:
-            return await message.edit(f"**Result**:\n{result}")
+              return await message.edit(f"**Result**:\n{result}")
 
 
 
 
 
-
-@app.on_message(filters.me & filters.command('factor', config.HANDLER)) 
-async def factor(_, message): 
-      if not len(message.text.split()) >= 2: 
-            return await message.edit('.factor x^2-1') 
-      else: 
-          query = message.text.split(None,1)[1] 
-          api = requests.get(f"https://newton.vercel.app/api/v2/factor/{query}").json() 
-          result = api['result'] 
-          if "Stop" in result: 
-              return await message.edit(f"**ERROR**:\n{result}") 
-          else: 
-             return await message.edit(f"**Result**:\n{result}")
 
 __mod_name__ = "FUN"
 
