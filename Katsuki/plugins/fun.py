@@ -45,7 +45,7 @@ async def hack(_, message):
 
 """ MATH TOOLS """
 
-@app.on_message(filters.me & filters.command(['derive','Integrate','simplify','factor'], prefixes=config.HANDLER))
+@app.on_message(filters.me & filters.command(['derive','integrate','simplify','factor'], prefixes=config.HANDLER))
 async def mathematics(_, message):
      
      pertten = message.text[1:].split()[0]
@@ -69,7 +69,8 @@ __mod_name__ = "FUN"
 
 __help__ = """
 - hack: reply to the user
-- maths: simplify, factor 
+- maths: simplify, factor, integrate, derive
+credit: https://newton.vercel.app/
 """
 
 
