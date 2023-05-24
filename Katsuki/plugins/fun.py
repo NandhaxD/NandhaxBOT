@@ -45,7 +45,7 @@ async def hack(_, message):
 
 """ MATH TOOLS """
 
-@app.on_message(filters.me, filters.command('sfy', config.HANDLER))
+@app.on_message(filters.me & filters.command('sfy', config.HANDLER))
 async def simplify(_, message):
      if not len(message.text.split()) >= 2:
            return await message.edit('.sfy 2x - 3')
