@@ -11,7 +11,7 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 """ SOME FUN MODULES FOR ENTERTAINMENT """
 
 
-import config, asyncio 
+import config, asyncio, requests 
 
 from Katsuki import app, MODULE 
 from pyrogram import filters, enums
@@ -50,12 +50,11 @@ async def simplify(_, message):
      if not len(message.text.split()) >= 2:
            return await message.edit('.sfy 2x - 3')
      else:
-         query= message.text.split(None,1)[1]
+         query = message.text.split(None,1)[1]
          api = requests.get(f'https://newton.vercel.app/api/v2/simplify/{query}').json()
          result = api['result']
          if "Stop" in result:
-             return await message.edit('
-                **ERROR**:\n{result}')
+             return await message.edit('**ERROR**:\n{result}')
          else:
             return await message.edit('**Result**:\{result}')
 
@@ -64,6 +63,7 @@ __mod_name__ = "FUN"
 
 __help__ = """
 - hack: reply to the user
+- sfy: math query
 """
 
 
