@@ -1,6 +1,6 @@
 from telegraph import upload_file, Telegraph
 from pyrogram import filters
-from Katsuki import app
+from Katsuki import app, APP_NAME
 import config, os
 
 
@@ -28,7 +28,7 @@ async def tm(_, message):
 """ TELEGRAPH PAGE CREATOR """
 
 telegraph = Telegraph()
-telegraph.create_account(short_name=config.NAME)
+telegraph.create_account(short_name=APP_NAME)
 
 
 @app.on_message(filters.command("txt", prefixes=config.HANDLER))
