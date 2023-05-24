@@ -28,7 +28,7 @@ async def tm(_, message):
 """ TELEGRAPH PAGE CREATOR """
 
 telegraph = Telegraph()
-telegraph.create_account(short_name=APP_NAME)
+telegraph.create_account(short_name=config.NAME)
 
 
 @app.on_message(filters.command("txt", prefixes=config.HANDLER))
