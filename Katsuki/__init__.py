@@ -61,17 +61,3 @@ class INFO:
       return info
 
 
-app = INFO.app()
-APP_ID = info.id
-APP_USERNAME = info.username
-APP_NAME = info.first_name
-APP_DC = info.dc_id
-APP_PHOTO = info.photo.big_file_id
-
-bot = INFO.bot()
-BOT_ID = info.id
-BOT_USERNAME = info.username
-BOT_NAME = info.first_name
-BOT_DC = info.dc_id
-BOT_PHOTO = info.photo.big_file_id
-      
