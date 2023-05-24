@@ -53,8 +53,8 @@ DATABASE = DB.MAIN
 
 class INFO:
    """ USER CLIENT INFO """
-    async def app():
-         info = await app.get_me()
+      def app():
+         info = app.get_me()
          app_id = info.id
          app_username = info.username
          app_name = info.first_name
@@ -69,8 +69,8 @@ class INFO:
           }
  
     """ BOT CLIENT INFO """
-    async def app():
-         info = await bot.get_me()
+    def app():
+         info = bot.get_me()
          bot_id = info.id
          bot_username = info.username
          bot_name = info.first_name
