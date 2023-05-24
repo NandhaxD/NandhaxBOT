@@ -45,7 +45,7 @@ async def hack(_, message):
 
 """ MATH TOOLS """
 
-@app.on_message(filters.me & filters.command(['simplify','factor'], prefixes=config.HANDLER))
+@app.on_message(filters.me & filters.command(['derive','Integrate','simplify','factor'], prefixes=config.HANDLER))
 async def mathematics(_, message):
      
      pertten = message.text[1:].split()[0]
@@ -56,9 +56,9 @@ async def mathematics(_, message):
          api = requests.get(f"https://newton.vercel.app/api/v2/{pertten}/{query}").json()
          result = api['result']
          if "Stop" in result:
-              return await message.edit(f"**ERROR**:\n{result}")
+              return await message.edit(f"**ERROR**:\npertten: {pertten}\n{result}")
          else:
-              return await message.edit(f"**Result**:\n{result}")
+              return await message.edit(f"**Result**:\npertten: {pertten}\n{result}")
 
 
 
