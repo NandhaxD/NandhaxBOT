@@ -40,6 +40,26 @@ async def hack(_, message):
           await message.edit(HACK_STRING[string % 8], parse_mode=enums.ParseMode.MARKDOWN)
 
 
+
+
+
+""" MATH TOOLS """
+
+@app.on_message(filters.me, filters.command('sfy', config.HANDLER))
+async def simplify(_, message):
+     if not len(message.text.split()) >= 2:
+           return await message.edit('.sfy 2x - 3')
+     else:
+         query= message.text.split(None,1)[1]
+         api = requests.get(f'https://newton.vercel.app/api/v2/simplify/{query}').json()
+         result = api['result']
+         if "Stop" in result:
+             return await message.edit('
+                **ERROR**:\n{result}')
+         else:
+            return await message.edit('**Result**:\{result}')
+
+
 __mod_name__ = "FUN"
 
 __help__ = """
