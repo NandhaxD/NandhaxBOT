@@ -52,7 +52,6 @@ DATABASE = DB.MAIN
 # CLASS FOR INFO GETTING
 
 class INFO:
-   """ USER CLIENT INFO """
    def app():
       info = app.get_me()
       app_id = info.id
@@ -67,8 +66,6 @@ class INFO:
           "dc_id": app_dc,
           "photo_id": app_photo 
           }
- 
-    """ BOT CLIENT INFO """
    def bot():
       info = bot.get_me()
       bot_id = info.id
