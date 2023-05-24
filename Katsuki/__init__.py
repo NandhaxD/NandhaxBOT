@@ -49,6 +49,7 @@ DATABASE = DB.MAIN
 
 
 
+# CLASS FOR INFO GETTING
 
 class INFO:
    """ USER CLIENT INFO """
@@ -83,32 +84,6 @@ class INFO:
           "photo_id": bot_photo 
           }
 
-
-
-
-
-
-
-
-
-
-
-
-# CLASS FOR INFO GETTING
-class INFO:
-    """ USER CLIENT INFO """
-    async def app():
-         info = await app.get_me()
-         app_id = info.id
-         app_username = info.username
-         app_name = info.first_name
-         app_dc = info.dc_id
-         return info
-    """ BOT CLIENT INFO """
-    async def bot():
-         info = await bot.get_me()
-         return info
-    
 
 
 
