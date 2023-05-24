@@ -48,15 +48,67 @@ except Mongoerrors.ConnectionFailure:
 DATABASE = DB.MAIN
 
 
+
+
+class INFO:
+   """ USER CLIENT INFO """
+    async def app():
+         info = await app.get_me()
+         app_id = info.id
+         app_username = info.username
+         app_name = info.first_name
+         app_dc = info.dc_id
+         app_photo = info.photo.big_file_id
+         return {
+          "id": app_id,
+          "name": app_name,
+          "username": app_username,
+          "dc_id": app_dc,
+          "photo_id": app_photo 
+          }
+ 
+    """ BOT CLIENT INFO """
+    async def app():
+         info = await bot.get_me()
+         bot_id = info.id
+         bot_username = info.username
+         bot_name = info.first_name
+         bot_dc = info.dc_id
+         bot_photo = info.photo.big_file_id
+         return {
+          "id": bot_id,
+          "name": bot_name,
+          "username": bot_username,
+          "dc_id": bot_dc,
+          "photo_id": bot_photo 
+          }
+
+
+
+
+
+
+
+
+
+
+
+
 # CLASS FOR INFO GETTING
 class INFO:
     """ USER CLIENT INFO """
     async def app():
          info = await app.get_me()
+         app_id = info.id
+         app_username = info.username
+         app_name = info.first_name
+         app_dc = info.dc_id
          return info
     """ BOT CLIENT INFO """
     async def bot():
          info = await bot.get_me()
          return info
     
- 
+
+
+
