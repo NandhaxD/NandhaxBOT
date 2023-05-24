@@ -53,14 +53,14 @@ DATABASE = DB.MAIN
 
 class INFO:
    """ USER CLIENT INFO """
-     def app():
-         info = app.get_me()
-         app_id = info.id
-         app_username = info.username
-         app_name = info.first_name
-         app_dc = info.dc_id
-         app_photo = info.photo.big_file_id
-         return {
+   def app():
+      info = app.get_me()
+      app_id = info.id
+      app_username = info.username
+      app_name = info.first_name
+      app_dc = info.dc_id
+      app_photo = info.photo.big_file_id
+      return {
           "id": app_id,
           "name": app_name,
           "username": app_username,
@@ -69,14 +69,14 @@ class INFO:
           }
  
     """ BOT CLIENT INFO """
-     def bot():
-         info = bot.get_me()
-         bot_id = info.id
-         bot_username = info.username
-         bot_name = info.first_name
-         bot_dc = info.dc_id
-         bot_photo = info.photo.big_file_id
-         return {
+   def bot():
+      info = bot.get_me()
+      bot_id = info.id
+      bot_username = info.username
+      bot_name = info.first_name
+      bot_dc = info.dc_id
+      bot_photo = info.photo.big_file_id
+      return {
           "id": bot_id,
           "name": bot_name,
           "username": bot_username,
