@@ -83,4 +83,16 @@ class INFO:
 
 
 
+app = INFO.app()
+APP_ID = app['id']
+APP_NAME = app['name']
+APP_USERNAME = app['username']
+APP_DC = app['dc_id']
+
+
+bot = INFO.bot()
+BOT_ID = bot['id']
+BOT_NAME = bot['name']
+BOT_DC = bot['dc_id']
+BOT_USERNAME = bot['username']
 
