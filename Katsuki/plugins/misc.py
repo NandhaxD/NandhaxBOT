@@ -18,7 +18,6 @@ import requests
 
  
 
-        
 	         
 @app.on_message(filters.me & filters.command("help", prefixes=config.HANDLER))
 async def help_command(_, message):
@@ -29,7 +28,7 @@ async def help_command(_, message):
       await message.delete()
 
 @app.on_message(filters.me & filters.command("git",prefixes=config.HANDLER)) 
-async def git(_, message): 
+async def github(_, message): 
      if len(message.command) < 2: 
          return await message.edit_text("where you input the username?\n") 
      user = message.text.split(None, 1)[1] 
@@ -50,7 +49,7 @@ async def git(_, message):
          kek = requests.get(res['avatar_url']).content 
          f.write(kek) 
   
-     await message.reply_photo(f"{user}.jpg", caption=data, quote=True) 
+     await message.reply_document(f"{user}.jpg", caption=data, quote=True) 
      os.remove(f"{user}.jpg") 
      await message.delete() 
      return 
@@ -69,7 +68,7 @@ async def ud(_, message):
           reply_text = f'**results: {text}**\n\n{results["list"][0]["definition"]}\n\n_{results["list"][0]["example"]}_'
         except Exception as e: 
               return await message.edit_text(f"Somthing wrong Happens:\n`{e}`")
-        ud = await message.edit_text("Exploring....")
+        ud = await message.edit_text("[`EXPLORING`]")
         await ud.edit_text(reply_text)
         
         
