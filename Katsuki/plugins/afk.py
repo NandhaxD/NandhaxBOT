@@ -50,8 +50,8 @@ async def afk_turn_off(_, message):
 	  	
 	 
 	 
-@app.on_message(filters.group & filters.reply & ~filters.me)  
-  async def telling_is_afk(_, message):  
+@app.on_message(filters.group & filters.reply & ~filters.me)
+async def telling_is_afk(_, message):  
                
            katsuki_id = 6129152989  
            try:  
