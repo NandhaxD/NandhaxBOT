@@ -16,6 +16,8 @@ DATA = {}
 
 
 
+
+
 @app.on_message(filters.me & filters.command("afk", prefixes=config.HANDLER))
 async def afk_turn_on(_, message):
 	 date = await get_datetime()['date']
@@ -23,11 +25,11 @@ async def afk_turn_on(_, message):
 	 if len(message.text.split()) >= 2:
 	 	  reason = message.text.split(None,1)[1]
 	 else:
-      reason = "Busy 🦥"	
-	 data = {'AFK': True, 'date': date, 'time': time, 'reason': reason}
+          reason = "Busy 🦥"	
+	 data = {'AFK': True, 'date': date,'time': time, 'reason': reason}
   
-  DATA.update(data)
-  return await message.edit('[`YOU TURN ON AFK NOW`]')
+     DATA.update(data)
+     return await message.edit('[`YOU TURN ON AFK NOW`]')
 	 	  
      
      
