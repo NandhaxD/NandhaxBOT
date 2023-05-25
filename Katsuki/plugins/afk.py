@@ -28,7 +28,7 @@ async def afk_turn_on(_, message):
                                             
      
 
-@app.on_message((filters.group | filters.private) & filters.me, group=2)
+@app.on_message((filters.group | filters.private) & filters.me & filters.incoming, group=2)
 async def afk_turn_off(_, message): 
   
     try: 
