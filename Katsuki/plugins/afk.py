@@ -49,25 +49,18 @@ async def afk_turn_off(_, message):
 	  	
 	 
 	 
-@app.on_message(filters.group & filters.reply ~filters.me)
-async def telling_is_afk(_, message):
-	   
-	   katsuki_id = 6129152989
-	   try:
-	      if not DATA.get('AFK'):
-	          return
-	      elif message.reply_to_message.from_user.id == katsuki_id:
-	           date = DATA['date']
-	           time = DATA['time']
-	           reason = DATA['reason']
-	           return await message.reply_text(strings.AFK_STRING.format(
-	           reason=reason, date=date, time=time))      
-            except: pass	             	              
-	             
-	         
-      
-	 
-	 	
-	 
-	 
-	 
+@app.on_message(filters.group & filters.reply ~filters.me) 
+ async def telling_is_afk(_, message): 
+             
+            katsuki_id = 6129152989 
+            try: 
+               if not DATA.get('AFK'): 
+                   return 
+               elif message.reply_to_message.from_user.id == katsuki_id: 
+                    date = DATA['date'] 
+                    time = DATA['time'] 
+                    reason = DATA['reason'] 
+                    return await message.reply_text(strings.AFK_STRING.format( 
+                    reason=reason, date=date, time=time))       
+           except: pass                                            
+                      
