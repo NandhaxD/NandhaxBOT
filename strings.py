@@ -12,20 +12,21 @@ HELP_CMD = """
 
 
 AFK_STRING = """
-Bruh AFK!
+**Currently AFK!**
 
-reason: [`{reason}`]
+🤔 **Reason**: 
+[ `{reason}` ]
 
-Date: [`{date}`]
-Time: [`{time}`]
+📅 Date: [ `{date}` ]
+⏰ Time: [ `{time}` ]
 """
 
 BOT_START = """
 Hello, I am Assistant for **{mention}**
 You can deploy Your Own, To Use Me.
 
-🤖 BOT STATUS: [{botlive}]
-🥸 APP STATUS: [{applive}]
+🤖 BOT STATUS: [ {botlive} ]
+🥸 APP STATUS: [ {applive} ]
 """
 
 RESTART_TEXT = """
