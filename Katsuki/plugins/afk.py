@@ -20,7 +20,7 @@ DATA = {}
 
 
 @app.on_message(filters.me & filters.command("afk", prefixes=config.HANDLER)) 
- async def afk_turn_on(_, message): 
+async def afk_turn_on(_, message): 
           date = await get_datetime()['date'] 
           time = await get_datetime()['time'] 
           if len(message.text.split()) >= 2: 
