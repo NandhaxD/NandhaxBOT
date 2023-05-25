@@ -24,7 +24,7 @@ DATA = {}
           date = await get_datetime()['date'] 
           time = await get_datetime()['time'] 
           if len(message.text.split()) >= 2: 
-           reason = message.text.split(None,1)[1] 
+              reason = message.text.split(None,1)[1] 
           else: 
               reason = "Busy 🦥"
           data = {'AFK': True, 'date': date,'time': time, 'reason': reason} 
