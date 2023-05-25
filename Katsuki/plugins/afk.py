@@ -4,7 +4,7 @@
 
 import config
 from pyrogram import filters
-from Katsuki.helpers.help_func import datetime 
+from Katsuki.helpers.help_func import get_datetime 
 from Katsuki import app
 
 
@@ -18,8 +18,8 @@ DATA = {}
 
 @app.on_message(filters.me & filters.command("afk", prefixes=config.HANDLER))
 async def afk_turn_on(_, message):
-	 date = datetime['date']
-	 time = datetime['time']
+	 date = await get_datetime()['date']
+	 time = await get_datetime()['time']
 	 if len(message.text.split()) >= 2:
 	 	  reason = message.text.split(None,1)[1]
 	 else:
@@ -35,7 +35,7 @@ async def afk_turn_on(_, message):
 async def afk_turn_off(_, message):
 	  try:
 	     if DATA.get('AFK'):
-	    	  DATA.clear()
+	    	   DATA.clear()
 	          return await message.reply_text("[`WELCOME BACK MASTER` 👾]")
 	     else:
 	        return 
@@ -58,7 +58,7 @@ async def telling_is_afk(_, message):
 	           reason = DATA['reason']
 	           return await message.reply_text(strings.AFK_STRING.format(
 	           reason=reason, date=date, time=time))
-   	except:
+    except:
    	     pass	             	              
 	             
 	         
