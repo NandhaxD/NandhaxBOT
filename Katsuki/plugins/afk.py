@@ -3,7 +3,7 @@
 
 
 import config, strings, random
-from pyrogram import filters
+from pyrogram import filters, enums
 from Katsuki.helpers.help_func import get_datetime 
 from Katsuki import app
 
@@ -50,6 +50,6 @@ async def telling_is_afk(_, message):
                      time = DATA['time']  
                      reason = DATA['reason']  
                      return await message.reply_photo(photo=AFK_IMG, caption=strings.AFK_STRING.format(  
-                     reason=reason, date=date, time=time))        
+                     reason=reason, date=date, time=time), parse_mode=enums.ParseMode.MARKDOWN)        
            except:
                  pass
