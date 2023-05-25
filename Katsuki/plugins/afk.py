@@ -25,8 +25,8 @@ async def afk_turn_on(_, message):
 	 else:
 	 	  reason = "Busy 🦥"	
 	 data = {'AFK': True, 'date': date, 'time': time, 'reason': reason}
-     DATA.update(data)
-     return await message.edit('[`YOU TURN ON AFK NOW`]')
+  DATA.update(data)
+  return await message.edit('[`YOU TURN ON AFK NOW`]')
      
      
 
