@@ -23,10 +23,12 @@ async def afk_turn_on(_, message):
 	 if len(message.text.split()) >= 2:
 	 	  reason = message.text.split(None,1)[1]
 	 else:
-	 	  reason = "Busy 🦥"	
+      reason = "Busy 🦥"	
 	 data = {'AFK': True, 'date': date, 'time': time, 'reason': reason}
+  
   DATA.update(data)
   return await message.edit('[`YOU TURN ON AFK NOW`]')
+	 	  
      
      
 
