@@ -39,19 +39,12 @@ async def afk_turn_on(_, message):
 async def afk_turn_off(_, message):
 
     try:
-
 	     if DATA.get('AFK'):
-
 	    	   DATA.clear()
-
 	           return await message.reply_text("[`WELCOME BACK MASTER` 👾]")
-
 	     else:
-
          return
-
      except:
-
 	       pass
 
 	      
