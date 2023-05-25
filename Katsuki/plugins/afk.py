@@ -31,17 +31,7 @@ async def afk_turn_on(_, message):
           data = {'AFK': True, 'date': date,'time': time, 'reason': reason} 
           DATA.update(data) 
                                             
-     
-
-@app.on_message((filters.group | filters.private) & filters.me & filters.incoming, group=2)
-async def afk_turn_off(_, message): 
-  
-    try: 
-          if DATA.get('AFK'): 
-                    DATA.clear() 
-                    return await message.reply_text("[`WELCOME BACK MASTER` 👾]") 
-          else: return 
-    except: pass
+    
 	      
 	  	 
 	 
