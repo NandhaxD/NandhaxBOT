@@ -2,7 +2,7 @@
 
 
 
-import config
+import config, strings
 from pyrogram import filters
 from Katsuki.helpers.help_func import get_datetime 
 from Katsuki import app
