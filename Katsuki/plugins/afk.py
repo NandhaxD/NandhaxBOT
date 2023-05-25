@@ -35,7 +35,6 @@ async def afk_turn_on(_, message):
 
           
 @app.on_message((filters.group | filters.private) & filters.me)
-
 async def afk_turn_off(_, message):
 
     try:
@@ -63,8 +62,7 @@ async def telling_is_afk(_, message):
 	           reason = DATA['reason']
 	           return await message.reply_text(strings.AFK_STRING.format(
 	           reason=reason, date=date, time=time))
-           except:
-   	       pass	             	              
+    except: pass	             	              
 	             
 	         
       
