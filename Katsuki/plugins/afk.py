@@ -2,7 +2,7 @@
 
 
 
-import config, strings
+import config, strings, random
 from pyrogram import filters
 from Katsuki.helpers.help_func import get_datetime 
 from Katsuki import app
@@ -11,6 +11,7 @@ from Katsuki import app
 
 DATA = {}
 
+AFK_STRING = ["I am currently AFK", "My apologies, I am away at the moment", "Unfortunately, I am not available at the moment", "My master is currently unavailable", "I am away from my keyboard", "Please excuse me, I am currently busy", "My master is temporarily offline", "I am currently occupied, please leave a message", "Sorry, I am currently not available", "Currently away from my computer", "Please leave a message as I am currently away", "My master is currently not present", "I am currently unavailable, sorry for the inconvenience", "My master is occupied at the moment", "Sorry, I am currently AFK and unable to respond"]
 
 
 
@@ -24,7 +25,7 @@ async def afk_turn_on(_, message):
               else:
                   reason = message.text.split(None,1)[1] 
           else: 
-              reason = "Busy 🦥"
+              reason = random.choice(AFK_STRING)
           await message.edit('[`YOU TURN ON AFK NOW`]')
           date = (await get_datetime())['date'] 
           time = (await get_datetime())['time']           
