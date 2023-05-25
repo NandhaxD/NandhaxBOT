@@ -16,7 +16,11 @@ DATA = {}
 
 @app.on_message(filters.me & filters.command("afk", prefixes=config.HANDLER)) 
 async def afk_turn_on(_, message): 
+          
           if len(message.text.split()) >= 2: 
+              if message.text.split()[1] == 'off':
+    DATA.clear()
+    return await message.edit("['AFK TURN OFF`]")
               reason = message.text.split(None,1)[1] 
           else: 
               reason = "Busy 🦥"
