@@ -14,6 +14,8 @@ DATA = {}
 AFK_STRING = ["I am currently AFK", "My apologies, I am away at the moment", "Unfortunately, I am not available at the moment", "My master is currently unavailable", "I am away from my keyboard", "Please excuse me, I am currently busy", "My master is temporarily offline", "I am currently occupied, please leave a message", "Sorry, I am currently not available", "Currently away from my computer", "Please leave a message as I am currently away", "My master is currently not present", "I am currently unavailable, sorry for the inconvenience", "My master is occupied at the moment", "Sorry, I am currently AFK and unable to respond"]
 
 
+AFK_IMG = "https://graph.org/file/ca042e845339f73cde0f6.jpg"
+
 
 @app.on_message(filters.me & filters.command("afk", prefixes=config.HANDLER)) 
 async def afk_turn_on(_, message): 
@@ -47,7 +49,7 @@ async def telling_is_afk(_, message):
                      date = DATA['date']  
                      time = DATA['time']  
                      reason = DATA['reason']  
-                     return await message.reply_text(strings.AFK_STRING.format(  
+                     return await message.reply_photo(photo=AFK_IMG, caption=strings.AFK_STRING.format(  
                      reason=reason, date=date, time=time))        
            except:
                  pass
