@@ -61,8 +61,8 @@ async def telling_is_afk(_, message):
 	           time = DATA['time']
 	           reason = DATA['reason']
 	           return await message.reply_text(strings.AFK_STRING.format(
-	           reason=reason, date=date, time=time))
-               except: pass	             	              
+	           reason=reason, date=date, time=time))      
+       except: pass	             	              
 	             
 	         
       
