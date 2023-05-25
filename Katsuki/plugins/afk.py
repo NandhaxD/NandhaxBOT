@@ -14,11 +14,6 @@ DATA = {}
 
 
 
-
-
-
-
-
 @app.on_message(filters.me & filters.command("afk", prefixes=config.HANDLER)) 
 async def afk_turn_on(_, message): 
           if len(message.text.split()) >= 2: 
@@ -32,10 +27,6 @@ async def afk_turn_on(_, message):
           return await message.edit('[`YOU TURN ON AFK NOW`]')
                                             
      
-     
-
-          
-
 
 @app.on_message((filters.group | filters.private) & filters.me)
 async def afk_turn_off(_, message): 
@@ -47,8 +38,7 @@ async def afk_turn_off(_, message):
           else: return 
     except: pass
 	      
-	  	
-	 
+	  	 
 	 
 @app.on_message(filters.group & filters.reply & ~filters.me)
 async def telling_is_afk(_, message):  
