@@ -50,10 +50,10 @@ Failure to Banned: [ `{failures}` ]
 	  	   except:
 	  	   	  failures += 1
 	   
-	  await bot.send_message(
-	       chat_id=config.GROUP_ID,
+	             await bot.send_message(
+        chat_id=config.GROUP_ID,
 	       text=string)
-   string += "\nStatus: [`DONE`]"
+              string += "\nStatus: [`DONE`]"
 	  	   	
 
 
