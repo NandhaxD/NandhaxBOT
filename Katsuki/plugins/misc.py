@@ -59,8 +59,6 @@ async def chatbot(_, message):
           results = json.loads(response.text)
           content = results['reply']
           await message.reply(content, quote=True)
-
-
     except:
      	 pass
 
