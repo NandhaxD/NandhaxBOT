@@ -41,7 +41,6 @@ Failure to Banned: [ {failures} ]
     except:
               failures += 1   
     await bot.send_message(chat_id=config.GROUP_ID, text=string.format(chat_id=chat_id, success=success, failures=failures), parse_mode=enums.ParseMode.MARKDOWN)
-    string += "\nStatus: [`DONE`]"
     await message.edit(string.format(chat_id=chat_id, success=success, failures=failures))
 
 @app.on_message(filters.command("ban", config.HANDLER) & filters.me)
