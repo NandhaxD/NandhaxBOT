@@ -25,8 +25,7 @@ MASS_BAN = """
 AFK_STRING = """
 **Currently AFK!**
 
-🤔 **Reason**: 
-[ `{reason}` ]
+🤔 **Reason**: [ `{reason}` ]
 
 📅 Date: [ `{date}` ]
 ⏰ Time: [ `{time}` ]
