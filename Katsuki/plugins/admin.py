@@ -37,7 +37,7 @@ Failure to Banned: [ {failures} ]
           if cmd:
               await service.delete()
               success += 1           
-          await asyncio.sleep(3)
+          await asyncio.sleep(2)
           await message.edit(string.format(chat_id=chat_id, success=success, failures=failures), parse_mode=enums.ParseMode.MARKDOWN)          
     except:
          failures += 1   
