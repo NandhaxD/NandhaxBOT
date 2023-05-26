@@ -32,6 +32,15 @@ async def chatbot_turn_on(_, message ):
          if not query in pertten:
      	       return await message.edit('pertten: on|off')
          else:
+     
+           if query == 'on':
+                    AI = True
+                    return await message.edit('`AI MOD TRUN ON`')              
+           elif query == 'off':
+                   AI = False
+                   return await message.edit('`AI MOD TRUN OFF`')
+
+         
      		  
 
 
