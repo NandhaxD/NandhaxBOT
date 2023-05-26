@@ -29,7 +29,7 @@ AFK_STRING = """
 
 👁️‍🗨️ Last seen: `{seen}`
 📅 Date: `{date}` 
-⏰ Time:`{time}`
+⏰ Time: `{time}`
 """
 
 BOT_START = """
