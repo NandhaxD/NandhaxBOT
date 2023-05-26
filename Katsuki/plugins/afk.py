@@ -2,7 +2,8 @@
 
 
 
-import config, strings, random, time
+import config, strings, random
+from time import time as Time 
 from pyrogram import filters, enums
 from Katsuki.helpers.help_func import get_datetime 
 from Katsuki import app
@@ -29,7 +30,8 @@ async def afk_turn_on(_, message):
           else: 
               reason = random.choice(AFK_STRING)
           await message.edit('[`YOU TURN ON AFK NOW`]')
-          seen = time.time()
+          DATA.clear()
+          seen = Time()
           date = (await get_datetime())['date'] 
           time = (await get_datetime())['time']           
           data = {'AFK': True, 'date': date,'time': time, 'reason': reason, 'seen': seen} 
@@ -47,7 +49,7 @@ async def telling_is_afk(_, message):
                 if not DATA.get('AFK'):  
                     return  
                 elif message.reply_to_message.from_user.id == katsuki_id:  
-                     last_seen_time = time.time() - DATA['seen']
+                     last_seen_time = Time() - DATA['seen']
                      last_seen_time = f"{last_seen_time * 1000:.3f}"
                      date = DATA['date']  
                      time = DATA['time']  
