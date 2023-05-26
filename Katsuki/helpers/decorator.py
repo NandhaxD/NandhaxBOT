@@ -21,7 +21,7 @@ def admin_only(func):
                  return await message.edit("[`THIS COMMAND ONLY FOR GROUP`]") 
              check=await message.chat.get_member(user_id) 
              is_admin = check.status==enums.ChatMemberStatus.ADMINISTRATOR 
-             is_owner = check.status==enums.ChatMemberStatud.OWNER
+             is_owner = check.status==enums.ChatMemberStatus.OWNER
              if not (is_admin and is_owner): 
                  return await message.edit("[`YOU ARE NOT ADMIN`]")
              return await func(app, message)                 
