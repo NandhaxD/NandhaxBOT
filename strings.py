@@ -11,6 +11,17 @@ HELP_CMD = """
 """
 
 
+
+MASS_BAN = """
+#MASS_BAN_EVENT
+
+**From**: [`{chat_id}`] 
+**Total Members**: [`{mem_count}`] 
+**Successfully Banned**: [`{success}`] 
+**Failure to Banned**: [`{failures}`] 
+ """    
+
+
 AFK_STRING = """
 **Currently AFK!**
 
