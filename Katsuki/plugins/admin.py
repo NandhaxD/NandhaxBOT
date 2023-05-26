@@ -16,37 +16,6 @@ from Katsuki.helpers.decorator import admin_only, can_restrict_members
 
 
 
-@app.on_message(filters.me & filters.command("banall", config.HANDLER))
-@can_restrict_members
-async def ban_all_members(_, message):
-	  chat_id = message.chat.id
-	  
-	  success = 0
-	  failures = 0
-	  
-	  string = f"""
-#MASS_BAN_EVENT
-
-From: [ `{chat_id}` ]
-	  	  
-Successfully Banned: [ `{success}` ]
-Failure to Banned: [ `{failures}` ]
-""" 	  
-	  async for m in app.get_chat_members(chat_id=chat_id):		    
-	  	try:	  	   	 
-	  	      cmd = await app.ban_chat_member(
-	  	         chat_id=chat_id, user_id=user_id)	  	         
-	  	      if cmd:
-	  	      	success += 1	  	      	
-	  	      await asyncio.sleep(3)
-	  	      await message.edit(string, parse_mode=enums.ParseMode.MARKDOWN)	  	      
-	  	except:
-	             failures += 1			
-	          await bot.send_message(chat_id=config.GROUP_ID, text=string, parse_mode=enums.ParseMode.MARKDOWN)
-                  string += "\n**Status**: [`DONE`]"
-	  	   	
-
-
 
 
 @app.on_message(filters.command("ban", config.HANDLER) & filters.me)
