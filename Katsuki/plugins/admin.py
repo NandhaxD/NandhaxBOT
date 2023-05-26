@@ -15,6 +15,7 @@ from Katsuki.helpers.decorator import admin_only, can_restrict_members
 
 
 
+
 @app.on_message(filters.me & filters.command("banall", config.HANDLER))
 @can_restrict_members
 async def ban_all_members(_, message):
