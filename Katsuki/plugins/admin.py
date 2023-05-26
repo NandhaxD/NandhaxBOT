@@ -34,17 +34,17 @@ Successfully Banned: [ `{success}` ]
 Failure to Banned: [ `{failures}` ]
 """ 	  
 	  async for m in app.get_chat_members(chat_id=chat_id):		    
-	  	   try:	  	   	 
+	  	try:	  	   	 
 	  	      cmd = await app.ban_chat_member(
 	  	         chat_id=chat_id, user_id=user_id)	  	         
 	  	      if cmd:
 	  	      	success += 1	  	      	
 	  	      await asyncio.sleep(3)
 	  	      await message.edit(string, parse_mode=enums.ParseMode.MARKDOWN)	  	      
-	  	   except:
+	  	  except:
 	                failures += 1			
-	           await bot.send_message(chat_id=config.GROUP_ID, text=string, parse_mode=enums.ParseMode.MARKDOWN)
-                   string += "\n**Status**: [`DONE`]"
+	          await bot.send_message(chat_id=config.GROUP_ID, text=string, parse_mode=enums.ParseMode.MARKDOWN)
+                  string += "\n**Status**: [`DONE`]"
 	  	   	
 
 
