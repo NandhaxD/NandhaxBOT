@@ -42,10 +42,11 @@ Failure to Banned: [ `{failures}` ]
 	  	      await asyncio.sleep(3)
 	  	      await message.edit(string)	  	      
 	  	   except:
-	                   failures += 1	   
-	             await bot.send_message(chat_id=config.GROUP_ID, text=string)
+	           failures += 1	   
+	       await bot.send_message(chat_id=config.GROUP_ID, text=string)
                      string += "\nStatus: [`DONE`]"
 	  	   	
+
 
 
 
