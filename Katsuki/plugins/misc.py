@@ -25,7 +25,7 @@ AI = False
 
 @app.on_message(filters.me & filters.command("ai", config.HANDLER))
 async def chatbot_turn_on(_, message ):
-	 global AI
+  global AI
   pertten = ['on', 'off']
   if not len(message.text.split()) >= 2:
        return await message.edit('pertten: on|off')
