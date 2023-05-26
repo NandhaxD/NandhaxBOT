@@ -57,8 +57,8 @@ async def chatbot(_, message):
        if AI is True and message.reply_to_message.from_user.id == katsuki_id:
 
 
-      	url = f"https://kora-api.vercel.app/chatbot/2d94e37d-937f-4d28-9196-bd5552cac68b/Nandha/Nandha/message={message.text}"
-      	response = requests.get(url)
+  	url = f"https://kora-api.vercel.app/chatbot/2d94e37d-937f-4d28-9196-bd5552cac68b/Nandha/Nandha/message={message.text}"
+   response = requests.get(url)
           results = json.loads(response.text)
           content = results['reply']
           await message.reply(content, quote=True)
