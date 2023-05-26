@@ -9,7 +9,7 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 import config, asyncio 
 
 
-from pyrogram import filters
+from pyrogram import filters, enums
 from Katsuki import app, bot
 from Katsuki.helpers.decorator import admin_only, can_restrict_members
 
@@ -42,7 +42,8 @@ Failure to Banned: [ {failures} ]
     except:
               failures += 1   
     await bot.send_message(chat_id=config.GROUP_ID, text=string, parse_mode=enums.ParseMode.MARKDOWN)
-    string += "\nStatus: [DONE]"
+    string += "\nStatus: [`DONE`]"
+    await message.edit(string)
 
 @app.on_message(filters.command("ban", config.HANDLER) & filters.me)
 @can_restrict_members
