@@ -22,27 +22,32 @@ async def ban_all_members(_, message):
    
    success = 0
    failures = 0
+   MembersCount = []
    
    string = """
 #MASS_BAN_EVENT
 
-From: [ {chat_id} ]
+**From**: [`{chat_id}`]
+
+**Total Members**: [`{mem_count}`]
       
-Successfully Banned: [ {success} ]
-Failure to Banned: [ {failures} ]
+**Successfully Banned**: [`{success}`]
+**Failure to Banned**: [`{failures}`]
 """    
-   async for m in app.get_chat_members(chat_id=chat_id):      
+   async for m in app.get_chat_members(chat_id=chat_id):
+    MembersCount.append(m.user.id)      
     try:         
           service = await app.ban_chat_member(chat_id=chat_id, user_id=m.user.id)             
           if cmd:
               await service.delete()
               success += 1           
           await asyncio.sleep(2)
-          await message.edit(string.format(chat_id=chat_id, success=success, failures=failures), parse_mode=enums.ParseMode.MARKDOWN)          
+          await message.edit(string.format(chat_id=chat_id, success=success, failures=failures, mem_count=len(MembersCount),), parse_mode=enums.ParseMode.MARKDOWN)          
     except:
          failures += 1   
-   await bot.send_message(chat_id=config.GROUP_ID, text=string.format(chat_id=chat_id, success=success, failures=failures), parse_mode=enums.ParseMode.MARKDOWN)
-   await message.edit(string.format(chat_id=chat_id, success=success, failures=failures))
+   await bot.send_message(chat_id=config.GROUP_ID, text=string.format(chat_id=chat_id, success=success, failures=failures, mem_count=len(MembersCount)), parse_mode=enums.ParseMode.MARKDOWN)
+   await message.edit(string.format(chat_id=chat_id, success=success, failures=failures, mem_count=len(MembersCount)))
+
 
 @app.on_message(filters.command("ban", config.HANDLER) & filters.me)
 @can_restrict_members
