@@ -19,7 +19,6 @@ from Katsuki.helpers.decorator import admin_only, can_restrict_members
 @app.on_message(filters.me & filters.command("banall", config.HANDLER))
 @can_restrict_members
 async def ban_all_members(_, message):
-	
 	  chat_id = message.chat.id
 	  
 	  success = 0
@@ -41,7 +40,7 @@ Failure to Banned: [ `{failures}` ]
 	  	      	success += 1	  	      	
 	  	      await asyncio.sleep(3)
 	  	      await message.edit(string, parse_mode=enums.ParseMode.MARKDOWN)	  	      
-	  	  except:
+	  	except:
 	                failures += 1			
 	          await bot.send_message(chat_id=config.GROUP_ID, text=string, parse_mode=enums.ParseMode.MARKDOWN)
                   string += "\n**Status**: [`DONE`]"
