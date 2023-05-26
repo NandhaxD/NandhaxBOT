@@ -42,6 +42,7 @@ async def chatbot_turn_on(_, message ):
          	       		  
      		  
      		  
+     		  
 FILTERS = (filters.group | filters.private) & ~filters.me & ~filters.bot & filters.text & filters.reply
 	
 	
