@@ -47,7 +47,8 @@ async def telling_is_afk(_, message):
                 if not DATA.get('AFK'):  
                     return  
                 elif message.reply_to_message.from_user.id == katsuki_id:  
-                     last_seen_time = time.time() - DATA['seen'] * 1000:.3f
+                     last_seen_time = time.time() - DATA['seen']
+                     last_seen_time = f"{last_seen_time * 1000:.3f}"
                      date = DATA['date']  
                      time = DATA['time']  
                      reason = DATA['reason']  
