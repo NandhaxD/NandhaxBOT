@@ -6,7 +6,7 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 
 
 
-import config, asyncio 
+import config, asyncio, strings
 
 
 from pyrogram import filters, enums
@@ -24,16 +24,8 @@ async def ban_all_members(_, message):
    failures = 0
    MembersCount = []
    
-   string = """
-#MASS_BAN_EVENT
+   string = strings.MASS_BAN
 
-**From**: [`{chat_id}`]
-
-**Total Members**: [`{mem_count}`]
-      
-**Successfully Banned**: [`{success}`]
-**Failure to Banned**: [`{failures}`]
-"""    
    async for m in app.get_chat_members(chat_id=chat_id):
     MembersCount.append(m.user.id)      
     try:         
