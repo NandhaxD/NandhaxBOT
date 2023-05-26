@@ -18,6 +18,52 @@ import requests
 
  
 
+AI = False
+
+
+@app.on_message(filters.me & filters.command("ai", config.HANDLER))
+async def chatbot_turn_on(_, message ):
+	 global AI
+	 
+	 pertten = ['on', 'off']
+	 if not len(message.text.split() >= 2:
+	 	 return await message.edit('pertten: on|off')
+     query = message.text.split()[1]
+     if not query in pertten:
+     	  return await message.edit('pertten: on|off')
+     else:
+     	
+     	if query == 'on':
+     		  AI = True
+               return await message.edit('`AI MOD TRUN ON`')
+               
+               
+         elif query == 'off':
+         	  AI = False
+         	  return await message.edit('`AI MOD TRUN OFF`')
+         	       		  
+     		  
+     		  
+FILTERS = (filters.group | filters.private) & ~filters.me & ~filters.bot & filters.text & filters.reply
+	
+	
+
+@app.on_message(FILTERS)
+async def chatbot(_, message):	
+    try:
+        
+       katsuki_id = 6129152989
+       if AI is True and message.reply_to_message.from_user.id == katsuki_id:
+      	url = f"https://kora-api.vercel.app/chatbot/2d94e37d-937f-4d28-9196-bd5552cac68b/Nandha/Nandha/message={message.text}"
+      	response = requests.get(url)
+          results = json.loads(response.text)
+          content = results['reply']
+          await message.reply(content, quote=True)
+    except:
+     	 pass
+
+
+
 	         
 @app.on_message(filters.me & filters.command("help", prefixes=config.HANDLER))
 async def help_command(_, message):
