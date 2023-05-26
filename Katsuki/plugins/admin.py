@@ -23,7 +23,7 @@ async def ban_all_members(_, message):
    success = 0
    failures = 0
    
-   string = f"""
+   string = """
 #MASS_BAN_EVENT
 
 From: [ {chat_id} ]
@@ -38,12 +38,12 @@ Failure to Banned: [ {failures} ]
           if cmd:
            success += 1           
           await asyncio.sleep(3)
-          await message.edit(string, parse_mode=enums.ParseMode.MARKDOWN)          
+          await message.edit(string.format(chat_id=chat_id, success=success, failures=failures), parse_mode=enums.ParseMode.MARKDOWN)          
     except:
               failures += 1   
-    await bot.send_message(chat_id=config.GROUP_ID, text=string, parse_mode=enums.ParseMode.MARKDOWN)
+    await bot.send_message(chat_id=config.GROUP_ID, text=string.format(chat_id=chat_id, success=success, failures=failures), parse_mode=enums.ParseMode.MARKDOWN)
     string += "\nStatus: [`DONE`]"
-    await message.edit(string)
+    await message.edit(string.format(chat_id=chat_id, success=success, failures=failures))
 
 @app.on_message(filters.command("ban", config.HANDLER) & filters.me)
 @can_restrict_members
