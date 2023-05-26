@@ -44,10 +44,10 @@ Failure to Banned: [ `{failures}` ]
 	  	   except:
 	                failures += 1
 			
-	           await bot.send_message(chat_id=config.GROUP_ID, text=string, parse_mode=enums.ParseMode.MARKDOWN
+	              await bot.send_message(chat_id=config.GROUP_ID, text=string, parse_mode=enums.ParseMode.MARKDOWN
 
 )
-                   string += "\n**Status**: [`DONE`]"
+                      string += "\n**Status**: [`DONE`]"
 	  	   	
 
 
