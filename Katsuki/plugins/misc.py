@@ -24,7 +24,7 @@ AI = False
 @app.on_message(filters.me & filters.command("ai", config.HANDLER))
 async def chatbot_turn_on(_, message ):
 	 global AI
-	 
+ 
 	 pertten = ['on', 'off']
 	 if not len(message.text.split() >= 2:
 	 	 return await message.edit('pertten: on|off')
@@ -32,15 +32,13 @@ async def chatbot_turn_on(_, message ):
          if not query in pertten:
      	       return await message.edit('pertten: on|off')
          else:
-     	
+ 
      	      if query == 'on':
      		      AI = True
                   return await message.edit('`AI MOD TRUN ON`')              
               elif query == 'off':
-                  AI = False
-                  return await message.edit('`AI MOD TRUN OFF`')
-         	       		  
-     		  
+                   AI = False
+                   return await message.edit('`AI MOD TRUN OFF`')
      		  
      		  
 FILTERS = (filters.group | filters.private) & ~filters.me & ~filters.bot & filters.text & filters.reply
