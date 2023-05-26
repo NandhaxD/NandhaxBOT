@@ -33,8 +33,9 @@ Failure to Banned: [ {failures} ]
 """    
    async for m in app.get_chat_members(chat_id=chat_id):      
     try:         
-          cmd = await app.ban_chat_member(chat_id=chat_id, user_id=m.user.id)             
+          service = await app.ban_chat_member(chat_id=chat_id, user_id=m.user.id)             
           if cmd:
+              await service.delete()
               success += 1           
           await asyncio.sleep(3)
           await message.edit(string.format(chat_id=chat_id, success=success, failures=failures), parse_mode=enums.ParseMode.MARKDOWN)          
