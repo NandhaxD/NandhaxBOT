@@ -16,8 +16,9 @@ if ENV:
    BOT_TOKEN = os.getenv("BOT_TOKEN")
    SESSION = os.getenv("SESSION")
    GROUP_ID = os.getenv("GROUP_ID")
+   OWNER_ID = os.getenv('OWNER_ID')
    DB_URL = os.getenv("DB_URL")
-   LIST_OF_VARIABLE = ["API_ID", "API_HASH", "BOT_TOKEN", "SESSION", "GROUP_ID", "DB_URL"]   
+   LIST_OF_VARIABLE = ["API_ID", "API_HASH", "BOT_TOKEN", "SESSION", "GROUP_ID", "DB_URL", "OWNER_ID"]   
    for var in LIST_OF_VARIABLE:
       if not os.getenv(var):
            sys.exit()
@@ -29,6 +30,7 @@ else:
    SESSION = None #str() method | use replit or bots to get your Pyro session 
    GROUP_ID = None #int() menthod | your group id
    DB_URL = None # get from mongodb.com
+   OWNER_ID = None # fill ur user id
 
 
 """ DEFAULT VARIABLES """
