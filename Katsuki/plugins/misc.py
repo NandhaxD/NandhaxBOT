@@ -52,7 +52,7 @@ FILTERS = (filters.group | filters.private) & ~filters.me & ~filters.bot & filte
 @app.on_message(FILTERS)
 async def chatbot(_, message):
    try:
-       katsuki_id = 6129152989
+       katsuki_id = config.OWNER_ID
        if AI is True and message.reply_to_message.from_user.id == katsuki_id:
           url = f"https://kora-api.vercel.app/chatbot/2d94e37d-937f-4d28-9196-bd5552cac68b/Nandha/Nandha/message={message.text}"
           response = requests.get(url)
