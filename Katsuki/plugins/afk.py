@@ -1,7 +1,4 @@
 
-
-
-
 import config, strings, random
 from time import time as Time 
 from image import AFK_IMG
@@ -36,10 +33,7 @@ async def afk_turn_on(_, message):
           time = (await get_datetime())['time']           
           data = {'AFK': True, 'date': date,'time': time, 'reason': reason, 'seen': seen} 
           DATA.update(data) 
-                                            
-    
-	      
-	  	 
+                                        
 	 
 @app.on_message((filters.group| filters.private) & filters.reply & ~filters.me, group=1)
 async def telling_is_afk(_, message):  
