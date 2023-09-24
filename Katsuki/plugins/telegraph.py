@@ -34,7 +34,10 @@ telegraph.create_account(short_name=config.NAME)
 @app.on_message(filters.command("txt", prefixes=config.HANDLER))
 async def graph_text(_, message):
      
-     first_name=message.from_user.first_name
+     if message.from_user:
+          first_name = message.from_user.first_name
+     else:
+          first_name = config.NAME
      if len(message.text.split()) >= 2:
            text = message.text.split(maxsplit=1)[1]
      else:
