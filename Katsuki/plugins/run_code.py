@@ -35,14 +35,14 @@ THUMB_ID = "./IMG_20220701_185623_542.jpg"
 @app.on_message(filters.me & filters.command("logs",prefixes=config.HANDLER))
 async def logs(_, message):
        run_logs = subprocess.getoutput("tail logs.txt")
-       msg = await message.edit_text("Analyzing Logging...")       
-       with io.BytesIO(str.encode(run_logs)) as logs:
-            logs.name = "logs.txt"
-            await message.reply_document(
-                document=logs, thumb=THUMB_ID, quote=True
-            )
-       return await msg.delete()
-
+       msg = await message.edit_text("analyzing.....")
+       if len(run_logs) > 4096:     
+              with io.BytesIO(str.encode(run_logs)) as logs:
+                   logs.name = "logs.txt"
+                   await message.reply_document(
+                document=logs, thumb=THUMB_ID, quote=True),
+                   return await msg.delete()
+      await message.edit(run_logs)
 
 
 """ SHELL COMMAND ARE USED FOR PIP AND SOME MORE THOUGH """
