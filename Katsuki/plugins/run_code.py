@@ -42,7 +42,7 @@ async def logs(_, message):
                    await message.reply_document(
                 document=logs, thumb=THUMB_ID, quote=True),
                    return await msg.delete()
-      await message.edit(run_logs)
+       await message.edit(run_logs)
 
 
 """ SHELL COMMAND ARE USED FOR PIP AND SOME MORE THOUGH """
