@@ -26,7 +26,7 @@ async def google_bard(_, message):
         
     if response.ok:
          data = response.json()
-         if data['images'] is not None:
+         if bool(data['images']) == True:
               photo = data['images'][0]
               await message.reply_photo(photo, captain=data['message'])
               return await msg.delete()
