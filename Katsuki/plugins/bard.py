@@ -8,12 +8,12 @@ async def bard_ai(_, message):
     
      # google bard AI 
     if not len(message.text.split()) >= 2:
-          return await message.edit("I don't understand what do you want?")
+          return await message.edit("`.bard hello`")
                                     
     query = message.text.split(None, 1)[1]
     if message.reply_to_message:
         text = (message.reply_to_message.text or message.reply_to_message.caption)
-        prompt = f"{text}, note:{query}"
+        prompt = f"{text}, Note:{query}"
       
     elif len(message.text.split()) >= 2:
          prompt = query 
