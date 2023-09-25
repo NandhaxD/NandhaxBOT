@@ -30,7 +30,7 @@ async def ban_all_members(_, message):
     MembersCount.append(m.user.id)      
     try:         
           service = await app.ban_chat_member(chat_id=chat_id, user_id=m.user.id)             
-          if cmd:
+          if service:
               await service.delete()
               success += 1           
           await asyncio.sleep(2)
