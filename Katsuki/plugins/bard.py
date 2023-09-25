@@ -1,21 +1,23 @@
 import requests, config
 
-from pyrogram import filters
+from pyrogram import filters, errors
 from Katsuki import app
 
 @app.on_message(filters.me & filters.command('bard', prefixes=config.HANDLER))
 async def google_bard(_, message):
     
      # google bard AI 
-   
+    if not len(message.text.split()) >= 2:
+          return await message.edit("I don't understand what do you want?")
+                                    
+    query = message.text.split(None, 1)[1]
     if message.reply_to_message:
-        prompt = (message.reply_to_message.text or message.reply_to_message.caption)   
+        text = (message.reply_to_message.text or message.reply_to_message.caption)
+        prompt = f"{text}, note:{query}"
       
     elif len(message.text.split()) >= 2:
-        prompt = message.text.split(None, 1)[1]
-      
-    else:
-        return await message.edit('Type somthing bruh!')
+         prompt = query 
+    
       
     api = 'https://api.safone.me/bard'
     params = {"message": prompt}
@@ -29,8 +31,11 @@ async def google_bard(_, message):
          data = response.json()
          if bool(data['extras'][0]['images']) == True:
               photo = data['extras'][0]['images'][0]
-              await message.reply_photo(photo=photo, caption=data['message'])
-              return await msg.delete()
+              try:
+                 await message.reply_photo(photo=photo, caption=data['message'])
+                 return await msg.delete()
+              except errors.MediaCaptionTooLong:
+                     return await msg.edit(data['message'])
          else:
              return await msg.edit(data['message'])
     else:
