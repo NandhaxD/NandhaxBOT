@@ -21,12 +21,19 @@ async def google_bard(_, message):
     params = {"message": prompt}
     
     response = requests.get(api, params=params)
-  
+
+    msg = await message.edit('Generating... please patience')
+        
     if response.ok:
          data = response.json()
-         return await message.edit(data['message'])
+         if not data['images'] None:
+              photo = data['images'][0]
+              await message.reply_photo(photo, captain=data['message'])
+              return await msg.delete()
+         else:
+             return await msg.edit(data['message'])
     else:
-       return await message.edit(response.status_code)
+       return await msg.edit(response.status_code)
          
     
          
