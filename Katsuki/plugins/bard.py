@@ -19,16 +19,17 @@ async def google_bard(_, message):
       
     api = 'https://api.safone.me/bard'
     params = {"message": prompt}
-    
-    response = requests.get(api, params=params)
 
     msg = await message.edit('Generating... please patience')
         
+    response = requests.get(api, params=params)
+
+    
     if response.ok:
          data = response.json()
          if bool(data['extras'][0]['images']) == True:
               photo = data['extras'][0]['images'][0]
-              await message.reply_photo(photo, captain=data['message'])
+              await message.reply_photo(photo=photo, caption=data['message'])
               return await msg.delete()
          else:
              return await msg.edit(data['message'])
