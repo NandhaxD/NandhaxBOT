@@ -23,7 +23,7 @@ async def alive(_, message):
     await asyncio.sleep(2)
     await msg.edit('0️⃣1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣')
     await asyncio.sleep(2)
-    await message.repy_photo(image.alive, caption=string.alive)
+    await message.repy_photo(image.ALIVE_IMG, caption=string.ALIVE_IMG)
     await msg.delete()
     
     
