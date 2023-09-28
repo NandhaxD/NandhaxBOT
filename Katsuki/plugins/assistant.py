@@ -19,19 +19,19 @@ SPAM = []
 @bot.on_message(filters.command("start") & filters.private)
 async def start(_, message):
      user_id = message.from_user.id
+     if user_id in SPAM:
+         return await message.reply("`DON'T SPAM HERE!`")
      info = await INFO.app()
      botlive = await emoji_convert(bot.is_connected)
      applive = await emoji_convert(app.is_connected)
      name = info.first_name
      id = info.id
-     if user_id in SPAM:
-         return await message.reply("[`DON'T SPAM HERE`]")
      SPAM.append(user_id)
      await message.forward(config.GROUP_ID)
      mention = f"[{name}](tg://user?id={id})"
      BUTTON=InlineKeyboardMarkup([[
      InlineKeyboardButton("SOURCE 👾", url=config.SOURCE),]])
-     await message.reply_text(text=strings.BOT_START.format(mention=mention, applive=applive, botlive=botlive),quote=True, reply_markup=BUTTON ,parse_mode=enums.ParseMode.MARKDOWN)
-     await asyncio.sleep(20)
+     await message.reply_text(text=strings.BOT_START_STRING.format(mention=mention, applive=applive, botlive=botlive),quote=True, reply_markup=BUTTON ,parse_mode=enums.ParseMode.MARKDOWN)
+     await asyncio.sleep(10)
      SPAM.remove(user_id)
-     return 
+     
