@@ -4,15 +4,15 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 
 
 
+ALIVE_STRING = "hello there, I alive since {}."
 
-HELP_CMD = """
+HELP_CMD_STRING = """
 **Module**: [`{module}`]
 **Commands**:[`{help}`]
 """
 
 
-
-MASS_BAN = """
+MASS_BAN_STRING = """
 #MASS_BAN_EVENT
 
 **From**: [`{chat_id}`] 
@@ -32,7 +32,7 @@ AFK_STRING = """
 ⏰ Time: `{time}`
 """
 
-BOT_START = """
+BOT_START_STRING = """
 Hello, I am Assistant for **{mention}**
 You can deploy Your Own, To Use Me.
 
@@ -40,7 +40,7 @@ You can deploy Your Own, To Use Me.
 🥸 User Status: [ {applive} ]
 """
 
-RESTART_TEXT = """
+RESTART_STRING = """
 [`SYSTEM AWAKEN`]
 
 📅 DATE: [`{date}`]
