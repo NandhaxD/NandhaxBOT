@@ -58,18 +58,7 @@ async def pypi_search(query):
 
 
 
-async def FileType(message):
-    if message.document:
-        type = message.document.mime_type
-        return ["txt" if type == "text/plain" else type.split("/")[1]][0]
-    elif message.photo:
-          return "jpg"
-    elif message.animation:
-          return message.animation.mime_type.split("/")[1]
-    elif message.video:
-         return message.video.mime_type.split("/")[1]
-    else:
-         return False
+
 
 
 async def railway_to_normal(time_str):
