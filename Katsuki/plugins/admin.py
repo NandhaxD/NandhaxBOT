@@ -8,7 +8,6 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 
 import config, asyncio, strings
 
-
 from pyrogram import filters, enums
 from Katsuki import app, bot
 from Katsuki.helpers.decorator import admin_only, can_restrict_members
@@ -24,7 +23,7 @@ async def ban_all_members(_, message):
    failures = 0
    MembersCount = []
    
-   string = strings.MASS_BAN
+   string = strings.MASS_BAN_STRING
 
    async for m in app.get_chat_members(chat_id=chat_id):
     MembersCount.append(m.user.id)      
