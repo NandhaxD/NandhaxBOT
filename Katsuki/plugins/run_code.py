@@ -15,6 +15,7 @@ import subprocess
 import traceback
 import config
 from Katsuki import app, MODULE
+from Katsuki.helpers.help_func import spacebin
 from pyrogram import filters, enums
 from pyrogram.errors import MessageTooLong
 
@@ -34,15 +35,16 @@ THUMB_ID = "./IMG_20220701_185623_542.jpg"
 
 @app.on_message(filters.me & filters.command("logs",prefixes=config.HANDLER))
 async def logs(_, message):
-       run_logs = subprocess.getoutput("tail logs.txt")
+       logsText = subprocess.getoutput("tail logs.txt")
        msg = await message.edit_text("analyzing.....")
-       if len(run_logs) > 4096:     
-              with io.BytesIO(str.encode(run_logs)) as logs:
+       if len(logsText) > 4096:
+	      paste = await spacebin(logsText)
+              with io.BytesIO(str.encode(logsText)) as logs:
                    logs.name = "logs.txt"
                    await message.reply_document(
-                document=logs, thumb=THUMB_ID, quote=True),
+                document=logs, captain=paste ,thumb=THUMB_ID, quote=True),
                    return await msg.delete()
-       await message.edit(run_logs)
+       await message.edit(logsText)
 
 
 """ SHELL COMMAND ARE USED FOR PIP AND SOME MORE THOUGH """
