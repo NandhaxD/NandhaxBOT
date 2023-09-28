@@ -8,10 +8,10 @@ from Katsuki import app
 
 @app.on_message(filters.me & filters.command('alive', prefixes=config.HANDLER))
 async def alive(_, message):
-    msg = await message.edit('1️⃣0️⃣0️⃣0️⃣0️⃣0️⃣0️⃣0️⃣0️⃣0️⃣')
+    msg = await message.edit('1️⃣0️⃣0️⃣0️⃣0️⃣0️⃣0️⃣0️⃣0️⃣')
     await msg.edit('1️⃣2️⃣0️⃣0️⃣0️⃣0️⃣0️⃣0️⃣0️⃣')
     await asyncio.sleep(2)
-    await meg.edit('1️⃣2️⃣3️⃣0️⃣0️⃣0️⃣0️⃣0️⃣0️⃣')
+    await msg.edit('1️⃣2️⃣3️⃣0️⃣0️⃣0️⃣0️⃣0️⃣0️⃣')
     await asyncio.sleep(2)
     await msg.edit('1️⃣2️⃣3️⃣4️⃣0️⃣0️⃣0️⃣0️⃣0️⃣')
     await asyncio.sleep(2)
