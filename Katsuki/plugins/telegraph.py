@@ -7,7 +7,7 @@ import config, os
 
 
 
-""" TELEGRAPH MEDIA UPLOADER """
+""" MEDIA UPLOADER """
 
 @app.on_message(filters.command("tm", prefixes=config.HANDLER) & filters.me)
 async def tm(_, message):
@@ -25,7 +25,7 @@ async def tm(_, message):
 
 
 
-""" TELEGRAPH PAGE CREATOR """
+""" PAGE CREATOR """
 
 telegraph = Telegraph()
 telegraph.create_account(short_name=config.NAME)
@@ -50,7 +50,7 @@ async def graph_text(_, message):
               elif message.reply_to_message and (message.reply_to_message.text or message.reply_to_message.caption):
                     text = (message.reply_to_message.text or message.reply_to_message.caption)
               else:
-                  return await message.edit('[`REPLY TO THE TEXT OR DOCUMENT`]')
+                  return await message.edit('`REPLY TO THE TEXT OR DOCUMENT`!')
      response = telegraph.create_page(first_name, html_content=text)
      page_url = response['url']
      return await message.edit(page_url)
