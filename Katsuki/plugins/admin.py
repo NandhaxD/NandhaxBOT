@@ -49,13 +49,13 @@ async def ban_chat_member(app, message):
    elif message.reply_to_message:
         user_id = message.reply_to_message.from_user.id
    else:
-       return await message.edit("[`WHO SHOULD I BAN?`]")
+       return await message.edit("`WHO SHOULD I BAN?`")
    try:
       await app.ban_chat_member(
            chat_id=message.chat.id,
            user_id=user_id)
    except Exception as e:
          return await message.edit(f"[`ERROR`: `{e}`]")
-   return await message.edit("[`BANNED`]")
+   return await message.edit("`BANNED`!")
    
   
