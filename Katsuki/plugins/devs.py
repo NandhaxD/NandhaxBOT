@@ -36,10 +36,11 @@ THUMB_ID = "./IMG_20220701_185623_542.jpg"
 @app.on_message(filters.me & filters.command("logs",prefixes=config.HANDLER))
 async def logs(_, message):
        logsText = subprocess.getoutput("tail logs.txt")
-       msg = await message.edit_text("analyzing.....")
+       msg = await message.edit_text("Analyzing.....")
        if len(logsText) > 4096:
-	      paste = await spacebin(logsText)
               with io.BytesIO(str.encode(logsText)) as logs:
+      
+                   paste = await spacebin(logsText)
                    logs.name = "logs.txt"
                    await message.reply_document(
                 document=logs, captain=paste ,thumb=THUMB_ID, quote=True),
