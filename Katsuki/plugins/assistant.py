@@ -27,7 +27,7 @@ async def start(_, message):
      name = info.first_name
      id = info.id
      SPAM.append(user_id)
-     await message.forward(config.GROUP_ID)
+     await message.forward(config.OWNER_ID)
      mention = f"[{name}](tg://user?id={id})"
      BUTTON=InlineKeyboardMarkup([[
      InlineKeyboardButton("SOURCE 👾", url=config.SOURCE),]])
