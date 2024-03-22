@@ -21,11 +21,10 @@ async def start(_, message):
      user_id = message.from_user.id
      if user_id in SPAM:
          return await message.reply("`DON'T SPAM HERE!`")
-     info = await INFO.app()
      botlive = await emoji_convert(bot.is_connected)
      applive = await emoji_convert(app.is_connected)
-     name = info.first_name
-     id = info.id
+     name = config.NAME
+     id = config.OWNER_ID
      SPAM.append(user_id)
      await message.forward(config.OWNER_ID)
      mention = f"[{name}](tg://user?id={id})"
