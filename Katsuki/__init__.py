@@ -22,7 +22,7 @@ MODULE = []
 
 # LOGGING INFO
 
-FORMAT = f"[katsuki] %(message)s"
+FORMAT = f"[{config.NAME}] %(message)s"
 logging.basicConfig(level=logging.INFO, handlers=[logging.FileHandler('logs.txt'),
               logging.StreamHandler()], format=FORMAT)
 
