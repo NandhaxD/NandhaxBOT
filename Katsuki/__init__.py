@@ -30,10 +30,10 @@ logging.basicConfig(level=logging.INFO, handlers=[logging.FileHandler('logs.txt'
 
 
 # PYROGRAM USER CLIENT 
-app = Client(name="katsuki", session_string=config.SESSION, api_id=config.API_ID, api_hash=config.API_HASH, plugins=dict(root="Katsuki"))
+app = Client(name=config.NAME, session_string=config.SESSION, api_id=config.API_ID, api_hash=config.API_HASH, plugins=dict(root="Katsuki"))
 
 #PYROGRAM BOT CLIENT
-bot = Client(name="KatsukiBot", bot_token=config.BOT_TOKEN, api_id=config.API_ID, api_hash=config.API_HASH, plugins=dict(root="Katsuki"))
+bot = Client(name=f"{config.NAME}bot", bot_token=config.BOT_TOKEN, api_id=config.API_ID, api_hash=config.API_HASH, plugins=dict(root="Katsuki"))
 
 # PYMONGO DATABASE
 DB = MongoClient(config.DB_URL)
@@ -48,16 +48,5 @@ except Mongoerrors.ConnectionFailure:
 DATABASE = DB.MAIN
 
 
-
-# CLASS FOR INFO GETTING
-
-class INFO:
-   def app():
-      info = app.get_me()
-      return info   
-     
-   def bot():
-      info = bot.get_me()
-      return info
 
 
