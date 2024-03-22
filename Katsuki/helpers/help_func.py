@@ -26,38 +26,6 @@ async def emoji_convert(query):
           return "🤔"
 
 
-async def pypi_search(query):
-    results = []
-    content = requests.get(f"https://pypi.org/search/?q={query}").content.decode('utf-8')
-    pattern_title = r'<span class="package-snippet__name">(.+?)<\/span>'
-    pattern_version = r'<span class="package-snippet__version">(.+?)<\/span>'
-    pattern_created = r'<time datetime="(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+\d{4})".*?>'
-    pattern_description = r'<p class="package-snippet__description">(.+?)<\/p>?'
-    package_snippets = re.findall(r'<a class="package-snippet".*?>(.*?)<\/a>', content, re.DOTALL)
-    for snippet in package_snippets:
-        try:
-            title = re.search(pattern_title, snippet).group(1)
-        except AttributeError:
-            title = None
-        try:
-            version = re.search(pattern_version, snippet).group(1)
-        except AttributeError:
-            version = None
-        try:
-            created = re.search(pattern_created, snippet).group(1)
-            created = created.replace('T', ' ').replace('+0000', '')
-        except AttributeError:
-            created = None
-        try:
-            description = re.search(pattern_description, snippet).group(1)
-        except AttributeError:
-            description = None
-        data = {"title": title, "version": version, "created": created, "description": description}
-        results.append(data)
-    return results
-
-
-
 
 
 
