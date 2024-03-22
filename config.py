@@ -10,12 +10,13 @@ import os, sys
 ENV = os.getenv("ENV", False)
 
 
+
 if ENV:    
    API_ID = os.getenv("API_ID")
    API_HASH = os.getenv("API_HASH")
    BOT_TOKEN = os.getenv("BOT_TOKEN")
    SESSION = os.getenv("SESSION")
-   GROUP_ID = os.getenv("GROUP_ID")
+   GROUP_ID = os.getenv("GROUP_ID", -1001717881477)
    OWNER_ID = os.getenv('OWNER_ID')
    DB_URL = os.getenv("DB_URL")
    LIST_OF_VARIABLE = ["API_ID", "API_HASH", "BOT_TOKEN", "SESSION", "GROUP_ID", "DB_URL", "OWNER_ID"]   
