@@ -30,7 +30,7 @@ async def start(_, message):
      await message.forward(config.OWNER_ID)
      mention = f"[{name}](tg://user?id={id})"
      BUTTON=InlineKeyboardMarkup([[
-     InlineKeyboardButton("SOURCE 👾", url=config.SOURCE),]])
+     InlineKeyboardButton("Source ⬅️", url=config.SOURCE),]])
      await message.reply_text(text=strings.BOT_START_STRING.format(mention=mention, applive=applive, botlive=botlive),quote=True, reply_markup=BUTTON ,parse_mode=enums.ParseMode.MARKDOWN)
      await asyncio.sleep(10)
      SPAM.remove(user_id)
