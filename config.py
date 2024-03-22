@@ -27,8 +27,7 @@ else:
    API_ID = 13257951 #int() method | get from my.telegram.org
    API_HASH = "d8ea642aedb736d40035bc05f0cfd477" #str() method | get from my.telegram.org
    BOT_TOKEN = "6059605779:AAFQpCCtPW2Xehr5Ce-Ppv2FgEmGXxY35nE" #str() method | get via @botfather
-   SESSION = "BQBZKrw0uAaWK1JNYJRV_0bAK-Dv-bvMfQWihxRVyj2MAVbRX6pAzz6TjhMWrsJyBRxnCx_NXC0yynjNu_cY5dCSEmdBB92YlEKq1_MjK49_kiULD5D3lJ7Np6sIG2RDSEmqJLy0NNrZoUCn8auYq3f6FyoFLsWb7rCcrm3RjMuehP-HY7bW31U1sWaMdMEmugCD8GrzLVDktLSLI2MjVTGJoy9bH232QzrR3mpch5jGo7RCrc4xySOkxJ_uvi3F3b09xycaAKiYMACEgDWkIWILoFBOH0J8pSkaIBbGncohj41d11EmDVzMQ1gVUqRNQiSTeT1q-LcppbfEvM5E-Px0AAAAAVOC3-wA" #str() method | use replit or bots to get your Pyro session 
-   GROUP_ID = -1001717881477 #int() menthod | your group id
+   SESSION = "BQDKTN8AuM4Olt5aDWZxxtPugoTAevANp0JMiEDTvKD01pOtzXsI6k1px_F400ApY4RV-m4BEn953pWrCeHz1UT7P4kNniKbueFjL3OQLlueUt1K2ZlTBINH-cYZXDGJcJn5FFUFocDc0G0oikdN3jCm9clHNbIVDoCvUCNY4TjQsG3H2SfHGPAf-zRYY-UFHiRcMCntAHjiVhd5KOpk7W590ogGl5MgnXGahC01QEUW1K16L1B8l_OEFKOaTlGis5QKVQfgHkQNvoPQB4dydV4B-DAtK5YFMgUEUViQitA3rZcUhz2qwO8H3K_byjkfzmoEQ0XccWQK6BEu8gv0EC3dW051GwAAAAFTgt_sAA" #str() method | use replit or bots to get your Pyro session    GROUP_ID = -1001717881477 #int() menthod | your group id
    DB_URL = "mongodb+srv://nandhaxd:u7uHs7EhyuyLT5Kj@cluster0.80igexg.mongodb.net/" # get from mongodb.com
    OWNER_ID = 5696053228 # fill ur user id
 
