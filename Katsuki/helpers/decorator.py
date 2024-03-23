@@ -42,7 +42,7 @@ def can_restrict_members(func):
                    return await message.edit("You're not admin")
              elif check.privileges is None:
                     return await message.reply("I can't check admin rights")
-             elif not check.privileges.can_restrict_members):
+             elif not check.privileges.can_restrict_members:
                  return await message.edit("you can't ban users from here.")
              return await func(app, message)                 
          return wrapped 
