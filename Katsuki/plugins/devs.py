@@ -30,8 +30,10 @@ async def aexec(code, app, message):
 
 
 
-""" GET LOGGING VIA COMMAND """
+
 THUMB_ID = "./IMG_20220701_185623_542.jpg"
+
+# get bot logging
 
 @app.on_message(filters.me & filters.command("logs",prefixes=config.HANDLER))
 async def logs(_, message):
@@ -78,7 +80,7 @@ Results:
 
 
 
-""" EVALUATE USED TO RUN YOUR CODES ON IT """
+# run your codes using eval
     
 @app.on_message(filters.me & filters.command("e",prefixes=config.HANDLER))
 async def evaluate(app , message):
@@ -129,7 +131,7 @@ async def evaluate(app , message):
         await status_message.delete()
         return
     else:
-        await status_message.edit(final_output)
+        await status_message.edit(f"```python\n{final_output}```")
         return 
 
 
