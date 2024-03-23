@@ -10,7 +10,7 @@ import asyncio
 import config
 import json
 
-from Katsuki import app, MODULE, INFO
+from Katsuki import app, MODULE, bot
 from pyrogram import filters, enums
 from gpytranslate import Translator
 
@@ -22,7 +22,7 @@ import requests
 	         
 @app.on_message(filters.me & filters.command("help", prefixes=config.HANDLER))
 async def help_command(_, message):
-      BOT_USERNAME = (await INFO.bot()).id
+      BOT_USERNAME = await bot.get_me().username
       query = "help"
       result = await app.get_inline_bot_results(bot=BOT_USERNAME, query=query)
       await app.send_inline_bot_result(chat_id=message.chat.id, query_id=result.query_id, result_id=result.results[0].id, reply_to_message_id=message.id)
@@ -107,13 +107,12 @@ async def translate(_, message) -> None:
 
 
 
-__mod_name__ = "MISC"  
+__mod_name__ = "Misc"  
     
 __help__ = """  
 - git: find github user 
 - tr {code}: reply to the message 
 - ud: urban dictionary 
-- write: unruled-note handwriting
 - tm: telegraph media upload
 - txt: telegraph text upload
 - paste: spacebin paste
