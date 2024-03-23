@@ -111,7 +111,7 @@ async def evaluate(app , message):
         evaluation = stdout
     else:
         evaluation = "Success"
-    taken_time = round({(time.time() - start_time))
+    taken_time = round((time.time() - start_time))
     
     final_output = f"<pre>Command:</pre><pre language='python'> {cmd} </pre> \n <pre> Takem time to output {taken_time}s:</pre><pre language='python'> {evaluation.strip()}</pre>"
     if len(final_output) > 4096:
