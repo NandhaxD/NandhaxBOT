@@ -20,8 +20,9 @@ SPAM = []
 async def start(_, message):
      user_id = message.from_user.id
      app = await app.get_me()
+     bot = await bot.get_me()
      if user_id in SPAM:
-         return await message.reply("`DON'T SPAM HERE!`")
+         return await message.reply("Please refrain from spamming in this chat. Thank you!")
      botlive = await emoji_convert(bot.is_connected)
      applive = await emoji_convert(app.is_connected)
      name = config.NAME
