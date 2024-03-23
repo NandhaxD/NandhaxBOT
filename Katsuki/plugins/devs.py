@@ -8,7 +8,7 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 
 
 import sys
-import io
+import io, time
 import re
 import os
 import subprocess
@@ -115,11 +115,12 @@ async def evaluate(app , message):
         evaluation = stdout
     else:
         evaluation = "Success"
-    final_output = f"<b>Command:</b>\n<code>{cmd}</code>\n\n<b>Output</b>:\n<code>{evaluation.strip()}</code>"
+    final_output_doc = f"<b>Command:</b>\n<code>{cmd}</code>\n\n<b>Output</b>:\n<code>{evaluation.strip()}</code>"
+    final_output_grp = f"```Command:``` \n```python \n{cmd}``` \n\n```Output: \n{evaluation.strip()}```"
     if len(final_output) > 4096:
         filename = "output.txt"
         with open(filename, "w+", encoding="utf8") as out_file:
-            out_file.write(str(final_output))
+            out_file.write(str(final_output_doc))
         await message.reply_document(
             document=filename,
             thumb=THUMB_ID,
@@ -131,7 +132,7 @@ async def evaluate(app , message):
         await status_message.delete()
         return
     else:
-        await status_message.edit(f"```python\n{final_output}```")
+        await status_message.edit(final_output_grp)
         return 
 
 
