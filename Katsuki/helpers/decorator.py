@@ -19,7 +19,7 @@ def admin_only(func):
              user_id=message.from_user.id 
              if message.chat.type==enums.ChatType.PRIVATE: 
                  return await message.edit("[`THIS COMMAND ONLY FOR GROUP`]") 
-             check=await message.chat.get_member(user_id) 
+             check = await message.chat.get_member(user_id) 
              is_admin = check.status==enums.ChatMemberStatus.ADMINISTRATOR 
              if not is_admin:
                  return await message.edit("[`YOU ARE NOT ADMIN`]")
@@ -35,14 +35,15 @@ def can_restrict_members(func):
              chat_id=message.chat.id 
              user_id=message.from_user.id 
              if message.chat.type==enums.ChatType.PRIVATE: 
-                 return await message.edit("[`THIS COMMAND ONLY FOR GROUP`]") 
+                 return await message.edit("This command only work in gorups.") 
              check = await message.chat.get_member(user_id) 
              is_admin = check.status==enums.ChatMemberStatus.ADMINISTRATOR
-             is_owner = check.status==enums.ChatMemberStatus.OWNER
-             if not (is_admin or is_owner):  
-                   return await message.edit("[`YOU ARE NOT ADMIN`]")
-             elif not check.privileges.can_restrict_members:
-                 return await message.edit("[`YOU CAN'T BAN PEOPLE'S HERE`]")
+             if not is_admin:  
+                   return await message.edit("You're not admin")
+             elif check.privileges is None:
+                    return await message.reply("I can't check admin rights")
+             elif not check.privileges.can_restrict_members):
+                 return await message.edit("you can't ban users from here.")
              return await func(app, message)                 
          return wrapped 
 
