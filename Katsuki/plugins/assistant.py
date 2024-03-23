@@ -9,7 +9,7 @@ import config, strings
 import asyncio
 
 from pyrogram import filters, enums
-from Katsuki import bot, INFO , app
+from Katsuki import bot , app
 from Katsuki.helpers.help_func import emoji_convert
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
@@ -19,6 +19,7 @@ SPAM = []
 @bot.on_message(filters.command("start") & filters.private)
 async def start(_, message):
      user_id = message.from_user.id
+     app = await app.get_me()
      if user_id in SPAM:
          return await message.reply("`DON'T SPAM HERE!`")
      botlive = await emoji_convert(bot.is_connected)
