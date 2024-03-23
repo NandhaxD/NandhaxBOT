@@ -116,8 +116,10 @@ async def evaluate(app , message):
         evaluation = stdout
     else:
         evaluation = "Success"
-    final_output = f"<b>Command:</b>\n```python {cmd}``` \n```Taken time to output``` \n```python {evaluation.strip()}```"
     taken_time = (time.time() - start_time)
+	
+    final_output = f"<b>Command:</b>\n```python {cmd}```\n<b>Taken time to output:</b>\n```python {evaluation.strip()}```"
+	
     if len(final_output) > 4096:
         filename = "output.txt"
         with open(filename, "w+", encoding="utf8") as out_file:
