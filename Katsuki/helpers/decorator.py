@@ -15,7 +15,7 @@ from Katsuki import app
 
 
 
-async def is_admin(chat_id, user_id):
+async def admin_check(chat_id, user_id):
       kk = await app.get_chat_member(chat_id, user_id)
       admin = kk.status == enums.ChatMemberStatus.ADMINISTRATOR
       owner = kk.status == enums.ChatMemberStatus.OWNER
@@ -32,7 +32,7 @@ def admin_only(func):
              user_id=message.from_user.id 
              if message.chat.type==enums.ChatType.PRIVATE: 
                  return await message.edit("This command only work in groups.") 
-             is_admin = await is_admin(chat_id, user_id)
+             is_admin = await admin_check(chat_id, user_id)
              if not is_admin[0]:
                  return await message.edit("you're not admin.")
              return await func(app, message)                 
@@ -48,7 +48,7 @@ def can_restrict_members(func):
              user_id=message.from_user.id 
              if message.chat.type==enums.ChatType.PRIVATE: 
                  return await message.edit("This command only work in gorups.") 
-             is_admin = await is_admin(chat_id, user_id)
+             is_admin = await admin_check(chat_id, user_id)
              if not is_admin[0]:  
                    return await message.edit("You're not admin.")
              elif not is_admin[1].privileges is None:
