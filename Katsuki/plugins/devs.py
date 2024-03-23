@@ -90,6 +90,7 @@ async def evaluate(app , message):
     except IndexError:
         await status_message.delete()
         return
+    start_time = time.time()
     reply_to_id = message.id
     if message.reply_to_message:
         reply_to_id = message.reply_to_message.id
@@ -115,24 +116,24 @@ async def evaluate(app , message):
         evaluation = stdout
     else:
         evaluation = "Success"
-    final_output_doc = f"<b>Command:</b>\n<code>{cmd}</code>\n\n<b>Output</b>:\n<code>{evaluation.strip()}</code>"
-    final_output_grp = f"```Command:``` \n```python \n{cmd}``` \n\n```Output: \n{evaluation.strip()}```"
+    final_output = f"<b>Command:</b>\n```python {cmd}``` \n```Taken time to output``` \n```python {evaluation.strip()}```"
+    taken_time = (time.time() - start_time)
     if len(final_output) > 4096:
         filename = "output.txt"
         with open(filename, "w+", encoding="utf8") as out_file:
-            out_file.write(str(final_output_doc))
+            out_file.write(str(final_output))
         await message.reply_document(
             document=filename,
             thumb=THUMB_ID,
             caption=cmd,
-            disable_notification=True, quote=True,
+            quote=True,
             reply_to_message_id=reply_to_id,
         )
         os.remove(filename)
         await status_message.delete()
         return
     else:
-        await status_message.edit(final_output_grp)
+        await status_message.edit(final_output)
         return 
 
 
