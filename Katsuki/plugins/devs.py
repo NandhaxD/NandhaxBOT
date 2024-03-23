@@ -67,7 +67,7 @@ async def terminal(katsuki, message):
      	file.close()
 	
      	await message.reply_document(document=filename,
-     	thumb=THUMB_ID, quote=True, caption=f"<code>{code}</code}", parse_mode=enums.ParseMode.HTML)
+     	thumb=THUMB_ID, quote=True, caption=f"<code>{code}</code>", parse_mode=enums.ParseMode.HTML)
      	return await message.delete()
      else:
      	await message.edit(text=final_output, parse_mode=enums.ParseMode.HTML)
