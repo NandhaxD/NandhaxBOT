@@ -136,7 +136,7 @@ async def evaluate(app , message):
 
 
 
-__mod_name__ = "DEVS" 
+__mod_name__ = "Dev" 
   
 __help__ = """
 - e: evaluate codes
