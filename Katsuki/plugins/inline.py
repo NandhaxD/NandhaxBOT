@@ -10,7 +10,7 @@ import config
 import requests
 
 
-from Katsuki import MODULE, bot, INFO as GET_INFO
+from Katsuki import MODULE, bot
 from Katsuki.helpers.help_func import spacebin
 from pyrogram import filters
 
@@ -22,7 +22,7 @@ InlineQueryResultArticle, InputTextMessageContent, InlineKeyboardMarkup, InlineK
 
 @bot.on_inline_query(filters.regex("help"))
 async def help_cmds(_, inline_query):
-    user_id = (await GET_INFO.app()).id
+    user_id = config.OWNER_ID
     if not inline_query.from_user.id == user_id:
         return  
     buttons = [[InlineKeyboardButton(x['module'], callback_data=f"help:{x['module']}")] for x in MODULE]
@@ -36,7 +36,7 @@ async def help_cmds(_, inline_query):
 
 @bot.on_inline_query(filters.regex("test"))
 async def test(_, inline_query):
-    user_id = (await GET_INFO.app()).id
+    user_id = config.OWNER_ID
     if not inline_query.from_user.id == user_id:
        return 
     string = inline_query
