@@ -116,10 +116,9 @@ async def evaluate(app , message):
         evaluation = stdout
     else:
         evaluation = "Success"
-    taken_time = (time.time() - start_time)
-	
+    taken_time = f"{(time.time() - start_time)}:.3f"
     
-    final_output = f"<pre>Command:</pre> \n <pre language='python'> {cmd} </pre> \n <pre> Takem time to output:</pre><pre language='python'> {evaluation.strip()}</pre>"
+    final_output = f"<pre>Command:</pre><pre language='python'> {cmd} </pre> \n <pre> Takem time to output {taken_time}s:</pre><pre language='python'> {evaluation.strip()}</pre>"
     if len(final_output) > 4096:
         filename = "output.txt"
         with open(filename, "w+", encoding="utf8") as out_file:
@@ -135,7 +134,7 @@ async def evaluate(app , message):
         await status_message.delete()
         return
     else:
-        await status_message.edit(final_output)
+        await status_message.edit(final_output, parse_mode=enums.ParseMode.HTML)
         return 
 
 
