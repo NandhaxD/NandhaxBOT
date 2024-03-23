@@ -17,33 +17,10 @@ from Katsuki import app, MODULE
 from pyrogram import filters, enums
 
 
-""" ANIMATION HACKS """
-@app.on_message(filters.command("hack",config.HANDLER) & filters.me)
-async def hack(_, message):
-    
-    if message.reply_to_message:
-         user_id = message.reply_to_message.from_user.id
-    else:
-      return await message.edit("who should I hack ?")
-    HACK_STRING = [
-    "Looking for WhatsApp databases in targeted person...",
-    "User online: True\nTelegram access: True\nRead Storage: True ",
-    "Hacking... 20.63%\n`[███░░░░░░░░░░░░░░░░░]`",
-    "Hacking... 56.21%\n`[█████████░░░░░░░░░░░]`",
-    "Hacking... 86.21%\n`[███████████████░░░░░]`",
-    "Hacking... 93.50%\n`[█████████████████░░░]`",
-    "Hacking...  100%\n`[████████████████████]`",
-    "**🧑‍💻 hacked successfully**",
-]
-    for string in range(8):
-          await asyncio.sleep(2)
-          await message.edit(HACK_STRING[string % 8], parse_mode=enums.ParseMode.MARKDOWN)
 
 
 
-
-
-""" MATH TOOLS """
+# Math tools
 
 @app.on_message(filters.me & filters.command(['derive','integrate','simplify','factor'], prefixes=config.HANDLER))
 async def mathematics(_, message):
@@ -65,10 +42,10 @@ async def mathematics(_, message):
 
 
 
-__mod_name__ = "FUN"
+__mod_name__ = "Fun"
 
 __help__ = """
-- hack: reply to the user
+
 - maths: simplify, factor, integrate, derive
 credit: https://newton.vercel.app/
 """
