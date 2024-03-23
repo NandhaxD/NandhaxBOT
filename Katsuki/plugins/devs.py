@@ -59,23 +59,18 @@ async def terminal(katsuki, message):
 	 	         return await message.delete()
      code = message.text.split(maxsplit=1)[1]
      output = subprocess.getoutput(code)
-     if len(output) > 4096:
+     final_output = f"<pre>Command:</pre><pre language='python'>{output}</pre>"
+     if len(final_output) > 4096:
      	filename = 'shell.txt'
      	file = open(filename, 'w+')
      	file.write(output)
      	file.close()
+	
      	await message.reply_document(document=filename,
-     	thumb=THUMB_ID, quote=True, caption=f"`{code}`", parse_mode=enums.ParseMode.MARKDOWN)
+     	thumb=THUMB_ID, quote=True, caption=f"<code>{code}</code}", parse_mode=enums.ParseMode.HTML)
      	return await message.delete()
      else:
-     	string = f"""\n
-Command:
-`{code}`
-
-Results:
-`{output}`
-"""
-     	await message.edit(text=string, parse_mode=enums.ParseMode.MARKDOWN)
+     	await message.edit(text=final_output, parse_mode=enums.ParseMode.HTML)
 
 
 
@@ -116,7 +111,7 @@ async def evaluate(app , message):
         evaluation = stdout
     else:
         evaluation = "Success"
-    taken_time = f"{(time.time() - start_time)}:.3f"
+    taken_time = round({(time.time() - start_time))
     
     final_output = f"<pre>Command:</pre><pre language='python'> {cmd} </pre> \n <pre> Takem time to output {taken_time}s:</pre><pre language='python'> {evaluation.strip()}</pre>"
     if len(final_output) > 4096:
