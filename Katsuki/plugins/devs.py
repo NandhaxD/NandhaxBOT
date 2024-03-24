@@ -78,7 +78,7 @@ async def terminal(katsuki, message):
 # run your codes using eval
     
 @app.on_message(filters.me & filters.command("e",prefixes=config.HANDLER))
-async def evaluate(app , message):
+async def evaluate(app , message: m):
     status_message = await message.edit("`Running ...`")
     try:
         cmd = message.text.split(maxsplit=1)[1]
@@ -86,6 +86,7 @@ async def evaluate(app , message):
         await status_message.delete()
         return
     start_time = time.time()
+    p = print
     reply_to_id = message.id
     if message.reply_to_message:
         reply_to_id = message.reply_to_message.id
