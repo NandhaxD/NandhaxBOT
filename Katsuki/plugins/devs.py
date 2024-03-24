@@ -17,6 +17,7 @@ import config
 from Katsuki import app, MODULE
 from Katsuki.helpers.help_func import spacebin
 from pyrogram import filters, enums
+from pyrogram.types import Message 
 from pyrogram.errors import MessageTooLong
 
 
@@ -78,7 +79,7 @@ async def terminal(katsuki, message):
 # run your codes using eval
     
 @app.on_message(filters.me & filters.command("e",prefixes=config.HANDLER))
-async def evaluate(app , message: m):
+async def evaluate(app , message):
     status_message = await message.edit("`Running ...`")
     try:
         cmd = message.text.split(maxsplit=1)[1]
@@ -87,6 +88,7 @@ async def evaluate(app , message: m):
         return
     start_time = time.time()
     p = print
+    m = message 
     reply_to_id = message.id
     if message.reply_to_message:
         reply_to_id = message.reply_to_message.id
