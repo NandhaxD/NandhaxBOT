@@ -29,6 +29,17 @@ async def aexec(code, app, message):
     return await locals()["__aexec"](app, message)
 
 
+ 
+def p(*args, **kwargs):
+    """
+    Custom print function to be used instead of print
+    """
+    print(*args, **kwargs)
+	
+def r(message)
+    print(message.reply_to_message)
+
+      
 
 
 
@@ -78,18 +89,6 @@ async def terminal(katsuki, message):
 
 # run your codes using eval
 
-async def eval_replace(code: str):
-	string = {
-		"p": "print",
-		"m": "message",
-		"c": "app",
-		"r": "message.reply_to_message"
-	        }
-	for sort , full in string.items():
-		kk = code.replace(sort, full)
-	return kk
-	
-
 	
 @app.on_message(filters.me & filters.command("e",prefixes=config.HANDLER))
 async def evaluate(app , message):
@@ -100,7 +99,6 @@ async def evaluate(app , message):
         await status_message.delete()
         return
     start_time = time.time()
-    cmd = await eval_replace(cmd)
 	
     reply_to_id = message.id
     if message.reply_to_message:
