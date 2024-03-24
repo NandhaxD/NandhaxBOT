@@ -22,6 +22,7 @@ from pyrogram.errors import MessageTooLong
 
 
 async def aexec(code, app, message):
+    r = message.reply_to_message
     exec(
         "async def __aexec(katsuki, message): "
         + "".join(f"\n {l_}" for l_ in code.split("\n"))
@@ -36,10 +37,7 @@ def p(*args, **kwargs):
     """
     print(*args, **kwargs)
 	
-def r(message):
-    print(message.reply_to_message)
 
-      
 
 
 
@@ -99,6 +97,8 @@ async def evaluate(app , message):
         await status_message.delete()
         return
     start_time = time.time()
+
+    reply = message.reply_to_message
 	
     reply_to_id = message.id
     if message.reply_to_message:
