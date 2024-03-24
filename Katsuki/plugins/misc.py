@@ -19,7 +19,7 @@ import requests
 
 
 async def test(message):
-	await message.reply('<blockquote> hi, how are you </blockquote>', parse_mode=enums ParseMode.HTML)
+	await message.reply('<blockquote> hi, how are you </blockquote>', parse_mode=enums.ParseMode.HTML)
 	
 
 AI = ['bard', 'gpt', 'palm']
@@ -35,7 +35,7 @@ async def artificial_intelligent(_, message):
 	  ok = response['content']		
 	except Exception as e:
 		 return await reply.edit(f"<pre>Errors:</pre>{e}", parse_mode=enums.ParseMode.HTML)				
-	return await reply.edit(f'<pre>{model.upper()}:</pre><pre>prompt: {prompt}</pre>\n <blockquote>{ok}</blockquote>', parse_mode=enums.ParseMode.HTML)
+	return await reply.edit(f'<pre>{model.upper()}:</pre>\n<pre>prompt: {prompt}</pre>\n <blockquote>{ok}</blockquote>', parse_mode=enums.ParseMode.HTML)
 		
          
 	         
