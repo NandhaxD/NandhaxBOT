@@ -12,7 +12,7 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 
 
 import config, asyncio, requests 
-import urllib.prase import quote
+from urllib.prase import quote
 from Katsuki import app, MODULE 
 from pyrogram import filters, enums
 
