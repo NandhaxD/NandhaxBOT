@@ -31,8 +31,8 @@ async def artificial_intelligent(_, message):
 	  response = requests.get(api).json()
 	  ok = response['content']		
 	except Exception as e:
-		 return await reply.edit(f"<pre>Errors:</p>{e}", parse_mode=enums.ParseMode.HTML)				
-	return await reply.edit(f'<pre>{model.upper()}</p>\n{ok}', parse_mode=enums.ParseMode.HTML)
+		 return await reply.edit(f"<pre>Errors:</pre>{e}", parse_mode=enums.ParseMode.HTML)				
+	return await reply.edit(f'<pre>{model.upper()}:</pre>{ok}', parse_mode=enums.ParseMode.HTML)
 		
          
 	         
