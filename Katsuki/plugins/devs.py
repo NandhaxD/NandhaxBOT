@@ -96,7 +96,7 @@ async def evaluate(app , m):
 
     	
     reply_to_id = m.id
-    if message.reply_to_message:
+    if m.reply_to_message:
         reply_to_id = m.reply_to_message.id
     old_stderr = sys.stderr
     old_stdout = sys.stdout
