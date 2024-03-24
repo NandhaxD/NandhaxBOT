@@ -21,12 +21,12 @@ from pyrogram.types import Message
 from pyrogram.errors import MessageTooLong
 
 
-async def aexec(code, app, m: Message):
+async def aexec(code, app, m):
     exec(
         "async def __aexec(katsuki, message): "
         + "".join(f"\n {l_}" for l_ in code.split("\n"))
     )
-    return await locals()["__aexec"](app, m)
+    return await locals()["__aexec"](app, m: Message)
 
 
  
