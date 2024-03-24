@@ -23,11 +23,11 @@ import requests
 AI = ['bard', 'gpt', 'palm']
 @app.on_message(filters.me & filters.command(AI, prefixes=""))
 async def artificial_intelligent(_, message):
-	reply = await message.edit('Thinking.....')
+	reply = await message.edit('<b>Thinking....</b>')
 	model = message.text.split()[0]
 	prompt = quote(message.text.split(None, 1)[1])
 	api = f"https://tofu-node-apis.onrender.com/chat/{model}/{prompt}"
-	response = requests.get(api.json())['content']
+	response = requests.get(api).json()['content']
 	await reply.edit(f'<pre>{model}</p>\n{response}')
 		
          
