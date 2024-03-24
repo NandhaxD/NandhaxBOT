@@ -93,12 +93,8 @@ async def evaluate(app , m):
         await status_message.delete()
         return
     start_time = time.time()
-    pattern = r'\bp\((?!"[^"]*"\))r\)'
-    replacement = m.reply_to_message
-    cmd = re.sub(pattern, replacement, cmd)	
-    pattern = r'print\((?!"[^"]*"\))r\)'
-    cmd = re.sub(pattern, replacement, cmd)	
-	
+
+    	
     reply_to_id = m.id
     if message.reply_to_message:
         reply_to_id = m.reply_to_message.id
