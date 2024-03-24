@@ -12,7 +12,7 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 
 
 import config, asyncio, requests 
-
+import urllib.prase import quote
 from Katsuki import app, MODULE 
 from pyrogram import filters, enums
 
@@ -22,7 +22,9 @@ from pyrogram import filters, enums
 
 # Math tools
 
-@app.on_message(filters.me & filters.command(['derive','integrate','simplify','factor'], prefixes=config.HANDLER))
+MATH_PERTTEN = ['cos', 'sin', 'tan', 'derive','integrate','simplify','factor']
+
+@app.on_message(filters.me & filters.command(MATH_PERTTEN, prefixes=config.HANDLER))
 async def mathematics(_, message):
      
      pertten = message.text[1:].split()[0]
@@ -30,12 +32,13 @@ async def mathematics(_, message):
            return await message.edit(f'{pertten} query')
      else:
          query = message.text.split(None,1)[1]
+         query = quote(query)
          api = requests.get(f"https://newton.vercel.app/api/v2/{pertten}/{query}").json()
          result = api['result']
          if "Stop" in result:
-              return await message.edit(f"❌ **ERROR**:\n**Pertten**: {pertten}\n**Query**: {query}\n{result}", parse_mode=enums.ParseMode.MARKDOWN)
+              return await message.edit(f"❌ **ERROR**:\n**Pertten**: {pertten}\n**Query**: {query}\n ```{result}```", parse_mode=enums.ParseMode.MARKDOWN)
          else:
-              return await message.edit(f"✅ **Result**:\n**Pertten**: {pertten}\n**Query**: {query}\n{result}", parse_mode=enums.ParseMode.MARKDOWN)
+              return await message.edit(f"✅ **Result**:\n**Pertten**: {pertten}\n**Query**: {query}\n ```{result}```", parse_mode=enums.ParseMode.MARKDOWN)
 
 
 
