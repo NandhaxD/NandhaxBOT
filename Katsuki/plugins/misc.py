@@ -18,9 +18,7 @@ import requests
 
 
 
-async def test(message):
-	await message.reply('<blockquote> hi, how are you </blockquote>', parse_mode=enums.ParseMode.HTML)
-	
+
 
 AI = ['bard', 'gpt', 'palm']
 @app.on_message(filters.me & filters.command(AI, prefixes=""))
