@@ -26,7 +26,7 @@ async def aexec(code, app, message, r):
         "async def __aexec(katsuki, message): "
         + "".join(f"\n {l_}" for l_ in code.split("\n"))
     )
-    return await locals()["__aexec"](app, message)
+    return await locals()["__aexec"](app, message, r)
 
 
  
