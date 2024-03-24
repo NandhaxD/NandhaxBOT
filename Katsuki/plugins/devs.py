@@ -21,8 +21,7 @@ from pyrogram.types import Message
 from pyrogram.errors import MessageTooLong
 
 
-async def aexec(code, app, message):
-    r = message.reply_to_message
+async def aexec(code, app, message, r):
     exec(
         "async def __aexec(katsuki, message): "
         + "".join(f"\n {l_}" for l_ in code.split("\n"))
@@ -32,9 +31,6 @@ async def aexec(code, app, message):
 
  
 def p(*args, **kwargs):
-    """
-    Custom print function to be used instead of print
-    """
     print(*args, **kwargs)
 	
 
@@ -98,7 +94,7 @@ async def evaluate(app , message):
         return
     start_time = time.time()
 
-    reply = message.reply_to_message
+    r = message.reply_to_message
 	
     reply_to_id = message.id
     if message.reply_to_message:
@@ -109,7 +105,7 @@ async def evaluate(app , message):
     redirected_error = sys.stderr = io.StringIO()
     stdout, stderr, exc = None, None, None
     try:
-        await aexec(cmd, app, message)
+        await aexec(cmd, app, message, reply)
     except Exception:
         exc = traceback.format_exc()
     stdout = redirected_output.getvalue()
