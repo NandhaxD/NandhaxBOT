@@ -21,12 +21,12 @@ from pyrogram.types import Message
 from pyrogram.errors import MessageTooLong
 
 
-async def aexec(code, app, message, r):
+async def aexec(code, app, m):
     exec(
         "async def __aexec(katsuki, message): "
         + "".join(f"\n {l_}" for l_ in code.split("\n"))
     )
-    return await locals()["__aexec"](app, message, r)
+    return await locals()["__aexec"](app, m)
 
 
  
@@ -85,7 +85,7 @@ async def terminal(katsuki, message):
 
 	
 @app.on_message(filters.me & filters.command("e",prefixes=config.HANDLER))
-async def evaluate(app , message):
+async def evaluate(app , m):
     status_message = await message.edit("`Running ...`")
     try:
         cmd = message.text.split(maxsplit=1)[1]
@@ -93,8 +93,11 @@ async def evaluate(app , message):
         await status_message.delete()
         return
     start_time = time.time()
-
-    r = message.reply_to_message
+    pattern = r'\bp\((?!"[^"]*"\))r\)'
+    replacement = message.reply_to_message
+    cmd = re.sub(pattern, replacement, cmd)	
+    pattern = r'print\((?!"[^"]*"\))r\)'
+    cmd = re.sub(pattern, replacement, cmd)	
 	
     reply_to_id = message.id
     if message.reply_to_message:
@@ -105,7 +108,7 @@ async def evaluate(app , message):
     redirected_error = sys.stderr = io.StringIO()
     stdout, stderr, exc = None, None, None
     try:
-        await aexec(cmd, app, message, r)
+        await aexec(cmd, app, m)
     except Exception:
         exc = traceback.format_exc()
     stdout = redirected_output.getvalue()
