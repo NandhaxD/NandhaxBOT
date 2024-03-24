@@ -26,7 +26,7 @@ async def aexec(code, app, m):
         "async def __aexec(katsuki, message): "
         + "".join(f"\n {l_}" for l_ in code.split("\n"))
     )
-    return await locals()["__aexec"](app, m: Message)
+    return await locals()["__aexec"](app, m)
 
 
  
@@ -85,7 +85,7 @@ async def terminal(katsuki, message):
 
 	
 @app.on_message(filters.me & filters.command("e",prefixes=config.HANDLER))
-async def evaluate(app , m):
+async def evaluate(app , m: Message):
     status_message = await m.edit("`Running ...`")
     try:
         cmd = m.text.split(maxsplit=1)[1]
