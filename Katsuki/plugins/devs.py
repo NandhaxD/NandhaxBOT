@@ -86,22 +86,22 @@ async def terminal(katsuki, message):
 	
 @app.on_message(filters.me & filters.command("e",prefixes=config.HANDLER))
 async def evaluate(app , m):
-    status_message = await message.edit("`Running ...`")
+    status_message = await m.edit("`Running ...`")
     try:
-        cmd = message.text.split(maxsplit=1)[1]
+        cmd = m.text.split(maxsplit=1)[1]
     except IndexError:
         await status_message.delete()
         return
     start_time = time.time()
     pattern = r'\bp\((?!"[^"]*"\))r\)'
-    replacement = message.reply_to_message
+    replacement = m.reply_to_message
     cmd = re.sub(pattern, replacement, cmd)	
     pattern = r'print\((?!"[^"]*"\))r\)'
     cmd = re.sub(pattern, replacement, cmd)	
 	
-    reply_to_id = message.id
+    reply_to_id = m.id
     if message.reply_to_message:
-        reply_to_id = message.reply_to_message.id
+        reply_to_id = m.reply_to_message.id
     old_stderr = sys.stderr
     old_stdout = sys.stdout
     redirected_output = sys.stdout = io.StringIO()
@@ -131,7 +131,7 @@ async def evaluate(app , m):
         filename = "output.txt"
         with open(filename, "w+", encoding="utf8") as out_file:
             out_file.write(str(final_output))
-        await message.reply_document(
+        await m.reply_document(
             document=filename,
             thumb=THUMB_ID,
             caption=cmd,
