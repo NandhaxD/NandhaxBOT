@@ -27,8 +27,12 @@ async def artificial_intelligent(_, message):
 	model = message.text.split()[0]
 	prompt = quote(message.text.split(None, 1)[1])
 	api = f"https://tofu-node-apis.onrender.com/chat/{model}/{prompt}"
-	response = requests.get(api).json()['content']
-	await reply.edit(f'<pre>{model}</p>\n{response}')
+	try:
+	  response = requests.get(api).json()
+        ok = response.get('content')
+	except Exception as e:
+		 await reply.edit(f"<pre>Errors:</p>{e}")
+	await reply.edit(f'<pre>{model.upper()}</p>\n{ok}')
 		
          
 	         
