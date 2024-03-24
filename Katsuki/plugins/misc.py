@@ -13,11 +13,23 @@ import json, os
 from Katsuki import app, MODULE, bot
 from pyrogram import filters, enums
 from gpytranslate import Translator
-
+from urllib.parse import quote
 import requests
 
 
 
+
+
+AI = ['bard', 'gpt', 'palm']
+@app.on_message(filters.me & filters.command(AI, prefixes=""))
+async def artificial_intelligent(_, message):
+	reply = await message.edit('Thinking.....')
+	model = message.text.split()[0]
+	prompt = quote(message.text.split(None, 1)[1])
+	api = f"https://tofu-node-apis.onrender.com/chat/{model}/{prompt}"
+	response = requests.get(api.json())['content']
+	await reply.edit(f'<pre>{model}</p>\n{response}')
+		
          
 	         
 @app.on_message(filters.me & filters.command("help", prefixes=config.HANDLER))
