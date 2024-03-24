@@ -23,7 +23,8 @@ import requests
 AI = ['bard', 'gpt', 'palm']
 @app.on_message(filters.me & filters.command(AI, prefixes=""))
 async def artificial_intelligent(_, message):
-	
+	if len(message.command) <2:
+		return await message.edit('<b>Type somthing....</b>')
 	reply = await message.edit('<b>Thinking....</b>')
 	model = message.text.split()[0]	
 	prompt = message.text.split(None, 1)[1]
