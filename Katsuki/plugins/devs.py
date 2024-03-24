@@ -81,8 +81,9 @@ async def terminal(katsuki, message):
 async def eval_replace(code: str):
 	string = {
 		"p": "print",
-		"m", "message",
-		"c", "app",
+		"m": "message",
+		"c": "app",
+		"r": "message.reply_to_message"
 	        }
 	for sort , full in string.items():
 		kk = code.replace(sort, full)
