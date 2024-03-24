@@ -36,7 +36,7 @@ def p(*args, **kwargs):
     """
     print(*args, **kwargs)
 	
-def r(message)
+def r(message):
     print(message.reply_to_message)
 
       
