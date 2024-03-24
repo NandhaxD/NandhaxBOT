@@ -48,7 +48,7 @@ async def logs(_, message):
                    await message.reply_document(
                 document=logs, captain=paste ,thumb=THUMB_ID, quote=True),
                    return await msg.delete()
-       await message.edit(logsText)
+       await message.edit(f"<pre>logging {logsText}</pre>", parse_mode=enums.ParseMode.HTML)
 
 
 """ SHELL COMMAND ARE USED FOR PIP AND SOME MORE THOUGH """
@@ -60,7 +60,7 @@ async def terminal(katsuki, message):
 	 	         return await message.delete()
      code = message.text.split(maxsplit=1)[1]
      output = subprocess.getoutput(code)
-     final_output = f"<pre>Command:</pre><pre language='python'>{output}</pre>"
+     final_output = f"<pre>Command:</pre><pre> {code}</pre> \n<pre language='python'>{output}</pre>"
      if len(final_output) > 4096:
      	filename = 'shell.txt'
      	file = open(filename, 'w+')
@@ -77,7 +77,19 @@ async def terminal(katsuki, message):
 
 
 # run your codes using eval
-    
+
+async def eval_replace(code: str):
+	string = {
+		"p": "print",
+		"m", "message",
+		"c", "app",
+	        }
+	for sort , full in string.items():
+		kk = code.replace(sort, full)
+	return kk
+	
+
+	
 @app.on_message(filters.me & filters.command("e",prefixes=config.HANDLER))
 async def evaluate(app , message):
     status_message = await message.edit("`Running ...`")
@@ -87,8 +99,8 @@ async def evaluate(app , message):
         await status_message.delete()
         return
     start_time = time.time()
-    p = print
-    m = message 
+    cmd = await eval_replace(cmd)
+	
     reply_to_id = message.id
     if message.reply_to_message:
         reply_to_id = message.reply_to_message.id
