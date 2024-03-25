@@ -38,7 +38,7 @@ async def afk_check(_, message):
         r = message.reply_to_message
         IS_AFK = AFK['afk']
         try:
-            if ((((r.from_user.id) == config.OWNER_ID):
+            if ((r.from_user.id) == config.OWNER_ID):
                    and IS_AFK):
                   reason = AFK['reason']
                   if reason is not None:
