@@ -26,10 +26,10 @@ if ENV:
            print(f"THE {var} ENVIRONMENT VARIABLE IS MISSING.")
 else:
    API_ID = 13257951 #int() method | get from my.telegram.org
-   API_HASH = "d8ea642aedb736d40035bc05f0cfd477" #str() method | get from my.telegram.org
-   BOT_TOKEN = "6059605779:AAGn74wEaCqIvhZxFZQHOjDtKOz51ITi2io" #str() method | get via @botfather
-   SESSION = "BQDKTN8AuM4Olt5aDWZxxtPugoTAevANp0JMiEDTvKD01pOtzXsI6k1px_F400ApY4RV-m4BEn953pWrCeHz1UT7P4kNniKbueFjL3OQLlueUt1K2ZlTBINH-cYZXDGJcJn5FFUFocDc0G0oikdN3jCm9clHNbIVDoCvUCNY4TjQsG3H2SfHGPAf-zRYY-UFHiRcMCntAHjiVhd5KOpk7W590ogGl5MgnXGahC01QEUW1K16L1B8l_OEFKOaTlGis5QKVQfgHkQNvoPQB4dydV4B-DAtK5YFMgUEUViQitA3rZcUhz2qwO8H3K_byjkfzmoEQ0XccWQK6BEu8gv0EC3dW051GwAAAAFTgt_sAA" #str() method | use replit or bots to get your Pyro session    GROUP_ID = -1001717881477 #int() menthod | your group id
-   DB_URL = "mongodb+srv://nandhaxd:u7uHs7EhyuyLT5Kj@cluster0.80igexg.mongodb.net/" # get from mongodb.com
+   API_HASH = "" #str() method | get from my.telegram.org
+   BOT_TOKEN = "" #str() method | get via @botfather
+   SESSION = "" #str() method | use replit or bots to get your Pyro session    GROUP_ID = -1001717881477 #int() menthod | your group id
+   DB_URL ="" # get from mongodb.com
    OWNER_ID = 5696053228 # fill ur user id
 
 
