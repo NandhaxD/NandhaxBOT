@@ -22,9 +22,11 @@ async def away_from_keyboard(_, message):
      else:
            reason = message.text.split(None, 1)[1]
        
+     
+     await message.reply('<b>You are now AFK!</b>')
      AFK['afk'] = True
      AFK['reason'] = reason
-     return await message.reply('<b>You are now AFK!</b>')
+     return 
 
 
 @app.on_message((filters.reply|filters.text) & ~filters.group , group=3)  
