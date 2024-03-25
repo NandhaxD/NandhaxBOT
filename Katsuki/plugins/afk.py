@@ -29,7 +29,7 @@ async def away_from_keyboard(_, message):
      return 
 
 
-@app.on_message((filters.reply|filters.text) & ~filters.group , group=3)  
+@app.on_message((filters.reply|filters.text), group=3)  
 async def afk_check(_, message):
 
         text = message.text
