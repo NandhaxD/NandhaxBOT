@@ -4,9 +4,16 @@ from pyrogram import filters, enums
 
 
 AFK = {'afk': False, 'reason': None} 
+@app.on_message(filters.me, group=10)
+async def back_to_life(_, message):
+      global AFK
+      check = AFK['afk']
+      if check:
+           AFK['afk'] = False
+           return await message.reply("<b>Welcome back by Katsuki ❤️!</b>")
+           
 
-
-@app.on_message(filters.me & filters.command('afk', prefixes=config.HANDLER))
+@app.on_message(filters.me & filters.command('afk', prefixes=config.HANDLER), group=1)
 async def away_from_keyboard(_, message):
      global AFK
      
@@ -19,15 +26,8 @@ async def away_from_keyboard(_, message):
      AFK['reason'] = reason
      return await message.reply('<b>You are now AFK!</b>')
 
-@app.on_message(filters.me, group=4)
-async def back_to_life(_, message):
-      global AFK
-      check = AFK['afk']
-      if check:
-           AFK['afk'] = False
-           return await message.reply("<b>Welcome back by Katsuki ❤️!</b>")
 
-@app.on_message((filters.reply|filters.text) & ~filters.group , group=2)  
+@app.on_message((filters.reply|filters.text) & ~filters.group , group=3)  
 async def afk_check(_, message):
 
         text = message.text
