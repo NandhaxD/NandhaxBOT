@@ -24,12 +24,11 @@ import requests
 async def artificial_intelligent(_, message):
 	if len(message.command) <2:
 		return await message.edit('<b>Type somthing....</b>')
-        modelType = {
-		'bard': 'gemini',
-		'gpt': 'chatgpt'}
+		
+        models = {'bard': 'gemini', 'gpt': 'chatgpt'}
 	reply = await message.edit('<b>Thinking....</b>')
 	model = message.text.split()[0]
-	model = model[modelType]
+	model = models[model]
 	prompt = message.text.split(None, 1)[1]
 	api = f"https://tofu-node-apis.onrender.com/api/{model}/{quote(prompt, safe='')}"	
 	try:		
