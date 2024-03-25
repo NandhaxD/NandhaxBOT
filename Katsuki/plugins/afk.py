@@ -38,15 +38,14 @@ async def afk_check(_, message):
         r = message.reply_to_message
         IS_AFK = AFK['afk']
         try:
-            if ((r.from_user.id) == config.OWNER_ID):
-                   and IS_AFK):
+            if (((r.from_user.id) == config.OWNER_ID) and IS_AFK):
                   reason = AFK['reason']
                   if reason is not None:
                         return await message.reply(
                           f'<pre>AFK: Away from keyboard!</pre>\n<pre>Reason:</pre><pre>{reason}</pre>', parse_mode=enums.ParseMode.HTML)
                   else:
                       return await message.reply('<b>Offline! ❤️ </b>')
-            elif re.findall(pattern, message.text, re.IGNORECASE):
+            elif (re.findall(pattern, message.text, re.IGNORECASE) and IS_AFK):
                   reason = AFK['reason']
                   if reason is not None:
                         return await message.reply(
