@@ -46,7 +46,7 @@ async def afk_check(_, message):
                           f'<pre>AFK: Away from keyboard!</pre>\n<pre>Reason:</pre><pre>{reason}</pre>', parse_mode=enums.ParseMode.HTML)
                   else:
                       return await message.reply('<b>Offline! ❤️ </b>')
-        except errors.AttributeError:
+        except AttributeError:
                 pass
         
                 
