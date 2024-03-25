@@ -27,8 +27,7 @@ async def back_to_life(_, message):
            AFK['afk'] = False
            return await message.reply("<b>Welcome back by Katsuki ❤️!</b>")
 
-@app.on_message((filters.reply|filters.text))
-                &~filters.group , group=2)  
+@app.on_message((filters.reply|filters.text) & ~filters.group , group=2)  
 async def afk_check(_, message):
 
         text = message.text
