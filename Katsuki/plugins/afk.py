@@ -3,7 +3,7 @@ from Katsuki import app
 from pyrogram import filters, enums
 
 
-AFK = {'afk': False, 'reason': 'not Mentioned'} 
+AFK = {'afk': False, 'reason': None} 
 
 
 @app.on_message(filters.me & filters.command('afk', prefixes=config.HANDLER))
@@ -35,7 +35,7 @@ async def afk_check(_, message):
         result = re.search(pattern, text) is not None
         r = message.reply_to_message
         IS_AFK = AFK['afk']
-        if ((r.from_user.id) == config.OWNER_ID or result)
+        if (((r.from_user.id) == config.OWNER_ID) or result)
                    and IS_AFK):
               reason = AFK['reason']
               if reason is not None:
