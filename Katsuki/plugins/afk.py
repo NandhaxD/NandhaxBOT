@@ -1,4 +1,4 @@
-import config, re
+import config 
 from Katsuki import app
 from pyrogram import filters, enums, errors
 
@@ -29,11 +29,8 @@ async def away_from_keyboard(_, message):
      return 
 
 
-@app.on_message((filters.reply|filters.text) & ~filters.me ,group=3)  
+@app.on_message(filters.reply & ~filters.me ,group=3)  
 async def afk_check(_, message):
-
-        
-        pattern = r'@nandha\b'
       
         r = message.reply_to_message
         IS_AFK = AFK['afk']
@@ -42,17 +39,10 @@ async def afk_check(_, message):
                   reason = AFK['reason']
                   if reason is not None:
                         return await message.reply(
-                          f'<pre>AFK: Away from keyboard!</pre>\n<pre>Reason:</pre><pre>{reason}</pre>', parse_mode=enums.ParseMode.HTML)
+                          f'<pre>AFK: Away from keyboard!</pre>\n<pre>Reason:</pre><pre>{reason}</pre>', parse_mode=enums.ParseMode.HTML, quote=True)
                   else:
-                      return await message.reply('<b>Offline! ❤️ </b>')
-            elif (re.search(pattern, message.text) and IS_AFK):
-                  reason = AFK['reason']
-                  if reason is not None:
-                        return await message.reply(
-                          f'<pre>AFK: Away from keyboard!</pre>\n<pre>Reason:</pre><pre>{reason}</pre>', parse_mode=enums.ParseMode.HTML)
-                  else:
-                      return await message.reply('<b>Offline! ❤️ </b>')
-                  
+                      return await message.reply('<b>Offline! ❤️ </b>', quote=True)
+            
         except AttributeError:
                 pass
         
