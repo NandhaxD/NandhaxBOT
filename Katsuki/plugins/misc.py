@@ -28,7 +28,8 @@ async def artificial_intelligent(_, message):
 	reply = await message.edit('<b>Thinking....</b>')
 	model = message.text.split()[0]	
 	prompt = message.text.split(None, 1)[1]
-	api = f"http://tofu-api.onrender.com/chat/{model}/{quote(prompt, safe='')}"	
+	qu = prompt.replace("/", '')
+	api = f"http://tofu-api.onrender.com/chat/{model}/{quote(qu, safe='')}"	
 	try:		
 	  response = requests.get(api).json()
 	  ok = response['content']		
