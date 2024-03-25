@@ -32,13 +32,13 @@ async def away_from_keyboard(_, message):
 @app.on_message((filters.reply|filters.text) & ~filters.me ,group=3)  
 async def afk_check(_, message):
 
-        text = message.text
+        
         pattern = r'@nandha\b'
-        result = re.findall(pattern, text, re.IGNORECASE)
+      
         r = message.reply_to_message
         IS_AFK = AFK['afk']
         try:
-            if ((((r.from_user.id) == config.OWNER_ID) or result)
+            if ((((r.from_user.id) == config.OWNER_ID)
                    and IS_AFK):
                   reason = AFK['reason']
                   if reason is not None:
@@ -46,6 +46,14 @@ async def afk_check(_, message):
                           f'<pre>AFK: Away from keyboard!</pre>\n<pre>Reason:</pre><pre>{reason}</pre>', parse_mode=enums.ParseMode.HTML)
                   else:
                       return await message.reply('<b>Offline! ❤️ </b>')
+            elif re.findall(pattern, message.text, re.IGNORECASE):
+                  reason = AFK['reason']
+                  if reason is not None:
+                        return await message.reply(
+                          f'<pre>AFK: Away from keyboard!</pre>\n<pre>Reason:</pre><pre>{reason}</pre>', parse_mode=enums.ParseMode.HTML)
+                  else:
+                      return await message.reply('<b>Offline! ❤️ </b>')
+                  
         except AttributeError:
                 pass
         
