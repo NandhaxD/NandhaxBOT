@@ -18,7 +18,7 @@ async def run_clients():
       await pyrogram.idle()
       zone = await get_datetime()
       await bot.send_message(
-           chat_id=config.GROUP_ID,
+           chat_id=config.OWNER_ID,
            text=strings.RESTART_TEXT.format(date=zone["date"], time=zone["time"]))
       
 
