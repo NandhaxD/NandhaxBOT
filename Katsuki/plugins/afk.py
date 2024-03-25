@@ -1,6 +1,6 @@
 import config, re
 from Katsuki import app
-from pyrogram import filters, enums
+from pyrogram import filters, enums, errors
 
 
 AFK = {'afk': False, 'reason': None} 
@@ -29,21 +29,24 @@ async def away_from_keyboard(_, message):
      return 
 
 
-@app.on_message((filters.reply|filters.text), group=3)  
+@app.on_message((filters.reply|filters.text) & ~filters.me ,group=3)  
 async def afk_check(_, message):
 
         text = message.text
         pattern = r'@nandha\b'
-        result = re.search(pattern, text) is not None
+        result = re.findall(pattern, text, re.IGNORECASE)
         r = message.reply_to_message
         IS_AFK = AFK['afk']
-        if ((((r.from_user.id) == config.OWNER_ID) or result)
+        try:
+            if ((((r.from_user.id) == config.OWNER_ID) or result)
                    and IS_AFK):
-              reason = AFK['reason']
-              if reason is not None:
-                     return await message.reply(
+                  reason = AFK['reason']
+                  if reason is not None:
+                        return await message.reply(
                           f'<pre>AFK: Away from keyboard!</pre>\n<pre>Reason:</pre><pre>{reason}</pre>', parse_mode=enums.ParseMode.HTML)
-              else:
-                   return await message.reply('<b>Offline! ❤️ </b>')
-             
+                  else:
+                      return await message.reply('<b>Offline! ❤️ </b>')
+        except errros.AttributeError:
+                pass
+        
                 
