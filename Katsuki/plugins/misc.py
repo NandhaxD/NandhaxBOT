@@ -31,12 +31,12 @@ async def artificial_intelligent(_, message):
 	model = message.text.split()[0]
 	model = ai_models[model]
 	prompt = message.text.split(None, 1)[1]
-	api = f"https://tofu-node-apis.onrender.com/api/{model}/{quote(prompt, safe='')}"	
-	#try:		
-	response = requests.get(api).json()
-	ok = response.get('reply')		
-	#except Exception as e:
-		# return await reply.edit(f"<pre>Errors:</pre>{e}", parse_mode=enums.ParseMode.HTML)				
+	api = f"https://tofu-node-apis.onrender.com/api/{model}?/{quote(prompt, safe='')}"	
+	try:		
+	    response = requests.get(api).json()
+	    ok = response.get('reply')		
+	except Exception as e:
+		 return await reply.edit(f"<pre>Errors:</pre>{e}", parse_mode=enums.ParseMode.HTML)				
 	return await reply.edit(f'<pre>{model.upper()}:</pre>\n<pre>prompt: {prompt}</pre>\n <blockquote>{ok}</blockquote>', parse_mode=enums.ParseMode.HTML)
 		
          
