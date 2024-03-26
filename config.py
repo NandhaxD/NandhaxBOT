@@ -29,7 +29,7 @@ else:
    API_HASH = "d8ea642aedb736d40035bc05f0cfd477" #str() method | get from my.telegram.org
    BOT_TOKEN = "6059605779:AAGn74wEaCqIvhZxFZQHOjDtKOz51ITi2io" #str() method | get via @botfather
    SESSION = "BQDKTN8AnC-7eeIoBSMj00LSBq5Kn_1yvYg4NdiDxQUheI39wdlGwZ2Z29HU7S8afa7vI_E86SMEebwrMR5CxDFEAvA-vsY5S_cKZm5BkY8l3ECyg5eU4FMRAys6FCCp4RxFo5ycunCReiv-vMUSqwr22V4v73JWHlPJghxROx4s9JDUL3SB0gOFm6HZmBa8MHx86pToJb0HORu69TKjWcArokBmHhqvOq--yIWTJsoDDLIy_Qszk3Km2I21TpU5p9NcGoiALwPryANBu7YPjfMaDPUneagkshX2DTfSa9eSMFAnLv0jwkmPW6FYX0dsXv7qARbN10fxd3Ltjufcg_kJTfvxewAAAAFTgt_sAA" #str() method | use replit or bots to get your Pyro session    GROUP_ID = -1001717881477 #int() menthod | your group id
-   DB_URL = "mongodb+srv://nandhaxd:u7uHs7EhyuyLT5Kj@cluster0.80igexg.mongodb.net/" # get from mongodb.com
+   DB_URL = "mongodb+srv://nandhaxd:hIatwh7wpArjRPX3@cluster0.80igexg.mongodb.net/" # get from mongodb.com
    OWNER_ID = 5696053228 # fill ur user id
 
 
