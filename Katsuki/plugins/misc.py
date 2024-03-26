@@ -31,7 +31,7 @@ async def artificial_intelligent(_, message):
 	model = message.text.split()[0]
 	model = ai_models[model]
 	prompt = message.text.split(None, 1)[1]
-	api = f"https://tofu-node-apis.onrender.com/api/{model}?/{quote(prompt, safe='')}"	
+	api = f"https://tofu-node-apis.onrender.com/api/{model}?/prompt={quote(prompt, safe='')}"	
 	try:		
 	    response = requests.get(api).json()
 	    ok = response.get('reply')		
