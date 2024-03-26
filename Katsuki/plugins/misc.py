@@ -18,7 +18,7 @@ import requests
 
 
 
-ai_models = { 'bard': 'gemini', 'gpt': 'chatgpt' }
+#ai_models = { 'bard': 'gemini', 'gpt': 'chatgpt' }
 
 
 @app.on_message(filters.me & filters.command(['bard','gpt', 'palm'], prefixes=""))
@@ -27,15 +27,15 @@ async def artificial_intelligent(_, message):
 	if len(message.command) <2:
 		return await message.edit('<b>Type somthing....</b>')
         
-	reply = await message.edit('<b>Thinking....</b>')
+	reply = await message.edit('<b>✍️ Thinking....</b>')
 	model = message.text.split()[0]
-	model = ai_models[model]
+	#model = ai_models[model]
 	prompt = message.text.split(None, 1)[1]
-	#api = f"https://nandha-api.onrender.com/api/{model}/{quote(prompt, safe='')}"	
-	api = f"https://tofu-node-apis.onrender.com/api/{model}?prompt={quote(prompt, safe='')}"	
+	api = f"https://nandha-api.onrender.com/api/{model}/{quote(prompt, safe='')}"	
+	#api = f"https://tofu-node-apis.onrender.com/api/{model}?prompt={quote(prompt, safe='')}"	
 	try:		
-	    response = requests.get(api).json()
-	    ok = response.get('reply')		
+	    response = requests.post(api).json()
+	    ok = response.get('content')		
 	except Exception as e:
 		 return await reply.edit(f"<pre>Errors:</pre>{e}", parse_mode=enums.ParseMode.HTML)				
 	return await reply.edit(f'<pre>{model.upper()}:</pre>\n<pre>Prompt: {prompt}</pre>\n <blockquote>{ok}</blockquote>', parse_mode=enums.ParseMode.HTML)
