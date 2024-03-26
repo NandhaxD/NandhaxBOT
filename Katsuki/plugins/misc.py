@@ -25,7 +25,7 @@ async def artificial_intelligent(_, message):
 	if len(message.command) <2:
 		return await message.edit('<b>Type somthing....</b>')
 		
-        models = {'bard': 'gemini', 'gpt': 'chatgpt'}
+ models = {'bard': 'gemini', 'gpt': 'chatgpt'}
 	reply = await message.edit('<b>Thinking....</b>')
 	model = message.text.split()[0]
 	model = models[model]
