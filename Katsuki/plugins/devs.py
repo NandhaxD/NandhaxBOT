@@ -14,7 +14,7 @@ import os
 import subprocess
 import traceback
 import config
-from Katsuki import app, MODULE
+from Katsuki import app, MODULE, bot
 from Katsuki.helpers.help_func import spacebin
 from pyrogram import filters, enums
 from pyrogram.types import Message 
@@ -86,6 +86,7 @@ async def terminal(katsuki, message):
 	
 @app.on_message(filters.me & filters.command("e",prefixes=config.HANDLER))
 async def evaluate(app , m: Message):
+    global r, bot
     status_message = await m.edit("`Running ...`")
     try:
         cmd = m.text.split(maxsplit=1)[1]
@@ -94,10 +95,10 @@ async def evaluate(app , m: Message):
         return
     start_time = time.time()
 
-    	
-    reply_to_id = m.id
-    if m.reply_to_message:
-        reply_to_id = m.reply_to_message.id
+    r = m.reply_to_message	
+    
+    if r:
+        reply_to_id = r.id
     old_stderr = sys.stderr
     old_stdout = sys.stdout
     redirected_output = sys.stdout = io.StringIO()
