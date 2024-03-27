@@ -34,7 +34,7 @@ async def artificial_intelligent(_, message):
 	api = f"https://nandha-api.onrender.com/ai/{model}/{quote(prompt, safe='')}"	
 	#api = f"https://tofu-node-apis.onrender.com/api/{model}?prompt={quote(prompt, safe='')}"	
 	try:		
-	    response = requests.post(api).json()
+	    response = requests.get(api).json()
 	    ok = response.get('content')		
 	except Exception as e:
 		 return await reply.edit(f"<pre>Errors:</pre>{e}", parse_mode=enums.ParseMode.HTML)				
