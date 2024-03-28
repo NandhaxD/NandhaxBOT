@@ -8,7 +8,9 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 
 import asyncio 
 import config
-import json, os
+import json
+import os
+import lang
 
 from Katsuki import app, MODULE, bot
 from pyrogram import filters, enums
@@ -17,6 +19,17 @@ from urllib.parse import quote
 import requests
 
 
+
+@app.on_message(filters.command('alive', prefixes=config.HANDLER))
+async def alive(_, message):
+       reply_to = message.reply_to_message
+       if reply_to:
+	        await message.reply(lang['alive'])
+       else:
+	   await message.reply(lang['alive'])
+	        
+	        
+	
 
 #ai_models = { 'bard': 'gemini', 'gpt': 'chatgpt' }
 
