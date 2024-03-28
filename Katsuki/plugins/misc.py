@@ -20,16 +20,12 @@ import requests
 
 
 
+
+
 @app.on_message(filters.command('alive', prefixes=config.HANDLER))
 async def alive(_, message):
-       reply_to = message.reply_to_message
-       if reply_to:
-           return await message.reply(lang['alive'])
-       else:
-	   return await message.reply(lang['alive'])
-	        
-	        
-	
+    await message.edit(lang['alive'])
+
 
 #ai_models = { 'bard': 'gemini', 'gpt': 'chatgpt' }
 
