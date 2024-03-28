@@ -6,10 +6,10 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 
 
 
-import config, asyncio, strings
+import config, asyncio
 
 from pyrogram import filters, enums
-from Katsuki import app, bot
+from Katsuki import app, bot. lang
 from Katsuki.helpers.decorator import admin_only, can_restrict_members
 
 
@@ -18,44 +18,41 @@ from Katsuki.helpers.decorator import admin_only, can_restrict_members
 @can_restrict_members
 async def ban_all_members(_, message):
    chat_id = message.chat.id
+   chat_name = message.chat.title
    
    success = 0
    failures = 0
-   MembersCount = []
-   
-   string = strings.MASS_BAN_STRING
 
    async for m in app.get_chat_members(chat_id=chat_id):
-    MembersCount.append(m.user.id)      
+          
     try:         
           service = await app.ban_chat_member(chat_id=chat_id, user_id=m.user.id)             
           if service:
               await service.delete()
               success += 1           
-          await asyncio.sleep(2)
-          await message.edit(string.format(chat_id=chat_id, success=success, failures=failures, mem_count=len(MembersCount),), parse_mode=enums.ParseMode.MARKDOWN)          
+          await asyncio.sleep(3)
+          await message.edit(lang['ban_03'].format(success=success, failures=failures, chat_name))          
     except:
          failures += 1   
-   await bot.send_message(chat_id=config.GROUP_ID, text=string.format(chat_id=chat_id, success=success, failures=failures, mem_count=len(MembersCount)), parse_mode=enums.ParseMode.MARKDOWN)
-   await message.edit(string.format(chat_id=chat_id, success=success, failures=failures, mem_count=len(MembersCount)))
+   await bot.send_message(chat_id=config.OWNER_ID, text=lang['ban_03'].format(success=success, failures=failures, chat_name))
+   await message.edit(lang['ban_03'].format(success=success, failures=failures, chat_name))
 
 
 @app.on_message(filters.command("ban", config.HANDLER) & filters.me)
 @can_restrict_members
 async def ban_chat_member(app, message):
-   
-   if len(message.text.split()) >= 2:
-        user_id = message.from_user.id
-   elif message.reply_to_message:
+        
+   if message.reply_to_message:
         user_id = message.reply_to_message.from_user.id
+        mention = message.reply_to_message.from_user.mention
    else:
-       return await message.edit("`WHO SHOULD I BAN?`")
+       return await message.edit(lang['ban_01'])
    try:
       await app.ban_chat_member(
            chat_id=message.chat.id,
            user_id=user_id)
    except Exception as e:
-         return await message.edit(f"[`ERROR`: `{e}`]")
-   return await message.edit("`BANNED`!")
+         return await message.edit(lang['error'].format(e))
+   return await message.edit(lang['ban_02'].format(mention))
    
   
