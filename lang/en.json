@@ -1,4 +1,15 @@
 {
+    
+    "error": "Error Appears:{}",
     "alive": "I'm alive",
-    "bot_start_text": "wwusu"
+    "bot_start_text": "wwusu",
+    "afk_01": "<b>You are now AFK!</b>",
+    "afk_02": "<pre>Away from keyboard [AFK]:\n{}</pre>",
+    "afk_03": "offline!!",
+    "afk_04": "<b>Welcome back by Katsuki !</b>",
+    "ban_01": "<b>Who Should I Ban?</b>",
+    "ban_02": "Banned! {}",
+    "ban_03": "<b>Successfully banned `{}` and failed to ban `{}` from {}</b>",
+    
+    
 }
