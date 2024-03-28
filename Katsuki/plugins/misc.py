@@ -10,9 +10,9 @@ import asyncio
 import config
 import json
 import os
-import lang
 
-from Katsuki import app, MODULE, bot
+
+from Katsuki import app, MODULE, bot, lang
 from pyrogram import filters, enums
 from gpytranslate import Translator
 from urllib.parse import quote
