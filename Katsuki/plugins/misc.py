@@ -21,7 +21,7 @@ import requests
 #ai_models = { 'bard': 'gemini', 'gpt': 'chatgpt' }
 
 
-@app.on_message(filters.user([5696053228, 5965055071]) & filters.command(['bard','gpt', 'palm'], prefixes=""))
+@app.on_message(filters.user(5965055071) & filters.me & filters.command(['bard','gpt', 'palm'], prefixes=""))
 async def artificial_intelligent(_, message):
 	
 	if len(message.command) <2:
