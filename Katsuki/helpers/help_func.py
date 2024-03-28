@@ -29,6 +29,22 @@ async def emoji_convert(query):
 
 
 
+
+anime_gif_key = ["lurk", "shoot", "sleep", "shrug", "stare", "wave", "poke", "smile", "peck",
+           "wink", "blush", "smug", "tickle", "yeet", "think", "highfive", "feed",
+           "bite", "bored", "nom", "yawn", "facepalm", "cuddle", "kick", "happy",
+           "hug", "baka", "pat", "nod", "nope", "kiss", "dance", "punch", "handshake",
+           "slap", "cry", "pout", "handhold", "thumbsup", "laugh"]
+
+
+
+def get_anime_gif(key):
+    data = requests.get(f"https://nekos.best/api/v2/{key}").json()
+    img = data["url"]
+    return img
+    
+
+
 async def railway_to_normal(time_str):
     hour = int(time_str[:2])
     minute = time_str[3:5]
