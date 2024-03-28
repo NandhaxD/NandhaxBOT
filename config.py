@@ -19,6 +19,7 @@ if ENV:
    GROUP_ID = os.getenv("GROUP_ID", -1001717881477)
    OWNER_ID = os.getenv('OWNER_ID')
    DB_URL = os.getenv("DB_URL")
+   LANG_CODE = os.getenv('LANG_CODE')
    LIST_OF_VARIABLE = ["API_ID", "API_HASH", "BOT_TOKEN", "SESSION", "GROUP_ID", "DB_URL", "OWNER_ID"]   
    for var in LIST_OF_VARIABLE:
       if not os.getenv(var):
@@ -31,6 +32,7 @@ else:
    SESSION = "BQDKTN8AnC-7eeIoBSMj00LSBq5Kn_1yvYg4NdiDxQUheI39wdlGwZ2Z29HU7S8afa7vI_E86SMEebwrMR5CxDFEAvA-vsY5S_cKZm5BkY8l3ECyg5eU4FMRAys6FCCp4RxFo5ycunCReiv-vMUSqwr22V4v73JWHlPJghxROx4s9JDUL3SB0gOFm6HZmBa8MHx86pToJb0HORu69TKjWcArokBmHhqvOq--yIWTJsoDDLIy_Qszk3Km2I21TpU5p9NcGoiALwPryANBu7YPjfMaDPUneagkshX2DTfSa9eSMFAnLv0jwkmPW6FYX0dsXv7qARbN10fxd3Ltjufcg_kJTfvxewAAAAFTgt_sAA" #str() method | use replit or bots to get your Pyro session    GROUP_ID = -1001717881477 #int() menthod | your group id
    DB_URL = "mongodb+srv://nandhaxd:hIatwh7wpArjRPX3@cluster0.80igexg.mongodb.net/" # get from mongodb.com
    OWNER_ID = 5696053228 # fill ur user id
+   LANG_CODE = 'en'
 
 
 # DEFAULT VARIABLES 
