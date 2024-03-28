@@ -6,11 +6,11 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 
 
 import config, strings
-import asyncio
+import asyncio, random 
 
 from pyrogram import filters, enums
 from Katsuki import bot ,app
-from Katsuki.helpers.help_func import emoji_convert
+from Katsuki.helpers.help_func import emoji_convert, anime_gif_key, get_anime_gif
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
@@ -19,6 +19,9 @@ SPAM = []
 @bot.on_message(filters.command("start") & filters.private)
 async def start(_, message):
      user_id = message.from_user.id
+
+     key = random.choice(anime_gif_key)
+     animation = await get_anime_gif(key=key)
      
      if user_id in SPAM:
          return await message.reply("Please refrain from spamming in this chat. Thank you!")
@@ -31,7 +34,9 @@ async def start(_, message):
      mention = f"[{name}](tg://user?id={id})"
      BUTTON=InlineKeyboardMarkup([[
      InlineKeyboardButton("Source ⬅️", url=config.SOURCE),]])
-     await message.reply_text(text=strings.BOT_START_STRING.format(mention=mention, applive=applive, botlive=botlive),quote=True, reply_markup=BUTTON ,parse_mode=enums.ParseMode.MARKDOWN)
+     await message.reply_animation(
+          animation=animation,
+          caption=strings.BOT_START_STRING.format(mention=mention, applive=applive, botlive=botlive),quote=True, reply_markup=BUTTON)
      await asyncio.sleep(10)
      SPAM.remove(user_id)
      
