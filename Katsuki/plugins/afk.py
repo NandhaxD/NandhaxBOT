@@ -1,5 +1,5 @@
 import config 
-from Katsuki import app
+from Katsuki import app, lang
 from pyrogram import filters, enums, errors
 
 
@@ -10,7 +10,7 @@ async def back_to_life(_, message):
       check = AFK['afk']
       if check:
            AFK['afk'] = False
-           return await message.reply("<b>Welcome back by Katsuki ❤️!</b>")
+           return await message.reply(lang['afk_04'])
            
 
 @app.on_message(filters.me & filters.command('afk', prefixes=config.HANDLER), group=1)
@@ -24,7 +24,7 @@ async def away_from_keyboard(_, message):
        
      AFK['afk'] = True
      AFK['reason'] = reason
-     w = await message.reply('<b>You are now AFK!</b>')
+     w = await message.reply(lang['afk_01'])
      w.stop_propagation()
      return 
 
@@ -38,10 +38,9 @@ async def afk_check(_, message):
             if (((r.from_user.id) == config.OWNER_ID) and IS_AFK):
                   reason = AFK['reason']
                   if reason is not None:
-                        return await message.reply(
-                          f'<pre>AFK: Away from keyboard!</pre>\n<pre>Reason:</pre><pre>{reason}</pre>', parse_mode=enums.ParseMode.HTML, quote=True)
-                  else:
-                      return await message.reply('<b>Offline! ❤️ </b>', quote=True)
+                        return await message.reply_text(text=lang['afk_02'].format(reason), quote=True)
+                                           else:
+                  return await message.reply_text(text=lang['afk_03'], quote=True)
             
         except AttributeError:
                 pass
