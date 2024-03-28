@@ -20,9 +20,9 @@ MODULE = []
 
 
 
-# LANGUAGE 
+# LANGUAGE load
 
-with open('lang/en.json', 'r') as f:
+with open(f'lang/{config.LANG_CODE}.json', 'r') as f:
     lang = json.load(f)
 
 # LOGGING INFO
@@ -46,7 +46,7 @@ DB = MongoClient(config.DB_URL)
 try:
    DB.server_info()
 except Mongoerrors.ConnectionFailure:
-     print("Connection failure, INVALID MONGO DB URL!, DOWN!")
+     print("Connection failure, INVALID MONGO DB URL maybe!, DOWN!")
      sys.exit()
 
 
