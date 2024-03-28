@@ -20,6 +20,11 @@ MODULE = []
 
 
 
+# LANGUAGE 
+
+with open('lang/en.json', 'r') as f:
+    lang = json.load(f)
+
 # LOGGING INFO
 
 FORMAT = f"[{config.NAME}] %(message)s"
