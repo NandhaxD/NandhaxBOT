@@ -88,10 +88,10 @@ async def ud(_, message):
         try:
           results = requests.get(
             f'https://api.urbandictionary.com/v0/define?term={text}').json()
-          reply_text = f'**results: {text}**\n\n{results["list"][0]["definition"]}\n\n_{results["list"][0]["example"]}_'
+          reply_text = f'<pre>Results:{text}</pre>\n\n<pre>{results["list"][0]["definition"]}\n\n{results["list"][0]["example"]}<pre>'
         except Exception as e: 
               return await message.edit_text(f"Somthing wrong Happens:\n`{e}`")
-        ud = await message.edit_text("[`EXPLORING`]")
+        ud = await message.edit_text("Defining.....")
         await ud.edit_text(reply_text)
         
         
