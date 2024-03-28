@@ -22,7 +22,7 @@ import requests
 
 
 
-@app.on_message(filters.command('alive', prefixes=config.HANDLER))
+@app.on_message(filters.me & filters.command('alive', prefixes=config.HANDLER))
 async def alive(_, message):
     await message.edit(lang['alive'])
 
