@@ -133,7 +133,7 @@ async def evaluate(app , m: Message):
             thumb=THUMB_ID,
             caption=cmd,
             quote=True,
-            reply_to_message_id=reply_to_id,
+            
         )
         os.remove(filename)
         await status_message.delete()
