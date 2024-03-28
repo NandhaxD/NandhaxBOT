@@ -24,9 +24,9 @@ import requests
 async def alive(_, message):
        reply_to = message.reply_to_message
        if reply_to:
-	        await message.reply(lang['alive'])
+           return await message.reply(lang['alive'])
        else:
-	   await message.reply(lang['alive'])
+	   return await message.reply(lang['alive'])
 	        
 	        
 	
