@@ -21,10 +21,12 @@ import requests
 #ai_models = { 'bard': 'gemini', 'gpt': 'chatgpt' }
 
 
-@app.on_message(filters.user(5965055071) & filters.me & filters.command(['bard','gpt', 'palm'], prefixes=""))
+@app.on_message(filters.me & filters.command(['bard','gpt', 'palm'], prefixes=""))
 async def artificial_intelligent(_, message):
+	
 	if len(message.command) <2:
 		return await message.edit('<b>Type somthing....</b>')
+        
 	reply = await message.edit('<b>✍️ Thinking....</b>')
 	model = message.text.split()[0]
 	#model = ai_models[model]
@@ -36,8 +38,8 @@ async def artificial_intelligent(_, message):
 	    ok = response.get('content')		
 	except Exception as e:
 		 return await reply.edit(f"<pre>Errors:</pre>{e}", parse_mode=enums.ParseMode.HTML)				
-	return await reply.edit(f'<pre>{model.upper()}:</pre>\n<pre>Prompt: {prompt}</pre>\n <pre>{ok}</pre>', parse_mode=enums.ParseMode.HTML)
-		
+	return await reply.edit(f'<pre>{model.upper()}:</pre>\n<pre>Prompt: {prompt}</pre>\n <blockquote>{ok}</blockquote>', parse_mode=enums.ParseMode.HTML)
+	
          
 	         
 @app.on_message(filters.me & filters.command("help", prefixes=config.HANDLER))
