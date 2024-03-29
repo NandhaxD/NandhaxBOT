@@ -26,7 +26,5 @@
     "afk_04": "<b>Welcome back by Katsuki !</b>",
     "ban_01": "<b>Who Should I Ban?</b>",
     "ban_02": "Banned! {}",
-    "ban_03": "<b>Successfully banned `{}` and failed to ban `{}` from {}</b>",
-    
-    
+    "ban_03": "<b>Successfully banned `{}` and failed to ban `{}` from {}</b>"
 }
