@@ -65,7 +65,7 @@ async def run_shell(katsuki, message):
 	 	         return await message.delete()
      code = message.text.split(maxsplit=1)[1]
      output = subprocess.getoutput(code)
-     final_output = lang['shell_01'].format(code, output)
+     final_output = "<pre>Command:</pre><pre> {}</pre> \n<pre language='python'>{}</pre>".format(code, output)
      if len(final_output) > 4096:
      	filename = 'shell.txt'
      	file = open(filename, 'w+')
