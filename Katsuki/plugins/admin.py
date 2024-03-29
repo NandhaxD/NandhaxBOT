@@ -34,7 +34,7 @@ async def ban_all_members(_, message):
           await message.edit(lang['ban_03'].format(success, failures, chat_name))          
     except:
          failures += 1   
-   await bot.send_message(chat_id=config.OWNER_ID, text=lang['ban_03'].format(success=success, failures=failures, chat_name))
+   await bot.send_message(chat_id=config.OWNER_ID, text=lang['ban_03'].format(success, failures, chat_name))
    await message.edit(lang['ban_03'].format(success, failures, chat_name))
 
 
