@@ -5,11 +5,11 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 
 
 
-import config, strings
+import config
 import asyncio, random 
 
 from pyrogram import filters, enums
-from Katsuki import bot ,app
+from Katsuki import bot ,app, lang
 from Katsuki.helpers.help_func import emoji_convert, anime_gif_key, get_anime_gif
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
@@ -24,7 +24,7 @@ async def start(_, message):
      animation = await get_anime_gif(key=key)
      
      if user_id in SPAM:
-         return await message.reply("Please refrain from spamming in this chat. Thank you!")
+         return await message.reply(lang['bot_start_02'])
      botlive = await emoji_convert(bot.is_connected)
      applive = await emoji_convert(app.is_connected)
      name = config.NAME
@@ -36,7 +36,7 @@ async def start(_, message):
      InlineKeyboardButton("Source ⬅️", url=config.SOURCE),]])
      await message.reply_animation(
           animation=animation,
-          caption=strings.BOT_START_STRING.format(mention=mention, applive=applive, botlive=botlive),quote=True, reply_markup=BUTTON)
+          caption=lang['bot_start_01'].format(mention, applive,botlive), quote=True, reply_markup=BUTTON)
      await asyncio.sleep(10)
      SPAM.remove(user_id)
      
