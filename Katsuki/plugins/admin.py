@@ -9,7 +9,7 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 import config, asyncio
 
 from pyrogram import filters, enums
-from Katsuki import app, bot. lang
+from Katsuki import app, bot, lang
 from Katsuki.helpers.decorator import admin_only, can_restrict_members
 
 
