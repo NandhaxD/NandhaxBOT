@@ -128,7 +128,7 @@ async def translate(_, message) -> None:
         dest = "en"
     translation = await trans(to_translate, sourcelang=source, targetlang=dest)
     await message.delete()
-    await reply_msg.reply_text(lang['translate_02'].format(source, dest, translation.text)
+    await reply_msg.reply_text(lang['translate_02'].format(source, dest, translation.text))
     return 
 
 
