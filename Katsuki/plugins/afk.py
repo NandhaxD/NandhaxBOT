@@ -39,8 +39,8 @@ async def afk_check(_, message):
                   reason = AFK['reason']
                   if reason is not None:
                         return await message.reply_text(text=lang['afk_02'].format(reason), quote=True)
-                                           else:
-                  return await message.reply_text(text=lang['afk_03'], quote=True)
+                  else:
+                       return await message.reply_text(text=lang['afk_03'], quote=True)
             
         except AttributeError:
                 pass
