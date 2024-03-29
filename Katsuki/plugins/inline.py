@@ -10,7 +10,7 @@ import config
 import requests
 
 
-from Katsuki import MODULE, bot
+from Katsuki import MODULE, bot, lang
 from Katsuki.helpers.help_func import spacebin
 from pyrogram import filters
 
@@ -31,7 +31,7 @@ async def help_cmds(_, inline_query):
       cache_time=0,
       results = [
      InlineQueryResultArticle(
-        "🆘 HELP COMMANDS",  InputTextMessageContent(message_text="[`HELP COMMANDS`]"), thumb_url="https://graph.org/file/b136511bda43b1d8db7d2.jpg",reply_markup=InlineKeyboardMarkup(buttons))])
+        lang['help_cmds'],  InputTextMessageContent(message_text=lang['help_cmds']), thumb_url="https://graph.org/file/d71ae8adaac9ad004b3ca.jpg",reply_markup=InlineKeyboardMarkup(buttons))])
 
 
 @bot.on_inline_query(filters.regex("test"))
