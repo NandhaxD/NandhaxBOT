@@ -40,8 +40,8 @@ async def math_riddle(_, message):
            await m.reply_photo(
                photo='boom.jpg', 
                        caption=lang['riddle'].format(query, result))
-    except Exception as e:
+     except Exception as e:
             return await msg.edit(lang['error'].format(e))
-    os.remove("image.jpg")
-    os.remove("boom.jpg")
+     os.remove("image.jpg")
+     os.remove("boom.jpg")
      
