@@ -14,7 +14,7 @@ import os
 import subprocess
 import traceback
 import config
-from Katsuki import app, MODULE, bot
+from Katsuki import app, MODULE, bot, lang
 from Katsuki.helpers.help_func import spacebin
 from pyrogram import filters, enums
 from pyrogram.types import Message 
@@ -44,7 +44,7 @@ THUMB_ID = "./IMG_20220701_185623_542.jpg"
 @app.on_message(filters.me & filters.command("logs",prefixes=config.HANDLER))
 async def logs(_, message):
        logsText = subprocess.getoutput("tail logs.txt")
-       msg = await message.edit_text("Analyzing.....")
+       msg = await message.edit_text(lang['alyz'])
        if len(logsText) > 4096:
               with io.BytesIO(str.encode(logsText)) as logs:
       
@@ -53,19 +53,19 @@ async def logs(_, message):
                    await message.reply_document(
                 document=logs, captain=paste ,thumb=THUMB_ID, quote=True),
                    return await msg.delete()
-       await message.edit(f"<pre>logging {logsText}</pre>", parse_mode=enums.ParseMode.HTML)
+       return await message.edit(lang['logging'].format(logsText), parse_mode=enums.ParseMode.HTML)
 
 
 """ SHELL COMMAND ARE USED FOR PIP AND SOME MORE THOUGH """
 
 @app.on_message(filters.me & filters.command("sh", prefixes=config.HANDLER))
-async def terminal(katsuki, message):
+async def run_shell(katsuki, message):
 	 
      if len(message.text.split()) <= 1:
 	 	         return await message.delete()
      code = message.text.split(maxsplit=1)[1]
      output = subprocess.getoutput(code)
-     final_output = f"<pre>Command:</pre><pre> {code}</pre> \n<pre language='python'>{output}</pre>"
+     final_output = lang['shell_01'].format(code, output)
      if len(final_output) > 4096:
      	filename = 'shell.txt'
      	file = open(filename, 'w+')
@@ -73,7 +73,7 @@ async def terminal(katsuki, message):
      	file.close()
 	
      	await message.reply_document(document=filename,
-     	thumb=THUMB_ID, quote=True, caption=f"<code>{code}</code>", parse_mode=enums.ParseMode.HTML)
+     	thumb=THUMB_ID, quote=True, caption=lang['shell_02'].format(code), parse_mode=enums.ParseMode.HTML)
      	return await message.delete()
      else:
      	await message.edit(text=final_output, parse_mode=enums.ParseMode.HTML)
@@ -122,8 +122,10 @@ async def evaluate(app , m: Message):
     else:
         evaluation = "Success"
     taken_time = round((time.time() - start_time), 3)
-    
-    final_output = f"<pre>Command:</pre><pre language='python'>{cmd}</pre> \n<pre>Takem Time To Output: {taken_time}'s:</pre><pre language='python'> {evaluation.strip()}</pre>"
+    output = evaluation.strip()
+	
+    final_output = lang['eval_01'].format(cmd, taken_time, output)
+	
     if len(final_output) > 4096:
         filename = "output.txt"
         with open(filename, "w+", encoding="utf8") as out_file:
