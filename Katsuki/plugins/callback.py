@@ -5,9 +5,9 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 
 
 
-import strings, config
+import config
 
-from Katsuki import bot, MODULE
+from Katsuki import bot, MODULE, lang
 from pyrogram import filters, enums 
 
 from pyrogram.types import ( 
@@ -18,7 +18,7 @@ InlineKeyboardMarkup, InlineKeyboardButton )
 async def help_back(_, query):
    user_id = config.OWNER_ID
    if not query.from_user.id == int(user_id):
-       return await query.answer("You Aren't my master", show_alert=True)
+       return await query.answer(lang['not_owner'], show_alert=True)
    buttons = [[InlineKeyboardButton(x['module'], callback_data=f"help:{x['module']}")] for x in MODULE]
    return await bot.edit_inline_text(
        inline_message_id=query.inline_message_id, text="Help Commands", reply_markup=InlineKeyboardMarkup(buttons), parse_mode=enums.ParseMode.MARKDOWN)
@@ -29,11 +29,11 @@ async def help_back(_, query):
 async def help_commnds(_, query):
    user_id = config.OWNER_ID
    if not query.from_user.id == int(user_id):
-       return await query.answer("You aren't my master", show_alert=True)
+       return await query.answer(lang['not_owner'], show_alert=True)
    CB_NAME = query.data.split(':')[1].casefold()
    data = [x for x in MODULE if x['module'].casefold() == CB_NAME]
    if len(data) == 0:
-       return await query.answer("Somthing wrong. no module.", show_alert=True)
+       return await query.answer(lang['wrong'], show_alert=True)
    module = data[0]['module']
    help = data[0]['help']
    button = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ BACK",callback_data="help_back")]])
