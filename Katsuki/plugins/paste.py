@@ -5,12 +5,12 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 
 
 
-import strings
+
 import requests 
 import config, os
 
 from Katsuki import app
-from Katsuki.helpers.help_func import spacebin, convert_to_datetime
+from Katsuki.helpers.help_func import spacebin, convert_to_datetime, lang
 from pyrogram import filters, enums
 
 
@@ -31,7 +31,7 @@ async def paste(_, message):
           timedate = await convert_to_datetime(mm["result"]["datetime"])
           link = mm["result"]["link"]
           raw = mm["result"]["raw"]          
-          return await message.edit(strings.PAST_FORMAT.format(link=link, raw=raw,timedate=timedate), parse_mode=enums.ParseMode.MARKDOWN, disable_web_page_preview=True)
+          return await message.edit(lang['paste'].format(link=link, raw=raw,timedate=timedate), parse_mode=enums.ParseMode.MARKDOWN, disable_web_page_preview=True)
 
     elif (message.reply_to_message.document and bool(message.reply_to_message.document.mime_type.startswith("text/"))):
            path = await app.download_media(message.reply_to_message)
@@ -45,11 +45,9 @@ async def paste(_, message):
            link = mm["result"]["link"]
            raw = mm["result"]["raw"]
 
-           return await message.edit(strings.PAST_FORMAT.format(link=link, raw=raw,timedate=timedate), parse_mode=enums.ParseMode.MARKDOWN, disable_web_page_preview=True)
+           return await message.edit(lang['paste'].format(link=link, raw=raw,timedate=timedate), parse_mode=enums.ParseMode.MARKDOWN, disable_web_page_preview=True)
 
     elif bool(message.reply_to_message.text or message.reply_to_message.caption):
-
-
            if message.reply_to_message.text:
                  text = message.reply_to_message.text
            elif message.reply_to_message.caption:
@@ -60,9 +58,9 @@ async def paste(_, message):
            link = mm["result"]["link"]
            raw = mm["result"]["raw"]
 
-           return await message.edit(strings.PAST_FORMAT.format(link=link, raw=raw,timedate=timedate), parse_mode=enums.ParseMode.MARKDOWN, disable_web_page_preview=True)
+           return await message.edit(lang['paste'].format(link=link, raw=raw,timedate=timedate), parse_mode=enums.ParseMode.MARKDOWN, disable_web_page_preview=True)
     else:
-         return await message.edit("=> I am UNABLE to paste this.")
+         return await message.edit(lang['wrong'])
 
 
     
