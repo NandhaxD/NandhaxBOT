@@ -11,13 +11,13 @@ from Katsuki import app, lang
 
 
 
-async def get_question():
-     api = "https://newton.vercel.app/api/v2/simplify/{query}"
+async def get_question():     
      symbol = ['+','-','*']
-     query = "({num1}{syb1}{num2}){syb2}{num3}".format(num1=randint(20, 44), syb1=choice(symbol), num2=randint(2, 9), syb2=choice(symbol), num3=randint (1, 30))
+     query = "({num1}{syb1}{num2}){syb2}{num3}".format(num1=randint(20, 44), syb1=choice(symbol), num2=randint(2, 9), syb2=choice(symbol), num3=randint (1, 30))     
+     api = "https://newton.vercel.app/api/v2/simplify/{query}"
      response = requests.get(api.format(query=query)).json()
      result = response['result']
-     return { 'query': query, 'result': result }
+     return {'query': query, 'result': result}
      
 
 
@@ -60,7 +60,7 @@ async def math_riddle(_, message):
      try:
            await message.reply_photo(
                photo=name, 
-                       caption=lang['riddle'].format(text, result))
+                       caption=lang['riddle'].format(text, answer))
            await msg.delete()
      except Exception as e:
            await msg.edit(lang['error'].format(e))
