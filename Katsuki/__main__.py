@@ -18,7 +18,7 @@ async def run_clients():
       zone = await get_datetime()
       await bot.send_message(
            chat_id=config.OWNER_ID,
-           text=lang['bot_restart'].format(date=zone["date"], time=zone["time"]))
+           text=lang['bot_restart'].format(zone["date"], zone["time"]))
       
 
 
