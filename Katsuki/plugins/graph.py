@@ -11,7 +11,7 @@ import config, os
 
 @app.on_message(filters.command("tm", prefixes=config.HANDLER) & filters.me)
 async def tm(_, message):
-    await message.edit('processing...')
+    await message.edit(lang['alyz'])
     reply_is = message.reply_to_message
     if not reply_is:
          return await message.edit_text(lang['reply_to_media'])
