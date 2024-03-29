@@ -1,7 +1,8 @@
 {
     "help_cmds": "HELP COMMANDS",
     "logging": "<pre>logging {}</pre>",
-    "paste": "**Paste Link**: [Here]({})\n**Raw View**: [Here]({})\n **Created at**: {}",
+    "riddle": "**Query**: `{}`\n**Answer**: `{}`",
+    "paste": "**Paste Link**: [Here]({})\n**Raw View**: [Here]({})\n**Created at**: {}",
     "alyz": "Analysing....",
     "query": "Enter Query ❗",
     "thinking": "✍️ Thinking....",
