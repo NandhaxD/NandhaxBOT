@@ -6,10 +6,9 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 
 
 import pyrogram
-import strings
 import config
 
-from Katsuki import bot , app
+from Katsuki import bot , app, lang
 from Katsuki.helpers.help_func import get_datetime 
 
 async def run_clients():
@@ -19,7 +18,7 @@ async def run_clients():
       zone = await get_datetime()
       await bot.send_message(
            chat_id=config.OWNER_ID,
-           text=strings.RESTART_TEXT.format(date=zone["date"], time=zone["time"]))
+           text=lang['bot_restart'].format(date=zone["date"], time=zone["time"]))
       
 
 
