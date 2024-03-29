@@ -1,6 +1,6 @@
 from telegraph import upload_file, Telegraph
 from pyrogram import filters
-from Katsuki import app
+from Katsuki import app, lang
 import config, os
 
 
@@ -14,7 +14,7 @@ async def tm(_, message):
     await message.edit('processing...')
     reply_is = message.reply_to_message
     if not reply_is:
-         return await message.edit_text("[`REPLY TO THE MEDIA`]")
+         return await message.edit_text(lang['reply_to_media'])
     types = [True if reply_is.document else True if reply_is.photo else True if reply_is.animation else False][0]
     if types:
         path = await message.reply_to_message.download()
@@ -50,7 +50,7 @@ async def graph_text(_, message):
               elif message.reply_to_message and (message.reply_to_message.text or message.reply_to_message.caption):
                     text = (message.reply_to_message.text or message.reply_to_message.caption)
               else:
-                  return await message.edit('`REPLY TO THE TEXT OR DOCUMENT`!')
+                  return await message.edit(lang['reply_to'])
      response = telegraph.create_page(first_name, html_content=text)
      page_url = response['url']
      return await message.edit(page_url)
