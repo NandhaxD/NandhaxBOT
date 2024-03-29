@@ -38,9 +38,9 @@ async def mathematics(_, message):
          api = requests.get(f"https://newton.vercel.app/api/v2/{pertten}/{query_req}").json()
          result = api['result']
          if "Stop" in result:
-              return await message.edit(f"❌ <b>ERROR</b>:\n<b>Pertten</b>: {pertten}\n<b>Query</b>: {query}\n <pre>{result}</pre>", parse_mode=enums.ParseMode.HTML)
+              return await message.edit(lang['math_01'].format(pertten, query, result), parse_mode=enums.ParseMode.HTML)
          else:
-              return await message.edit(f"✅ <b>Result</b>:\n<b>Pertten</b>: {pertten}\n<b>Query</b>: {query}\n <pre>{result}</pre>", parse_mode=enums.ParseMode.HTML)
+              return await message.edit(lang['math_01'].format(pertten, query, result), parse_mode=enums.ParseMode.HTML)
 
 
 
