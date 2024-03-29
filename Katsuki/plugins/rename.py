@@ -9,7 +9,7 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 import config
 import os
 from pyrogram import filters
-from Katsuki import app
+from Katsuki import app, lang
 
 THUMB_ID = "./IMG_20220701_185623_542.jpg"
 
@@ -20,9 +20,9 @@ async def rename(_, message):
        filename = message.text.split(None,1)[1]
     except:
         return await message.edit("Ex: `.rename file.txt`")                                 
-    msg = await message.edit("⬇️ File has downloading...")
+    msg = await message.edit(lang['download'])
     path = await message.reply_to_message.download(file_name=filename)
-    await msg.edit_text("⬆️ File has uplaoding")
+    await msg.edit_text(lang['upload'])
    
     await message.reply_document(document=path, thumb=THUMB_ID, quote=True)
     await msg.delete()
