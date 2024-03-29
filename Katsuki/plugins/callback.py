@@ -21,7 +21,7 @@ async def help_back(_, query):
        return await query.answer(lang['not_owner'], show_alert=True)
    buttons = [[InlineKeyboardButton(x['module'], callback_data=f"help:{x['module']}")] for x in MODULE]
    return await bot.edit_inline_text(
-       inline_message_id=query.inline_message_id, text="Help Commands", reply_markup=InlineKeyboardMarkup(buttons), parse_mode=enums.ParseMode.MARKDOWN)
+       inline_message_id=query.inline_message_id, text=lang['help_cmds'], reply_markup=InlineKeyboardMarkup(buttons), parse_mode=enums.ParseMode.MARKDOWN)
        
      
 
