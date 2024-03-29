@@ -141,7 +141,7 @@ async def evaluate(app , m: Message):
         await status_message.delete()
         return
     else:
-        await m.reply(final_output, parse_mode=enums.ParseMode.HTML)
+        await satatus_message.edit(final_output, parse_mode=enums.ParseMode.HTML)
         return 
 
 
