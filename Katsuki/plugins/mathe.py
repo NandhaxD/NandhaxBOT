@@ -15,7 +15,7 @@ async def get_question():
      api = "https://newton.vercel.app/api/v2/simplify/{query}"
      symbol = ['+','-','*']
      query = "({num1}{syb1}{num2}){syb2}{num3}".format(num1=randint(20, 44), syb1=choice(symbol), num2=randint(2, 9), syb2=choice(symbol), num3=randint (1, 30))
-     response = requests.get(api.format(query)).json()
+     response = requests.get(api.format(query=query)).json()
      result = response['result']
      return { 'query': query, 'result': result }
      
