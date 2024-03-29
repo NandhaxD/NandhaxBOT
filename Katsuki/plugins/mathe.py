@@ -21,7 +21,7 @@ async def get_question():
 
 @app.on_message(filters.me & filters.command('riddle', prefixes=config.HANDLER))
 async def math_riddle(_, message):
-     msg = await m.edit(lang['thinking'])
+     msg = await message.edit(lang['thinking'])
      template = requests.get("https://graph.org/file/9b165baf9de57406d76ca.jpg")
      with open("image.jpg", "wb") as img_file:
            img_file.write(template.content)
