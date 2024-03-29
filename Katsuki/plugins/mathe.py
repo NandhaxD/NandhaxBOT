@@ -2,7 +2,7 @@
 import config
 import os
 import requests
-import urllib
+import io
 from random import randint, choice
 
 from PIL import Image, ImageDraw, ImageFont
