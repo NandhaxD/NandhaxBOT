@@ -34,9 +34,9 @@ async def alive(_, message):
 async def artificial_intelligent(_, message):
 	
 	if len(message.command) <2:
-		return await message.edit('<b>Type somthing....</b>')
+		return await message.edit(lang['query'])
         
-	reply = await message.edit('<b>✍️ Thinking....</b>')
+	reply = await message.edit(lang['thinking'])
 	model = message.text.split()[0]
 	#model = ai_models[model]
 	prompt = message.text.split(None, 1)[1]
@@ -46,8 +46,8 @@ async def artificial_intelligent(_, message):
 	    response = requests.get(api).json()
 	    ok = response.get('content')		
 	except Exception as e:
-		 return await reply.edit(f"<pre>Errors:</pre>{e}", parse_mode=enums.ParseMode.HTML)				
-	return await reply.edit(f'<pre>{model.upper()}:</pre>\n<pre>Prompt: {prompt}</pre>\n <blockquote>{ok}</blockquote>', parse_mode=enums.ParseMode.HTML)
+		 return await reply.edit(lang['error'].format(str(e)), parse_mode=enums.ParseMode.HTML)				
+	return await reply.edit(lang['AI'].format(model.upper(), prompt, ok), parse_mode=enums.ParseMode.HTML)
 	
          
 	         
@@ -99,8 +99,8 @@ async def ud(_, message):
             f'https://api.urbandictionary.com/v0/define?term={text}').json()
           reply_text = f'<pre>Results:{text}</pre>\n\n<pre>{results["list"][0]["definition"]}\n\n{results["list"][0]["example"]}<pre>'
         except Exception as e: 
-              return await message.edit_text(f"Somthing wrong Happens:\n`{e}`")
-        ud = await message.edit_text("Defining.....")
+              return await message.edit_text(lang['error'].format(e))
+        ud = await message.edit_text(lang['thinking'])
         await ud.edit_text(reply_text)
         
         
@@ -109,7 +109,7 @@ trans = Translator()
 async def translate(_, message) -> None:
     reply_msg = message.reply_to_message
     if not reply_msg:
-        await message.reply_text("[Reply To The Message Using The Translation Code Provided!](https://telegra.ph/Lang-Codes-03-19-3)")
+        await message.reply_text(lang['translate_01'])
         return
     if reply_msg.caption:
         to_translate = reply_msg.caption
@@ -127,12 +127,8 @@ async def translate(_, message) -> None:
         source = await trans.detect(to_translate)
         dest = "en"
     translation = await trans(to_translate, sourcelang=source, targetlang=dest)
-    reply = (
-        f"**Translated from {source} to {dest}**:\n"
-        f"`{translation.text}`"
-    )
     await message.delete()
-    await reply_msg.reply_text(reply)
+    await reply_msg.reply_text(lang['translate_02'].format(source, dest, translation.text)
     return 
 
 
