@@ -14,7 +14,7 @@ async def add_user(user_id: int):
     if not user_id in list:
           user = {'user_id': user_id}
           db.insert_one(user)
-
+          return True
 
 
 async def remove_user(user_id: int):
@@ -22,7 +22,7 @@ async def remove_user(user_id: int):
       user = db.find_one(user)
       if user:
          db.delete_one(user)
-      return True
+         return True
       
   
   
