@@ -31,7 +31,7 @@ def devs_only(func):
      async def wrapped(app: app, message: Message):
           user_id = message.from_user.id
           list = await get_users()
-          if ((not user_id in list) or (user_id != int(config.OWNER_ID))):
+          if (user_id != int(config.OWNER_ID)):
                 return 
           return await func(app, message)
      return wrapped 
