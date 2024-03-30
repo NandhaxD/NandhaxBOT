@@ -5,7 +5,7 @@ db = DATABASE['DEV_USERS']
 
 
 
-async def get_users(): > list:
+async def get_users():
      list = [x['user_id'] for x in db.find()]
      return list
 
