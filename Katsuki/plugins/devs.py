@@ -16,7 +16,7 @@ import traceback
 import config
 from Katsuki import app, MODULE, bot, lang
 from Katsuki.helpers.help_func import spacebin
-from Katsuki.helpers.decorator import devs
+from Katsuki.helpers.decorator import devs_only
 from pyrogram import filters, enums
 from pyrogram.types import Message 
 from pyrogram.errors import MessageTooLong
@@ -86,7 +86,7 @@ async def run_shell(katsuki, message):
 
 	
 @app.on_message(filters.command("e",prefixes=config.HANDLER))
-@devs
+@devs_only
 async def evaluate(app , m: Message):
     global r, bot
     status_message = await m.reply_text("`Running ...`")
