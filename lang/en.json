@@ -1,4 +1,5 @@
 {
+    "reply_to": "Reply to Message.",
     "help_cmds": "HELP COMMANDS",
     "logging": "<pre>logging {}</pre>",
     "only_group": "This command only work in group's",
