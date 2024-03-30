@@ -27,31 +27,31 @@ async def admin_check(chat_id, user_id):
            
 
 
-def devs(func):
-     async def wrapped(app:app, message: Message):
+def devs_only(func):
+     async def wrapped(app: app, message: Message):
           user_id = message.from_user.id
           list = await get_users()
-          if ((not user_id in list) or (user_id != config.OWNER_ID)):
-             return 
+          if ((not user_id in list) or (user_id != int(config.OWNER_ID))):
+                return 
           return await func(app, message)
      return wrapped 
   
 
 def admin_only(func): 
-         async def wrapped(app:app, message:Message): 
+         async def wrapped(app: app, message:Message): 
              chat_id=message.chat.id 
              user_id=message.from_user.id 
              if message.chat.type==enums.ChatType.PRIVATE: 
-                 return await message.edit("This command only work in groups.") 
+                 return await message.edit(lang['only_group']) 
              is_admin = await admin_check(chat_id, user_id)
              if not is_admin[0]:
-                 return await message.edit("you're not admin.")
+                 return await message.edit(lang['not_admin'])
              return await func(app, message)                 
          return wrapped
 
 
 def can_restrict_members(func): 
-         async def wrapped(app:app, message:Message): 
+         async def wrapped(app: app, message:Message): 
              chat_id=message.chat.id 
              user_id=message.from_user.id 
              if message.chat.type==enums.ChatType.PRIVATE: 
