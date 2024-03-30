@@ -40,7 +40,7 @@ anime_gif_key = ["lurk", "shoot", "sleep", "shrug", "stare", "wave", "poke", "sm
 
 async def get_anime_gif(key):
     data = requests.get(f"https://nekos.best/api/v2/{key}").json()
-    img = data["url"]
+    img = data['results']["url"]
     return img
     
 
