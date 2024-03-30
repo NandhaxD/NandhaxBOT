@@ -1,6 +1,8 @@
 {
     "help_cmds": "HELP COMMANDS",
     "logging": "<pre>logging {}</pre>",
+    "only_group": "This command only work in group's",
+    "not_check_admin": "You can't check admin rights here.",
     "riddle": "**Query**: `{}`\n**Answer**: `{}`",
     "paste": "**Paste Link**: [Here]({})\n**Raw View**: [Here]({})\n**Created at**: {}",
     "alyz": "Analysing....",
@@ -30,5 +32,5 @@
     "afk_04": "<b>Welcome back by Katsuki !</b>",
     "ban_01": "<b>Who Should I Ban?</b>",
     "ban_02": "Banned! {}",
-    "ban_03": "<b>Successfully banned `{}` and failed to ban `{}` from {}</b>"
-}
+    "ban_03": "<b>Successfully banned `{}` and failed to ban `{}` from {}</b>",
+}   "ban_04": "You can't ban users from here."
