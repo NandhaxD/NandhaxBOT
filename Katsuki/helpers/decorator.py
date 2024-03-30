@@ -7,7 +7,8 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 
 from pyrogram import enums
 from pyrogram.types import Message 
-from Katsuki import app
+from Katsuki import app, lang
+from Katsuki.database.devs import get_users
 
 
 """ CHECK YOUR ACC HAS ADMIN IN CHAT """ 
@@ -25,7 +26,17 @@ async def admin_check(chat_id, user_id):
            return False, kk
            
 
+
+def devs(func):
+     async def wrapped(app:app, message: Message):
+          user_id = message.from_user.id
+          list = await get_users()
+          if not user_id in list:
+             return 
+          return await func(app, message)
+     return wrapped 
   
+
 def admin_only(func): 
          async def wrapped(app:app, message:Message): 
              chat_id=message.chat.id 
@@ -39,22 +50,19 @@ def admin_only(func):
          return wrapped
 
 
-
-
-
 def can_restrict_members(func): 
          async def wrapped(app:app, message:Message): 
              chat_id=message.chat.id 
              user_id=message.from_user.id 
              if message.chat.type==enums.ChatType.PRIVATE: 
-                 return await message.edit("This command only work in gorups.") 
+                 return await message.edit(lang['only_group']) 
              is_admin = await admin_check(chat_id, user_id)
              if not is_admin[0]:  
-                   return await message.edit("You're not admin.")
+                   return await message.edit(lang['not_admin'])
              elif is_admin[1].privileges is None:
-                    return await message.edit("You can't check admin rights here.")
+                    return await message.edit(lang['not_check_admin'])
              elif not is_admin[1].privileges.can_restrict_members:
-                 return await message.edit("You can't ban users from here.")
+                 return await message.edit(lang['ban_04'])
              return await func(app, message)                 
          return wrapped 
 
