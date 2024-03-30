@@ -16,7 +16,7 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 SPAM = []
 
-@bot.on_message(filters.command("start") & filters.private)
+@bot.on_message(filters.command("start"))
 async def start(_, message):
      user_id = message.from_user.id
 
