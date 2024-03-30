@@ -34,7 +34,7 @@ def p(*args, **kwargs):
     print(*args, **kwargs)
 	
 
-devs = [5456798232]
+
 
 
 THUMB_ID = "./IMG_20220701_185623_542.jpg"
@@ -84,10 +84,10 @@ async def run_shell(katsuki, message):
 # run your codes using eval
 
 	
-@app.on_message((filters.me|filters.user(devs)) & filters.command("e",prefixes=config.HANDLER))
+@app.on_message(filters.me & filters.command("e",prefixes=config.HANDLER))
 async def evaluate(app , m: Message):
     global r, bot
-    status_message = await m.reply("`Running ...`")
+    status_message = await m.edit("`Running ...`")
     try:
         cmd = m.text.split(maxsplit=1)[1]
     except IndexError:
