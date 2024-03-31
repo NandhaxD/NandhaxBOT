@@ -21,16 +21,20 @@ import requests
 
 copied_message = {}
 
-@app.on_message(filters.command('copy', prefixes=config.HANDLER))
+@app.on_message(filters.command(['copy', 'clear'], prefixes=config.HANDLER))
 async def copy_message(_, message):
       global copied_message
       reply = message.reply_to_message
+      if message.text.split()[0][1:].lower() == 'clear':
+	      return await message.edit(lang['success'])
+	       
       if not reply:
 	      return await message.reply(lang['reply_to'])
       else:
           message_id = reply.id
 	  from_chat = message.chat.id
 	  format = {'from_chat_id': from_chat, 'message_id': reply_id}
+	  copied_message.update(format)
 	  return await message.edit(lang['copied'])
 	      
 	
