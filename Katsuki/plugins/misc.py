@@ -19,8 +19,31 @@ from urllib.parse import quote
 import requests
 
 
+copied_message = {}
+
+@app.on_message(filters.command('copy', prefixes=config.HANDLER))
+async def copy_message(_, message):
+      global copied_message
+      reply = message.reply_to_message
+      if not reply:
+	      return await message.reply(lang['reply_to'])
+      else:
+          message_id = reply.id
+	  from_chat = message.chat.id
+	  format = {'from_chat_id': from_chat, 'message_id': reply_id}
+	  return await message.edit(lang['copied'])
+	      
+	
+@app.on_message(filters.command('send', prefixes=config.HANDLER))
+async def send(_, message):
+     if bool(copied_message):
+           message_id = copied_message['message_id']
+	   from_chat_id = copied_message['from_chat_id']
+           await app.copy_message(message.chat.id, from_chat_id, message_id)
+	   return await message.edit(lang['success'])
 
 
+	
 
 @app.on_message(filters.me & filters.command('alive', prefixes=config.HANDLER))
 async def alive(_, message):
