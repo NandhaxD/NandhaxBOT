@@ -35,7 +35,7 @@ async def start(_, message):
      await message.forward(config.OWNER_ID)
      mention = f"[{name}](tg://user?id={id})"
      BUTTON=InlineKeyboardMarkup([[
-     InlineKeyboardButton("Source ⬅️", url=config.SOURCE),]])
+     InlineKeyboardButton("Source ⬅️", url=config.SOURCE),InlineKeyboardButton("GROUP ⬅️", url=config.GROUP_LINK)]])
      await message.reply_animation(
           animation=animation,
           caption=lang['bot_start_01'].format(mention, applive,botlive), quote=True, reply_markup=BUTTON)
@@ -105,7 +105,9 @@ async def quote(_, message):
      buffer = base64.b64decode(response['result']['image'].encode('utf-8'))
      name = f"{username}.webp"
      open(name, 'wb').write(buffer)
-     await message.reply_sticker(sticker=name)
+     BUTTON=InlineKeyboardMarkup([[
+     InlineKeyboardButton("BG CODE ⬅️", url=config.SOURCE)]])
+     await message.reply_sticker(sticker=name, reply_markup=BUTTON, quote=True)
      return await message.delete()
      
      
