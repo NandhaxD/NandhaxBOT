@@ -39,14 +39,14 @@ async def copy_message(_, message):
         return await message.edit(lang['copied'])
 
 
+
 @app.on_message(filters.command('send', prefixes=config.HANDLER))
 async def send_copied_message(_, message):
      if bool(copied_message):
            message_id = copied_message['message_id']
-	   from_chat_id = copied_message['from_chat_id']
+	          from_chat_id = copied_message['from_chat_id']
            await app.copy_message(message.chat.id, from_chat_id, message_id)
-	   return await message.edit(lang['success'])
-
+           return await message.edit(lang['success'])
 
 	
 
