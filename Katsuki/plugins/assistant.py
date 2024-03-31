@@ -92,7 +92,7 @@ async def quote(_, message):
                except:
                     bg_code = "332255"
                     
-               text = message.text.split(message.text.split()[0]).split('|')[1] if is_bg_code == True else message.text.split(None, 1)[1]
+               text = message.text.split(message.text.split()[0])[1].split('|')[1] if is_bg_code == True else message.text.split(None, 1)[1]
                username = message.from_user.first_name
                photo_id = message.from_user.photo.big_file_id if message.from_user.photo else "AgACAgUAAxkDAAECAW9mCc9TJA-yyVyZ12RsrE2MAyr1YAACx7oxGz2WUVRbAAGQzuS-v5UACAEAAwIAA3gABx4E"
                avatar_url = await grap(await app.download_media(photo_id))
