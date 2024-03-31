@@ -79,7 +79,7 @@ async def quote(_, message):
                  bg_code = "332255"
            text = reply.text if reply.text else None
            if text is None:
-                 return await message.edit('You can only do with text.')
+                 return await message.edit(lang['reply_to_text'])
            photo_id = reply.from_user.photo.big_file_id if reply.from_user.photo else "AgACAgUAAxkDAAECAW9mCc9TJA-yyVyZ12RsrE2MAyr1YAACx7oxGz2WUVRbAAGQzuS-v5UACAEAAwIAA3gABx4E"
            username = reply.from_user.first_name
            avatar_url = await grap(await app.download_media(photo_id))
