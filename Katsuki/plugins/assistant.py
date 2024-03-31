@@ -12,7 +12,7 @@ import base64
 
 from pyrogram import filters, enums
 from Katsuki import bot ,app, lang
-from Katsuki.helpers.help_func import emoji_convert, anime_gif_key, get_anime_gif
+from Katsuki.helpers.help_func import emoji_convert, anime_gif_key, get_anime_gif, grap
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
