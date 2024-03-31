@@ -101,7 +101,7 @@ async def quote(_, message):
      data['messages'][0]['from']['name'] = username
      data['messages'][0]['from']['photo']['url'] = avatar_url
      data['messages'][0]['text'] = text
-     response = requests.post('https://bot.lyo.su/quote/generate', json=json).json()
+     response = requests.post('https://bot.lyo.su/quote/generate', json=data).json()
      buffer = base64.b64decode(response['result']['image'].encode('utf-8'))
      name = f"{username}.webp"
      open(name, 'wb').write(buffer)
