@@ -1,6 +1,7 @@
 {
     "copied": "Message Successfully Copied",
     "success": "Success.",
+    "reply_to_text": "Reply to Message Text",
     "reply_to": "Reply to Message.",
     "help_cmds": "HELP COMMANDS",
     "logging": "<pre>logging {}</pre>",
