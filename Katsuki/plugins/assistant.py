@@ -90,9 +90,9 @@ async def quote(_, message):
                   bg_code = message.text.split(message.text.split()[0])[1].split('|')[0]
                   is_bg_code = True
                except:
-                    is_bg_code = False
                     bg_code = "332255"
-               text = message.text.split(None, 1)[1] if is_bg_code is False else message.text.split(message.text.split()[0])[1].split('|')[1]
+                    
+               text = message.text.split(message.text.split()[0]).split('|')[1] if is_bg_code == True else message.text.split(None, 1)[1]
                username = message.from_user.first_name
                photo_id = message.from_user.photo.big_file_id if message.from_user.photo else "AgACAgUAAxkDAAECAW9mCc9TJA-yyVyZ12RsrE2MAyr1YAACx7oxGz2WUVRbAAGQzuS-v5UACAEAAwIAA3gABx4E"
                avatar_url = await grap(await app.download_media(photo_id))
@@ -106,10 +106,6 @@ async def quote(_, message):
      name = f"{username}.webp"
      open(name, 'wb').write(buffer)
      BUTTON=InlineKeyboardMarkup([[
-     InlineKeyboardButton("BG CODE ⬅️", url=config.SOURCE)]])
-     await message.reply_sticker(sticker=name, reply_markup=BUTTON, quote=True)
-     return await message.delete()
-     
-     
-
+     InlineKeyboardButton("BG CODE ⬅️", url="https://graph.org/file/1e3df8ff41d67db1fc9ea.jpg")]])
+     return await message.reply_sticker(sticker=name, reply_markup=BUTTON, quote=True)
      
