@@ -14,6 +14,7 @@ import base64
 
 
 from Katsuki import app, MODULE, bot, lang
+from Katsuki.helpers.help_func import grap
 from pyrogram import filters, enums
 from gpytranslate import Translator
 from urllib.parse import quote
