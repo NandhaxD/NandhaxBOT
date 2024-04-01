@@ -7,6 +7,7 @@
     "help_cmds": "HELP COMMANDS",
     "logging": "<pre>logging {}</pre>",
     "only_group": "This command only work in group's",
+    "not_admin": "You're not admin here.",
     "not_check_admin": "You can't check admin rights here.",
     "riddle": "**Query**: `{}`\n**Answer**: `{}`",
     "delete_01": "You can't delete messages here.",
