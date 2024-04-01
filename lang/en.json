@@ -1,5 +1,5 @@
 {
-    "context": "Input some context WuW.",
+    "quote": "reply to the text message with code or without.\nExample:\n~ .q hello\n~ .q 332255|hello",
     "copied": "Message Successfully Copied",
     "success": "Success.",
     "reply_to_text": "Reply to Message Text",
