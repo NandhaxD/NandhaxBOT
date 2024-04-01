@@ -10,6 +10,7 @@ import asyncio
 import config
 import json
 import os
+import base64
 
 
 from Katsuki import app, MODULE, bot, lang
@@ -125,7 +126,7 @@ async def ud(_, message):
         try:
           results = requests.get(
             f'https://api.urbandictionary.com/v0/define?term={text}').json()
-          reply_text = f'<pre>Results:{text}</pre>\n\n<pre>{results["list"][0]["definition"]}\n\n{results["list"][0]["example"]}<pre>'
+          reply_text = f'<pre>Results:{text}</pre>\n\n<pre>{results["list"][0]["definition"]}\n\n{results["list"][0]["example"]}</pre>'
         except Exception as e: 
               return await message.edit_text(lang['error'].format(e))
         ud = await message.edit_text(lang['thinking'])
