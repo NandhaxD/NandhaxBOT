@@ -190,9 +190,8 @@ data = {
 
 @app.on_message(filters.command(['q','quote'], prefixes=config.HANDLER))
 async def quote_ub(_, message):
-     reply = message.reply_to_message
-     if reply:
-           if reply.forward_from:
+           reply = message.reply_to_message
+           if (reply and reply.forward_from):
                 if not len(message.text.split()) < 2:
                       bg_code = message.text.split()[1]
                 else:
@@ -202,7 +201,7 @@ async def quote_ub(_, message):
                 username = reply.forward_from.first_name
                 avatar_url = await grap(await app.download_media(photo_id))
                 
-           elif reply.from_user:
+           elif reply:
                  if not len(message.text.split()) < 2:
                        bg_code = message.text.split()[1]
                  else:
@@ -245,6 +244,7 @@ __mod_name__ = "Misc"
     
 __help__ = """  
 - git: find github user 
+- q: for quote msg
 - tr {code}: reply to the message 
 - ud: urban dictionary 
 - tm: telegraph media upload
