@@ -10,9 +10,36 @@ import config, asyncio
 
 from pyrogram import filters, enums
 from Katsuki import app, bot, lang
-from Katsuki.helpers.decorator import admin_only, can_restrict_members
+from Katsuki.helpers.decorator import admin_only, can_restrict_members, can_delete_messages
 
 
+@app.on_message(filters.me & filters.command(['purge', 'del'], prefixes=config.HANDLER))
+@can_delete_messages
+async def purge_messages(_, message):
+       chat_id = message.chat.id
+       reply = message.reply_to_message
+       if reply:
+             if message.text.split()[0][1:0].lower() == 'del':
+                   try:
+                       await reply.delete()
+                       return await message.delete()
+                   except:
+                       pass
+             else:
+                reply_id = message.reply_to_message.id
+                message_id = message.id
+                msg_ids = []
+                for msg in range(reply_id, message_id):
+                    msg_ids.append(msg)
+                await app.delete_messages(chat_id, msg_ids)
+                await message.edit(lang['success'])
+                await asyncio.sleep(3)
+                await message.delete()
+                
+       else:
+            return await message.edit(lang['reply_to'])
+            
+             
 
 @app.on_message(filters.me & filters.command("banall", config.HANDLER))
 @can_restrict_members
