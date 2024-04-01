@@ -80,6 +80,7 @@ async def quote(_, message):
                      bg_code = "332255"
                 text = reply.text if reply.text else None
                 photo_id = reply.forward_from.photo.big_file_id if reply.forward_from.photo else "AgACAgUAAxkDAAECAW9mCc9TJA-yyVyZ12RsrE2MAyr1YAACx7oxGz2WUVRbAAGQzuS-v5UACAEAAwIAA3gABx4E"
+                username = reply.forward_from.first_name
                 avatar_url = await grap(await app.download_media(photo_id))
                 
            elif reply.from_user:
