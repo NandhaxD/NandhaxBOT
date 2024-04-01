@@ -9,6 +9,8 @@
     "only_group": "This command only work in group's",
     "not_check_admin": "You can't check admin rights here.",
     "riddle": "**Query**: `{}`\n**Answer**: `{}`",
+    "delete_01": "You can't delete messages here.",
+    
     "paste": "**Paste Link**: [Here]({})\n**Raw View**: [Here]({})\n**Created at**: {}",
     "alyz": "Analysing....",
     "query": "Enter Query ❗",
