@@ -7,20 +7,20 @@ import os, sys
 
 """ CHANGE TO FALSE IF YOU DON'T WANNA ADD VARIABLES IN HOSTING SITE """
 
-ENV = os.getenv("ENV", False)
+ENV = os.getenv("ENV", True)
 
 
 
 if ENV:    
-   API_ID = os.getenv("API_ID")
-   API_HASH = os.getenv("API_HASH")
-   BOT_TOKEN = os.getenv("BOT_TOKEN")
+   API_ID = os.getenv("API_ID", 13257951)
+   API_HASH = os.getenv("API_HASH", "d8ea642aedb736d40035bc05f0cfd477")
+   BOT_TOKEN = os.getenv("BOT_TOKEN", "6059605779:AAGn74wEaCqIvhZxFZQHOjDtKOz51ITi2io")
    SESSION = os.getenv("SESSION")
    GROUP_ID = os.getenv("GROUP_ID", -1001717881477)
-   OWNER_ID = os.getenv('OWNER_ID')
-   GROUP_LINK = os.getenv('GROUP_LINK')
-   DB_URL = os.getenv("DB_URL")
-   LANG_CODE = os.getenv('LANG_CODE')
+   OWNER_ID = os.getenv('OWNER_ID', 5696053228)
+   GROUP_LINK = os.getenv('GROUP_LINK', "t.me/nandhasupport")
+   DB_URL = os.getenv("DB_URL", "mongodb+srv://nandhaxd:hIatwh7wpArjRPX3@cluster0.80igexg.mongodb.net")
+   LANG_CODE = os.getenv('LANG_CODE', 'en')
    LIST_OF_VARIABLE = ["API_ID", "API_HASH", "BOT_TOKEN", "SESSION", "GROUP_ID", "DB_URL", "OWNER_ID"]   
    for var in LIST_OF_VARIABLE:
       if not os.getenv(var):
