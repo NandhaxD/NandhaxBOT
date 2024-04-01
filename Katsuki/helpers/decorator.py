@@ -27,6 +27,26 @@ async def admin_check(chat_id, user_id):
            
 
 
+
+def can_delete_messages(func):
+     async def wrapped(app: app, message: Message):
+          user_id = message.from_user.id
+          chat_id = message.chat.id
+          if message.chat.type==enums.ChatType.PRIVATE:
+               return await func(app, message)
+          else:
+               nandha = await admin_check(chat_id, user_id)
+               if nandha[0] == True:
+                    if nandha[1].privileges.can_delete_messages:
+                            return await func(app, message)
+                    else:
+                         return await message.edit(lang['delete_01'])
+               else:
+                    return await message.edit(lang['not_admin'])
+     return wrapped                 
+              
+      
+
 def devs_only(func):
      async def wrapped(app: app, message: Message):
           user_id = message.from_user.id
