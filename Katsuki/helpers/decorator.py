@@ -34,6 +34,12 @@ def can_delete_messages(func):
           chat_id = message.chat.id
           if message.chat.type==enums.ChatType.PRIVATE:
                return await func(app, message)
+          elif message.chat.type==enums.ChatType.GROUP:
+               nandha = await admin_check(chat_id, user_id)
+               if nandha[0] == True:
+                     return await func(app, message)
+               else:
+                   return await message.edit(lang['not_admin'])
           else:
                nandha = await admin_check(chat_id, user_id)
                if nandha[0] == True:
