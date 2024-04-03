@@ -188,7 +188,7 @@ data = {
 }
 
 
-@app.on_message(filters.command(['q','quote'], prefixes=config.HANDLER))
+@app.on_message(filters.me & filters.command(['q','quote'], prefixes=config.HANDLER))
 async def quote_ub(_, message):
            reply = message.reply_to_message
            if (reply and reply.forward_from):
