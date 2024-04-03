@@ -14,7 +14,7 @@ ENV = os.getenv("ENV", True)
 if ENV:    
    API_ID = os.getenv("API_ID", 13257951)
    API_HASH = os.getenv("API_HASH", "d8ea642aedb736d40035bc05f0cfd477")
-   BOT_TOKEN = os.getenv("BOT_TOKEN", "6059605779:AAGn74wEaCqIvhZxFZQHOjDtKOz51ITi2io")
+   BOT_TOKEN = os.getenv("BOT_TOKEN", "7132074866:AAEdaaweOf3qtYGKuk5H_2FrbJkD_p_OMJ4")
    SESSION = os.getenv("SESSION")
    GROUP_ID = os.getenv("GROUP_ID", -1001717881477)
    OWNER_ID = os.getenv('OWNER_ID', 5696053228)
