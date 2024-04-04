@@ -15,7 +15,7 @@ async def progress(current, total, msg, type):
             await msg.edit(f"Uploading... {c*100/t:.1f}%")
         return 
                    
-@bot.on_message(filters.reply & filters.commamd('rename', prefixes=config.HANDLER))
+@bot.on_message(filters.reply & filters.command('rename', prefixes=config.HANDLER))
 async def rename(_, message):
       reply = message.reply_to_message
       chat_id = message.chat.id
@@ -26,7 +26,7 @@ async def rename(_, message):
                  file_name = message.text.split(None, 1)[1]
             else:
                 return await message.reply('Give File Name!')
-            msg = await message.reply(lang['download'])
+            msg = await message.reply("Download...")
             start_dl = time.time()
               
             path = await bot.download_media(
