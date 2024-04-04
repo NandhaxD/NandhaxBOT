@@ -9,9 +9,9 @@ from pyrogram import filters
 
 
 async def progress(current, total, msg, type):
-        if type = "dl":
+        if type == "dl":
             await msg.edit(f"Downloading... {c*100/t:.1f}%")
-        elif type = "ul":
+        elif type == "ul":
             await msg.edit(f"Uploading... {c*100/t:.1f}%")
         return 
                    
@@ -28,11 +28,15 @@ async def rename(_, message):
                 return await message.reply('Give File Name!')
             msg = await message.reply(lang['download'])
             start_dl = time.time()
+              
             path = await bot.download_media(
                     message=reply,
                     file_name=file_name, 
                     progress=progress( 
-                         current, total, msg, type='dl')
+                         current, 
+                         total, 
+                         msg, 
+                         type='dl')
                 )
             
             await msg.edit('Download Complete.')
@@ -43,11 +47,15 @@ async def rename(_, message):
                       chat_id, 
                       document=path,
                       progress=progress(current, total, msg, type='ul'))
+              
             ul_time = round(time.time-start_ul, 3)
+              
             await msg.edit(
+                    
                   f"download taken time: {dl_time}"
                   f"upload taken time: {ul_time}"
                   f"thank you for using me. (:"
+                    
             )
                        
               
