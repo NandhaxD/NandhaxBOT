@@ -7,7 +7,7 @@ from pyrogram import filters
 
 
 
-async def progress(current, total, msg, type)
+async def progress(current, total, msg, type):
         if type = "dl":
             await msg.edit(f"Downloading... {c*100/t:.1f}%")
         elif type = "ul":
