@@ -8,12 +8,9 @@ from pyrogram import filters
 
 
 
-async def progress(current, total, msg, type):
-        if type == "dl":
-            await msg.edit(f"Downloading... {c*100/t:.1f}%")
-        elif type == "ul":
-            await msg.edit(f"Uploading... {c*100/t:.1f}%")
-        return 
+async def progress(current, total, msg, text):
+            await msg.edit(f"{text}... {c*100/t:.1f}%")
+        
                    
 @bot.on_message(filters.reply & filters.command('rename', prefixes=config.HANDLER))
 async def rename(_, message):
@@ -35,8 +32,8 @@ async def rename(_, message):
                     progress=progress( 
                          current, 
                          total, 
-                         msg, 
-                         type='dl')
+                         msg, 'downloading',
+                        )
                 )
             
             await msg.edit('Download Complete.')
@@ -46,11 +43,11 @@ async def rename(_, message):
             await bot.send_document(
                       chat_id, 
                       document=path,
-                      progress=progress(current, total, msg, type='ul'))
+                      progress=progress(current, total, msg, 'downloading'))
               
             ul_time = round(time.time-start_ul, 3)
               
-            await msg.edit(
+            return await msg.edit(
                     
                   f"download taken time: {dl_time}"
                   f"upload taken time: {ul_time}"
