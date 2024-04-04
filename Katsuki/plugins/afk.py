@@ -1,9 +1,12 @@
 import config 
+
 from Katsuki import app, lang
 from pyrogram import filters, enums, errors
 
 
 AFK = {'afk': False, 'reason': None} 
+afk_url = "https://graph.org/file/cc5d46b2d63dc1ebbe3f3.mp4"
+
 @app.on_message(filters.me, group=10)
 async def back_to_life(_, message):
       global AFK
@@ -29,7 +32,7 @@ async def away_from_keyboard(_, message):
      return 
 
 
-@app.on_message(filters.reply & ~filters.me ,group=3)  
+@app.on_message(filters.reply & ~filters.me & ~filters.bot ,group=3)  
 async def afk_check(_, message):
       
         r = message.reply_to_message
@@ -38,9 +41,9 @@ async def afk_check(_, message):
             if (((r.from_user.id) == config.OWNER_ID) and IS_AFK):
                   reason = AFK['reason']
                   if reason is not None:
-                        return await message.reply_text(text=lang['afk_02'].format(reason), quote=True)
+                        return await message.reply_animation(animation=afk_url, caption=lang['afk_02'].format(reason), quote=True)
                   else:
-                       return await message.reply_text(text=lang['afk_03'], quote=True)
+                       return await message.reply_animation(animation=afk_url, caption=lang['afk_03'], quote=True)
             
         except AttributeError:
                 pass
