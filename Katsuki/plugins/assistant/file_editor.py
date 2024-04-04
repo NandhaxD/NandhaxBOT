@@ -4,11 +4,8 @@ import time
 from Katsuki import bot, lang
 from pyrogram import filters
 
-
-
-
-
-async def progress(c, t, msg, text):
+async def progress(c, t, msg, text, count):
+            if not (count[0] % 5 == 0 or c == t): return 
             await msg.edit(f"{text}... {c*100/t:.1f}%")
         
                    
@@ -31,33 +28,30 @@ async def rename(_, message):
                     file_name=file_name, 
                     progress=progress,
                     progress_args=( 
-                         msg, 'downloading',
+                         msg, 'Downloading',
                         )
                 )
             
             await msg.edit('Download Complete.')
-            dl_time = round(time.time()-start_dl, 3)
+            dl_time = round(time.time()-start_dl, 2)
         
             start_ul = time.time()
             await bot.send_document(
                       chat_id, 
                       document=path,
                       progress=progress,
-                      progress_args=(msg, 'uploading'))
+                      progress_args=(msg, 'Uploading'))
               
-            ul_time = round(time.time()-start_ul, 3)
+            ul_time = round(time.time()-start_ul, 2)
               
             return await msg.edit(
                     
-                  f"download taken time: {dl_time}"
-                  f"upload taken time: {ul_time}"
-                  f"thank you for using me. (:"
+                  f"<b>Download Taken Time</b>: {dl_time}\n"
+                  f"<b>Upload Taken Time</b>: {ul_time}\n"
+                  f"<b>Thank You For Using Me. (:</b>"
                     
             )
-                       
-              
-            
-            
+                                                             
       else:
          return await message.reply('Reply To Document, Media!')
            
