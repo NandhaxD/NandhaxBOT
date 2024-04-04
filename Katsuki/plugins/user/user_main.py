@@ -1,6 +1,6 @@
 import config
 
-from Katsuki import app. bot
+from Katsuki import app, bot
 from pyrogram import filters
 
 
