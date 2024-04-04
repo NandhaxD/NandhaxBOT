@@ -36,7 +36,7 @@ async def rename(_, message):
                 )
             
             await msg.edit('Download Complete.')
-            dl_time = round(time.time-start_dl, 3)
+            dl_time = round(time.time()-start_dl, 3)
         
             start_ul = time.time()
             await bot.send_document(
@@ -45,7 +45,7 @@ async def rename(_, message):
                       progress=progress,
                       progress_args=(msg, 'uploading'))
               
-            ul_time = round(time.time-start_ul, 3)
+            ul_time = round(time.time()-start_ul, 3)
               
             return await msg.edit(
                     
