@@ -7,7 +7,7 @@ from random import randint, choice
 
 from PIL import Image, ImageDraw, ImageFont
 from pyrogram import filters
-from Katsuki import app, lang
+from Katsuki import bot, lang
 
 
 
@@ -18,19 +18,7 @@ async def get_question():
      return {'query': query, 'result': result}
      
 
-
-
-
-
-
-
-
-
-
-
-
-
-@app.on_message(filters.me & filters.command('riddle', prefixes=config.HANDLER))
+@bot.on_message(filters.command('riddle', prefixes=config.HANDLER))
 async def math_riddle(_, message):
      msg = await message.edit(lang['thinking'])
      img = Image.open(io.BytesIO(requests.get("https://graph.org/file/9b165baf9de57406d76ca.jpg").content))
