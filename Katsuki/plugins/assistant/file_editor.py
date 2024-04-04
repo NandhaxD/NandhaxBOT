@@ -8,7 +8,7 @@ from pyrogram import filters
 
 
 
-async def progress(current, total, msg, text):
+async def progress(c, t, msg, text):
             await msg.edit(f"{text}... {c*100/t:.1f}%")
         
                    
