@@ -29,9 +29,8 @@ async def rename(_, message):
             path = await bot.download_media(
                     message=reply,
                     file_name=file_name, 
-                    progress=progress( 
-                         c, 
-                         t, 
+                    progress=progress,
+                    progress_args=( 
                          msg, 'downloading',
                         )
                 )
@@ -43,7 +42,8 @@ async def rename(_, message):
             await bot.send_document(
                       chat_id, 
                       document=path,
-                      progress=progress(c, t, msg, 'downloading'))
+                      progress=progress,
+                      progress_args=(msg, 'uploading'))
               
             ul_time = round(time.time-start_ul, 3)
               
