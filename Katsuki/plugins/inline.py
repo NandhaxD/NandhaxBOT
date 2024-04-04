@@ -25,14 +25,23 @@ async def help_cmds(_, inline_query):
     user_id = config.OWNER_ID
     if not inline_query.from_user.id == user_id:
         return  
+     
     buttons = [[InlineKeyboardButton(x['module'], callback_data=f"help:{x['module']}")] for x in MODULE]
-    await bot.answer_inline_query(
-      inline_query.id,
-      cache_time=0,
-      results = [
-     InlineQueryResultArticle(
+    try:
+        await bot.answer_inline_query(
+        inline_query.id,
+        cache_time=0,
+        results = [
+        InlineQueryResultArticle(
         lang['help_cmds'],  InputTextMessageContent(message_text=lang['help_cmds']), thumb_url="https://graph.org/file/d71ae8adaac9ad004b3ca.jpg",reply_markup=InlineKeyboardMarkup(buttons))])
-
+     except Exception as e:
+              await bot.answer_inline_query(
+        inline_query.id,
+        cache_time=0,
+        results = [
+        InlineQueryResultArticle(
+        lang['help_cmds'],  InputTextMessageContent(message_text=lang['error'].format(e)), thumb_url="https://graph.org/file/d71ae8adaac9ad004b3ca.jpg",reply_markup=InlineKeyboardMarkup(buttons))])
+             
 
 @bot.on_inline_query(filters.regex("test"))
 async def test(_, inline_query):
