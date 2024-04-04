@@ -1,4 +1,5 @@
 import config
+import time
 
 from Katsuki import bot, lang
 from pyrogram import filters
@@ -53,6 +54,6 @@ async def rename(_, message):
             
             
       else:
-         return await message.reply(lang['reply_to_media'])
+         return await message.reply('Reply To Document, Media!')
            
   
