@@ -20,7 +20,7 @@ async def get_question():
 
 @bot.on_message(filters.command('riddle', prefixes=config.HANDLER))
 async def math_riddle(_, message):
-     msg = await message.edit(lang['thinking'])
+     msg = await message.reply(lang['thinking'])
      img = Image.open(io.BytesIO(requests.get("https://graph.org/file/9b165baf9de57406d76ca.jpg").content))
      draw = ImageDraw.Draw(img)
      url = "https://github.com/JulietaUla/Montserrat/raw/master/fonts/otf/Montserrat-ExtraBold.otf"
