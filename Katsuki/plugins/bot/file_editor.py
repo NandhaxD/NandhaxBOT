@@ -4,9 +4,11 @@ import time
 from Katsuki import bot, lang
 from pyrogram import filters
 
-async def progress(c, t, msg, text, count):
-            if not (count[0] % 5 == 0 or c == t): 
-                  return await msg.edit(f"{text}... {c*100/t:.1f}%")
+async def progress(c, t, msg, text, start):
+            now = time.time()
+            diff = now - start
+            if round(diff % 10.00) == 0 or c == t:
+                 await msg.edit(f"{text}... {c*100/t:.1f}%")
         
                    
 @bot.on_message(filters.reply & filters.command('rename', prefixes=config.HANDLER))
