@@ -28,7 +28,7 @@ async def rename(_, message):
                     file_name=file_name, 
                     progress=progress,
                     progress_args=( 
-                         msg, 'Downloading',
+                         msg, 'Downloading', [0]
                         )
                 )
             
@@ -40,7 +40,7 @@ async def rename(_, message):
                       chat_id, 
                       document=path,
                       progress=progress,
-                      progress_args=(msg, 'Uploading'))
+                      progress_args=(msg, 'Uploading', [0]))
               
             ul_time = round(time.time()-start_ul, 2)
               
