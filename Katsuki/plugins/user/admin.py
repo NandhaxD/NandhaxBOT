@@ -42,6 +42,7 @@ async def purge_messages(_, message):
              
 @app.on_message(filters.me & filters.command('unbanall', config.HANDLER))
 @can_restrict_members
+async def unban_all_members(_, message):
      chat_id = message.chat.id
      chat_name = message.chat.title
 
