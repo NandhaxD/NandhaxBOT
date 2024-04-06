@@ -108,7 +108,7 @@ async def ban_chat_member(_, message):
               except Exception as e:
                      return await message.edit(lang['error'].format(e))
        elif not reply and (not len(message.text.split()) < 2):
-                # give the chat_id and user_id where to the user be banned if no chat_id user banned in current chat
+                # give the chat_id and user_id where the user be banned if no chat_id given user banned in current chat with only user_id
                 # eg: .ban chat_id|user_id or .ban user_id           
                 txt = message.text
                 if '|' in txt:
