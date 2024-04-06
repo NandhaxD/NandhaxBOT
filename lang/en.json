@@ -2,6 +2,8 @@
     "quote": "reply to the text message with code or without.\nExample:\n~ .q hello\n~ .q 332255|hello",
     "copied": "Message Successfully Copied",
     "success": "Success.",
+    "unbanall_01": "#UNBANALL\nCHAT: {}\nFOUND: {}\nSUCCESS: {}",
+    "unbanall_02": "Found {} In {} Successfully Unbanned {}",
     "reply_to_text": "Reply to Message Text",
     "reply_to": "Reply to Message.",
     "help_cmds": "HELP COMMANDS",
