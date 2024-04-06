@@ -22,7 +22,7 @@ async def adminlist(_, message):
        if not len(message.text.split()) < 2:
            try:
                chat_id = message.text.split(None, 1)[1]
-               async for m in app.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTATORS):
+               async for m in app.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
                        admin_str += f"➤ {m.user.mention}\n"
                await message.edit(admin_str)
            except Exception as e:
@@ -30,7 +30,7 @@ async def adminlist(_, message):
        else:
            try:
                chat_id = message.chat.id
-               async for m in app.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTATORS):
+               async for m in app.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
                      admin_str += f"➤ {m.user.mention}\n"
                await message.edit(admin_str)
            except Exception as e:
