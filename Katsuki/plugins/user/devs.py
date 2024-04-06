@@ -22,12 +22,12 @@ from pyrogram.types import Message
 from pyrogram.errors import MessageTooLong
 
 
-async def aexec(code, app, m):
+async def aexec(code, app, message):
     exec(
-        "async def __aexec(app, m): "
+        "async def __aexec(app, message): "
         + "".join(f"\n {l_}" for l_ in code.split("\n"))
     )
-    return await locals()["__aexec"](app, m)
+    return await locals()["__aexec"](app, message)
 
 
  
@@ -87,18 +87,19 @@ async def run_shell(katsuki, message):
 	
 @app.on_message(filters.command("e",prefixes=config.HANDLER))
 @devs_only
-async def evaluate(app , m: Message):
-    global r, bot
-    status_message = await m.reply_text("`Running ...`")
+async def evaluate(app , message):
+    global r, bot, m
+    status_message = await message.reply_text("`Running ...`")
     try:
-        cmd = m.text.split(maxsplit=1)[1]
+        cmd = message.text.split(maxsplit=1)[1]
     except IndexError:
         await status_message.delete()
         return
     start_time = time.time()
 
-    r = m.reply_to_message	
-    
+    r = message.reply_to_message	
+    m = message
+
     if r:
         reply_to_id = r.id
     old_stderr = sys.stderr
@@ -107,7 +108,7 @@ async def evaluate(app , m: Message):
     redirected_error = sys.stderr = io.StringIO()
     stdout, stderr, exc = None, None, None
     try:
-        await aexec(cmd, app, m)
+        await aexec(cmd, app, message)
     except Exception:
         exc = traceback.format_exc()
     stdout = redirected_output.getvalue()
@@ -132,7 +133,7 @@ async def evaluate(app , m: Message):
         filename = "output.txt"
         with open(filename, "w+", encoding="utf8") as out_file:
             out_file.write(str(final_output))
-        await m.reply_document(
+        await message.reply_document(
             document=filename,
             thumb=THUMB_ID,
             caption=cmd,
