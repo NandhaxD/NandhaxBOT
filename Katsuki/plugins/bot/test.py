@@ -22,10 +22,12 @@ async def looptest(_, message):
 
      if len(message.text.split()) < 2:
           return await message.reply('True or False?')
-     loop = message.text.split(None, 1)[1]
-     if loop == True:
+     condition = message.text.split(None, 1)[1]
+     if condition == True:
+          loop = True
           await send_message(chat_id=message.chat.id)
+     elif condition == False:
           loop = False
-       
+          return await message.reply('loop is stopped!')
   
      
