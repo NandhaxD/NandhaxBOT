@@ -58,7 +58,8 @@ async def unban_all_members(_, message):
               pass
      await bot.send_message(
             chat_id=config.OWNER_ID,
-            text=lang['unbanall_01'].format(len(users), chat_name, success)
+            text=lang['unbanall_01'].format(len(users), chat_name, success))
+       
      await msg.edit(lang['unbanall_02'].format(len(users), chat_name, success))
 
             
