@@ -18,12 +18,13 @@ from Katsuki.helpers.decorator import admin_only, can_restrict_members, can_dele
 async def adminlist(_, message):
        
        chat_name = message.chat.title
-       admin_str = f"Admin from {chat_name}:\n"
+       admin_str = f"**Admin from {chat_name}**:\n"
        if not len(message.text.split()) < 2:
            try:
-               chat_id = message.text.split(None, 1)[1]
+               chat = await app.get_chat(message.text.split(None, 1)[1])
+               chat_name = chat.title
                async for m in app.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
-                       admin_str += f"➤ {m.user.mention}\n"
+                       admin_str += f"➤ [{m.user.first_name}](tg://user?id={m.user.id})-(`{m.user.id}`)\n"
                await message.edit(admin_str)
            except Exception as e:
                   return await message.edit(lang['error'].format(e))
@@ -31,7 +32,7 @@ async def adminlist(_, message):
            try:
                chat_id = message.chat.id
                async for m in app.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
-                     admin_str += f"➤ {m.user.mention}\n"
+                     admin_str += f"➤ [{m.user.first_name}](tg://user?id={m.user.id})-(`{m.user.id}`)\n"
                await message.edit(admin_str)
            except Exception as e:
                   return await message.edit(lang['error'].format(e))
@@ -81,6 +82,8 @@ async def unban_all_members(_, message):
               success += 1
         except:
               pass
+     if len(users) == 0:
+            return await message.edit(f'No users currently banned in {message.chat.title}')            
      await bot.send_message(
             chat_id=config.OWNER_ID,
             text=lang['unbanall_01'].format(len(users), chat_name, success))
