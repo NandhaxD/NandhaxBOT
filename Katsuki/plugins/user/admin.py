@@ -15,7 +15,7 @@ from Katsuki.helpers.decorator import admin_only, can_restrict_members, can_dele
 
 @app.on_message(filters.me & filters.command(['admins', 'adminlist'], prefixes=config.HANDLER))
 @admin_only
-async for def adminlist(_, message):
+async def adminlist(_, message):
        
        chat_name = message.chat.title
        admin_str = f"Admin from {chat_name}:\n"
