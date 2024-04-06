@@ -13,6 +13,31 @@ from Katsuki import app, bot, lang
 from Katsuki.helpers.decorator import admin_only, can_restrict_members, can_delete_messages
 
 
+@app.on_message(filters.me & filters.command(['admins', 'adminlist'], prefixes=config.HANDLER))
+@admin_only
+async for def adminlist(_, message):
+       
+       chat_name = message.chat.title
+       admin_str = f"Admin from {chat_name}:\n"
+       if not len(message.text.split()) < 2:
+           try:
+               chat_id = message.text.split(None, 1)[1]
+               async for m in app.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTATORS):
+                       admin_str += f"➤ {m.user.mention}\n"
+               await message.edit(admin_str)
+           except Exception as e:
+                  return await message.edit(lang['error'].format(e))
+       else:
+           try:
+               chat_id = message.chat.id
+               async for m in app.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTATORS):
+                     admin_str += f"➤ {m.user.mention}\n"
+               await message.edit(admin_str)
+           except Exception as e:
+                  return await message.edit(lang['error'].format(e))
+                  
+
+
 @app.on_message(filters.me & filters.command(['purge', 'del'], prefixes=config.HANDLER))
 @can_delete_messages
 async def purge_messages(_, message):
@@ -49,7 +74,7 @@ async def unban_all_members(_, message):
      users = []
      success = 0
      msg = await message.edit('~ Searching For Unban Members.')
-     async for m in app.get_chat_members(chat_id, filter=ChatMembersFilter.BANNED):
+     async for m in app.get_chat_members(chat_id, filter=enums.ChatMembersFilter.BANNED):
         try:
               users.append(m.user.id)
               await app.unban_chat_member(chat_id, m.user.id)
