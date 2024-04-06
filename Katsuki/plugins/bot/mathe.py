@@ -29,7 +29,9 @@ async def reply_riddle_answer(_, message):
              if int(message.text) == answer:
                   await message.reply('You guess the answer 🥳, wait for next riddle.')
                   ANSWER['answer'] = None
-      
+          except: pass
+
+
 
 async def get_question():     
      symbol = ['+','-','*']
