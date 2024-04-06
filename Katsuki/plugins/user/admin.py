@@ -104,7 +104,7 @@ async def ban_chat_member(_, message):
               try:
                  nandha = await app.ban_chat_member(chat_id, user_id)
                  await nandha.delete()
-                 return await message.edit(lang['banned'])
+                 return await message.edit(lang['ban_01'])
               except Exception as e:
                      return await message.edit(lang['error'].format(e))
        elif not reply and (not len(message.text.split()) < 2):
@@ -118,7 +118,7 @@ async def ban_chat_member(_, message):
                 try:
                    nandha = await app.ban_chat_member(chat_id, user_id)
                    await nandha.delete()
-                   return await message.edit(lang['banned'])
+                   return await message.edit(lang['ban_01'])
                 except Exception as e:
                        return await message.edit(lang['error'].format(e))
        else:
