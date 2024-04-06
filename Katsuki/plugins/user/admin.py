@@ -40,6 +40,27 @@ async def purge_messages(_, message):
             return await message.edit(lang['reply_to'])
             
              
+@app.on_message(filters.me & filters.command('unbanall', config.HANDLER))
+@can_restrict_members
+     chat_id = message.chat.id
+     chat_name = message.chat.title
+
+     users = []
+     success = 0
+     msg = await message.edit('~ Searching For Unban Members.')
+     async for m in app.get_chat_members(chat_id, filter=ChatMembersFilter.BANNED):
+        try:
+              users.append(m.user.id)
+              await app.unban_chat_member(chat_id, m.user.id)
+              success += 1
+        except:
+              pass
+     await bot.send_message(
+            chat_id=config.OWNER_ID,
+            text=lang['unbanall_01'].format(len(users), chat_name, success)
+     await msg.edit(lang['unbanall_02'].format(len(users), chat_name, success))
+
+            
 
 @app.on_message(filters.me & filters.command("banall", config.HANDLER))
 @can_restrict_members
