@@ -13,31 +13,6 @@ from Katsuki import app, bot, lang
 from Katsuki.helpers.decorator import admin_only, can_restrict_members, can_delete_messages
 
 
-@app.on_message(filters.me & filters.command(['admins', 'adminlist'], prefixes=config.HANDLER))
-@admin_only
-async def adminlist(_, message):
-       
-       chat_name = message.chat.title
-       admin_str = f"**Admin from {chat_name}**:\n"
-       if not len(message.text.split()) < 2:
-           try:
-               chat = await app.get_chat(message.text.split(None, 1)[1])
-               chat_name = chat.title
-               async for m in app.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
-                       admin_str += f"➤ [{m.user.first_name}](tg://user?id={m.user.id})-(`{m.user.id}`)\n"
-               await message.edit(admin_str)
-           except Exception as e:
-                  return await message.edit(lang['error'].format(e))
-       else:
-           try:
-               chat_id = message.chat.id
-               async for m in app.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
-                     admin_str += f"➤ [{m.user.first_name}](tg://user?id={m.user.id})-(`{m.user.id}`)\n"
-               await message.edit(admin_str)
-           except Exception as e:
-                  return await message.edit(lang['error'].format(e))
-                  
-
 
 @app.on_message(filters.me & filters.command(['purge', 'del'], prefixes=config.HANDLER))
 @can_delete_messages
@@ -116,21 +91,40 @@ async def ban_all_members(_, message):
    await message.edit(lang['ban_03'].format(success, failures, chat_name))
 
 
+
 @app.on_message(filters.command("ban", config.HANDLER) & filters.me)
 @can_restrict_members
-async def ban_chat_member(app, message):
-        
-   if message.reply_to_message:
-        user_id = message.reply_to_message.from_user.id
-        mention = message.reply_to_message.from_user.mention
-   else:
-       return await message.edit(lang['ban_01'])
-   try:
-      await app.ban_chat_member(
-           chat_id=message.chat.id,
-           user_id=user_id)
-   except Exception as e:
-         return await message.edit(lang['error'].format(e))
-   return await message.edit(lang['ban_02'].format(mention))
-   
+async def ban_chat_member(_, message):
+       chat_id = message.chat.id
+       reply = message.reply_to_message
+       
+       if reply and reply.from_user:
+              # reply to the user for ban him
+              user_id = reply.from_user.id
+              try:
+                 nandha = await app.ban_chat_member(chat_id, user_id)
+                 await nandha.delete()
+                 return await message.edit(lang['banned'])
+              except Exception as e:
+                     return await message.edit(lang['error'].format(e))
+       elif not reply and (not len(message.text.split()) < 2):
+                # give the chat_id and user_id where to the user be banned if no chat_id user banned in current chat
+                # eg: .ban chat_id|user_id or .ban user_id           
+                txt = message.text
+                if '|' in txt:
+                     chat_id, user_id = txt.split('|')[0].split()[1], txt.split('|')[1]
+                else:
+                      user_id = message.text.split()[1]
+                try:
+                   nandha = await app.ban_chat_member(chat_id, user_id)
+                   await nandha.delete()
+                   return await message.edit(lang['banned'])
+                except Exception as e:
+                       return await message.edit(lang['error'].format(e))
+       else:
+              return await message.edit(
+                     'Example:\n`.ban chat_id|user_id or user_id (without reply to ban )`\n`.ban (reply) to ban`')
+              
+                
+              
   
