@@ -87,6 +87,8 @@ async def riddle(_, message):
                 'Example: `/riddle on|off`')
      condition = message.text.split()[1].lower()
      if condition == 'on':
+            if IS_RIDDLE:
+                  return await message.reply('Already one in process...')
             IS_RIDDLE = True
             await message.reply('Starting riddle...')
      elif condition == 'off':
