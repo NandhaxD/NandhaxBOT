@@ -23,9 +23,9 @@ async def looptest(_, message):
      if len(message.text.split()) < 2:
           return await message.reply('True or False?')
      loop = message.text.split(None, 1)[1]
-     if loop:
+     if loop == True:
           await send_message(chat_id=message.chat.id)
-          
+          loop = False
        
   
      
