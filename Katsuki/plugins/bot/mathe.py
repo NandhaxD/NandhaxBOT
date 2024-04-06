@@ -90,8 +90,11 @@ async def riddle(_, message):
             IS_RIDDLE = True
             await message.reply('Starting riddle...')
      elif condition == 'off':
-            await message.reply('Stopping riddle..')
-            IS_RIDDLE = False
+            if IS_RIDDLE == False:
+                      return await message.reply('No active riddle.')
+            else:
+                await message.reply('Stopping riddle..')
+                IS_RIDDLE = False
           
      else:
           return await message.reply(
