@@ -84,7 +84,7 @@ async def send_math_riddle(text: str, chat_id: int):
 @devs_only
 async def riddle(_, message):
      global IS_RIDDLE
-     if len(message.text.split()) < 2:
+     if len(message.text.split()) > 1:
            return await message.reply(
                 'Example: `/riddle on|off`')
      condition = message.text.split()[1].lower()
