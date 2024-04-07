@@ -98,7 +98,7 @@ async def games(_, message):
                   return await message.reply('Already one in process...')
             IS_RIDDLE = True
             await message.reply('Starting riddle...')
-            await send_math_riddle(chat_id=message.chat.id, message)
+            await send_math_riddle(chat_id=message.chat.id, message=message)
           
      elif condition == 'off':
             if IS_RIDDLE == False:
