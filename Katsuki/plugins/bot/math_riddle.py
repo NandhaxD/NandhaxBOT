@@ -77,7 +77,7 @@ async def send_math_riddle(chat_id: int):
               nandha = await make_math_riddle()
               ANSWER['answer'] = nandha[2]
               await bot.send_photo(
-                    photo=nandha[0],  caption=nandha[1])
+                    chat_id=chat_id, photo=nandha[0],  caption=nandha[1])
               count += 1
               os.remove(nandha[0])
               await asyncio.sleep(2*60)
