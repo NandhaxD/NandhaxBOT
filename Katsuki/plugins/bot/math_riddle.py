@@ -65,7 +65,8 @@ async def make_math_riddle():
 
 
 async def send_math_riddle(chat_id: int):
-         global ANSWER 
+         global ANSWER
+         count = 0
          while count < 21:
               if IS_RIDDLE == False:
                    return await message.reply(
@@ -77,17 +78,18 @@ async def send_math_riddle(chat_id: int):
               ANSWER['answer'] = nandha[2]
               await bot.send_photo(
                     photo=nandha[0],  caption=nandha[1])
+              count += 1
               os.remove(nandha[0])
               await asyncio.sleep(2*60)
 
 
 
-@bot.on_message(filters.command('game', prefixes=config.HANDLER))
+@bot.on_message(filters.command('riddle', prefixes=config.HANDLER))
 async def games(_, message):
      global IS_RIDDLE
      if len(message.text.split()) < 2:
            return await message.reply(
-                'Example: `/game on|off`')
+                'Example: `/riddle on|off`')
                
      condition = str(message.text.split()[1])
      if condition == 'on':
