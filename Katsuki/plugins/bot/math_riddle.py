@@ -81,7 +81,6 @@ async def send_math_riddle(text: str, chat_id: int):
 
 
 @bot.on_message(filters.command('riddle'))
-@devs_only
 async def riddle(_, message):
      global IS_RIDDLE
      if not len(message.text.split()) < 2:
