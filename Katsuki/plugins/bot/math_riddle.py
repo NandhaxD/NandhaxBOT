@@ -19,8 +19,32 @@ IS_RIDDLE = False
 ANSWER = {'answer': None}
 
 
+@bot.on_message(filters.command('game', prefixes=config.HANDLER))
+async def riddle(_, message):
+     global IS_RIDDLE
+     if not len(message.text.split()) < 2:
+           return await message.reply(
+                'Example: `/game on|off`')
+               
+     condition = str(message.text.split()[1]).lower()
+     if condition == 'on':
+            if IS_RIDDLE:
+                  return await message.reply('Already one in process...')
+            IS_RIDDLE = True
+            await message.reply('Starting riddle...')
+     elif condition == 'off':
+            if IS_RIDDLE == False:
+                      return await message.reply('No active riddle.')
+            else:
+                await message.reply('Stopping riddle..')
+                IS_RIDDLE = False          
+     else:
+          return await message.reply(
+               'Example: `/riddle on|off`')
           
-@bot.on_message(filters.text & (~filters.private | ~filters.bot))
+     
+         
+@bot.on_message(filters.text & (~filters.private & ~filters.bot), group=3)
 async def reply_riddle_answer(_, message):
      global ANSWER
      if IS_RIDDLE:
@@ -77,52 +101,6 @@ async def send_math_riddle(text: str, chat_id: int):
               await bot.send_photo(
                     photo=nandha[0],  caption=nandha[1])
               os.remove(nandha[0])
-              asyncio.sleep(2*60)
+              await asyncio.sleep(2*60)
 
 
-@bot.on_message(filters.command('riddle'))
-async def riddle(_, message):
-     global IS_RIDDLE
-     if not len(message.text.split()) < 2:
-           return await message.reply(
-                'Example: `/riddle on|off`')
-               
-     condition = message.text.split()[1].lower()
-     if condition == 'on':
-            if IS_RIDDLE:
-                  return await message.reply('Already one in process...')
-            IS_RIDDLE = True
-            await message.reply('Starting riddle...')
-     elif condition == 'off':
-            if IS_RIDDLE == False:
-                      return await message.reply('No active riddle.')
-            else:
-                await message.reply('Stopping riddle..')
-                IS_RIDDLE = False          
-     else:
-          return await message.reply(
-               'Example: `/riddle on|off`')
-          
-     
-
-     
-
-
-
-"""
-template = requests.get("https://graph.org/file/9b165baf9de57406d76ca.jpg")
-     with open("image.jpg", "wb") as img_file:
-           img_file.write(template.content)
-     img = Image.open("image.jpg")
-     draw = ImageDraw.Draw(img)
-     url = "https://github.com/JulietaUla/Montserrat/raw/master/fonts/otf/Montserrat-ExtraBold.otf"
-     font = ImageFont.truetype(urllib.request.urlopen(url), size=100)
-     position = (270, 300)
-     color = (255, 255, 255)
-     draw.text(position, text, font=font, fill=color)
-     img.save('boom.jpg')
-     
-"""
-
-                    
-    # Wait for the print thread to finish before exiting the programo
