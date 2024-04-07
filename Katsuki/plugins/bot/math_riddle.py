@@ -5,6 +5,7 @@
 import config
 import os
 import requests
+import asyncio 
 import io
 from random import randint, choice
 
@@ -76,12 +77,12 @@ async def send_math_riddle(chat_id: int):
                          'All riddle finished for new start do `/riddle on`')
               nandha = await make_math_riddle()
               ANSWER['answer'] = nandha[2]
-              await bot.send_photo(
+              msg = await bot.send_photo(
                     chat_id=chat_id, photo=nandha[0],  caption=nandha[1])
               count += 1
               os.remove(nandha[0])
-              await asyncio.sleep(2*60)
-
+              await asyncio.sleep(1*60)
+              
 
 
 @bot.on_message(filters.command('riddle', prefixes=config.HANDLER))
