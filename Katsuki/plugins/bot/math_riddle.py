@@ -37,7 +37,7 @@ async def get_question():
      result = eval(query)
      return {'query': query, 'result': result}
 
-async def make_math_riddle(text: str):
+async def make_math_riddle():
      img = Image.open(io.BytesIO(requests.get("https://graph.org/file/9b165baf9de57406d76ca.jpg").content))
      draw = ImageDraw.Draw(img)
      url = "https://github.com/JulietaUla/Montserrat/raw/master/fonts/otf/Montserrat-ExtraBold.otf"
@@ -64,7 +64,7 @@ async def make_math_riddle(text: str):
 
 
 
-async def send_math_riddle(text: str, chat_id: int):
+async def send_math_riddle(chat_id: int):
          global ANSWER 
          while count < 21:
               if IS_RIDDLE == False:
@@ -73,7 +73,7 @@ async def send_math_riddle(text: str, chat_id: int):
               elif count == 20:
                    return await message.reply(
                          'All riddle finished for new start do `/riddle on`')
-              nandha = await make_math_riddle(text)
+              nandha = await make_math_riddle()
               ANSWER['answer'] = nandha[2]
               await bot.send_photo(
                     photo=nandha[0],  caption=nandha[1])
@@ -95,6 +95,8 @@ async def games(_, message):
                   return await message.reply('Already one in process...')
             IS_RIDDLE = True
             await message.reply('Starting riddle...')
+            await send_math_riddle(chat_id=message.chat.id)
+          
      elif condition == 'off':
             if IS_RIDDLE == False:
                       return await message.reply('No active riddle.')
