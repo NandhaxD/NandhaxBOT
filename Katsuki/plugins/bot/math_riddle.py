@@ -19,31 +19,6 @@ IS_RIDDLE = False
 ANSWER = {'answer': None}
 
 
-@bot.on_message(filters.command('game', prefixes=config.HANDLER))
-async def riddle(_, message):
-     global IS_RIDDLE
-     if not len(message.text.split()) < 2:
-           return await message.reply(
-                'Example: `/game on|off`')
-               
-     condition = str(message.text.split()[1]).lower()
-     if condition == 'on':
-            if IS_RIDDLE:
-                  return await message.reply('Already one in process...')
-            IS_RIDDLE = True
-            await message.reply('Starting riddle...')
-     elif condition == 'off':
-            if IS_RIDDLE == False:
-                      return await message.reply('No active riddle.')
-            else:
-                await message.reply('Stopping riddle..')
-                IS_RIDDLE = False          
-     else:
-          return await message.reply(
-               'Example: `/riddle on|off`')
-          
-     
-         
 @bot.on_message(filters.text & (~filters.private & ~filters.bot), group=3)
 async def reply_riddle_answer(_, message):
      global ANSWER
@@ -53,10 +28,9 @@ async def reply_riddle_answer(_, message):
              if int(message.text) == answer:
                   await message.reply('You guess the answer 🥳, wait for next riddle.')
                   ANSWER['answer'] = None
-          except: pass
-
-
-
+          except: 
+               pass
+               
 async def get_question():     
      symbol = ['+','-','*']
      query = "({num1}{syb1}{num2}){syb2}{num3}".format(num1=randint(20, 44), syb1=choice(symbol), num2=randint(2, 9), syb2=choice(symbol), num3=randint (1, 30))     
@@ -87,6 +61,9 @@ async def make_math_riddle(text: str):
      return name, question, answer 
 
 
+
+
+
 async def send_math_riddle(text: str, chat_id: int):
          global ANSWER 
          while count < 21:
@@ -102,5 +79,34 @@ async def send_math_riddle(text: str, chat_id: int):
                     photo=nandha[0],  caption=nandha[1])
               os.remove(nandha[0])
               await asyncio.sleep(2*60)
+
+
+
+@bot.on_message(filters.command('game', prefixes=config.HANDLER))
+async def games(_, message):
+     global IS_RIDDLE
+     if len(message.text.split()) < 2:
+           return await message.reply(
+                'Example: `/game on|off`')
+               
+     condition = str(message.text.split()[1])
+     if condition == 'on':
+            if IS_RIDDLE:
+                  return await message.reply('Already one in process...')
+            IS_RIDDLE = True
+            await message.reply('Starting riddle...')
+     elif condition == 'off':
+            if IS_RIDDLE == False:
+                      return await message.reply('No active riddle.')
+            else:
+                await message.reply('Stopping riddle..')
+                IS_RIDDLE = False          
+     else:
+          return await message.reply(
+               'Example: `/riddle on|off`')
+          
+     
+         
+
 
 
