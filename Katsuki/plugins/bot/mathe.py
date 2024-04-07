@@ -84,9 +84,10 @@ async def send_math_riddle(text: str, chat_id: int):
 @devs_only
 async def riddle(_, message):
      global IS_RIDDLE
-     if len(message.text.split()) > 1:
+     if not len(message.text.split()) < 2:
            return await message.reply(
                 'Example: `/riddle on|off`')
+               
      condition = message.text.split()[1].lower()
      if condition == 'on':
             if IS_RIDDLE:
@@ -98,8 +99,7 @@ async def riddle(_, message):
                       return await message.reply('No active riddle.')
             else:
                 await message.reply('Stopping riddle..')
-                IS_RIDDLE = False
-          
+                IS_RIDDLE = False          
      else:
           return await message.reply(
                'Example: `/riddle on|off`')
