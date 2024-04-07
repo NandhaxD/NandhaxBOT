@@ -65,7 +65,7 @@ async def make_math_riddle():
 
 
 
-async def send_math_riddle(chat_id: int):
+async def send_math_riddle(chat_id: int, message):
          global ANSWER
          count = 0
          while count < 21:
@@ -98,7 +98,7 @@ async def games(_, message):
                   return await message.reply('Already one in process...')
             IS_RIDDLE = True
             await message.reply('Starting riddle...')
-            await send_math_riddle(chat_id=message.chat.id)
+            await send_math_riddle(chat_id=message.chat.id, message)
           
      elif condition == 'off':
             if IS_RIDDLE == False:
