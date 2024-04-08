@@ -20,13 +20,13 @@ async def purge_messages(_, message):
        chat_id = message.chat.id
        reply = message.reply_to_message
        if reply:
-             if message.text.split()[0][1:0].lower() == 'del':
+             if message.text.split()[0][1:].lower() == 'del':
                    try:
                        await reply.delete()
                        return await message.delete()
                    except:
                        pass
-             else:
+             elif message.text.split()[0][1:].lower() == 'purge':
                 reply_id = message.reply_to_message.id
                 message_id = message.id
                 msg_ids = []
