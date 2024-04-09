@@ -5,7 +5,7 @@ import requests
 from urllib.parse import quote
 
 from Katsuki import bot
-from pyrogram import filters
+from pyrogram import filters, enums
 
 
 is_chatbot = False
@@ -14,6 +14,8 @@ api = 'https://tofu-node-apis.onrender.com/api/charai?charID=gkLVbtXVSkljrRjnkzO
 
 @bot.on_message(filters.reply & filters.text & filters.chat(-1001717881477) & ~filters.bot)
 async def reply_chatbot(_, message):
+      chat_id = message.chat.id
+      
       if is_chatbot is False:
           return
       else:    
@@ -23,6 +25,7 @@ async def reply_chatbot(_, message):
                response = requests.get(api.format(message_text)).json()
                try:
                   text = response['reply']
+                  await bot.send_chat_action(chat_id, enums.ChatAction.TYPING)
                   await message.reply(text)
                except:
                    return 
@@ -41,11 +44,11 @@ async def chatbot(_, message):
          if query == 'on':
              is_chatbot = True
              return await message.reply(
-               'Successfully turn onend the chatbot.')
+               'Successfully turn onend chatbot in the chat group.')
          elif query == 'off':
                is_chatbot = False
                return await message.reply(
-                  'Successfully turn offend the chatbot.')
+                  'Successfully turn offend chatbot in the chat group.')
          else:
               return await message.reply(
           'Example: !chatbot on|off')
