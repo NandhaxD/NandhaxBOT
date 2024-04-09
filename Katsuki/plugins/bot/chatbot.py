@@ -20,7 +20,7 @@ async def reply_chatbot(_, message):
           return
       else:    
           reply = message.reply_to_message
-          if reply.from_user.id == config.BOT_ID:
+          if reply.from_user and reply.from_user.id == config.BOT_ID:
                message_text = quote(message.text)
                response = requests.get(api.format(message_text)).json()
                try:
