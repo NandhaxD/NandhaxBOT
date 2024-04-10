@@ -25,7 +25,10 @@ async def reply_chatbot(_, message):
           if reply.from_user and reply.from_user.id == config.BOT_ID:
                name = message.from_user.first_name
                message_text = quote(f'username: {name}\nprompt:\n'+message.text)
-               response = requests.get(api.format(message_text)).json()
+               try:
+                  response = requests.get(api.format(message_text), timeout=10).json()
+               except requests.exceptions.Timeout as e:
+                        return 
                try:
                     success = response['reply']
                     if success:
