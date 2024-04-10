@@ -80,7 +80,7 @@ async def quote(_, message):
            data['messages'][0]['text'] = text
            response = requests.post('https://bot.lyo.su/quote/generate', json=data).json()
            buffer = base64.b64decode(response['result']['image'].encode('utf-8'))
-           name = f"{username}.webp"
+           name = f"{username}bot.webp"
            open(name, 'wb').write(buffer)
            BUTTON=InlineKeyboardMarkup([[
            InlineKeyboardButton("BG CODE ⬅️", url="https://graph.org/file/1e3df8ff41d67db1fc9ea.jpg")]])
