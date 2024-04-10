@@ -30,7 +30,7 @@ async def reply_chatbot(_, message):
                     success = response['reply']
                     if success:
                         await bot.send_chat_action(chat_id, enums.ChatAction.TYPING)
-                        await message.reply(text)
+                        await message.reply(success)
                except:
                    return 
         
