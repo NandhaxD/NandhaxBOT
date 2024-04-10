@@ -14,20 +14,23 @@ api = 'https://tofu-node-apis.onrender.com/api/charai?charID=gkLVbtXVSkljrRjnkzO
 
 @bot.on_message(filters.reply & filters.text & filters.chat(-1001717881477) & ~filters.bot)
 async def reply_chatbot(_, message):
+      
       chat_id = message.chat.id
       
       if is_chatbot is False:
           return
+            
       else:    
           reply = message.reply_to_message
           if reply.from_user and reply.from_user.id == config.BOT_ID:
                name = message.from_user.first_name
-               message_text = quote(f'user: {name}\nprompt:\n'+message.text)
+               message_text = quote(f'username: {name}\nprompt:\n'+message.text)
                response = requests.get(api.format(message_text)).json()
                try:
-                  text = response['reply']
-                  await bot.send_chat_action(chat_id, enums.ChatAction.TYPING)
-                  await message.reply(text)
+                    success = response['reply']
+                    if success:
+                        await bot.send_chat_action(chat_id, enums.ChatAction.TYPING)
+                        await message.reply(text)
                except:
                    return 
         
