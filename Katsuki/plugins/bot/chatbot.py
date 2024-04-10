@@ -21,7 +21,8 @@ async def reply_chatbot(_, message):
       else:    
           reply = message.reply_to_message
           if reply.from_user and reply.from_user.id == config.BOT_ID:
-               message_text = quote(message.text)
+               name = message.from_user.first_name
+               message_text = quote(f'{name}: \n'+message.text)
                response = requests.get(api.format(message_text)).json()
                try:
                   text = response['reply']
