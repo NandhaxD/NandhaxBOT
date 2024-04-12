@@ -38,7 +38,7 @@ else:
 
 
 HANDLER = ["~", ".","!","?","@","$"] 
-NAME = "Katsuki"
+NAME = "NandhaXBOT"
   
 
 # REQUIRED VARIABLES
