@@ -48,5 +48,6 @@
     "afk_04": "<b>Welcome back by Katsuki !</b>",
     "ban_01": "Banned!",
     "ban_03": "<b>Successfully banned `{}` and failed to ban `{}` from {}</b>",
-    "ban_04": "You can't ban users from here."
-}
+    "ban_04": "You can't ban users from here.",
+    "ban_05": "Example:\n`.ban chat_id|user_id` or user_id (without reply to ban ) `.ban (reply) to ban.`"
+} 
