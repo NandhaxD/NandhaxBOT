@@ -6,7 +6,7 @@ from pyrogram import filters
 
 
 
-@app.on_message(filters.me & filters.command("help", prefixes=config.HANDLER))
+@app.on_message(filters.me & filters.command("help", prefixes=config.PREFIXES))
 async def help_command(_, message):
       BOT_USERNAME = (await bot.get_me()).username
       query = "help"
