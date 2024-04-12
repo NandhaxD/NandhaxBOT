@@ -9,7 +9,7 @@ import config, os
 
 """ MEDIA UPLOADER """
 
-@app.on_message(filters.command("tm", prefixes=config.HANDLER) & filters.me)
+@app.on_message(filters.command("tm", prefixes=config.PREFIXES) & filters.me)
 async def tm(_, message):
     await message.edit(lang['alyz'])
     reply_is = message.reply_to_message
@@ -31,7 +31,7 @@ telegraph = Telegraph()
 telegraph.create_account(short_name=config.NAME)
 
 
-@app.on_message(filters.command("txt", prefixes=config.HANDLER))
+@app.on_message(filters.command("txt", prefixes=config.PREFIXES))
 async def graph_text(_, message):
      
      if message.from_user:
