@@ -42,11 +42,11 @@ THUMB_ID = "./IMG_20220701_185623_542.jpg"
 
 # get bot logging
 
-@app.on_message(filters.me & filters.command("logs",prefixes=config.HANDLER))
-async def logs(_, message):
+@app.on_message(filters.me & filters.command("logs",prefixes=config.PREFIXES))
+async def Getlogs(_, message):
        logsText = subprocess.getoutput("tail logs.txt")
        msg = await message.edit_text(lang['alyz'])
-       if len(logsText) > 4096:
+       if len(logsText) > 4094:
               with io.BytesIO(str.encode(logsText)) as logs:
       
                    paste = await spacebin(logsText)
@@ -57,9 +57,9 @@ async def logs(_, message):
        return await message.edit(lang['logging'].format(logsText), parse_mode=enums.ParseMode.HTML)
 
 
-""" SHELL COMMAND ARE USED FOR PIP AND SOME MORE THOUGH """
+#HELL COMMAND ARE USED FOR PIP AND SOME MORE THOUGH 
 
-@app.on_message(filters.me & filters.command("sh", prefixes=config.HANDLER))
+@app.on_message(filters.me & filters.command("sh", prefixes=config.PREFIXES))
 async def run_shell(katsuki, message):
 	 
      if len(message.text.split()) <= 1:
@@ -67,7 +67,7 @@ async def run_shell(katsuki, message):
      code = message.text.split(maxsplit=1)[1]
      output = subprocess.getoutput(code)
      final_output = lang['shell_01'].format(code, output)
-     if len(final_output) > 4096:
+     if len(final_output) > 4095:
      	filename = 'shell.txt'
      	file = open(filename, 'w+')
      	file.write(output)
@@ -85,7 +85,7 @@ async def run_shell(katsuki, message):
 # run your codes using eval
 
 	
-@app.on_message(filters.command("e",prefixes=config.HANDLER))
+@app.on_message(filters.command("e",prefixes=config.PREFIXES))
 @devs_only
 async def evaluate(app , message):
     global r, bot, m
