@@ -26,7 +26,7 @@ from pyrogram import filters, enums
 
 MATH_PERTTEN = ['cos', 'sin', 'tan', 'derive','integrate','simplify','factor']
 
-@app.on_message(filters.me & filters.command(MATH_PERTTEN, prefixes=config.HANDLER))
+@app.on_message(filters.me & filters.command(MATH_PERTTEN, prefixes=config.PREFIXES))
 async def mathematics(_, message):
      
      pertten = message.text[1:].split()[0]
