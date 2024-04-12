@@ -43,7 +43,7 @@ async def help_cmds(_, inline_query):
         lang['help_cmds'],  InputTextMessageContent(message_text=lang['error'].format(e)), thumb_url="https://graph.org/file/d71ae8adaac9ad004b3ca.jpg",reply_markup=InlineKeyboardMarkup(buttons))])
              
 
-@bot.on_inline_query(filters.regex("test"))
+@bot.on_inline_query(filters.regex(""))
 async def test(_, inline_query):
     user_id = config.OWNER_ID
     if not inline_query.from_user.id == user_id:
@@ -55,6 +55,7 @@ async def test(_, inline_query):
     results=[
        InlineQueryResultArticle(
             "Here the InlineQuery Objecs",
-            InputTextMessageContent(message_text=string, disable_web_page_preview=True), thumb_url="https://graph.org/file/4f71af878a085505e8faf.jpg")])
+            InputTextMessageContent(message_text="I'M NANDHA X BOT",
+                                    , disable_web_page_preview=True), thumb_url="https://graph.org/file/4f71af878a085505e8faf.jpg")])
      
 
