@@ -1,6 +1,6 @@
 import config 
 
-from Katsuki import app, lang
+from nandha import app, lang
 from pyrogram import filters, enums, errors
 
 

@@ -8,8 +8,8 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 import pyrogram
 import config
 
-from Katsuki import bot , app, lang
-from Katsuki.helpers.help_func import get_datetime 
+from nandha import bot , app, lang
+from nandha.helpers.help_func import get_datetime 
 
 async def run_clients():
       await bot.start()

@@ -10,8 +10,8 @@ import config
 import requests
 
 
-from Katsuki import MODULE, bot, lang
-from Katsuki.helpers.help_func import spacebin
+from nandha import MODULE, bot, lang
+from nandha.helpers.help_func import spacebin
 from pyrogram import filters
 
 from pyrogram.types import (

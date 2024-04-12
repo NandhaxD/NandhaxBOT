@@ -15,7 +15,7 @@ import config, asyncio, requests
 
 
 from urllib.parse import quote
-from Katsuki import app, MODULE, lang 
+from nandha import app, MODULE, lang 
 from pyrogram import filters, enums
 
 

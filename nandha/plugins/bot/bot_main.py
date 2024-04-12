@@ -3,8 +3,8 @@ import random
 import asyncio 
 import requests 
 from pyrogram import filters, enums
-from Katsuki import bot ,app, lang
-from Katsuki.helpers.help_func import emoji_convert, anime_gif_key, get_anime_gif
+from nandha import bot ,app, lang
+from nandha.helpers.help_func import emoji_convert, anime_gif_key, get_anime_gif
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 

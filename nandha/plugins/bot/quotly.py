@@ -3,8 +3,8 @@ import requests
 import base64
 
 from pyrogram import filters, enums
-from Katsuki import bot ,app, lang
-from Katsuki.helpers.help_func import grap
+from nandha import bot ,app, lang
+from nandha.helpers.help_func import grap
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 

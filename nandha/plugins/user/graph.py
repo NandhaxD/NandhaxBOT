@@ -1,6 +1,6 @@
 from telegraph import upload_file, Telegraph
 from pyrogram import filters
-from Katsuki import app, lang
+from nandha import app, lang
 import config, os
 
 

@@ -9,8 +9,8 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 import requests 
 import config, os
 
-from Katsuki import app, lang
-from Katsuki.helpers.help_func import spacebin, convert_to_datetime
+from nandha import app, lang
+from nandha.helpers.help_func import spacebin, convert_to_datetime
 from pyrogram import filters, enums
 
 

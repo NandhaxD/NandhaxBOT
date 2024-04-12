@@ -1,7 +1,7 @@
 import config
 import time
 
-from Katsuki import bot, lang
+from nandha import bot, lang
 from pyrogram import filters
 
 async def progress(c, t, msg, text, start):

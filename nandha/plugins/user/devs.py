@@ -14,9 +14,9 @@ import os
 import subprocess
 import traceback
 import config
-from Katsuki import app, MODULE, bot, lang
-from Katsuki.helpers.help_func import spacebin
-from Katsuki.helpers.decorator import devs_only
+from nandha import app, MODULE, bot, lang
+from nandha.helpers.help_func import spacebin
+from nandha.helpers.decorator import devs_only
 from pyrogram import filters, enums
 from pyrogram.types import Message 
 from pyrogram.errors import MessageTooLong

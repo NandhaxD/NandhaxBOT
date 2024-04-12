@@ -7,7 +7,7 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 
 import config
 
-from Katsuki import bot, MODULE, lang
+from nandha import bot, MODULE, lang
 from pyrogram import filters, enums 
 
 from pyrogram.types import ( 

@@ -4,7 +4,7 @@ import requests
 
 from urllib.parse import quote
 
-from Katsuki import bot
+from nandha import bot
 from pyrogram import filters, enums
 
 

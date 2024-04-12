@@ -1,5 +1,5 @@
 
-from Katsuki import DATABASE
+from nandha import DATABASE
 
 db = DATABASE['DEV_USERS']
 

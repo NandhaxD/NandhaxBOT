@@ -7,8 +7,8 @@ import config
 
 from pyrogram import enums
 from pyrogram.types import Message 
-from Katsuki import app, lang
-from Katsuki.database.devs import get_users
+from nandha import app, lang
+from nandha.database.devs import get_users
 
 
 """ CHECK YOUR ACC HAS ADMIN IN CHAT """ 
