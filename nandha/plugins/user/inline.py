@@ -55,7 +55,8 @@ async def test(_, inline_query):
     results=[
        InlineQueryResultArticle(
             "Here the InlineQuery Objecs",
-            InputTextMessageContent(message_text="I'M NANDHA X BOT",
-                                    , disable_web_page_preview=True), thumb_url="https://graph.org/file/4f71af878a085505e8faf.jpg")])
+            InputTextMessageContent(
+                 message_text="I'M NANDHA X BOT",
+                               disable_web_page_preview=True), thumb_url="https://telegra.ph/file/94a1e1e74fa5dcc631f62.jpg")])
      
 
