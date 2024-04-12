@@ -15,11 +15,7 @@
     "riddle": "**Query**: `{}`\n**Answer**: `{}`",
     "delete_01": "You can't delete messages here.",
     "rename_01": "Example: !rename nandha.txt",
-    "rename_02": ( 
-           "Download Taken Time: {}\n" 
-           "Upload Taken Time: {}\n"
-           "Thank You For Using Me. (:"
-          ),
+    "rename_02": "Download Taken Time: {}\nUpload Taken Time: {}\nThank You For Using Me. (:",
     "paste": "**Paste Link**: [Here for paste]({})\n**Raw View**: [Here for raw]({})\n**Created at**: {}",
     "alyz": "Analysing....",
     "query": "Enter Query ❗",
