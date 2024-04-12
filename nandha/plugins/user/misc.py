@@ -24,7 +24,7 @@ import requests
 copied_message = {}
 
 
-@app.on_message(filters.command(['copy', 'clear'], prefixes=config.HANDLER))
+@app.on_message(filters.command(['copy', 'clear'], prefixes=config.PREFIXES))
 async def copy_message(_, message):
     global copied_message
     reply = message.reply_to_message
@@ -43,7 +43,7 @@ async def copy_message(_, message):
 
 
 
-@app.on_message(filters.command('send', prefixes=config.HANDLER))
+@app.on_message(filters.command('send', prefixes=config.PREFIXES))
 async def send_copied_message(_, message):
     if bool(copied_message):
         message_id = copied_message['message_id']
@@ -82,7 +82,7 @@ async def artificial_intelligent(_, message):
          
 
 
-@app.on_message(filters.me & filters.command("git",prefixes=config.HANDLER)) 
+@app.on_message(filters.me & filters.command("git",prefixes=config.PREFIXES)) 
 async def github(_, message): 
      if len(message.command) < 2: 
          return await message.edit_text("where you input the username?\n") 
@@ -112,7 +112,7 @@ async def github(_, message):
 
 
 
-@app.on_message(filters.command(["ud","define"],prefixes=config.HANDLER) & filters.me)
+@app.on_message(filters.command(["ud","define"],prefixes=config.PREFIXES) & filters.me)
 async def ud(_, message):
         if len(message.command) < 2:
              return await message.edit("where you input the text?")         
@@ -128,7 +128,7 @@ async def ud(_, message):
         
         
 trans = Translator()
-@app.on_message(filters.command("tr",prefixes=config.HANDLER) & filters.me)
+@app.on_message(filters.command("tr",prefixes=config.PREFIXES) & filters.me)
 async def translate(_, message) -> None:
     reply_msg = message.reply_to_message
     if not reply_msg:
@@ -181,7 +181,7 @@ data = {
 }
 
 
-@app.on_message(filters.me & filters.command(['q','quote'], prefixes=config.HANDLER))
+@app.on_message(filters.me & filters.command(['q','quote'], prefixes=config.PREFIXES))
 async def quote_ub(_, message):
            reply = message.reply_to_message
            if (reply and reply.forward_from):
