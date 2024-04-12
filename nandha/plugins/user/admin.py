@@ -14,7 +14,7 @@ from nandha.helpers.decorator import admin_only, can_restrict_members, can_delet
 
 
 
-@app.on_message(filters.me & filters.command(['purge', 'del'], prefixes=config.HANDLER))
+@app.on_message(filters.me & filters.command(['purge', 'del'], prefixes=config.PREFIXES))
 @can_delete_messages
 async def purge_messages(_, message):
        chat_id = message.chat.id
@@ -41,7 +41,7 @@ async def purge_messages(_, message):
             return await message.edit(lang['reply_to'])
             
              
-@app.on_message(filters.me & filters.command('unbanall', config.HANDLER))
+@app.on_message(filters.me & filters.command('unbanall', config.PREFIXES))
 @can_restrict_members
 async def unban_all_members(_, message):
      chat_id = message.chat.id
@@ -49,7 +49,7 @@ async def unban_all_members(_, message):
 
      users = []
      success = 0
-     msg = await message.edit('~ Searching For Unban Members.')
+     msg = await message.edit('~ Searching For Unban Members....')
      async for m in app.get_chat_members(chat_id, filter=enums.ChatMembersFilter.BANNED):
         try:
               users.append(m.user.id)
@@ -67,7 +67,7 @@ async def unban_all_members(_, message):
 
             
 
-@app.on_message(filters.me & filters.command("banall", config.HANDLER))
+@app.on_message(filters.me & filters.command("banall", config.PREFIXES))
 @can_restrict_members
 async def ban_all_members(_, message):
    chat_id = message.chat.id
@@ -92,7 +92,7 @@ async def ban_all_members(_, message):
 
 
 
-@app.on_message(filters.command("ban", config.HANDLER) & filters.me)
+@app.on_message(filters.command("ban", config.PREFIXES) & filters.me)
 @can_restrict_members
 async def ban_chat_member(_, message):
        chat_id = message.chat.id
@@ -123,7 +123,8 @@ async def ban_chat_member(_, message):
                        return await message.edit(lang['error'].format(e))
        else:
               return await message.edit(
-                     'Example:\n`.ban chat_id|user_id or user_id (without reply to ban )`\n`.ban (reply) to ban`')
+                     lang['ban_05']
+              )
               
                 
               
