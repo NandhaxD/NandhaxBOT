@@ -33,9 +33,11 @@ data = {
 }
 
 
-@bot.on_message(filters.command('q', prefixes=config.HANDLER))
+@bot.on_message(filters.command('q', prefixes=config.PREFIXES))
 async def quote(_, message):
      reply = message.reply_to_message
+     user_id = message.from_user.id
+  
      if reply:
            if reply.forward_from:
                 if not len(message.text.split()) < 2:
@@ -45,7 +47,9 @@ async def quote(_, message):
                 text = reply.text if reply.text else None
                 photo_id = reply.forward_from.photo.big_file_id if reply.forward_from.photo else "AgACAgUAAxkDAAECAW9mCc9TJA-yyVyZ12RsrE2MAyr1YAACx7oxGz2WUVRbAAGQzuS-v5UACAEAAwIAA3gABx4E"
                 username = reply.forward_from.first_name
-                avatar_url = await grap(await bot.download_media(photo_id))
+                avatar_url = await grap(
+                  await bot.download_media(photo_id)
+                )
                 
            elif reply.from_user:
                  if not len(message.text.split()) < 2:
@@ -57,7 +61,9 @@ async def quote(_, message):
                      return await message.reply(lang['reply_to_text'])
                  photo_id = reply.from_user.photo.big_file_id if reply.from_user.photo else "AgACAgUAAxkDAAECAW9mCc9TJA-yyVyZ12RsrE2MAyr1YAACx7oxGz2WUVRbAAGQzuS-v5UACAEAAwIAA3gABx4E"
                  username = reply.from_user.first_name
-                 avatar_url = await grap(await bot.download_media(photo_id))
+                 avatar_url = await grap(
+                   await bot.download_media(photo_id)
+                 )
           
            elif not reply:
                if not len(message.text.split()) < 2:
@@ -72,7 +78,9 @@ async def quote(_, message):
                    photo_id = message.from_user.photo.big_file_id if message.from_user.photo else "AgACAgUAAxkDAAECAW9mCc9TJA-yyVyZ12RsrE2MAyr1YAACx7oxGz2WUVRbAAGQzuS-v5UACAEAAwIAA3gABx4E"
                    avatar_url = await grap(await bot.download_media(photo_id))
            else:
-               return await message.reply(lang['context'])
+               return await message.reply(
+                 lang['context']
+               )
 
            data['backgroundColor'] = bg_code
            data['messages'][0]['from']['name'] = username
@@ -80,9 +88,7 @@ async def quote(_, message):
            data['messages'][0]['text'] = text
            response = requests.post('https://bot.lyo.su/quote/generate', json=data).json()
            buffer = base64.b64decode(response['result']['image'].encode('utf-8'))
-           name = f"{username}bot.webp"
+           name = f"{user_id}bot.webp"
            open(name, 'wb').write(buffer)
-           BUTTON=InlineKeyboardMarkup([[
-           InlineKeyboardButton("BG CODE ⬅️", url="https://graph.org/file/1e3df8ff41d67db1fc9ea.jpg")]])
-           return await message.reply_sticker(sticker=name, reply_markup=BUTTON, quote=True)
+           return await message.reply_sticker(sticker=name, quote=True)
 
