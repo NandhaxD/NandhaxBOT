@@ -36,10 +36,10 @@ logging.basicConfig(level=logging.INFO, handlers=[logging.FileHandler('logs.txt'
 
 
 # PYROGRAM USER CLIENT 
-app = Client(name=config.NAME, session_string=config.SESSION, api_id=config.API_ID, api_hash=config.API_HASH, plugins=dict(root="Katsuki"))
+app = Client(name=config.NAME, session_string=config.SESSION, api_id=config.API_ID, api_hash=config.API_HASH, plugins=dict(root="nandha"))
 
 #PYROGRAM BOT CLIENT
-bot = Client(name=f"{config.NAME}bot", bot_token=config.BOT_TOKEN, api_id=config.API_ID, api_hash=config.API_HASH, plugins=dict(root="Katsuki"))
+bot = Client(name=f"{config.NAME}bot", bot_token=config.BOT_TOKEN, api_id=config.API_ID, api_hash=config.API_HASH, plugins=dict(root="nandha"))
 
 # PYMONGO DATABASE
 DB = MongoClient(config.DB_URL)
