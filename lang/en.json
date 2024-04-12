@@ -20,7 +20,7 @@
            "Upload Taken Time: {}\n"
            "Thank You For Using Me. (:"
           ),
-    "paste": "**Paste Link**: [Here]({})\n**Raw View**: [Here]({})\n**Created at**: {}",
+    "paste": "**Paste Link**: [Here for paste]({})\n**Raw View**: [Here for raw]({})\n**Created at**: {}",
     "alyz": "Analysing....",
     "query": "Enter Query ❗",
     "thinking": "✍️ Thinking....",
