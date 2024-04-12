@@ -19,7 +19,7 @@ if ENV:
    GROUP_ID = os.getenv("GROUP_ID", -1001717881477)
    OWNER_ID = os.getenv('OWNER_ID', 5696053228)
    BOT_ID = os.getenv('BOT_ID', 6952927982)
-   GROUP_LINK = os.getenv('GROUP_LINK', "t.me/nandhasupport")
+   GROUP_LINK = os.getenv('GROUP_LINK', "nandhasupport.t.me")
    DB_URL = os.getenv("DB_URL", "mongodb+srv://nandhaxd:hIatwh7wpArjRPX3@cluster0.80igexg.mongodb.net")
    LANG_CODE = os.getenv('LANG_CODE', 'en')
    LIST_OF_VARIABLE = ["API_ID", "API_HASH", "BOT_TOKEN", "SESSION", "GROUP_ID", "DB_URL", "OWNER_ID"]      
