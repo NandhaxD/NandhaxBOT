@@ -37,7 +37,7 @@ else:
 # DEFAULT VARIABLES 
 
 
-HANDLER = ["~", ".","!","?","@","$"] 
+PREFIXES = ["~", ".","!","?","@","$"] 
 NAME = "NandhaXBOT"
   
 
