@@ -17,7 +17,7 @@ from pyrogram import filters, enums
   
     
 
-@app.on_message(filters.command("paste",config.HANDLER) & filters.me)
+@app.on_message(filters.command("paste",config.PREFIXES) & filters.me)
 async def paste(_, message):
     #share your codes on https://spacebin.in
 
