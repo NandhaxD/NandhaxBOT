@@ -2,16 +2,12 @@ import config
 import time
 
 from nandha import bot, lang
+from nandha.helpers.help_func import progress 
 from pyrogram import filters
 
-async def progress(c, t, msg, text, start):
-            now = time.time()
-            diff = now - start
-            if round(diff % 10.00) == 0 or c == t:
-                 await msg.edit(f"{text}... {c*100/t:.1f}%")
-        
+
                    
-@bot.on_message(filters.reply & filters.command('rename', prefixes=config.HANDLER))
+@bot.on_message(filters.reply & filters.command('rename', prefixes=config.PREFIXES))
 async def rename(_, message):
       reply = message.reply_to_message
       chat_id = message.chat.id
@@ -21,8 +17,12 @@ async def rename(_, message):
             if not len(message.text.split()) < 2:
                  file_name = message.text.split(None, 1)[1]
             else:
-                return await message.reply('Give File Name!')
-            msg = await message.reply("Download...")
+                return await message.reply(
+                            lang['rename_01']
+                )
+            msg = await message.reply(
+                        lang['download']
+            )
             start_dl = time.time()
               
             path = await bot.download_media(
@@ -33,7 +33,9 @@ async def rename(_, message):
                          msg, 'Downloading', start_dl)
                 )
             
-            await msg.edit('Download Complete.')
+            await msg.edit(
+                        'Download Complete.'
+            )
             dl_time = round(time.time()-start_dl, 2)
         
             start_ul = time.time()
@@ -41,19 +43,19 @@ async def rename(_, message):
                       chat_id, 
                       document=path,
                       progress=progress,
-                      progress_args=(msg, 'Uploading', start_ul))
+                      progress_args=(msg, 'Uploading', start_ul)
+            )
               
             ul_time = round(time.time()-start_ul, 2)
               
             return await msg.edit(
-                    
-                  f"<b>Download Taken Time</b>: {dl_time}\n"
-                  f"<b>Upload Taken Time</b>: {ul_time}\n"
-                  f"<b>Thank You For Using Me. (:</b>"
-                    
+                        lang['rename_02'].format(dl_time, ul_time)
             )
+                    
                                                              
       else:
-         return await message.reply('Reply To Document, Media!')
+         return await message.reply(
+                     lang['reply_to_media']
+         )
            
   
