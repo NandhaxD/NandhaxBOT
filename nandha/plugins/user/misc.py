@@ -52,7 +52,7 @@ async def send_copied_message(_, message):
         return await message.edit(lang['success'])
 	    
 
-@app.on_message(filters.me & filters.command('alive', prefixes=config.HANDLER))
+@app.on_message(filters.me & filters.command('alive', prefixes=config.PREFIXES))
 async def alive(_, message):
     await message.edit(lang['alive'])
 
