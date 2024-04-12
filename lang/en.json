@@ -6,6 +6,7 @@
     "unbanall_02": "Found {} In {} Successfully Unbanned {}",
     "reply_to_text": "Reply to Message Text",
     "reply_to": "Reply to Message.",
+    "reply_to_media": "Reply to Media.",
     "help_cmds": "HELP COMMANDS",
     "logging": "<pre>logging {}</pre>",
     "only_group": "This command only work in group's",
@@ -13,7 +14,12 @@
     "not_check_admin": "You can't check admin rights here.",
     "riddle": "**Query**: `{}`\n**Answer**: `{}`",
     "delete_01": "You can't delete messages here.",
-    
+    "rename_01": "Example: !rename nandha.txt",
+    "rename_02": ( 
+           "Download Taken Time: {}\n" 
+           "Upload Taken Time: {}\n"
+           "Thank You For Using Me. (:"
+          ),
     "paste": "**Paste Link**: [Here]({})\n**Raw View**: [Here]({})\n**Created at**: {}",
     "alyz": "Analysing....",
     "query": "Enter Query ❗",
@@ -25,8 +31,8 @@
     "not_owner": "You're not My Owner",
     "error": "Error Appears:{}",
     "alive": "I'm Alive",
-    "upload": "uploading....",
-    "download": "download....",
+    "upload": "Uploading....",
+    "download": "Download....",
     "reply_to_media": "Reply to the media ❗",
     "reply_to": "Reply to the message ❗",
     "math_01": "<b>Result</b>:\n<b>Pertten</b>: {}\n<b>Query</b>: {}\n <pre>{}</pre>",
