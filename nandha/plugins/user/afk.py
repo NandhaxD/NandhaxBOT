@@ -1,7 +1,7 @@
 import config 
 
 from nandha import app, lang
-from nandha.helpers.help_funcs import get_anime_gif, gif_anime_key
+from nandha.helpers.help_funcs import get_anime_gif, anime_gif_key
 from pyrogram import filters, enums, errors
 
 
