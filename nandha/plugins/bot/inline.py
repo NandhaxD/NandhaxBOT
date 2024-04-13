@@ -18,8 +18,6 @@ from pyrogram.types import (
 InlineQueryResultArticle, InputTextMessageContent, InlineKeyboardMarkup, InlineKeyboardButton )
 
 
-async 
-
 async def inline_paste(bot, inline_query_id, context):
     paste = await spacebin(context)
     link = ['result']['link']
