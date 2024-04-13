@@ -23,7 +23,7 @@ async def inline_paste(bot, inline_query_id, context):
         paste = await spacebin(context)
         link = paste['result']['link']
         raw = paste['result']['raw']
-        datetime = ['result']['datetime']
+        datetime = paste['result']['datetime']
         await bot.answer_inline_query(
                  inline_query_id,
                cache_time=1,
