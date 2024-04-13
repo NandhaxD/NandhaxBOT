@@ -88,7 +88,7 @@ async def my_inline(_, inline_query):
             
      elif query == 'paste':
              context = query.split(query.split()[0])[1]
-             await inline_paste(bot, inline_query_id, context)
+             await inline_paste(bot, inline_query.id, context)
              
              
              
