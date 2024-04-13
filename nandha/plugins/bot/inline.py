@@ -27,7 +27,7 @@ async def inline_paste(bot, inline_query_id, context):
     datetime = ['result']['datetime']
     try:
          await bot.answer_inline_query(
-                 inline_query.id,
+                 inline_query_id,
                cache_time=1,
               results=[
                     InlineQueryResultArticle(
@@ -37,7 +37,7 @@ async def inline_paste(bot, inline_query_id, context):
                                disable_web_page_preview=True), thumb_url="https://telegra.ph/file/bea4f6c85c9dc5773521e.jpg")])
     except Exception as e:
             await bot.answer_inline_query(
-                 inline_query.id,
+                 inline_query_id,
                cache_time=1,
               results=[
                     InlineQueryResultArticle(
