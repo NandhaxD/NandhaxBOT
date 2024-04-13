@@ -33,7 +33,7 @@ data = {
 }
 
 
-@bot.on_message(filters.command('q', prefixes=config.PREFIXES))
+@bot.on_message(filters.command(['q','quote']))
 async def quote(_, message):
      reply = message.reply_to_message
      user_id = message.from_user.id
