@@ -17,6 +17,13 @@ import time
 from telegraph import upload_file
 
 
+
+
+async def match_text(pattern, text):
+    regex = re.compile(pattern, re.IGNORECASE)
+    return bool(regex.match(text))
+     
+
 async def emoji_convert(query):
      if query==True:
          return "✅"
