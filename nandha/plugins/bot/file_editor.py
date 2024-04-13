@@ -11,12 +11,13 @@ from pyrogram import filters
 async def rename(_, message):
       reply = message.reply_to_message
       chat_id = message.chat.id
-      message_id = reply.id
       if not reply:
             return await message.reply(lang['reply_to'])
       elif not reply.media:
             return await message.reply(lang['reply_to_media'])        
       else:
+            message_id = reply.id
+        
             if not len(message.text.split()) < 2:
                  file_name = message.text.split(None, 1)[1]
             else:
