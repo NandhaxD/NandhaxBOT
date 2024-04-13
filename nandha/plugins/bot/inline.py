@@ -50,7 +50,7 @@ async def inline_paste(bot, inline_query_id, context):
 
 @bot.on_inline_query()
 async def my_inline(_, inline_query):
-     query = inline_query.query.lower()
+     query = inline_query.query.split()
      OWNER_ID = config.OWNER_ID  
      if len(query) == 0:
            string = inline_query
@@ -59,13 +59,13 @@ async def my_inline(_, inline_query):
                   cache_time=1,
                     results=[
                     InlineQueryResultArticle(
-                   "IM Nandha",
+                   "WUW",
                      InputTextMessageContent(
                 message_text=string,
                                disable_web_page_preview=True), thumb_url="https://telegra.ph/file/94a1e1e74fa5dcc631f62.jpg")])
      
          
-     elif query == 'help':
+     elif query[0] == 'help':
           user_id = config.OWNER_ID
           if not inline_query.from_user.id == user_id:
                   return  
@@ -86,8 +86,8 @@ async def my_inline(_, inline_query):
                              InlineQueryResultArticle(
                          lang['help_cmds'],  InputTextMessageContent(message_text=lang['error'].format(e)), thumb_url="https://graph.org/file/d71ae8adaac9ad004b3ca.jpg",reply_markup=InlineKeyboardMarkup(buttons))])
             
-     elif query.split()[0] == 'paste':
-             context = query.split(query.split()[0])[1]
+     elif query[0] == 'paste':
+             context = query
              await inline_paste(bot, inline_query.id, context)
              
              
