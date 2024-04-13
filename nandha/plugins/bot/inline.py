@@ -21,8 +21,8 @@ InlineQueryResultArticle, InputTextMessageContent, InlineKeyboardMarkup, InlineK
 async def inline_paste(bot, inline_query_id, context):
     try:
         paste = await spacebin(context)
-        link = ['result']['link']
-        raw = ['result']['raw']
+        link = paste['result']['link']
+        raw = paste['result']['raw']
         datetime = ['result']['datetime']
         await bot.answer_inline_query(
                  inline_query_id,
