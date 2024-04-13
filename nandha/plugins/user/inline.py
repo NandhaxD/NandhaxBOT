@@ -11,6 +11,7 @@ import requests
 
 
 from nandha import MODULE, bot, lang
+from nandha.helpers.help_func import match_text
 from nandha.helpers.help_func import spacebin
 from pyrogram import filters
 
@@ -18,42 +19,58 @@ from pyrogram.types import (
 InlineQueryResultArticle, InputTextMessageContent, InlineKeyboardMarkup, InlineKeyboardButton )
 
 
- 
 
-@bot.on_inline_query(filters.regex("help"), group=2)
-async def userbot_cmds(_, inline_query):
-    user_id = config.OWNER_ID
-    if not inline_query.from_user.id == user_id:
-        return  
-     
-    buttons = [[InlineKeyboardButton(x['module'], callback_data=f"help:{x['module']}")] for x in MODULE]
-    try:
-        await bot.answer_inline_query(
-        inline_query.id,
-        cache_time=0,
-        results = [
-        InlineQueryResultArticle(
-        lang['help_cmds'],  InputTextMessageContent(message_text=lang['help_cmds']), thumb_url="https://graph.org/file/d71ae8adaac9ad004b3ca.jpg",reply_markup=InlineKeyboardMarkup(buttons))])
-    except Exception as e:
-        await bot.answer_inline_query(
-        inline_query.id,
-        cache_time=0,
-        results = [
-        InlineQueryResultArticle(
-        lang['help_cmds'],  InputTextMessageContent(message_text=lang['error'].format(e)), thumb_url="https://graph.org/file/d71ae8adaac9ad004b3ca.jpg",reply_markup=InlineKeyboardMarkup(buttons))])
-             
 
-@bot.on_inline_query(group=-1)
-async def bot_cmds(_, inline_query):
-    string = inline_query
-    await bot.answer_inline_query(
-       inline_query.id,
-       cache_time=0,
-    results=[
-       InlineQueryResultArticle(
-            "Here available commands for free uses.",
-            InputTextMessageContent(
-                 message_text="I'M NANDHA X BOT",
+
+
+
+@bot.on_inline_query()
+async def my_inline(_, inline_query):
+     query = inline_query.query.lower()
+     OWNER_ID = config.OWNER_ID  
+     if len(query) == 0:
+           string = inline_query
+           await bot.answer_inline_query(
+                  inline_query.id,
+                  cache_time=1,
+                    results=[
+                    InlineQueryResultArticle(
+                   "Here available commands for free uses.",
+                     InputTextMessageContent(
+                message_text=string,
                                disable_web_page_preview=True), thumb_url="https://telegra.ph/file/94a1e1e74fa5dcc631f62.jpg")])
      
+         
+     elif query == 'help':
+          user_id = config.OWNER_ID
+          if not inline_query.from_user.id == user_id:
+                  return  
+     
+          buttons = [[InlineKeyboardButton(x['module'], callback_data=f"help:{x['module']}")] for x in MODULE]
+          try:
+              await bot.answer_inline_query(
+                   inline_query.id,
+                   cache_time=1,
+                   results = [
+                         InlineQueryResultArticle(
+                         lang['help_cmds'],  InputTextMessageContent(message_text=lang['help_cmds']), thumb_url="https://graph.org/file/d71ae8adaac9ad004b3ca.jpg",reply_markup=InlineKeyboardMarkup(buttons))])
+          except Exception as e:
+                  await bot.answer_inline_query(
+                        inline_query.id,
+                        cache_time=0,
+                              results = [
+                             InlineQueryResultArticle(
+                         lang['help_cmds'],  InputTextMessageContent(message_text=lang['error'].format(e)), thumb_url="https://graph.org/file/d71ae8adaac9ad004b3ca.jpg",reply_markup=InlineKeyboardMarkup(buttons))])
+           
+     
+
+ 
+
+#@bot.on_inline_query(filters.regex("help"), group=2)
+#async def userbot_cmds(_, inline_query):
+             
+
+#@bot.on_inline_query(group=-1)
+#async def bot_cmds(_, inline_query):
+    
 
