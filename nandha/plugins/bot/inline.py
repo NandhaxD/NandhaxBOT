@@ -39,7 +39,7 @@ async def inline_paste(bot, inline_query_id, context):
                cache_time=1,
               results=[
                     InlineQueryResultArticle(
-                   "Click Here",
+                   "Error 404",
                      InputTextMessageContent(
                 message_text=lang['error'].format(e),
                                disable_web_page_preview=True), thumb_url="https://telegra.ph/file/e20ed7b575028c62e5bf1.jpg")])
@@ -86,7 +86,7 @@ async def my_inline(_, inline_query):
                              InlineQueryResultArticle(
                          lang['help_cmds'],  InputTextMessageContent(message_text=lang['error'].format(e)), thumb_url="https://graph.org/file/d71ae8adaac9ad004b3ca.jpg",reply_markup=InlineKeyboardMarkup(buttons))])
             
-     elif query == 'paste':
+     elif query.split()[0] == 'paste':
              context = query.split(query.split()[0])[1]
              await inline_paste(bot, inline_query.id, context)
              
