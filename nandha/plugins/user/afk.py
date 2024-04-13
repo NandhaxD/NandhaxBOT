@@ -47,6 +47,7 @@ async def afk_check(_, message):
                               caption=lang['afk_02'].format(reason), quote=True
                         )
                   else:
+                       url = await get_anime_gif(anime_gif_key[2])
                        return await message.reply_animation(
                              animation=url, caption=lang['afk_03'], quote=True
                                                            )
