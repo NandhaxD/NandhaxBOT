@@ -41,7 +41,7 @@ async def inline_paste(bot, inline_query_id, context):
                     InlineQueryResultArticle(
                    "Click Here",
                      InputTextMessageContent(
-                message_text=['error'].format(e),
+                message_text=lang['error'].format(e),
                                disable_web_page_preview=True), thumb_url="https://telegra.ph/file/e20ed7b575028c62e5bf1.jpg")])
     
   
@@ -59,7 +59,7 @@ async def my_inline(_, inline_query):
                   cache_time=1,
                     results=[
                     InlineQueryResultArticle(
-                   "Here available commands for free uses.",
+                   "IM Nandha",
                      InputTextMessageContent(
                 message_text=string,
                                disable_web_page_preview=True), thumb_url="https://telegra.ph/file/94a1e1e74fa5dcc631f62.jpg")])
