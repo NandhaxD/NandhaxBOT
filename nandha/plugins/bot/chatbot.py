@@ -8,7 +8,7 @@ from nandha import bot
 from pyrogram import filters, enums
 
 
-api = 'https://tofu-node-apis.onrender.com/api/charai?charID=gkLVbtXVSkljrRjnkzOowUbfXntEOFB2iWtu3xBj19A&q={}'
+api = 'https://tofu-node-apis.onrender.com/api/charai?charID=isvAKdyuaL5wGF3BkuJGWu7Rls7q8DAu3bIEIvWOo-Y&q={}'
 
 @bot.on_message(filters.reply & filters.text & filters.chat(config.GROUP_ID) & ~filters.bot)
 async def reply_chatbot(_, message):
