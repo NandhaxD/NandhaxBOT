@@ -65,12 +65,3 @@ async def my_inline(_, inline_query):
      
 
  
-
-#@bot.on_inline_query(filters.regex("help"), group=2)
-#async def userbot_cmds(_, inline_query):
-             
-
-#@bot.on_inline_query(group=-1)
-#async def bot_cmds(_, inline_query):
-    
-
