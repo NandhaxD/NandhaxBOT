@@ -43,7 +43,7 @@ async def userbot_cmds(_, inline_query):
         lang['help_cmds'],  InputTextMessageContent(message_text=lang['error'].format(e)), thumb_url="https://graph.org/file/d71ae8adaac9ad004b3ca.jpg",reply_markup=InlineKeyboardMarkup(buttons))])
              
 
-@bot.on_inline_query(group=1)
+@bot.on_inline_query(group=-1)
 async def bot_cmds(_, inline_query):
     string = inline_query
     await bot.answer_inline_query(
