@@ -7,13 +7,16 @@ from pyrogram import filters
 
 
                    
-@bot.on_message(filters.reply & filters.command('rename', prefixes=config.PREFIXES))
+@bot.on_message(filters.command('rename'))
 async def rename(_, message):
       reply = message.reply_to_message
       chat_id = message.chat.id
       message_id = reply.id
-  
-      if bool(reply.media):
+      if not reply:
+            return await message.reply(lang['reply_to'])
+      elif not reply.media:
+            return await message.reply(lang['reply_to_media'])        
+      else:
             if not len(message.text.split()) < 2:
                  file_name = message.text.split(None, 1)[1]
             else:
