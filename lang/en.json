@@ -1,5 +1,5 @@
 {
-    "quote": "reply to the text message with code or without.\nExample:\n~ .q hello\n~ .q 332255|hello",
+    "quote": "Reply to the text message with code or without.\nExample:\n~ .q hello\n~ .q 332255|hello",
     "copied": "Message Successfully Copied",
     "success": "Success.",
     "unbanall_01": "#UNBANALL\nCHAT: {}\nFOUND: {}\nSUCCESS: {}",
@@ -16,7 +16,7 @@
     "delete_01": "You can't delete messages here.",
     "rename_01": "Example: !rename nandha.txt",
     "rename_02": "Download Taken Time: {}\nUpload Taken Time: {}\nThank You For Using Me. (:",
-    "paste": "**Paste Link**: [Here for paste]({})\n**Raw View**: [Here for raw]({})\n**Created at**: {}",
+    "paste": "**Paste Link**: **[Paste Link]({})**\n**Raw View**: **[Raw Link]({})**\n**Created at**: {}",
     "alyz": "Analysing....",
     "query": "Enter Query ❗",
     "thinking": "✍️ Thinking....",
