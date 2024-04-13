@@ -56,9 +56,5 @@ async def rename(_, message):
             )
                     
                                                              
-      else:
-         return await message.reply(
-                     lang['reply_to_media']
-         )
-           
+      
   
