@@ -18,10 +18,9 @@ from pyrogram.types import (
 InlineQueryResultArticle, InputTextMessageContent, InlineKeyboardMarkup, InlineKeyboardButton )
 
 
+async 
 
-
-async def inline_paste(bot, inline_query):
-    context = inline_query.query.split(None, 1)[1]
+async def inline_paste(bot, inline_query_id, context):
     paste = await spacebin(context)
     link = ['result']['link']
     raw = ['result']['raw']
@@ -90,7 +89,8 @@ async def my_inline(_, inline_query):
                          lang['help_cmds'],  InputTextMessageContent(message_text=lang['error'].format(e)), thumb_url="https://graph.org/file/d71ae8adaac9ad004b3ca.jpg",reply_markup=InlineKeyboardMarkup(buttons))])
             
      elif query == 'paste':
-             await inline_paste(bot, inline_query)
+             context = query.split(query.split()[0])[1]
+             await inline_paste(bot, inline_query_id, context)
              
              
              
