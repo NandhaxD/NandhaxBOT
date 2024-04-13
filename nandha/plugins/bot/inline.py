@@ -87,7 +87,7 @@ async def my_inline(_, inline_query):
                          lang['help_cmds'],  InputTextMessageContent(message_text=lang['error'].format(e)), thumb_url="https://graph.org/file/d71ae8adaac9ad004b3ca.jpg",reply_markup=InlineKeyboardMarkup(buttons))])
             
      elif query.split()[0] == 'paste':
-             context = query
+             context = query.split(None, 1)[1]
              await inline_paste(bot, inline_query.id, context)
              
              
