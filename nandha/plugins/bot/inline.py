@@ -9,7 +9,7 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 import config 
 import requests
 
-
+from urllib.parse import quote
 from nandha import MODULE, bot, lang
 from nandha.helpers.help_func import spacebin
 from pyrogram import filters
@@ -18,31 +18,46 @@ from pyrogram.types import (
 InlineQueryResultArticle, InputTextMessageContent, InlineKeyboardMarkup, InlineKeyboardButton )
 
 
+api_url = 'https://nandha-api.onrender.com/'
+
+
+
+async def article(name: str, article: str, thumb_url: str , keyboard: str = None]):     
+     results=[
+         InlineQueryResultArticle(
+                   name,
+                     InputTextMessageContent(
+                message_text=article,
+                               disable_web_page_preview=True), 
+             thumb_url=thumb_url, 
+             reply_markup=keyboard)
+     ]
+     return results
+    
+
 async def inline_paste(bot, inline_query_id, context):
     try:
         paste = await spacebin(context)
         link = paste['result']['link']
         raw = paste['result']['raw']
         datetime = paste['result']['datetime']
+        name = 'Here your paste'
+        results = await article(
+            name, lang['paste'].format(link, raw, datetime), 'https://graph.org/file/d7ee801a941e632db40f1.jpg')
+        
         await bot.answer_inline_query(
                  inline_query_id,
-               cache_time=1,
-              results=[
-                    InlineQueryResultArticle(
-                   "Click Here",
-                     InputTextMessageContent(
-                message_text=lang['paste'].format(link, raw, datetime),
-                               disable_web_page_preview=True), thumb_url="https://telegra.ph/file/bea4f6c85c9dc5773521e.jpg")])
+               cache_time=1, results
+        )
     except Exception as e:
+            results = await article('ERROR 404',
+                        lang['error'].format(e), 'https://graph.org/file/6248cbb1e09af24a646f4.jpg')
+                                    
             await bot.answer_inline_query(
                  inline_query_id,
                cache_time=1,
-              results=[
-                    InlineQueryResultArticle(
-                   "Error 404",
-                     InputTextMessageContent(
-                message_text=lang['error'].format(e),
-                               disable_web_page_preview=True), thumb_url="https://telegra.ph/file/e20ed7b575028c62e5bf1.jpg")])
+              results
+            )
     
   
 
@@ -52,17 +67,15 @@ async def inline_paste(bot, inline_query_id, context):
 async def my_inline(_, inline_query):
      query = inline_query.query
      OWNER_ID = config.OWNER_ID  
+     inline_query_id = inline_query.id
      if len(query) == 0:
            string = inline_query
+           results = await article('Objects', string, 'https://telegra.ph/file/94a1e1e74fa5dcc631f62.jpg')
            await bot.answer_inline_query(
-                  inline_query.id,
+                  inline_query_id,
                   cache_time=1,
-                    results=[
-                    InlineQueryResultArticle(
-                   "WUW",
-                     InputTextMessageContent(
-                message_text=string,
-                               disable_web_page_preview=True), thumb_url="https://telegra.ph/file/94a1e1e74fa5dcc631f62.jpg")])
+                    results
+)
      
          
      elif query.split()[0] == 'help':
@@ -72,24 +85,54 @@ async def my_inline(_, inline_query):
      
           buttons = [[InlineKeyboardButton(x['module'], callback_data=f"help:{x['module']}")] for x in MODULE]
           try:
+              results = await article(lang['help_cmds'], lang['help_cmds'], 'https://graph.org/file/d71ae8adaac9ad004b3ca.jpg', InlineKeyboardMarkup(buttons))
+              
               await bot.answer_inline_query(
-                   inline_query.id,
+                   inline_query_id,
                    cache_time=1,
-                   results = [
-                         InlineQueryResultArticle(
-                         lang['help_cmds'],  InputTextMessageContent(message_text=lang['help_cmds']), thumb_url="https://graph.org/file/d71ae8adaac9ad004b3ca.jpg",reply_markup=InlineKeyboardMarkup(buttons))])
+              results
+              )
           except Exception as e:
+                  results = await article('ERROR 404',
+                        lang['error'].format(e), 'https://graph.org/file/6248cbb1e09af24a646f4.jpg')
+                                    
                   await bot.answer_inline_query(
-                        inline_query.id,
-                        cache_time=0,
-                              results = [
-                             InlineQueryResultArticle(
-                         lang['help_cmds'],  InputTextMessageContent(message_text=lang['error'].format(e)), thumb_url="https://graph.org/file/d71ae8adaac9ad004b3ca.jpg",reply_markup=InlineKeyboardMarkup(buttons))])
-            
+                 inline_query_id,
+               cache_time=1,
+              results
+          )
+         
      elif query.split()[0] == 'paste':
              context = query.split(None, 1)[1]
              await inline_paste(bot, inline_query.id, context)
-             
+
+
+     elif query.split()[0] == 'fonts':
+            context = query.split(None, 1)[1]
+            try:
+                end_point = f'styletext?query={quote(context)}'
+                req = requests.get(api_url+end_point).json()
+                context = f"Query: **{context}**\n"
+                for text in req['fonts']:
+                       context += text+"\n"
+                await article('Style Fonts', context, 'https://graph.org/file/d95f726d8fe3706cc69ae.jpg')
+                await bot.answer_inline_query(
+                      inline_query_id,
+                             cache_time=1,
+                          results
+                         )
+            except Exception as e:
+                    results = await article('ERROR 404',
+                        lang['error'].format(e), 'https://graph.org/file/6248cbb1e09af24a646f4.jpg')
+                                    
+                    await bot.answer_inline_query(
+                 inline_query_id,
+               cache_time=1,
+              results
+          )
+         
+                   
+            
              
              
 
