@@ -46,16 +46,16 @@ async def inline_paste(bot, inline_query_id, context):
             name, lang['paste'].format(link, raw, datetime), 'https://graph.org/file/d7ee801a941e632db40f1.jpg')
         
         await bot.answer_inline_query(
-                 inline_query_id,
-               cache_time=1, results )
+                 inline_query_id, results
+               cache_time=1 )
     except Exception as e:
             results = await article('ERROR 404',
                         lang['error'].format(e), 'https://graph.org/file/6248cbb1e09af24a646f4.jpg')
                                     
             await bot.answer_inline_query(
-                 inline_query_id,
-               cache_time=1,
-              results
+                 inline_query_id,results,
+               cache_time=1
+              
             )
     
   
@@ -71,9 +71,9 @@ async def my_inline(_, inline_query):
            string = inline_query
            results = await article('Objects', string, 'https://telegra.ph/file/94a1e1e74fa5dcc631f62.jpg')
            await bot.answer_inline_query(
-                  inline_query_id,
+                  inline_query_id,results,
                   cache_time=1,
-                    results
+                    
 )
      
          
@@ -87,18 +87,18 @@ async def my_inline(_, inline_query):
               results = await article(lang['help_cmds'], lang['help_cmds'], 'https://graph.org/file/d71ae8adaac9ad004b3ca.jpg', InlineKeyboardMarkup(buttons))
               
               await bot.answer_inline_query(
-                   inline_query_id,
+                   inline_query_id,results,
                    cache_time=1,
-              results
+              
               )
           except Exception as e:
                   results = await article('ERROR 404',
                         lang['error'].format(e), 'https://graph.org/file/6248cbb1e09af24a646f4.jpg')
                                     
                   await bot.answer_inline_query(
-                 inline_query_id,
+                 inline_query_id,results,
                cache_time=1,
-              results
+              
           )
          
      elif query.split()[0] == 'paste':
@@ -114,20 +114,20 @@ async def my_inline(_, inline_query):
                 context = f"Query: **{context}**\n"
                 for text in req['fonts']:
                        context += text+"\n"
-                await article('Style Fonts', context, 'https://graph.org/file/d95f726d8fe3706cc69ae.jpg')
+                results = await article('Style Fonts', context, 'https://graph.org/file/d95f726d8fe3706cc69ae.jpg')
                 await bot.answer_inline_query(
-                      inline_query_id,
+                      inline_query_id,results,
                              cache_time=1,
-                          results
+                          
                          )
             except Exception as e:
                     results = await article('ERROR 404',
                         lang['error'].format(e), 'https://graph.org/file/6248cbb1e09af24a646f4.jpg')
                                     
                     await bot.answer_inline_query(
-                 inline_query_id,
+                 inline_query_id,results,
                cache_time=1,
-              results
+              
           )
          
                    
