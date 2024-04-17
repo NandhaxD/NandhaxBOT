@@ -42,7 +42,7 @@ async def inline_sof(bot, inline_query_id, query):
              results = await article('ERROR 404',
                         lang['error'].format(e), error_img)
                                     
-            await bot.answer_inline_query(
+             await bot.answer_inline_query(
                  inline_query_id,results,
                cache_time=1
               
