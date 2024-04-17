@@ -11,7 +11,7 @@ import requests
 
 
 from nandha import MODULE, bot, lang
-from nandha.helpers.help_inline import (
+from nandha.helpers.inline_help import (
 inline_paste, inline_fonts, inline_sof)
 from nandha.helpers.misc import article
 
