@@ -24,6 +24,14 @@ InlineQueryResultArticle, InputTextMessageContent, InlineKeyboardMarkup, InlineK
 error_img = 'https://graph.org/file/6248cbb1e09af24a646f4.jpg'
 
 
+BUTTONS = [[
+InlineKeyboardButton('SOF', switch_inline_query_current_chat='sof text'),
+InlineKeyboardButton('FONTS', switch_inline_query_current_chat='fonts text'),
+InlineKeyboardButton('PASTE', switch_inline_query_current_chat='paste text'),     
+ 
+]]
+
+
 
 @bot.on_inline_query()
 async def my_inline(_, inline_query):
@@ -32,8 +40,7 @@ async def my_inline(_, inline_query):
      inline_query_id = inline_query.id
      
      if len(query) == 0:
-           string = inline_query
-           results = await article('Objects', string, 'https://telegra.ph/file/94a1e1e74fa5dcc631f62.jpg')
+           results = await article('Inline Commands', "**Here some commands**", 'https://graph.org/file/e2e4bdc46a616f46361ae.jpg', keyboard=InlineKeyboardMarkup(BUTTON))
            await bot.answer_inline_query(
                   inline_query_id, results, cache_time=1)   
           
