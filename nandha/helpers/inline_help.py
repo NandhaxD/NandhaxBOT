@@ -23,7 +23,7 @@ async def inline_sof(bot, inline_query_id, query):
          context = quote(query.split(None, 1)[1])
          end_point = f'stackoverflow?query={context}'
          req = requests.get(api_url+end_point).json()
-         for xx in req['results']
+         for xx in req['results']:
               button = [[ InlineKeyboardButton(text="Link 🔗", url=xx['link'])]]
               results.append(
                   await article(
