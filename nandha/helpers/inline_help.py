@@ -31,7 +31,8 @@ async def inline_sof(bot, inline_query_id, query):
                       article=f"[{xx['text']}]({xx['link']})", 
                       thumb_url="https://graph.org/file/4a9b862e7877aef3ee553.jpg", 
                       
-                  ))
+                  )[0] 
+              )
          
          await bot.answer_inline_query(
                  inline_query_id, results,
