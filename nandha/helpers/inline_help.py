@@ -33,7 +33,7 @@ async def inline_sof(bot, inline_query_id, query):
               
               results.append(result[0])
                    
-              )
+              
          
          await bot.answer_inline_query(
                  inline_query_id, results,
