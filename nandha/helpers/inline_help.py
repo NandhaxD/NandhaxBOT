@@ -31,7 +31,7 @@ async def inline_sof(bot, inline_query_id, query):
                       f"[{xx['text']}]({xx['link']})", 
                       "https://graph.org/file/4a9b862e7877aef3ee553.jpg", 
                       InlineKeyboardMarkup(button)
-                  )
+                  ))
          
          await bot.answer_inline_query(
                  inline_query_id, results,
