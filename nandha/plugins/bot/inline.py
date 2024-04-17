@@ -12,7 +12,7 @@ import requests
 
 from nandha import MODULE, bot, lang
 from nandha.helpers.help_inline import (
-inline_paste, inline_fonts )
+inline_paste, inline_fonts, inline_sof)
 from nandha.helpers.misc import article
 
 from pyrogram import filters
@@ -65,9 +65,10 @@ async def my_inline(_, inline_query):
              await inline_paste(bot, inline_query_id, query)
           
      elif query.split()[0] == 'fonts':
-            await inline_fonts(bot, inline_query_id, query)
+             await inline_fonts(bot, inline_query_id, query)
           
-                
+     elif query.split()[0] == 'sof':
+             await inline_sof(bot, inline_query_id, query)
          
                    
             
