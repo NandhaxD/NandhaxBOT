@@ -19,6 +19,7 @@ InlineQueryResultArticle, InputTextMessageContent, InlineKeyboardMarkup, InlineK
 
 
 api_url = 'https://nandha-api.onrender.com/'
+error_img = 'https://graph.org/file/6248cbb1e09af24a646f4.jpg'
 
 
 
@@ -50,7 +51,7 @@ async def inline_paste(bot, inline_query_id, context):
                cache_time=1 )
     except Exception as e:
             results = await article('ERROR 404',
-                        lang['error'].format(e), 'https://graph.org/file/6248cbb1e09af24a646f4.jpg')
+                        lang['error'].format(e), error_img)
                                     
             await bot.answer_inline_query(
                  inline_query_id,results,
@@ -60,6 +61,29 @@ async def inline_paste(bot, inline_query_id, context):
     
   
 
+
+async def inline_fonts(bot, inline_query_id, context):
+            try:
+                end_point = f'styletext?query={quote(context)}'
+                req = requests.get(api_url+end_point).json()
+                context = f"**Query**: {context}\n\n"
+                for text in req['fonts']:
+                       context += text+"\n"
+                results = await article('Style Fonts', context, 'https://graph.org/file/d95f726d8fe3706cc69ae.jpg')
+                await bot.answer_inline_query(
+                      inline_query_id,results,
+                             cache_time=1,
+                          
+                         )
+            except Exception as e:
+                    results = await article('ERROR 404',
+                        lang['error'].format(e), error_img)
+                                    
+                    await bot.answer_inline_query(
+                 inline_query_id, results,
+               cache_time=1,
+              
+                    )
 
 
 @bot.on_inline_query()
@@ -93,7 +117,7 @@ async def my_inline(_, inline_query):
               )
           except Exception as e:
                   results = await article('ERROR 404',
-                        lang['error'].format(e), 'https://graph.org/file/6248cbb1e09af24a646f4.jpg')
+                        lang['error'].format(e), error_img)
                                     
                   await bot.answer_inline_query(
                  inline_query_id,results,
@@ -103,33 +127,14 @@ async def my_inline(_, inline_query):
          
      elif query.split()[0] == 'paste':
              context = query.split(None, 1)[1]
-             await inline_paste(bot, inline_query.id, context)
+             await inline_paste(bot, inline_query_id, context)
 
 
      elif query.split()[0] == 'fonts':
-            
-            try:
-                context = query.split(None, 1)[1]
-                end_point = f'styletext?query={quote(context)}'
-                req = requests.get(api_url+end_point).json()
-                context = f"**Query**: {context}\n\n"
-                for text in req['fonts']:
-                       context += text+"\n"
-                results = await article('Style Fonts', context, 'https://graph.org/file/d95f726d8fe3706cc69ae.jpg')
-                await bot.answer_inline_query(
-                      inline_query_id,results,
-                             cache_time=1,
-                          
-                         )
-            except Exception as e:
-                    results = await article('ERROR 404',
-                        lang['error'].format(e), 'https://graph.org/file/6248cbb1e09af24a646f4.jpg')
-                                    
-                    await bot.answer_inline_query(
-                 inline_query_id,results,
-               cache_time=1,
-              
-          )
+            context = query.split(None, 1)[1]
+            await inline_fonts(bot, inline_query_id, context)
+          
+                
          
                    
             
