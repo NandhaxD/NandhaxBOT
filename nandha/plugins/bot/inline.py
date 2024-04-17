@@ -40,7 +40,7 @@ async def my_inline(_, inline_query):
      inline_query_id = inline_query.id
      
      if len(query) == 0:
-           results = await article('Inline Commands', "**Here some commands**", 'https://graph.org/file/e2e4bdc46a616f46361ae.jpg', keyboard=InlineKeyboardMarkup(BUTTON))
+           results = await article('🌟 Commands', "**Here some commands**", 'https://graph.org/file/e2e4bdc46a616f46361ae.jpg', keyboard=InlineKeyboardMarkup(BUTTONS))
            await bot.answer_inline_query(
                   inline_query_id, results, cache_time=1)   
           
