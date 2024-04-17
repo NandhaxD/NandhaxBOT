@@ -22,7 +22,7 @@ api_url = 'https://nandha-api.onrender.com/'
 
 
 
-async def article(name: str, article: str, thumb_url: str , keyboard: str = None]):     
+async def article(name: str, article: str, thumb_url: str , keyboard: str = None):     
      results=[
          InlineQueryResultArticle(
                    name,
