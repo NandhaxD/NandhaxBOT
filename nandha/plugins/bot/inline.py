@@ -35,7 +35,7 @@ async def my_inline(_, inline_query):
            string = inline_query
            results = await article('Objects', string, 'https://telegra.ph/file/94a1e1e74fa5dcc631f62.jpg')
            await bot.answer_inline_query(
-                  inline_query_id,results, cache_time=1, switch_pm_text='@bot sof text')   
+                  inline_query_id,results, cache_time=1, switch_pm_parameter='Hi Bro', switch_pm_text='@bot sof text')   
           
      elif query.split()[0] == 'help':
           user_id = config.OWNER_ID
