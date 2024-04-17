@@ -107,11 +107,12 @@ async def my_inline(_, inline_query):
 
 
      elif query.split()[0] == 'fonts':
-            context = query.split(None, 1)[1]
+            
             try:
+                context = query.split(None, 1)[1]
                 end_point = f'styletext?query={quote(context)}'
                 req = requests.get(api_url+end_point).json()
-                context = f"Query: **{context}**\n"
+                context = f"**Query**: {context}\n\n"
                 for text in req['fonts']:
                        context += text+"\n"
                 results = await article('Style Fonts', context, 'https://graph.org/file/d95f726d8fe3706cc69ae.jpg')
