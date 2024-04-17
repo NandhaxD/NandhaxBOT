@@ -1,10 +1,5 @@
 
-
-a
 from pyrogram.types import InlineQueryResultArticle, InputTextMessageContent
-
-
-
 
 
 async def article(name: str, article: str, thumb_url: str , keyboard: str = None):     
@@ -15,6 +10,7 @@ async def article(name: str, article: str, thumb_url: str , keyboard: str = None
                 message_text=article,
                                disable_web_page_preview=True), 
              thumb_url=thumb_url, 
-             reply_markup=keyboard)
+             reply_markup=keyboard
+         )
      ]
      return results
