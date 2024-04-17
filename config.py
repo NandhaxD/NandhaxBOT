@@ -21,7 +21,7 @@ if ENV:
    GROUP_LINK = os.getenv('GROUP_LINK', "nandhasupport.t.me")
    DB_URL = os.getenv("DB_URL", "mongodb+srv://nandhaxd:hIatwh7wpArjRPX3@cluster0.80igexg.mongodb.net")
    LANG_CODE = os.getenv('LANG_CODE', 'en')
-   LIST_OF_VARIABLE = ["API_ID", "API_HASH", "BOT_TOKEN", "SESSION", "GROUP_ID", "DB_URL", "OWNER_ID"]      
+         
 else:
    API_ID = 13257951 #int() method | get from my.telegram.org
    API_HASH = "d8ea642aedb736d40035bc05f0cfd477" #str() method | get from my.telegram.org
