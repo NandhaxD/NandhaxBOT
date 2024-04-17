@@ -46,7 +46,7 @@ async def inline_paste(bot, inline_query_id, context):
             name, lang['paste'].format(link, raw, datetime), 'https://graph.org/file/d7ee801a941e632db40f1.jpg')
         
         await bot.answer_inline_query(
-                 inline_query_id, results
+                 inline_query_id, results,
                cache_time=1 )
     except Exception as e:
             results = await article('ERROR 404',
