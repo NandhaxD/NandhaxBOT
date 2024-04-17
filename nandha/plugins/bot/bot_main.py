@@ -24,12 +24,13 @@ async def start(_, message):
      name = config.NAME
      id = config.OWNER_ID
      SPAM.append(user_id)
-     await message.forward(config.OWNER_ID)
+     if message.chat.type == enums.ChatType.PRIVATE:
+           await message.forward(config.OWNER_ID)
      mention = f"[{name}](tg://user?id={id})"
      BUTTON=InlineKeyboardMarkup([[
      InlineKeyboardButton("Source ⬅️", url=config.SOURCE),InlineKeyboardButton("GROUP ⬅️", url=config.GROUP_LINK)]])
      await message.reply_animation(
           animation=animation,
           caption=lang['bot_start_01'].format(mention, applive,botlive), quote=True, reply_markup=BUTTON)
-     await asyncio.sleep(10)
+     await asyncio.sleep(5)
      SPAM.remove(user_id)
