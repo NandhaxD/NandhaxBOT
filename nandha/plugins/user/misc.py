@@ -53,6 +53,7 @@ async def ping(_, message):
 	await msg.edit(
 		f'**Ping**: {pingtime}\n\
   **Uptime**: {uptime}'
+	)
 	
 	
 	
