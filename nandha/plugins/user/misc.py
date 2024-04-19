@@ -14,7 +14,7 @@ import time
 import base64
 
 
-from nandha import app, MODULE, bot, lang
+from nandha import app, MODULE, bot, lang, StartTime
 from nandha.helpers.help_func import grap, get_readable_time
 from pyrogram import filters, enums
 from gpytranslate import Translator
@@ -25,7 +25,7 @@ import requests
 copied_message = {}
 
 
-@app.on_message(filters.command(['copy', 'clear'], prefixes=config.PREFIXES))
+@app.on_message(filters.me & filters.command(['copy', 'clear'], prefixes=config.PREFIXES))
 async def copy_message(_, message):
     global copied_message
     reply = message.reply_to_message
@@ -42,10 +42,10 @@ async def copy_message(_, message):
         return await message.edit(lang['copied'])
 
 
-@app.on_message(filters.command('ping', prefixes=config.PREFIXES))
+@app.on_message(filters.me & filters.command('ping', prefixes=config.PREFIXES))
 async def ping(_, message):
 	start = time.time()
-	uptime = await get_readable_time()
+	uptime = await get_readable_time(time.time()-StartTime)
 	ping = round(time.time() - start, 4)
 	msg = await message.edit(
 		'**Pinging....**'
@@ -59,7 +59,7 @@ async def ping(_, message):
 	
 
 
-@app.on_message(filters.command('send', prefixes=config.PREFIXES))
+@app.on_message(filters.me & filters.command('send', prefixes=config.PREFIXES))
 async def send_copied_message(_, message):
     if bool(copied_message):
         message_id = copied_message['message_id']
