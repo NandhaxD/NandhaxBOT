@@ -10,11 +10,12 @@ import asyncio
 import config
 import json
 import os
+import time
 import base64
 
 
 from nandha import app, MODULE, bot, lang
-from nandha.helpers.help_func import grap
+from nandha.helpers.help_func import grap, get_readable_time
 from pyrogram import filters, enums
 from gpytranslate import Translator
 from urllib.parse import quote
@@ -41,6 +42,20 @@ async def copy_message(_, message):
         return await message.edit(lang['copied'])
 
 
+@app.on_message(filters.command('ping', prefixes=config.PREFIXES))
+async def ping(_, message):
+	start = time.time()
+	uptime = await get_readable_time()
+	ping = round(time.time() - start, 4)
+	msg = await message.edit(
+		'**Pinging....**'
+	)
+	await msg.edit(
+		f'**Ping**: {pingtime}\n\
+  **Uptime**: {uptime}'
+	
+	
+	
 
 
 @app.on_message(filters.command('send', prefixes=config.PREFIXES))
@@ -243,6 +258,7 @@ __help__ = """
 - tm: telegraph media upload
 - txt: telegraph text upload
 - paste: spacebin paste
+- ping: check ping&uptime
 - rename: rename a file with extension
 """  
     
