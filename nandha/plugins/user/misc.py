@@ -41,7 +41,7 @@ async def copy_message(_, message):
         copied_message.update(format)
         return await message.edit(lang['copied'])
 
-@app.on_message(filters.me & filters.command('send', prefixes=config.PREFIXES))
+@app.on_message(filters.me & filters.command('paste', prefixes=config.PREFIXES))
 async def send_copied_message(_, message):
     if bool(copied_message):
         message_id = copied_message['message_id']
@@ -61,7 +61,7 @@ async def ping(_, message):
 		'**Pinging....**'
 	)
 	await msg.edit(
-		f'**Ping**: {pingtime}\n\
+		f'**Ping**: {ping}\n\
   **Uptime**: {uptime}'
 	)
 	
@@ -257,7 +257,6 @@ __help__ = """
 - txt: telegraph text upload
 - paste: spacebin paste
 - ping: check ping&uptime
-- rename: rename a file with extension
 """  
     
     
