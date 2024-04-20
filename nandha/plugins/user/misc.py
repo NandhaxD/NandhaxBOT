@@ -22,8 +22,20 @@ from urllib.parse import quote
 import requests
 
 
-copied_message = {}
 
+@app.on_message(filters.me & filters.command('ping', prefixes=config.PREFIXES))
+async def ping(_, message):
+	start = time.time()
+	uptime = get_readable_time(time.time()-StartTime)
+	ping = round(time.time() - start * 1000, 4)
+	msg = await message.edit(
+		'**Pinging....**'
+	)
+	await msg.edit(
+		f'🏓 **Ping**: {ping}ms\n**⏲️ Uptime**: {uptime}'
+	)
+	
+copied_message = {}
 
 @app.on_message(filters.me & filters.command(['copy', 'clear'], prefixes=config.PREFIXES))
 async def copy_message(_, message):
@@ -50,19 +62,6 @@ async def send_copied_message(_, message):
         return await message.edit(lang['success'])
 	    
 
-
-
-@app.on_message(filters.me & filters.command('ping', prefixes=config.PREFIXES))
-async def ping(_, message):
-	start = time.time()
-	uptime = get_readable_time(time.time()-StartTime)
-	ping = round(time.time() - start, 4)
-	msg = await message.edit(
-		'**Pinging....**'
-	)
-	await msg.edit(
-		f'🏓 **Ping**: {ping}\n**⏲️ Uptime**: {uptime}'
-	)
 	
 @app.on_message(filters.me & filters.command('alive', prefixes=config.PREFIXES))
 async def alive(_, message):
