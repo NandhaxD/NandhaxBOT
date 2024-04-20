@@ -14,12 +14,11 @@ import config
 
 from pyrogram import Client
 from pymongo import MongoClient, errors as Mongoerrors
+from aiohttp import ClientSession
 
 StartTime = time.time()
 
 MODULE = []
-
-
 
 # LANGUAGE load
 
@@ -41,6 +40,9 @@ app = Client(name=config.NAME, session_string=config.SESSION, api_id=config.API_
 #PYROGRAM BOT CLIENT
 bot = Client(name=f"{config.NAME}bot", bot_token=config.BOT_TOKEN, api_id=config.API_ID, api_hash=config.API_HASH, plugins=dict(root="nandha"))
 
+# Aiohttp Session
+aiohttpsession = ClientSession()
+
 # PYMONGO DATABASE
 DB = MongoClient(config.DB_URL)
 
@@ -52,6 +54,8 @@ except Mongoerrors.ConnectionFailure:
 
 
 DATABASE = DB.MAIN
+
+
 
 
 
