@@ -27,7 +27,6 @@ copied_message = {}
 
 @app.on_message(filters.me & filters.command(['copy', 'clear'], prefixes=config.PREFIXES))
 async def copy_message(_, message):
-    global copied_message
     reply = message.reply_to_message
     if message.text.split()[0][1:].lower() == 'clear':
         return await message.edit(lang['success'])
@@ -38,6 +37,7 @@ async def copy_message(_, message):
         message_id = reply.id
         from_chat = message.chat.id
         format = {'from_chat_id': from_chat, 'message_id': message_id}
+	    
         copied_message.update(format)
         return await message.edit(lang['copied'])
 
@@ -61,7 +61,7 @@ async def ping(_, message):
 		'**Pinging....**'
 	)
 	await msg.edit(
-		f'🏓 **Ping**: {ping}\**⏲️ Uptime**: {uptime}'
+		f'🏓 **Ping**: {ping}\n**⏲️ Uptime**: {uptime}'
 	)
 	
 @app.on_message(filters.me & filters.command('alive', prefixes=config.PREFIXES))
