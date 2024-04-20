@@ -17,8 +17,8 @@ from pyrogram import filters, enums
   
     
 
-@app.on_message(filters.command("paste",config.PREFIXES) & filters.me)
-async def paste(_, message):
+@app.on_message(filters.command("spacebin",config.PREFIXES) & filters.me)
+async def spacebin_paste(_, message):
     #share your codes on https://spacebin.in
 
     if not message.reply_to_message:
