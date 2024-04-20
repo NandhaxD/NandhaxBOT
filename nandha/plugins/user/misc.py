@@ -41,24 +41,6 @@ async def copy_message(_, message):
         copied_message.update(format)
         return await message.edit(lang['copied'])
 
-
-@app.on_message(filters.me & filters.command('ping', prefixes=config.PREFIXES))
-async def ping(_, message):
-	start = time.time()
-	uptime = await get_readable_time(time.time()-StartTime)
-	ping = round(time.time() - start, 4)
-	msg = await message.edit(
-		'**Pinging....**'
-	)
-	await msg.edit(
-		f'**Ping**: {pingtime}\n\
-  **Uptime**: {uptime}'
-	)
-	
-	
-	
-
-
 @app.on_message(filters.me & filters.command('send', prefixes=config.PREFIXES))
 async def send_copied_message(_, message):
     if bool(copied_message):
@@ -68,6 +50,21 @@ async def send_copied_message(_, message):
         return await message.edit(lang['success'])
 	    
 
+
+
+@app.on_message(filters.me & filters.command('ping', prefixes=config.PREFIXES))
+async def ping(_, message):
+	start = time.time()
+	uptime = get_readable_time(time.time()-StartTime)
+	ping = round(time.time() - start, 4)
+	msg = await message.edit(
+		'**Pinging....**'
+	)
+	await msg.edit(
+		f'**Ping**: {pingtime}\n\
+  **Uptime**: {uptime}'
+	)
+	
 @app.on_message(filters.me & filters.command('alive', prefixes=config.PREFIXES))
 async def alive(_, message):
     await message.edit(lang['alive'])
