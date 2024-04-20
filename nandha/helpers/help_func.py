@@ -15,7 +15,18 @@ import re
 import time
 
 from telegraph import upload_file
+from nandha import session
 
+
+
+
+async def get(url: str, *args, **kwargs):
+    async with session.get(url, *args, **kwargs) as resp:
+        try:
+            data = await resp.json()
+        except Exception:
+            data = await resp.text()
+    return data
 
 
 
@@ -23,6 +34,7 @@ async def match_text(pattern, text):
     regex = re.compile(pattern, re.IGNORECASE)
     return bool(regex.match(text))
      
+
 
 async def emoji_convert(query):
      if query==True:
