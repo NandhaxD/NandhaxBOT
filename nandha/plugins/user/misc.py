@@ -61,8 +61,7 @@ async def ping(_, message):
 		'**Pinging....**'
 	)
 	await msg.edit(
-		f'**Ping**: {ping}\n\
-  **Uptime**: {uptime}'
+		f'🏓 **Ping**: {ping}\**⏲️ Uptime**: {uptime}'
 	)
 	
 @app.on_message(filters.me & filters.command('alive', prefixes=config.PREFIXES))
