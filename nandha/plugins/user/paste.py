@@ -6,7 +6,8 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 
 
 
-import requests 
+import requests
+import asyncio 
 import config, os
 
 from nandha import app, lang
@@ -17,7 +18,7 @@ from pyrogram import filters, enums
   
     
 
-@app.on_message(filters.command("spacebin",config.PREFIXES) & filters.me)
+@app.on_message(filters.command("sb",config.PREFIXES) & filters.me)
 async def spacebin_paste(_, message):
     #share your codes on https://spacebin.in
 
@@ -25,7 +26,9 @@ async def spacebin_paste(_, message):
           try:
               text = message.text.split(None,1)[1]
           except:
-               await message.edit("=> Input text to paste else reply.")
+               msg = await message.edit("Eg: `.sb reply|text`")
+               await asyncio.sleep(5)
+               await msg.delete()
                return           
           mm = await spacebin(text)
           timedate = await convert_to_datetime(mm["result"]["datetime"])
