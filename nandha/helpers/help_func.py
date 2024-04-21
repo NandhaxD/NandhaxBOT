@@ -18,6 +18,13 @@ from telegraph import upload_file
 from nandha import aiohttpsession
 
 
+async def make_carbon(code):
+    url = "https://carbonara.solopov.dev/api/cook"
+    async with aiohttpsession.post(url, json={"code": code}) as resp:
+        image = io.BytesIO(await resp.read())
+    image.name = "carbon.png"
+    return image
+
 
 async def post(url: str, *args, **kwargs):
     async with aiohttpsession.post(url, *args, **kwargs) as resp:
