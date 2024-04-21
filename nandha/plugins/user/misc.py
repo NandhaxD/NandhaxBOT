@@ -51,7 +51,8 @@ async def carbon(_, message):
             await message.reply_photo(photo=image)
             return await msg.delete()
         except Exception as e:
-            return await message.edit(lang['error'].format(e)))
+            return await message.edit(lang['error'].format(e))
+		
 
 copied_message = {}
 
