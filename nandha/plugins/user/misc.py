@@ -43,9 +43,9 @@ async def carbon(_, message):
         msg = await message.edit(lang['reply_to'])
         await asyncio.sleep(10)
         return await msg.delete()
-    else:
+    elif reply and reply.text:
         try:
-            query = message.text.split(None, 1)[1]
+            query = reply.text
             msg = await message.edit(lang['alyz'])
             image = await make_carbon(query)
             await message.reply_photo(photo=image)
