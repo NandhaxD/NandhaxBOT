@@ -119,7 +119,7 @@ async def convert_to_datetime(timestamp): # Unix timestamp
 
 async def batbin(text: str):
     url = "https://batbin.me/api/v2/paste"
-    req = post(url, data=text)
+    req = await post(url, data=text)
     if req['success']:
          return url.split('api')[0]+req['message']
     return False
