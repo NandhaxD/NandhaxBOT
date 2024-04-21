@@ -12,7 +12,7 @@
     "only_group": "This command only work in group's",
     "not_admin": "You're not admin here.",
     "not_check_admin": "You can't check admin rights here.",
-    "riddle": "**Query**: `{}`\n**Answer**: `{}`",
+    "give_text": "Gimme some text to execute.",
     "delete_01": "You can't delete messages here.",
     "rename_01": "Example: !rename nandha.txt",
     "rename_02": "Download Taken Time: {}\nUpload Taken Time: {}\nThank You For Using Me. (:",
