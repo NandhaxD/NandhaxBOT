@@ -16,7 +16,7 @@
     "delete_01": "You can't delete messages here.",
     "rename_01": "Example: !rename nandha.txt",
     "rename_02": "Download Taken Time: {}\nUpload Taken Time: {}\nThank You For Using Me. (:",
-    "paste": "🌠 **Spacebin**: {}\n😼 **Batbin**: {}\n💀 **Raw View**: {}",
+    "paste": "🌠 **Spacebin**: [click here]({})\n😼 **Batbin**: [click here]({})\n💀 **Raw View**: [click here]({})",
     "alyz": "Analysing....",
     "query": "Enter Query ❗",
     "thinking": "✍️ Thinking....",
