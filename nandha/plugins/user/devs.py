@@ -42,7 +42,7 @@ THUMB_ID = "./IMG_20220701_185623_542.jpg"
 
 # get bot logging
 
-@app.on_message(filters.me & filters.command("logs",prefixes=config.PREFIXES))
+@app.on_message(~filters.bot & filters.me & filters.command("logs",prefixes=config.PREFIXES))
 async def Getlogs(_, message):
        logsText = subprocess.getoutput("tail logs.txt")
        msg = await message.edit_text(lang['alyz'])
@@ -59,7 +59,7 @@ async def Getlogs(_, message):
 
 #HELL COMMAND ARE USED FOR PIP AND SOME MORE THOUGH 
 
-@app.on_message(filters.me & filters.command("sh", prefixes=config.PREFIXES))
+@app.on_message(~filters.bot & filters.me & filters.command("sh", prefixes=config.PREFIXES))
 async def run_shell(katsuki, message):
 	 
      if len(message.text.split()) <= 1:
@@ -85,7 +85,7 @@ async def run_shell(katsuki, message):
 # run your codes using eval
 
 	
-@app.on_message(filters.command("e",prefixes=config.PREFIXES))
+@app.on_message(~filters.bot & filters.command("e",prefixes=config.PREFIXES))
 @devs_only
 async def evaluate(app , message):
     global r, bot, m
