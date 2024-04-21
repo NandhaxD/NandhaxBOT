@@ -35,7 +35,7 @@ async def ping(_, message):
 		f'🏓 **Ping**: {ping}ms\n**⏲️ Uptime**: {uptime}'
 	)
 	
-copied_message = {}
+
 
 
 @app.on_message(filters.me & filters.command('cb', prefixes=config.PREFIXES))
@@ -50,6 +50,7 @@ async def carbon(_, message):
              await message.reply_photo(photo=image)
 				       
 
+copied_message = {}
 
 @app.on_message(~filters.bot & filters.me & filters.command(['copy', 'clear'], prefixes=config.PREFIXES))
 async def copy_message(_, message):
