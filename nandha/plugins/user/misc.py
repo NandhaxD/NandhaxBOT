@@ -15,7 +15,7 @@ import base64
 
 
 from nandha import app, MODULE, bot, lang, StartTime
-from nandha.helpers.help_func import grap, get_readable_time
+from nandha.helpers.help_func import grap, get_readable_time, make_carbon
 from pyrogram import filters, enums
 from gpytranslate import Translator
 from urllib.parse import quote
@@ -27,9 +27,9 @@ import requests
 async def ping(_, message):
 	start = time.time()
 	uptime = get_readable_time(time.time()-StartTime)
-	ping = round(time.time() - start * 1000, 4)
+	ping = round(time.time() - start, 3)
 	msg = await message.edit(
-		'**Pinging....**'
+		'**🏓 🏓 Pinging....**'
 	)
 	await msg.edit(
 		f'🏓 **Ping**: {ping}ms\n**⏲️ Uptime**: {uptime}'
@@ -37,7 +37,21 @@ async def ping(_, message):
 	
 copied_message = {}
 
-@app.on_message(filters.me & filters.command(['copy', 'clear'], prefixes=config.PREFIXES))
+
+@app.on_message(filters.me & filters.command('cb', prefixes=config.PREFIXES))
+async def carbon(_, message):
+	if len(message.text.split) < 2:
+	     msg = await message.reply(lang['give_text'])
+	     await asyncio.sleep(10)
+	     return await msg.delete()
+	else:
+	     query = message.text.split(None, 1)[1]
+	     image = await make_carbon(query)
+             await message.reply_photo(photo=image)
+				       
+
+
+@app.on_message(~filters.bot & filters.me & filters.command(['copy', 'clear'], prefixes=config.PREFIXES))
 async def copy_message(_, message):
     reply = message.reply_to_message
     if message.text.split()[0][1:].lower() == 'clear':
@@ -53,7 +67,7 @@ async def copy_message(_, message):
         copied_message.update(format)
         return await message.edit(lang['copied'])
 
-@app.on_message(filters.me & filters.command('paste', prefixes=config.PREFIXES))
+@app.on_message(~filters.bot & filters.me & filters.command('paste', prefixes=config.PREFIXES))
 async def send_copied_message(_, message):
     if bool(copied_message):
         message_id = copied_message['message_id']
