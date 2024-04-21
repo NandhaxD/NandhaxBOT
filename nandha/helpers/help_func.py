@@ -117,6 +117,13 @@ async def convert_to_datetime(timestamp): # Unix timestamp
      return date
 
 
+async def batbin(text: str):
+    url = "https://batbin.me/api/v2/paste"
+    req = post(url, data=text)
+    if req['success']:
+         return url.split('api')[0]+req['message']
+    return False
+    
 async def spacebin(text: str):
     url = "https://spaceb.in/api/v1/documents/"
     response = requests.post(url, data={"content": text, "extension": "txt"})
