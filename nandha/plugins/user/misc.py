@@ -40,8 +40,9 @@ async def ping(_, message):
 
 @app.on_message(filters.me & filters.command('cb', prefixes=config.PREFIXES))
 async def carbon(_, message):
-	if len(message.text.split) < 2:
-	     msg = await message.reply(lang['give_text'])
+	reply = message.reply_to_message
+	if not reply
+             msg = await message.edit(lang['reply_to'])
 	     await asyncio.sleep(10)
 	     return await msg.delete()
 	else:
