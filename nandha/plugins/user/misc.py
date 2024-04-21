@@ -36,15 +36,13 @@ async def ping(_, message):
 	)
 	
 
-
-
 @app.on_message(filters.me & filters.command('cb', prefixes=config.PREFIXES))
 async def carbon(_, message):
 	reply = message.reply_to_message
 	if not reply:
                 msg = await message.edit(lang['reply_to'])
-		await asyncio.sleep(10)
-	        return await msg.delete()
+	        	await asyncio.sleep(10)
+    	        return await msg.delete()
 	else:
 	    try:
 	       query = message.text.split(None, 1)[1]
@@ -54,6 +52,7 @@ async def carbon(_, message):
 	       return await msg.delete()    
 	    except Exception as e:
 		     return await message.edit(lang['error'].format(e))
+
 
 copied_message = {}
 
