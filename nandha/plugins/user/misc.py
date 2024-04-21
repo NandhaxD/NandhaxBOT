@@ -45,10 +45,12 @@ async def carbon(_, message):
 	     await asyncio.sleep(10)
 	     return await msg.delete()
 	else:
-	     query = message.text.split(None, 1)[1]
-	     image = await make_carbon(query)
-             await message.reply_photo(photo=image)
-				       
+	    try:
+	      query = message.text.split(None, 1)[1]
+	      image = await make_carbon(query)
+	      await message.reply_photo(photo=image)
+	    except Exception as e:
+		     return await message.edit(lang['error'].format(e))
 
 copied_message = {}
 
