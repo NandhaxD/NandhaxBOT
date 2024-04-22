@@ -14,6 +14,7 @@ import os
 import subprocess
 import traceback
 import config
+import pyrogram
 from nandha import app, MODULE, bot, lang
 from nandha.helpers.help_func import spacebin
 from nandha.helpers.decorator import devs_only
@@ -22,12 +23,12 @@ from pyrogram.types import Message
 from pyrogram.errors import MessageTooLong
 
 
-async def aexec(code, app, message):
+async def aexec(code, app, message, r, bot):
     exec(
-        "async def __aexec(app, message): "
+        "async def __aexec(app, message, r, bot): "
         + "".join(f"\n {l_}" for l_ in code.split("\n"))
     )
-    return await locals()["__aexec"](app, message)
+    return await locals()["__aexec"](app, message, r, bot)
 
 
  
@@ -88,7 +89,7 @@ async def run_shell(katsuki, message):
 @app.on_message(~filters.bot & filters.command("e",prefixes=config.PREFIXES))
 @devs_only
 async def evaluate(app , message):
-    global r, bot, m
+    
     status_message = await message.reply_text("`Running ...`")
     try:
         cmd = message.text.split(maxsplit=1)[1]
@@ -108,7 +109,13 @@ async def evaluate(app , message):
     redirected_error = sys.stderr = io.StringIO()
     stdout, stderr, exc = None, None, None
     try:
-        await aexec(cmd, app, message)
+        await aexec(
+		code=cmd, 
+		app=app, 
+		message=message, 
+		r=r, 
+		bot=bot
+	)
     except Exception:
         exc = traceback.format_exc()
     stdout = redirected_output.getvalue()
