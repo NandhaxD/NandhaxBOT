@@ -8,27 +8,29 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 
 
 import sys
-import io, time
+import io
+import time
 import re
 import os
 import subprocess
 import traceback
+import requests as req
 import config
 import pyrogram
 from nandha import app, MODULE, bot, lang
-from nandha.helpers.help_func import spacebin
+from nandha.helpers.help_func import spacebin as paste
 from nandha.helpers.decorator import devs_only
 from pyrogram import filters, enums
 from pyrogram.types import Message 
 from pyrogram.errors import MessageTooLong
 
 
-async def aexec(code, app, message, r, bot):
+async def aexec(code, app, message, r, ru, bot):
     exec(
-        "async def __aexec(app, message, r, bot): "
+        "async def __aexec(app, message, r, ru, bot): "
         + "".join(f"\n {l_}" for l_ in code.split("\n"))
     )
-    return await locals()["__aexec"](app, message, r, bot)
+    return await locals()["__aexec"](app, message, r, ru, bot)
 
 
  
@@ -49,11 +51,9 @@ async def Getlogs(_, message):
        msg = await message.edit_text(lang['alyz'])
        if len(logsText) > 4094:
               with io.BytesIO(str.encode(logsText)) as logs:
-      
-                   paste = await spacebin(logsText)
                    logs.name = "logs.txt"
                    await message.reply_document(
-                document=logs, captain=paste ,thumb=THUMB_ID, quote=True),
+                document=logs,thumb=THUMB_ID, quote=True),
                    return await msg.delete()
        return await message.edit(lang['logging'].format(logsText), parse_mode=enums.ParseMode.HTML)
 
@@ -100,6 +100,7 @@ async def evaluate(app , message):
 
     r = message.reply_to_message	
     m = message
+    ru = getattr(r, 'from_user', None)
 
     if r:
         reply_to_id = r.id
@@ -113,7 +114,8 @@ async def evaluate(app , message):
 		code=cmd, 
 		app=app, 
 		message=message, 
-		r=r, 
+		r=r,
+		ru=ru,
 		bot=bot
 	)
     except Exception:
