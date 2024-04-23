@@ -25,6 +25,41 @@ async def make_carbon(code):
     image.name = "carbon.png"
     return image
 
+async get_note_deatils(msg):
+     reply = msg.reply_to_message
+     text = None
+     file_id = None
+     caption = None
+     type = None
+     if msg.text and not reply:
+        note_name = msg.text.split()[1]
+        text = msg.text.split(None, 2)[2]
+        type = "#TEXT"
+     elif reply:
+           note_name = msg.text.split()[1]
+           if reply.text:
+               text = reply.text
+               type = "#TEXT"
+           elif reply.sticker:
+               file_id = reply.sticker.file_id
+               type = "#STICKER"
+           elif reply.photo:
+               file_id = reply.photo.file_id
+               type = "#PHOTO"
+               if reply.caption:
+                   caption = reply.caption               
+           elif reply.video:
+               file_id = reply.video.file_id
+               type = "#VIDEO"
+               if reply.caption:
+                   caption = reply.caption                 
+           elif reply.document:            
+               file_id = reply.document.file_id
+               type = "#DOCUMENT"
+               if reply.caption:
+                   caption = reply.caption
+     return text, file_id, type, caption
+
 
 async def post(url: str, *args, **kwargs):
     async with aiohttpsession.post(url, *args, **kwargs) as resp:
