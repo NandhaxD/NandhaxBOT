@@ -10,11 +10,12 @@ right_format = 'Eg: `/save {notename} reply to text/media` or give text like `{n
 exists = '**Note name already exist. delete and try again.**'
 added = 'Added!:`{}`\nGet the note using `/get notename`'
 
-get_note_eg = 'Example:\n`/get {notename}`'
+get_note_eg = '**Example**:\n`/get {notename}`'
 
 
 @bot.on_message(filters.command('get'))
 async def get_note(_, message):
+      
       chat_id = message.chat.id
       reply = message.reply_to_message
      
@@ -31,17 +32,17 @@ async def get_note(_, message):
           type = note.get('type', '')
           file_id = note.get('file_id', '')
           caption = note.get('caption', None)
-          text = note.get('text', '')
-
+          text = note.get('text', '')        
 
           if type == '#STICKER':
                reply_func = reply.reply_sticker if reply else message.reply_sticker
-               return await reply_func(file_id)
+               return await reply_func(
+                     file_id
+               )
           elif type == '#PHOTO':
                reply_func = reply.reply_photo if reply else message.reply_photo
                return await reply_func(
-                    photo=file_id, 
-                    caption=caption
+                    photo=file_id,  caption=caption
                )
           elif type == '#TEXT':
                 reply_func = reply.text if reply else message.reply_text
@@ -51,20 +52,17 @@ async def get_note(_, message):
           elif type == '#ANIMATION':
                 reply_func = reply.animation if reply else message.reply_animation
                 return reply_func(
-                     animation=file_id, 
-                     caption=caption
+                     animation=file_id,   caption=caption
                 )
           elif type == '#DOCUMENT':
                 reply_func = reply.document if reply else message.reply_document
                 return reply_func(
-                     document=file_id, 
-                     caption=caption
+                     document=file_id,  caption=caption
                 )
           elif type == '#VIDEO':
                 reply_func = reply.video if reply else message.reply_video
                 return reply_func(
-                     video=file_id, 
-                     caption=caption
+                     video=file_id, caption=caption
                 )
           
 
