@@ -1,6 +1,6 @@
 
 from nandha import bot
-from nandha.helpers.help_func import get_note_deatils, get_notes_list
+from nandha.helpers.help_func import get_note_deatils, get_notes_list, add_note
 from pyrogram import filters
 
 right_format = 'Eg: `/save {notename} reply to text/media` or give text like `{notename} @nandha`'
