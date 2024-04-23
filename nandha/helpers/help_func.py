@@ -58,7 +58,12 @@ async def get_note_deatils(msg):
                type = "#DOCUMENT"
                if reply.caption:
                    caption = reply.caption
-     return text, file_id, type, caption
+     return {
+         'text': text, 
+         'file_id': file_id,
+         'type': type, 
+         'caption': caption 
+     }
 
 
 async def post(url: str, *args, **kwargs):
