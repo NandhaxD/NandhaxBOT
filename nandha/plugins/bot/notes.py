@@ -1,12 +1,16 @@
 
 from nandha import bot
-from nandha.helpers.help_func import get_note_deatils
+from nandha.helpers.help_func import get_note_deatils, get_notes_list
 from pyrogram import filters
 
 right_format = 'Eg: `/save {notename} reply to text/media` or give text like `{notename} @nandha`'
-cant_encode = 'sorry i cannot encode the string maybe try removing some unicodes strings in text.'
+exists = 'Note name already exist. delete and try again.'
+added = 'Added `#{}`'
+
 @bot.on_message(filters.command('save'))
 async def save_note(_, message):
+
+     chat_id = message.chat.id
      
      reply = message.reply_to_message
   
@@ -27,6 +31,18 @@ async def save_note(_, message):
                str(e)
           )
                
-     return await message.reply(note)
+     note_name = note['name']
+     if note_name in (await get_notes_list(chat_id)):
+          return await message.reply(
+                 exists
+          )
+     else:
+           await add_note(
+                chat_id=chat_id, 
+                data=note
+           )
+           return await message.reply(
+                added.format(note_name)
+           )
 
         
