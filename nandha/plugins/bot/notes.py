@@ -8,7 +8,7 @@ from pyrogram import filters
 
 right_format = 'Eg: `/save {notename} reply to text/media` or give text like `{notename} @nandha`'
 exists = '**Note name already exist. delete and try again.**'
-added = 'Added!:`{}`\nGet the note using `/get notename`'
+added = 'Added!:`{}`\nGet the note using `/get {}`'
 
 get_note_eg = '**Example**:\n`/get {notename}`'
 
@@ -17,6 +17,7 @@ get_note_eg = '**Example**:\n`/get {notename}`'
 async def get_note(_, message):
       
       chat_id = message.chat.id
+     
       reply = message.reply_to_message
      
       if len(message.text.split()) < 2:
@@ -71,17 +72,6 @@ async def get_note(_, message):
      
      
 
- 
-
-      
-      
-
-
-
-
-
-
-
 
 @bot.on_message(filters.command('save'))
 async def save_note(_, message):
@@ -119,7 +109,7 @@ async def save_note(_, message):
                 data=note
            )
            return await message.reply(
-                added.format(note_name)
+                added.format(note_name, note_name)
            )
 
         
