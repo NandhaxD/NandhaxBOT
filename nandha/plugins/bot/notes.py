@@ -10,7 +10,7 @@ async def save_note(_, message):
      reply = message.reply_to_message
   
      if not reply:
-         if len(message.text.split()) <= 2
+         if len(message.text.split()) <= 2:
              return await message.reply(
                   right_format
              )
