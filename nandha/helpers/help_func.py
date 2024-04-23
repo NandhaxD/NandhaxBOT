@@ -52,7 +52,12 @@ async def get_note_deatils(msg):
                file_id = reply.video.file_id
                type = "#VIDEO"
                if reply.caption:
-                   caption = reply.caption                 
+                   caption = reply.caption  
+           elif reply.animation:
+               file_id = reply.animation.file_id
+               type = "#ANIMATION"
+               if reply.caption:
+                   caption = reply.caption              
            elif reply.document:            
                file_id = reply.document.file_id
                type = "#DOCUMENT"
