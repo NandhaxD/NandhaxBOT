@@ -72,14 +72,14 @@ async def get_notes(_, message):
 @bot.on_message(filters.command('notes'))
 async def get_note_list(_, message):
       chat_id = message.chat.id
-      chat_name = message.chat.title if message.chat else message.chat.first_name
+      chat_name = message.chat.title if message.chat.title else message.chat.first_name
             
       list = await get_notes_list(chat_id)
-      text = f'**Here the list of notes for {chat_name}\n\n**'
+      text = f'**Here the list of notes in {chat_name}:\n\n**'
       if not list is None:
             for i, name in enumerate(list):
-                  text += f'{i+1} `{name}`\n'
-      text += '\nYou can get the notes by using `/get {notename}`'
+                  text += f'{i+1}, `{name}`\n'
+      text += '\nYou can get access the notes by using `/get {notename}`'
       return await message.reply(text)
 
 
