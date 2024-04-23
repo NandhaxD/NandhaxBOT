@@ -25,7 +25,7 @@ async def make_carbon(code):
     image.name = "carbon.png"
     return image
 
-async get_note_deatils(msg):
+async def get_note_deatils(msg):
      reply = msg.reply_to_message
      text = None
      file_id = None
