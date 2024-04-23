@@ -59,7 +59,7 @@ async def get_note_deatils(msg):
                if reply.caption:
                    caption = reply.caption
      return {
-         'notename': notename,
+         'name': note_name,
          'text': text, 
          'file_id': file_id,
          'type': type, 
