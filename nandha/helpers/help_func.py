@@ -62,20 +62,12 @@ async def emoji_convert(query):
 
 
 
-#async def progress(c, t, msg, text, start):
-#            now = time.time()
- #           diff = now - start
- #           if round(diff % 10.00) == 0 or c == t:
- #                await msg.edit(f"{text}... {c*100/t:.1f}%")
-
-
 async def progress(c, t, msg, text, start):
-    emojis = ['🤍', '🤍🤍', '🤍🤍🤍', '🤍🤍🤍🤍', '🤍🤍🤍🤍🤍', '🤍🤍🤍🤍🤍🤍', '🤍🤍🤍🤍🤍🤍🤍', '❤️', '❤️❤️', '❤️❤️❤️', '❤️❤️❤️❤️', '❤️❤️❤️❤️❤️', '❤️❤️❤️❤️❤️❤️', '❤️❤️❤️❤️❤️❤️❤️']
-    now = time.time()
-    diff = now - start
-    progress_index = int(c / t * len(emojis))
-    progress_emoji = emojis[progress_index]
-    await msg.edit(f"{text}... {progress_emoji}")
+         now = time.time()
+         diff = now - start
+           if round(diff % 10.00) == 0 or c == t:
+               await msg.edit(f"**{text}... {c*100/t:.1f} %**")
+
 
 
 async def grap(path):
@@ -86,10 +78,6 @@ async def grap(path):
      except:
           return False
      return url
-     
-     
-     
-
 
 
 anime_gif_key = ["lurk", "shoot", "sleep", "shrug", "stare", "wave", "poke", "smile", "peck",
