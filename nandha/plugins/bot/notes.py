@@ -1,3 +1,4 @@
+
 from nandha import bot
 from nandha.helpers.help_func import get_note_deatils
 from pyrogram import filters
@@ -21,9 +22,9 @@ async def save_note(_, message):
               )
      try:
         note = await get_note_deatils(message)
-     except RequestsJSONDecodeError:
+     except Exception as e:
           return await message.reply(
-               cant_encode
+               str(e)
           )
                
      return await message.reply(note)
