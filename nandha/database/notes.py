@@ -8,6 +8,12 @@ async def get_chats_list() -> list:
     return chat_ids
 
 
+async def notes_list(chat_id: int, name: str):
+    chat = db.find_one({'chat_id': chat_id})
+    if chat:
+        notes = [ note['name'] for note in chat['notes'] ]
+        return notes
+
 async def add_note(chat_id, data):
       save_data = {
           'chat_id': chat_id,
