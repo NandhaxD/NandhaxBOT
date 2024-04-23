@@ -33,7 +33,8 @@ async def save_note(_, message):
           )
                
      note_name = note['name']
-     if note_name in (await get_notes_list(chat_id)):
+     notes_list = await get_notes_list(chat_id)
+     if (not notes_list is None) and (note_name in notes_list):
           return await message.reply(
                  exists
           )
