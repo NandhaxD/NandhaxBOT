@@ -20,7 +20,7 @@ async def save_note(_, message):
                  right_format
               )
     
-      note = await get_note_deatils(message)
-      return await message.reply(note)
+     note = await get_note_deatils(message)
+     return await message.reply(note)
 
         
