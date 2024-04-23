@@ -25,10 +25,10 @@ async def get_notes(_, message):
             )   
       else:
           note_name = message.text.split()[1]
-          note = await get_note(               
+          note_data = await get_note(               
                name=note_name, chat_id=chat_id
           )
-          note = notes[0]
+          note = note_data[0]
           type = note.get('type', '')
           file_id = note.get('file_id', '')
           caption = note.get('caption', None)
@@ -69,14 +69,23 @@ async def get_notes(_, message):
           
 
      
-     
+@bot.on_message(filters.command('notes'))
+async def get_note_list(_, message):
+      chat_id = message.chat.id
+      chat_name = message.chat.title if message.chat else message.chat.first_name
+            
+      list = await get_notes_list(chat_id)
+      text = f'**Here the list of notes for {chat_name}\n\n**'
+      if not list is None:
+            for i, name in enumerate(list):
+                  text += f'{i+1} `{name}`\n'
+      text += '\nYou can get the notes by using `/get {notename}`'
+      return await message.reply(text)
 
 
 @bot.on_message(filters.command('save'))
-async def save_note(_, message):
-
+async def save_note(_, message):      
      chat_id = message.chat.id
-     
      reply = message.reply_to_message
   
      if not reply:
