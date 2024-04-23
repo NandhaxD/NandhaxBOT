@@ -8,6 +8,18 @@ async def get_chats_list() -> list:
     return chat_ids
 
 
+async def add_note(chat_id, data):
+      save_data = {
+          'chat_id': chat_id,
+          'notes': [data]
+       }
+       db.insert_one(save_data)
+       return True
+
+       
+      
+
+
            
           
 
