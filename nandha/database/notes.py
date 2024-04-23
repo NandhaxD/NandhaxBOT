@@ -8,15 +8,15 @@ async def get_chats_list() -> list:
     return chat_ids
 
 
-async def get_note(name, chat_id):
+async def get_note(name: str, chat_id: int):
     col = db.find_one({'chat_id': chat_id})
     if not col is None:
           notes = col.get('notes', [])
-          note = [note for note in notes if note['name'] == name]
-          if len(note) == 0:
-              return False
-          else:
+          note = [ note for note in notes if note['name'] == name ]
+          if len(note) == 1:
               return note
+          else:
+              return False
     return False
 
 
