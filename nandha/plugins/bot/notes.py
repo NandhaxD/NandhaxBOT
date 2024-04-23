@@ -13,7 +13,7 @@ added = 'Added!:`{}`\nGet the note using `/get notename`'
 get_note_eg = 'Example:\n`/get {notename}`'
 
 
-@bot.on_message(filters.command('get', prefixes=config.PREFIXES))
+@bot.on_message(filters.command('get'))
 async def get_note(_, message):
       chat_id = message.chat.id
       reply = message.reply_to_message
