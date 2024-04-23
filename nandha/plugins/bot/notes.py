@@ -3,7 +3,7 @@ from nandha.helpers.help_func import get_note_deatils
 from pyrogram import filters
 
 right_format = 'Eg: `/save {notename} reply to text/media` or give text like `{notename} @nandha`'
-
+cant_encode = 'sorry i cannot encode the string maybe try removing some unicodes strings in text.'
 @bot.on_message(filters.command('save'))
 async def save_note(_, message):
      
@@ -19,8 +19,13 @@ async def save_note(_, message):
               return await message.reply(
                  right_format
               )
-    
-     note = await get_note_deatils(message)
+     try:
+        note = await get_note_deatils(message)
+     except RequestsJSONDecodeError:
+          return await message.reply(
+               cant_encode
+          )
+               
      return await message.reply(note)
 
         
