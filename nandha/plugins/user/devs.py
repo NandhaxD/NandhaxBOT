@@ -25,12 +25,12 @@ from pyrogram.types import Message
 from pyrogram.errors import MessageTooLong
 
 
-async def aexec(code, app, message, r, ru, bot):
+async def aexec(code, app, m, r, ru, bot):
     exec(
-        "async def __aexec(app, message, r, ru, bot): "
+        "async def __aexec(app, m, r, ru, bot): "
         + "".join(f"\n {l_}" for l_ in code.split("\n"))
     )
-    return await locals()["__aexec"](app, message, r, ru, bot)
+    return await locals()["__aexec"](app, m, r, ru, bot)
 
 
  
@@ -113,7 +113,7 @@ async def evaluate(app , message):
         await aexec(
 		code=cmd, 
 		app=app, 
-		message=message, 
+		m=message, 
 		r=r,
 		ru=ru,
 		bot=bot
