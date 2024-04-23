@@ -24,9 +24,8 @@ async def get_note(_, message):
             )   
       else:
           note_name = message.text.split()[1]
-          note = await get_note(
-               chat_id=chat_id,
-               name=note_name
+          note = await get_note(               
+               note_name, chat_id
           )
           note = notes[0]
           type = note.get('type', '')
