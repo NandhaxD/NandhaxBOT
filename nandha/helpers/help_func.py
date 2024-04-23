@@ -65,7 +65,7 @@ async def emoji_convert(query):
 async def progress(c, t, msg, text, start):
          now = time.time()
          diff = now - start
-           if round(diff % 10.00) == 0 or c == t:
+         if round(diff % 10.00) == 0 or c == t:
                await msg.edit(f"**{text}... {c*100/t:.1f} %**")
 
 
