@@ -16,7 +16,7 @@ async def get_notes_list(chat_id: int):
 
 async def add_note(chat_id, data):
       notes = db.find_one({'chat_id': chat_id})
-      if len(notes['notes']) > 0:
+      if (not notes is None) and (len(notes['notes']) > 0):
            db.update_one(
                {'chat_id': chat_id}, 
                {'$push': {'notes': data}}
