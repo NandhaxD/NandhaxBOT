@@ -12,9 +12,9 @@ async def add_note(chat_id, data):
       save_data = {
           'chat_id': chat_id,
           'notes': [data]
-       }
-       db.insert_one(save_data)
-       return True
+     }
+      db.insert_one(save_data)
+      return True
 
        
       
