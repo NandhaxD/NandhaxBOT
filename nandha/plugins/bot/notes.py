@@ -14,10 +14,9 @@ get_note_eg = '**Example**:\n`/get {notename}`'
 
 
 @bot.on_message(filters.command('get'))
-async def get_note(_, message):
+async def get_notes(_, message):
       
-      chat_id = message.chat.id
-     
+      chat_id = message.chat.id     
       reply = message.reply_to_message
      
       if len(message.text.split()) < 2:
@@ -27,7 +26,7 @@ async def get_note(_, message):
       else:
           note_name = message.text.split()[1]
           note = await get_note(               
-               note_name, chat_id
+               name=note_name, chat_id=chat_id
           )
           note = notes[0]
           type = note.get('type', '')
