@@ -14,7 +14,7 @@ no_notes = '**No Notes Saved in {}**'
 get_note_eg = '**Example**:\n`/get {notename}`'
 give_note_del = '**Provide note name to deleted**.'
 deleted_note = 'Successfully deleted note `{}`.'
-
+deleted_all = '** Successfully deleted all notes from {}**.
 
 @bot.on_message(filters.command('get'))
 async def get_notes(_, message):
@@ -94,7 +94,23 @@ async def clear_note(_, message):
              return await message.reply(
                  not_exists.format(note_name)
 )
-                
+
+
+@bot.on_message(filters.command(['rallnote', 'removeallnote']))
+async def delete_chat_notes(_, message):
+       chat_id = message.chat.id
+       chat_name = message.chat.title if message.chat.title else message.chat.first_name
+  
+       nandha = await delete_all_note(chat_id)
+       if nandha:
+             return await message.reply(
+                   deleted_all.format(chat_name)
+             )
+       else:
+             return await message.reply(
+                   no_notes.format(chat_name)
+             )
+
      
 @bot.on_message(filters.command('notes'))
 async def get_note_list(_, message):
