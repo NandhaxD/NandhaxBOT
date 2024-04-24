@@ -2,12 +2,14 @@
 import config
 
 from nandha import bot
-from nandha.helpers.help_func import get_note_deatils
+from nandha.helpers.help_func import get_note_deatils, match_text
 from nandha.database.notes import get_notes_list, add_note, get_note
 from pyrogram import filters
 
 right_format = 'Eg: `/save {notename} reply to text/media` or give text like `{notename} @nandha`'
-exists = '**Note name already exist. delete and try again.**'
+exists = '**Note Name already exist.\nDelete and try again.**'
+not_exists = 'No Notename Found Named {}.'
+
 added = 'Added!:`{}`\nGet the note using `/get {}`'
 
 get_note_eg = '**Example**:\n`/get {notename}`'
@@ -24,10 +26,14 @@ async def get_notes(_, message):
                  get_note_eg
             )   
       else:
-          note_name = message.text.split()[1]
+          note_name = message.text.split()[1].lower()
           note_data = await get_note(               
                name=note_name, chat_id=chat_id
           )
+          if not note_data:
+                return await message.reply(
+                      not_exists.format(note_name)
+                )
           note = note_data[0]
           type = note.get('type', '')
           file_id = note.get('file_id', '')
