@@ -28,7 +28,7 @@
     "error": "Error Appears:{}",
     "alive": "I'm Alive",
     "upload": "Uploading....",
-    "download": "Download....",
+    "download": "Downloading....",
     "reply_to_media": "Reply to the media ❗",
     "reply_to": "Reply to the message ❗",
     "math_01": "<b>Result</b>:\n<b>Pertten</b>: {}\n<b>Query</b>: {}\n <pre>{}</pre>",
