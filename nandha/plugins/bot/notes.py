@@ -2,7 +2,7 @@
 import config
 
 from nandha import bot
-from nandha.helpers.help_func import get_note_deatils, match_text
+from nandha.helpers.help_func import get_note_deatils
 from nandha.database.notes import get_notes_list, add_note, get_note
 from pyrogram import filters
 
