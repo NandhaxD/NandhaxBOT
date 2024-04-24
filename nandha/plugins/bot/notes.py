@@ -52,22 +52,22 @@ async def get_notes(_, message):
                     photo=file_id,  caption=caption
                )
           elif type == '#TEXT':
-                reply_func = reply.text if reply else message.reply_text
+                reply_func = reply.reply_text if reply else message.reply_text
                 return await reply_func(
                      text=text
                 )
           elif type == '#ANIMATION':
-                reply_func = reply.animation if reply else message.reply_animation
+                reply_func = reply.reply_animation if reply else message.reply_animation
                 return await reply_func(
                      animation=file_id,   caption=caption
                 )
           elif type == '#DOCUMENT':
-                reply_func = reply.document if reply else message.reply_document
+                reply_func = reply.reply_document if reply else message.reply_document
                 return await reply_func(
                      document=file_id,  caption=caption
                 )
           elif type == '#VIDEO':
-                reply_func = reply.video if reply else message.reply_video
+                reply_func = reply.reply_video if reply else message.reply_video
                 return await reply_func(
                      video=file_id, caption=caption
                 )
