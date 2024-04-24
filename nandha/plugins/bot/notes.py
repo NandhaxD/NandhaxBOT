@@ -86,7 +86,7 @@ async def clear_note(_, message):
           note_name = message.text.split()[1].lower()
           notes = await get_notes_list(chat_id)
           if (not notes is None) and (note_name in notes):
-              await delete_note(note_name)
+              await delete_note(note_name, chat_id)
               return await message.reply(
                   deleted_note.format(note_name)
               )
