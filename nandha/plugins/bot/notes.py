@@ -8,10 +8,9 @@ from pyrogram import filters
 
 right_format = 'Eg: `/save {notename} reply to text/media` or give text like `{notename} @nandha`'
 exists = '**Note Name already exist.\nDelete and try again.**'
-not_exists = 'No Notename Found Named {}.'
-
-added = 'Added!:`{}`\nGet the note using `/get {}`'
-
+not_exists = 'No Notename Saved as `{}`.\nGet the list of notes by `/notes` command.'
+added = '**Added!**:`{}`\nGet the note using `/get {}`'
+no_notes = '**No Notes Saved in {}**'
 get_note_eg = '**Example**:\n`/get {notename}`'
 
 
@@ -81,7 +80,11 @@ async def get_note_list(_, message):
       chat_name = message.chat.title if message.chat.title else message.chat.first_name
             
       list = await get_notes_list(chat_id)
-      text = f'**Here the list of notes in {chat_name}:\n\n**'
+      if list is None:
+            return await message.reply(
+                  no_notes.format(chat_name)
+            )                  
+      text = f'**Here The List Of Notes In {chat_name}:\n\n**'
       if not list is None:
             for i, name in enumerate(list):
                   text += f'{i+1}, `{name}`\n'
