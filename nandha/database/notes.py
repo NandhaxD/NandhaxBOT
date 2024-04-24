@@ -8,6 +8,7 @@ async def get_chats_list() -> list:
     return chat_ids
 
 
+
 async def get_note(name, chat_id):
     col = db.find_one({'chat_id': chat_id})
     if not col is None:
@@ -21,7 +22,14 @@ async def get_note(name, chat_id):
 
 
 
-
+async def delete_all_note(chat_id: int):
+    col = db.find_one({'chat_id': chat_id})
+    if not col is None:
+         db.delete_one(col)
+         return True
+    else:
+         return False
+    
 async def delete_note(name, chat_id):
     col = db.find_one({'chat_id': chat_id})
     if not col is None:
