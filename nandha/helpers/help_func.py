@@ -32,11 +32,11 @@ async def get_note_deatils(msg):
      caption = None
      type = None
      if msg.text and not reply:
-        note_name = msg.text.split()[1]
+        note_name = msg.text.split()[1].lower()
         text = msg.text.split(None, 2)[2]
         type = "#TEXT"
      elif reply:
-           note_name = msg.text.split()[1]
+           note_name = msg.text.split()[1].lower()
            if reply.text:
                text = reply.text
                type = "#TEXT"
