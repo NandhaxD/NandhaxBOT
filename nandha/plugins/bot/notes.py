@@ -3,7 +3,7 @@ import config
 
 from nandha import bot
 from nandha.helpers.help_func import get_note_deatils
-from nandha.database.notes import get_notes_list, add_note, get_note, delete_note
+from nandha.database.notes import get_notes_list, add_note, get_note, delete_note, delete_all_note
 from pyrogram import filters
 
 right_format = 'Eg: `/save {notename} reply to text/media` or give text like `{notename} @nandha`'
@@ -14,7 +14,7 @@ no_notes = '**No Notes Saved in {}**'
 get_note_eg = '**Example**:\n`/get {notename}`'
 give_note_del = '**Provide note name to deleted**.'
 deleted_note = 'Successfully deleted note `{}`.'
-deleted_all = '** Successfully deleted all notes from {}**.
+deleted_all = '**Successfully deleted all notes from {}**'
 
 @bot.on_message(filters.command('get'))
 async def get_notes(_, message):
