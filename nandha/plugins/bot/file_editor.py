@@ -76,7 +76,7 @@ async def get_sticker(_, message):
           )
      elif reply and reply.photo:
           file = await reply.download(
-              file_name=reply.sticker.file_name.split('.')[0]+'.webp'
+              file_name=reply.photo.file_name.split('.')[0]+'.webp'
           )
           return await message.reply_sticker(
             file, quote=True
