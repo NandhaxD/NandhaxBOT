@@ -38,18 +38,23 @@ async def rename(_, message):
                 )
             
             await msg.edit(
-                        'Download Complete.'
+                        '**Download Complete.**'
             )
             dl_time = round(time.time()-start_dl, 2)
         
             start_ul = time.time()
-            await bot.send_document(
-                      chat_id, 
+            try:
+                await bot.send_document(
+                      chat_id=chat_id, 
                       document=path,
                       progress=progress,
                       progress_args=(msg, 'Uploading', start_ul)
             )
-              
+            except Exception as e:
+                 return await msg.edit(
+                   str(e)
+                 )
+                   
             ul_time = round(time.time()-start_ul, 2)
               
             return await msg.edit(
