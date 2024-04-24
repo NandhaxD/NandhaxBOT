@@ -6,6 +6,7 @@ from nandha.helpers.help_func import progress
 from pyrogram import filters
 
 
+
                    
 @bot.on_message(filters.command('rename'))
 async def rename(_, message):
@@ -63,4 +64,27 @@ async def rename(_, message):
                     
                                                              
       
+@bot.on_message(filters.command('getsticker'))
+async def get_sticker(_, message):
+     reply = message.reply_to_message
+     if reply and reply.sticker:
+          file = await reply.download(
+              file_name=reply.sticker.file_name.split('.')[0]+'.png'
+          )
+          return await message.reply_document(
+            file, quote=True
+          )
+     elif reply and reply.photo:
+          file = await reply.download(
+              file_name=reply.sticker.file_name.split('.')[0]+'.webp'
+          )
+          return await message.reply_sticker(
+            file, quote=True
+          )
+     else:
+         return await message.reply(
+            lang['reply_to_media']
+         )
+      
+        
   
