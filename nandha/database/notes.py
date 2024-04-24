@@ -20,6 +20,19 @@ async def get_note(name, chat_id):
     return False
 
 
+
+
+async def delete_note(name, chat_id):
+    col = db.find_one({'chat_id': chat_id})
+    if not col is None:
+        db.update_one(
+          {"chat_id": chat_id},
+          {"$pull": {"notes": {"name": name}}})
+        return True
+    else:
+        return False
+
+
 async def get_notes_list(chat_id: int):
     chat = db.find_one({'chat_id': chat_id})
     if chat:
