@@ -3,7 +3,7 @@ import config
 
 from nandha import bot
 from nandha.helpers.help_func import get_note_deatils
-from nandha.database.notes import get_notes_list, add_note, get_note
+from nandha.database.notes import get_notes_list, add_note, get_note, delete_note
 from pyrogram import filters
 
 right_format = 'Eg: `/save {notename} reply to text/media` or give text like `{notename} @nandha`'
@@ -12,6 +12,8 @@ not_exists = 'No Notename Saved as `{}`.\nGet the list of notes by `/notes` comm
 added = '**Added!**:`{}`\nGet the note using `/get {}`'
 no_notes = '**No Notes Saved in {}**'
 get_note_eg = '**Example**:\n`/get {notename}`'
+give_note_del = '**Provide note name to deleted**.'
+deleted_note = 'Successfully deleted note `{}`.'
 
 
 @bot.on_message(filters.command('get'))
@@ -73,6 +75,26 @@ async def get_notes(_, message):
 
           
 
+@bot.on_message(filters.command('clear'))
+async def clear_note(_, message):
+     chat_id = message.chat.id
+     if len(message.text.split()) < 2:
+          return await message.reply(
+              give_note_del
+          )
+     else:
+          note_name = message.text.split()[1].lower()
+          notes = await get_notes_list(chat_id)
+          if (not notes is None) and (note_name in notes):
+              await delete_note(note_name)
+              return await message.reply(
+                  deleted_note.format(note_name)
+              )
+          else:
+             return await message.reply(
+                 not_exists.format(note_name)
+)
+                
      
 @bot.on_message(filters.command('notes'))
 async def get_note_list(_, message):
