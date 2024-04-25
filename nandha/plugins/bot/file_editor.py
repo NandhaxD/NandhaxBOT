@@ -72,25 +72,29 @@ async def get_sticker(_, message):
               file = await reply.download(
               file_name=reply.sticker.file_name.split('.')[0]+'.png'
             )
-               return await message.reply_document(
+              return await message.reply_document(
                file, quote=True
             )
         elif reply.sticker and reply.sticker.is_video:
               file = await reply.download(
               file_name=reply.sticker.file_name.split('.')[0]+'.mkv'
                )
-                 return await message.reply_document(
+              return await message.reply_document(
                       file, quote=True
              )       
         elif reply.photo:
              file = await reply.download(
-              file_name=reply.photo.file_unique_id+'.webp'
+               file_name=reply.photo.file_unique_id+'.webp'
                 )
-              return await message.reply_sticker(
+             return await message.reply_sticker(
                 file, quote=True
               )
+        else:
+            return await message.reply(
+                lang['reply_to_media']
+             )
      else:
-             return await message.reply(
+         return await message.reply(
                 lang['reply_to_media']
                 )
       
