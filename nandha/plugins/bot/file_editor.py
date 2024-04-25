@@ -68,7 +68,7 @@ async def rename(_, message):
 async def get_sticker(_, message):
      reply = message.reply_to_message
      if reply:
-        if not reply.sticker.is_video:
+        if not reply.sticker and not reply.sticker.is_video:
               file = await reply.download(
               file_name=reply.sticker.file_name.split('.')[0]+'.png'
             )
