@@ -67,24 +67,32 @@ async def rename(_, message):
 @bot.on_message(filters.command('getsticker'))
 async def get_sticker(_, message):
      reply = message.reply_to_message
-     if reply and reply.sticker:
-          file = await reply.download(
+     if reply:
+        if reply.sticker:
+              file = await reply.download(
               file_name=reply.sticker.file_name.split('.')[0]+'.png'
-          )
-          return await message.reply_document(
-            file, quote=True
-          )
-     elif reply and reply.photo:
-          file = await reply.download(
+            )
+               return await message.reply_document(
+               file, quote=True
+            )
+        elif reply.sticker and reply.sticker.is_video:
+              file = await reply.download(
+              file_name=reply.sticker.file_name.split('.')[0]+'.mkv'
+               )
+                 return await message.reply_document(
+                      file, quote=True
+             )       
+        elif reply.photo:
+             file = await reply.download(
               file_name=reply.photo.file_unique_id+'.webp'
-          )
-          return await message.reply_sticker(
-            file, quote=True
-          )
+                )
+              return await message.reply_sticker(
+                file, quote=True
+              )
      else:
-         return await message.reply(
-            lang['reply_to_media']
-         )
+             return await message.reply(
+                lang['reply_to_media']
+                )
       
         
   
