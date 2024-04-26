@@ -71,9 +71,9 @@ async def get_notes(_, message):
                 return await reply_func(
                      video=file_id, caption=caption
                 )
-          
-          try: await message.delete() if message else None; except: pass
-                
+          try: await message.delete();
+          except: pass
+           
 
 @bot.on_message(filters.command('clear'))
 async def clear_note(_, message):
