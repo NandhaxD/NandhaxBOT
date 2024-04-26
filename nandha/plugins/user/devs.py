@@ -87,10 +87,9 @@ async def run_shell(katsuki, message):
 
 	
 @app.on_message(~filters.bot & filters.command("e",prefixes=config.PREFIXES))
-@devs_only
 async def evaluate(app , message):
     
-    status_message = await message.reply_text("`Running ...`")
+    status_message = await message.edit("`Running ...`")
     try:
         cmd = message.text.split(maxsplit=1)[1]
     except IndexError:
