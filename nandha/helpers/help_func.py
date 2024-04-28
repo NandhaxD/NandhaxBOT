@@ -31,7 +31,7 @@ async def get_note_deatils(msg):
      file_id = None
      caption = None
      type = None
-     keyboard = msg.reply_markup if msg.reply_markup and not reply else reply.reply_markup if reply.reply_markup and reply else None
+     keyboard = str(msg.reply_markup) if msg.reply_markup and not reply else str(reply.reply_markup) if reply.reply_markup and reply else None
      if msg.text and not reply:
         note_name = msg.text.split()[1].lower()
         text = msg.text.split(None, 2)[2]
