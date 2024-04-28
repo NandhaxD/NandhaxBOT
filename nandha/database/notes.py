@@ -16,9 +16,9 @@ async def get_notes_list(chat_id: int):
 
 async def get_note(name, chat_id):
     col = db.find_one({'chat_id': chat_id})    
-    length = len(await get_notes_list(chat_id)) if await get_notes_list(chat_id) is not None else 0
+    length = len(await get_notes_list(chat_id)) if (await get_notes_list(chat_id)) else 0
     available_num = [i + 1 for i in range(length)]
-    if name.isdigit() and name in available_num:
+    if name.isdigit() and int(name) in available_num:
           notes = col['notes']
           note = notes[name-1]
           return note        
