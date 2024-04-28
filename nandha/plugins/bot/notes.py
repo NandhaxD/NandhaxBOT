@@ -139,7 +139,6 @@ async def get_note_list(_, message):
 
 
 @bot.on_message(filters.command('save'))
-@admin_only
 async def save_note(_, message):      
      chat_id = message.chat.id
      reply = message.reply_to_message
