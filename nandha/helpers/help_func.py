@@ -31,6 +31,7 @@ async def get_note_deatils(msg):
      file_id = None
      caption = None
      type = None
+     keyboard = msg.reply_markup if msg.reply_markup and not reply else reply.reply_markup if reply.reply_markup and reply else None
      if msg.text and not reply:
         note_name = msg.text.split()[1].lower()
         text = msg.text.split(None, 2)[2]
@@ -57,7 +58,12 @@ async def get_note_deatils(msg):
                file_id = reply.animation.file_id
                type = "#ANIMATION"
                if reply.caption:
-                   caption = reply.caption              
+                   caption = reply.caption 
+           elif reply.audio:            
+               file_id = reply.audio.file_id
+               type = "#AUDIO"
+               if reply.caption:
+                   caption = reply.caption
            elif reply.document:            
                file_id = reply.document.file_id
                type = "#DOCUMENT"
@@ -68,7 +74,8 @@ async def get_note_deatils(msg):
          'text': text, 
          'file_id': file_id,
          'type': type, 
-         'caption': caption 
+         'caption': caption,
+         'keyboard': keyboard
      }
 
 
