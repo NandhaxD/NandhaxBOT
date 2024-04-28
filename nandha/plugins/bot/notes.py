@@ -9,7 +9,7 @@ from pyrogram import filters
 right_format = 'Eg: `/save {notename} reply to text/media` or give text like `{notename} @nandha`'
 exists = '**Note Name already exist.\nDelete and try again.**'
 not_exists = 'No Notename Saved as `{}`.\nGet the list of notes by `/notes` command.'
-added = '**Added!**:`{}`\nGet the note using `/get {}`'
+added = '**Added!**: `{}`\nGet the note using `/get {}`'
 no_notes = '**No Notes Saved in {}**'
 get_note_eg = '**Example**:\n`/get {notename}`'
 give_note_del = '**Provide note name to deleted**.'
@@ -131,6 +131,7 @@ async def get_note_list(_, message):
 
 
 @bot.on_message(filters.command('save'))
+@admin_only
 async def save_note(_, message):      
      chat_id = message.chat.id
      reply = message.reply_to_message
