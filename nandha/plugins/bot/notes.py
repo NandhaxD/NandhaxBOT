@@ -1,8 +1,9 @@
 
 import config
+import json
 
 from nandha import bot
-from nandha.helpers.help_func import get_note_deatils
+from nandha.helpers.help_func import get_note_deatils, deserialize_inline_keyboard
 from nandha.database.notes import get_notes_list, add_note, get_note, delete_note, delete_all_note
 from pyrogram import filters
 
@@ -39,7 +40,12 @@ async def get_notes(_, message):
           type = note.get('type', '')
           file_id = note.get('file_id', '')
           caption = note.get('caption', None)
-          keyboard = note.get('keyboard', None)
+          keyboard = None
+          keyboard_json = note.get('keyboard', None)
+          if keyboard_json:
+              serialized_keyboard = json.loads(keyboard_json)
+              keyboard = deserialize_inline_keyboard(serialized_keyboard)
+          
           text = note.get('text', '')        
 
           if type == '#STICKER':
