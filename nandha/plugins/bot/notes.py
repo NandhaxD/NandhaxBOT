@@ -9,7 +9,7 @@ from pyrogram import filters
 right_format = 'Eg: `/save {notename} reply to text/media` or give text like `{notename} @nandha`'
 exists = '**Note Name already exist.\nDelete and try again.**'
 not_exists = 'No Notename Saved as `{}`.\nGet the list of notes by `/notes` command.'
-added = '**Added!**: `{}`\nGet the note using `/get {}`'
+added = '**Added!**: `{}`\nGet the note using `/get {}` or `/get num`'
 no_notes = '**No Notes Saved in {}**'
 get_note_eg = '**Example**:\n`/get {notename}`'
 give_note_del = '**Provide note name to deleted**.'
@@ -162,6 +162,13 @@ async def save_note(_, message):
           )
                
      note_name = note['name']
+     length = len(await get_notes_list(chat_id)) if await get_notes_list(chat_id) is not None else 0
+     available_num = [i + 1 for i in range(length)]
+     if note_name.isdigit():
+           return await message.reply(
+                 "**Hello, sorry you can't store note by digits because you are accessing notes by its number** `/get 1`"
+           )
+      
      notes_list = await get_notes_list(chat_id)
      if (not notes_list is None) and (note_name in notes_list):
           return await message.reply(
