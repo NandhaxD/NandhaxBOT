@@ -18,6 +18,7 @@ import json
 from telegraph import upload_file
 from nandha import aiohttpsession
 
+from pyrogram import types
 
 async def make_carbon(code):
     url = "https://carbonara.solopov.dev/api/cook"
@@ -48,10 +49,10 @@ def deserialize_inline_keyboard(serialized_keyboard):
     for serialized_row in serialized_keyboard["inline_keyboard"]:
         row = []
         for serialized_button in serialized_row:
-            button = pyrogram.types.InlineKeyboardButton(**serialized_button)
+            button = types.InlineKeyboardButton(**serialized_button)
             row.append(button)
         inline_keyboard.append(row)
-    return pyrogram.types.InlineKeyboardMarkup(inline_keyboard=inline_keyboard)
+    return types.InlineKeyboardMarkup(inline_keyboard=inline_keyboard)
 
 
 async def get_note_deatils(msg):
