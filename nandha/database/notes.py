@@ -20,7 +20,7 @@ async def get_note(name, chat_id):
     available_num = [i + 1 for i in range(length)]
     if name.isdigit() and int(name) in available_num:
           notes = col['notes']
-          note = notes[name-1]
+          note = notes[int(name)-1]
           return note        
     else:
        if col and 'notes' in col:
