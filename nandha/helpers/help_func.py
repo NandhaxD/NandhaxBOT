@@ -25,13 +25,44 @@ async def make_carbon(code):
     image.name = "carbon.png"
     return image
 
+
+def serialize_inline_keyboard(keyboard):
+    serialized_keyboard = {
+        "inline_keyboard": []
+    }
+    for row in keyboard.inline_keyboard:
+        serialized_row = []
+        for button in row:
+            serialized_button = {
+                "text": button.text,
+                "url": button.url
+            }
+            serialized_row.append(serialized_button)
+        serialized_keyboard["inline_keyboard"].append(serialized_row)
+    return serialized_keyboard
+
+
+def deserialize_inline_keyboard(serialized_keyboard):
+    inline_keyboard = []
+    for serialized_row in serialized_keyboard["inline_keyboard"]:
+        row = []
+        for serialized_button in serialized_row:
+            button = pyrogram.types.InlineKeyboardButton(**serialized_button)
+            row.append(button)
+        inline_keyboard.append(row)
+    return pyrogram.types.InlineKeyboardMarkup(inline_keyboard=inline_keyboard)
+
+
 async def get_note_deatils(msg):
      reply = msg.reply_to_message
      text = None
      file_id = None
      caption = None
      type = None
-     keyboard = str(msg.reply_markup) if msg.reply_markup and not reply else str(reply.reply_markup) if reply.reply_markup and reply else None
+     keyboard_class = msg.reply_markup if msg.reply_markup and not reply else reply.reply_markup if reply.reply_markup and reply else None
+     if keyboard_class:
+          keyboard = json.dumps(serialize_inline_keyboard(keyboard_class))
+              
      if msg.text and not reply:
         note_name = msg.text.split()[1].lower()
         text = msg.text.split(None, 2)[2]
