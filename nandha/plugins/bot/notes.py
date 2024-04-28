@@ -39,37 +39,45 @@ async def get_notes(_, message):
           type = note.get('type', '')
           file_id = note.get('file_id', '')
           caption = note.get('caption', None)
+          keyboard = note.get('keyboard', None)
           text = note.get('text', '')        
 
           if type == '#STICKER':
                reply_func = reply.reply_sticker if reply else message.reply_sticker
                return await reply_func(
-                     file_id
+                     sticker=file_id, reply_markup=keyboard
                )
+          
+          elif type == '#AUDIO':
+               reply_func = reply.reply_audio if reply else message.reply_audio
+               return await reply_func(
+                    audio=file_id,  caption=caption, reply_markup=keyboard
+               )
+
           elif type == '#PHOTO':
                reply_func = reply.reply_photo if reply else message.reply_photo
                return await reply_func(
-                    photo=file_id,  caption=caption
+                    photo=file_id,  caption=caption, reply_markup=keyboard
                )
           elif type == '#TEXT':
                 reply_func = reply.reply_text if reply else message.reply_text
                 return await reply_func(
-                     text=text
+                     text=text, reply_markup=keyboard
                 )
           elif type == '#ANIMATION':
                 reply_func = reply.reply_animation if reply else message.reply_animation
                 return await reply_func(
-                     animation=file_id,   caption=caption
+                     animation=file_id,   caption=caption, reply_markup=keyboard
                 )
           elif type == '#DOCUMENT':
                 reply_func = reply.reply_document if reply else message.reply_document
                 return await reply_func(
-                     document=file_id,  caption=caption
+                     document=file_id,  caption=caption, reply_markup=keyboard
                 )
           elif type == '#VIDEO':
                 reply_func = reply.reply_video if reply else message.reply_video
                 return await reply_func(
-                     video=file_id, caption=caption
+                     video=file_id, caption=caption, reply_markup=keyboard
                 )
           try: await message.delete();
           except: pass
