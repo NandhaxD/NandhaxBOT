@@ -26,9 +26,9 @@ async def howall(_, message):
 
     if query == 'sex':
         if reply:
-            return await reply.reply_text(random.choice(sex_string.format(mention)))
+            return await reply.reply_text(random.choice(sex_string).format(mention))
         else:
-            return await message.reply_text(random.choice(sex_string.format(mention)))
+            return await message.reply_text(random.choice(sex_string).format(mention))
     else:
         num = random.randint(0, 100)
         default = f'**You\'re {num}% {query} {mention}**'
