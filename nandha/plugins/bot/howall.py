@@ -6,7 +6,7 @@ from pyrogram import filters
 from nandha import bot
 
 
-CMDS = [ 'sex', 'beauty', 'boobs', 'dick', 'horny', 'gay', 'lezbian', 'noob', 'idiot', 'nigga' ] 
+CMDS = [ 'howall', 'sex', 'beauty', 'boobs', 'dick', 'horny', 'gay', 'lezbian', 'noob', 'idiot', 'nigga', 'pro'] 
 
 sex_string = [
   'Wanna sex with me? {}.',
@@ -21,14 +21,17 @@ async def howall(_, message):
     else:
         mention = message.from_user.mention
 
-    reply_func = reply.reply_animation if reply else message.reply_animation
+    reply_func = reply if reply else message
     query = message.command[0]
-
-    if query == 'sex':
-        if reply:
-            return await reply.reply_text(random.choice(sex_string).format(mention))
-        else:
-            return await message.reply_text(random.choice(sex_string).format(mention))
+    if query == 'howall':
+          text = "**Commands**:\n"
+          CMDS.remove('howall')
+          for i, string in enumerate(CMDS):
+             text += f"{i+1}, {string}\n"
+          return await reply_func.reply_text(text)
+      
+    elif query == 'sex':
+          return await reply_func.reply_text(random.choice(sex_string).format(mention))
     else:
         num = random.randint(0, 100)
         default = f'**You\'re {num}% {query} {mention}**'
@@ -41,10 +44,11 @@ async def howall(_, message):
             'noob': 'https://telegra.ph//file/8e4d7e3213ab240f9df0b.mp4',
             'idiot': 'https://telegra.ph//file/71b56eee6b5f4b46d89bb.mp4',
             'nigga': 'https://telegra.ph//file/0e9acff8b61039a857d90.mp4',
-            'beauty': 'https://graph.org/file/5f2e2de605dabcba88250.mp4'
+            'beauty': 'https://graph.org/file/5f2e2de605dabcba88250.mp4',
+            'pro': 'https://graph.org/file/4148eee2228b6932b87d8.mp4'
         }
         if query in url_data:
             url = url_data[query]
-            return await reply_func(
+            return await reply_func.reply_animation(
                 animation=url, caption=default
             )
