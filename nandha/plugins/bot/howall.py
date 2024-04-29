@@ -6,7 +6,7 @@ from pyrogram import filters
 from nandha import bot
 
 
-CMDS = [ 'sex', 'boobs', 'dick', 'horny', 'gay', 'lezbian', 'noob', 'idiot', 'nigga' ] 
+CMDS = [ 'sex', 'beauty', 'boobs', 'dick', 'horny', 'gay', 'lezbian', 'noob', 'idiot', 'nigga' ] 
 
 sex_string = [
   'Wanna sex with me? {}.',
@@ -40,7 +40,8 @@ async def howall(_, message):
             'boobs': 'https://telegra.ph//file/6cdb0450dcbc457a9e48f.mp4',
             'noob': 'https://telegra.ph//file/8e4d7e3213ab240f9df0b.mp4',
             'idiot': 'https://telegra.ph//file/71b56eee6b5f4b46d89bb.mp4',
-            'nigga': 'https://telegra.ph//file/0e9acff8b61039a857d90.mp4'
+            'nigga': 'https://telegra.ph//file/0e9acff8b61039a857d90.mp4',
+            'beauty': 'https://graph.org/file/5f2e2de605dabcba88250.mp4'
         }
         if query in url_data:
             url = url_data[query]
