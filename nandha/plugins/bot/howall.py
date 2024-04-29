@@ -24,7 +24,7 @@ async def howall(_, message):
      query = message.command[0]
      if query == 'sex':
         if reply:
-           return await reply.reply_text(random.choice(sex_string.format(mention))                                  
+           return await reply.reply_text(random.choice(sex_string.format(mention))
         else:
            return await message.reply_text(random.choice(sex_string.format(mention))
      else:
