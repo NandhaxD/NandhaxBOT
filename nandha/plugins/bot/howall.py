@@ -25,9 +25,10 @@ async def howall(_, message):
     query = message.command[0]
     if query == 'howall':
           text = "**Commands**:\n"
-          CMDS.remove('howall')
           for i, string in enumerate(CMDS):
-             text += f"{i+1}, {string}\n"
+             if text == 'howall':
+                 continue
+             text += f"{i}, {string}\n"
           return await reply_func.reply_text(text)
       
     elif query == 'sex':
