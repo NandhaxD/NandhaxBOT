@@ -6,7 +6,7 @@ from pyrogram import filters
 from nandha import bot
 
 
-CMDS = [ 'howall', 'cringe', 'cute', 'anger', 'wish', 'happy', 'sex', 'beauty', 'boobs', 'dick', 'horny', 'gay', 'lezbian', 'noob', 'idiot', 'nigga', 'pro'] 
+CMDS = [ 'howall', 'stress', 'cringe', 'cute', 'anger', 'wish', 'happy', 'sex', 'beauty', 'boobs', 'dick', 'horny', 'gay', 'lezbian', 'noob', 'idiot', 'nigga', 'pro'] 
 
 sex_string = [
   'Wanna sex with me? {}.',
@@ -49,6 +49,7 @@ async def howall(_, message):
             'pro': 'https://graph.org/file/4148eee2228b6932b87d8.mp4',
             'happy': 'https://graph.org/file/97a4255b12507d6afd107.mp4',
             'wish': 'https://graph.org/file/71a3426dd84e096378c4c.mp4',
+            'stress': 'https://graph.org/file/108ba0615e1aae6ee512f.mp4',
             'anger': 'https://graph.org/file/9d8d7d0782082acdd1016.mp4',
             'cute': 'https://graph.org/file/d18acc7b969a2a519fc47.mp4',
             'cringe': 'https://graph.org/file/78822c1d45414ccb5e0d7.mp4'
