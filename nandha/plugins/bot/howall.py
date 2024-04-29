@@ -26,7 +26,7 @@ async def howall(_, message):
     if query == 'howall':
           text = "**Commands**:\n"
           for i, string in enumerate(CMDS):
-             if text == 'howall':
+             if string == 'howall':
                  continue
              text += f"{i}, {string}\n"
           return await reply_func.reply_text(text)
