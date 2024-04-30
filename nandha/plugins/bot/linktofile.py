@@ -16,7 +16,8 @@ def encode(string: str):
 def decode(string: str):
     decoded_bytes = base64.b64decode(string.encode('utf-8'))
     return decoded_bytes.decode('utf-8')
-    
+
+db = DATABASE['LINK_TO_FILE']
     
 link = 'nandhaxbot.t.me?start=file:{}'    
 
