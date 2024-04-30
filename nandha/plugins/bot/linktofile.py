@@ -40,10 +40,11 @@ async def Getlink(_, message):
                        [[types.InlineKeyboardButton('click here', url=link.format(id))]]
                    ))
             else:
-                file_json = {'file_ids': [file_id]}
-                new_user_json = user_json.update(file_json)
-                db.insert_one(new_user_json
-                  )
+                db.update_one(
+                   {'user_id': user_id},
+                   {'$set': {'file_ids': [file_id]}},
+                   upsert=True
+                )
                 id = encode(file_id)
                 return await message.reply(
                    'Successfully added',
