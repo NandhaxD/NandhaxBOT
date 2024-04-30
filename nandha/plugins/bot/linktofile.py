@@ -32,7 +32,7 @@ async def Getlink(_, message):
             user_json = {'user_id': user_id}
             if db.find_one(user_json):
                  db.update_one(
-                   {'$push': {'file_ids': file_id}})
+                   user_json, {'$push': {'file_ids': file_id}})
                  id = encode(file_id)
                  return await message.reply(
                    'Successfully added',
