@@ -35,7 +35,10 @@ async def Getlink(_, message):
                    {'$push': {'file_ids': file_id}})
                  id = encode(file_id)
                  return await message.reply(
-                   'Successfully added', reply_markup=types.InlineKeyboardMarkup([[types.InlineKeyboardButton('click here', url=link.format(id))]]))
+                   'Successfully added',
+                   reply_markup=types.InlineKeyboardMarkup(
+                       [[types.InlineKeyboardButton('click here', url=link.format(id))]]
+                   ))
             else:
                 file_json = {'file_ids' [file_id]}
                 new_user_json = user_json.update(file_json)
@@ -43,4 +46,7 @@ async def Getlink(_, message):
                   )
                 id = encode(file_id)
                 return await message.reply(
-                   'Successfully added', reply_markup=types.InlineKeyboardMarkup([[types.InlineKeyboardButton('click here', url=.format(id))]]))
+                   'Successfully added',
+                    reply_markup=types.InlineKeyboardMarkup(
+                        [[types.InlineKeyboardButton('click here', url=link.format(id))]]
+                    ))
