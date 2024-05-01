@@ -18,12 +18,14 @@ async def click_interaction(bot, message):
             action=SendMessageEmojiInteraction(
                 emoticon=message.text,
                 msg_id=message.id,
-                interaction=DataJSON(data='{"v":1, "a": [{"t": 1, "i": 1}]}'),
+                interaction=DataJSON(data='{"v":1, "a": [{"t": 1, "i": 2}]}'),
             ),
         )
     )
      
 SPAM = []
+emoji = ['⚡️', '❤️', '🥳', '👾', '🔥', '🤑']
+
 
 @bot.on_message(filters.command("start"))
 async def start(_, message):
@@ -71,7 +73,7 @@ async def start(_, message):
      id = config.OWNER_ID
      SPAM.append(user_id)
      if message.chat.type == enums.ChatType.PRIVATE:
-           msg = await message.reply('⚡️')
+           msg = await message.reply(random.choice(emoji))
            await click_interaction(bot, msg)
            
            await message.forward(config.OWNER_ID)
