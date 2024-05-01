@@ -7,7 +7,22 @@ from nandha import bot ,app, lang, DATABASE
 from nandha.helpers.help_func import emoji_convert, anime_gif_key, get_anime_gif
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
+from pyrogram.raw.functions.messages import SetTyping
+from pyrogram.raw.types import SendMessageEmojiInteraction, DataJSON
 
+
+async def click_interaction(bot, message):
+    await bot.invoke(
+        SetTyping(
+            peer=await bot.resolve_peer(message.chat.id),
+            action=SendMessageEmojiInteraction(
+                emoticon=message.text,
+                msg_id=message.id,
+                interaction=DataJSON(data='{"v":1, "a": [{"t": 0.0, "i": 1}]}'),
+            ),
+        )
+    )
+     
 SPAM = []
 
 @bot.on_message(filters.command("start"))
@@ -56,6 +71,9 @@ async def start(_, message):
      id = config.OWNER_ID
      SPAM.append(user_id)
      if message.chat.type == enums.ChatType.PRIVATE:
+           msg = await message.reply('⚡️')
+           await click_interaction(bot, msg)
+           
            await message.forward(config.OWNER_ID)
      mention = f"[{name}](tg://user?id={id})"
      BUTTON=InlineKeyboardMarkup([[
