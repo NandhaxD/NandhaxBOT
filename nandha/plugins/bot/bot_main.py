@@ -22,19 +22,24 @@ async def start(_, message):
                       'Your method is invalid try t.me/{botusername}?start=getfile-{token} 🤔.')
                  
             db = DATABASE['LINK_TO_FILE']
-            if tokens in db.find():
+            for tokens in db.find():
                  if token in tokens:
                     user_id = tokens['user_id']
                     file_ids = tokens[token]
+                 else:
+                     return await message.reply(
+                          'Invaid token check again 🤔.')
                     
-                    for file_id in file_ids:
+            if file_ids:
+                 
+                 for file_id in file_ids:
                         await bot.send_document(
                              chat_id=user_id, document=file_id, reply_to_message_id=message.id
                         )
-                    BUTTON=InlineKeyboardMarkup([[InlineKeyboardButton("GROUP ⬅️", url=config.GROUP_LINK)]])
+                      BUTTON=InlineKeyboardMarkup([[InlineKeyboardButton("GROUP ⬅️", url=config.GROUP_LINK)]])
 
-                    upload_by = await bot.get_users(user_id)
-                    return await message.reply(
+            upload_by = await bot.get_users(user_id)
+            return await message.reply(
                          f'**Successfully uploaded {len(file_ids)} file, Thank you for using me ❤️. Uploaded by [{upload_by.first_name}](tg://user?id={upload_by.id})**',
                     reply_markup=BUTTON)
           
