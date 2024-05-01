@@ -34,7 +34,7 @@ async def start(_, message):
                  
                  for file_id in file_ids:
                         await bot.send_document(
-                             chat_id=user_id, document=file_id, reply_to_message_id=message.id
+                             chat_id=message.from_user.id, document=file_id, reply_to_message_id=message.id
                         )
             BUTTON=InlineKeyboardMarkup([[InlineKeyboardButton("GROUP ⬅️", url=config.GROUP_LINK)]])
 
