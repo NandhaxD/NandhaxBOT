@@ -20,7 +20,7 @@ async def start(_, message):
             user = db.find_one({'user_id': user_id})            
             if user:
                ignore = ['_id', 'user_id']
-               user_tokens = [ token for token in db.find_one(user_json) if token not in ignore]
+               user_tokens = [ token for token in user if token not in ignore]
                if token in user_token:
                     file_ids = user[token]
                     
