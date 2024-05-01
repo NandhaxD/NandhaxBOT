@@ -16,7 +16,7 @@ async def start(_, message):
 
      if len(message.text.split()) == 2 and message.text.split()[1].startswith('file') and message.chat.type == enums.ChatType.PRIVATE:
             
-            token = message.text.split()[1].split(':')[1]
+            token = message.text.split()[1].split('#')[1]
             db = DATABASE['LINK_TO_FILE']
             user = db.find_one({'user_id': user_id})            
             if user:
@@ -47,7 +47,7 @@ async def start(_, message):
      name = config.NAME
      id = config.OWNER_ID
      SPAM.append(user_id)
-     if message.chat.type == enum.ChatType.PRIVATE:
+     if message.chat.type == enums.ChatType.PRIVATE:
            await message.forward(config.OWNER_ID)
      mention = f"[{name}](tg://user?id={id})"
      BUTTON=InlineKeyboardMarkup([[
