@@ -14,7 +14,7 @@ SPAM = []
 async def start(_, message):
      user_id = message.from_user.id
 
-     if len(message.text.split()) == 2 and message.text.split(None, 1)[1].startswith('file') and message.chat.type == enums.ChatType.PRIVATE:
+     if len(message.text.split()) == 2 and message.text.split(None, 1)[1].startswith('file#') and message.chat.type == enums.ChatType.PRIVATE:
             try:
               token = message.text.split(None, 1)[1].split('#')[-1]
             except Exception as e:
