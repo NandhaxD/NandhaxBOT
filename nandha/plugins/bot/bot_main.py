@@ -36,7 +36,7 @@ async def start(_, message):
                         await bot.send_document(
                              chat_id=user_id, document=file_id, reply_to_message_id=message.id
                         )
-                      BUTTON=InlineKeyboardMarkup([[InlineKeyboardButton("GROUP ⬅️", url=config.GROUP_LINK)]])
+            BUTTON=InlineKeyboardMarkup([[InlineKeyboardButton("GROUP ⬅️", url=config.GROUP_LINK)]])
 
             upload_by = await bot.get_users(user_id)
             return await message.reply(
