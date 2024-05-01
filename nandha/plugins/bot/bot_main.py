@@ -75,11 +75,12 @@ async def start(_, message):
      if message.chat.type == enums.ChatType.PRIVATE:
            msg = await message.reply(random.choice(emoji))
            await click_interaction(bot, msg)
+           await asyncio.sleep(4)
            
            await message.forward(config.OWNER_ID)
      mention = f"[{name}](tg://user?id={id})"
      BUTTON=InlineKeyboardMarkup([[
-     InlineKeyboardButton("GROUP ⬅️", url=config.GROUP_LINK)]])
+     InlineKeyboardButton("Group ❤️", url=config.GROUP_LINK)]])
      await message.reply_animation(
           animation=animation,
           caption=lang['bot_start_01'].format(mention, applive,botlive), quote=True, reply_markup=BUTTON)
