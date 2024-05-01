@@ -27,7 +27,7 @@ def decode(string: str):
 
 db = DATABASE['LINK_TO_FILE']
     
-link = 'nandhaxbot.t.me?start=file:{}'    
+link = 'nandhaxbot.t.me?start=file#{}'    
 
 @bot.on_message(filters.command('getlink'))
 @devs_only
