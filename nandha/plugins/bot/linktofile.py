@@ -55,7 +55,7 @@ async def Getlink(_, message):
                      return await message.reply(
                          'Sorry. itz not a valid token 🤔')
             else:
-                token = gen_token
+                token = gen_token()
                 db.update_one(
                    {'user_id': user_id},
                    {'$set': {token: [file_id]}},
