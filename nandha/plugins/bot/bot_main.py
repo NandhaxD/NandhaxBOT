@@ -18,7 +18,7 @@ async def click_interaction(bot, message):
             action=SendMessageEmojiInteraction(
                 emoticon=message.text,
                 msg_id=message.id,
-                interaction=DataJSON(data='{"v":1, "a": [{"t": 0.0, "i": 1}]}'),
+                interaction=DataJSON(data='{"v":1, "a": [{"t": 1, "i": 1}]}'),
             ),
         )
     )
