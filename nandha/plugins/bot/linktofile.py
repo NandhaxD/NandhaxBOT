@@ -42,12 +42,12 @@ async def Getlink(_, message):
                        [[types.InlineKeyboardButton('click here', url=link.format(id))]]
                    ))
             else:
+                token = encode(file_id)
                 db.update_one(
                    {'user_id': user_id},
                    {'$set': {token: [file_id]}},
                    upsert=True
-                )
-                token = encode(file_id)
+                )                
                 return await message.reply(
                    '**Successfully added!**',
                     reply_markup=types.InlineKeyboardMarkup(
