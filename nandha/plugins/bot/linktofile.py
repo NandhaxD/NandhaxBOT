@@ -31,23 +31,25 @@ async def Getlink(_, message):
             file_id = document.file_id
             user_json = {'user_id': user_id}
             if db.find_one(user_json):
+          
+                 token = encode(file_id)
                  db.update_one(
-                   user_json, {'$push': {'file_ids': file_id}})
-                 id = encode(file_id)
+                   user_json, {'$push': {token: file_id}})
+                 
                  return await message.reply(
-                   'Successfully added',
+                   '**Successfully added!**',
                    reply_markup=types.InlineKeyboardMarkup(
                        [[types.InlineKeyboardButton('click here', url=link.format(id))]]
                    ))
             else:
                 db.update_one(
                    {'user_id': user_id},
-                   {'$set': {'file_ids': [file_id]}},
+                   {'$set': {token: [file_id]}},
                    upsert=True
                 )
-                id = encode(file_id)
+                token = encode(file_id)
                 return await message.reply(
-                   'Successfully added',
+                   '**Successfully added!**',
                     reply_markup=types.InlineKeyboardMarkup(
                         [[types.InlineKeyboardButton('click here', url=link.format(id))]]
                     ))
