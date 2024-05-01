@@ -26,7 +26,7 @@ async def start(_, message):
                     
                     for file_id in file_ids:
                         await bot.send_document(
-                             chat_id=user_id, document=file_id, quote=True
+                             chat_id=user_id, document=file_id, reply_to_message_id=message.id
                         )
                     return await message.reply(
                          f'**Successfully uploaded {len(file_ids)} thank you for using Me.**')
@@ -37,6 +37,7 @@ async def start(_, message):
      
      if user_id in SPAM:
          return await message.reply(lang['bot_start_02'])
+          
      botlive = await emoji_convert(bot.is_connected)
      applive = await emoji_convert(app.is_connected)
      name = config.NAME
