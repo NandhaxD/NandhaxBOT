@@ -22,12 +22,10 @@ async def start(_, message):
                       'Your method is invalid try t.me/{botusername}?start=getfile-{token} 🤔.')
                  
             db = DATABASE['LINK_TO_FILE']
-            user = db.find_one({'user_id': user_id})            
-            if user:
-               ignore = ['_id', 'user_id']
-               user_tokens = [ token for token in user if token not in ignore]
-               if token in user_tokens:
-                    file_ids = user[token]
+            if tokens in db.find():
+                 if token in tokens:
+                    user_id = tokens['user_id']
+                    file_ids = tokens[token]
                     
                     for file_id in file_ids:
                         await bot.send_document(
@@ -35,8 +33,9 @@ async def start(_, message):
                         )
                     BUTTON=InlineKeyboardMarkup([[InlineKeyboardButton("GROUP ⬅️", url=config.GROUP_LINK)]])
 
+                    upload_by = await bot.get_users(user_id)
                     return await message.reply(
-                         f'**Successfully uploaded {len(file_ids)} file, Thank you for using me ❤️. @NandhaXBOT**',
+                         f'**Successfully uploaded {len(file_ids)} file, Thank you for using me ❤️. Uploaded by [{upload_by.first_name}](tg://user?id={upload_by.id})**',
                     reply_markup=BUTTON)
           
 
