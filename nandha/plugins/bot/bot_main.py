@@ -15,7 +15,8 @@ async def start(_, message):
      user_id = message.from_user.id
 
      if len(message.text.split()) == 2 and message.text.split()[1].startswith('file') and message.chat.type == enums.ChatType.PRIVATE:
-            token = message.text.split(':')[1]
+            
+            token = message.text.split()[1].split(':')[1]
             db = DATABASE['LINK_TO_FILE']
             user = db.find_one({'user_id': user_id})            
             if user:
@@ -28,8 +29,11 @@ async def start(_, message):
                         await bot.send_document(
                              chat_id=user_id, document=file_id, reply_to_message_id=message.id
                         )
+                    BUTTON=InlineKeyboardMarkup([[InlineKeyboardButton("GROUP ⬅️", url=config.GROUP_LINK)]])
+
                     return await message.reply(
-                         f'**Successfully uploaded {len(file_ids)} thank you for using Me.**')
+                         f'**Successfully uploaded {len(file_ids)} file, Thank you for using me ❤️.**',
+                    reply_markup=BUTTON)
           
 
      key = random.choice(anime_gif_key)
@@ -43,11 +47,11 @@ async def start(_, message):
      name = config.NAME
      id = config.OWNER_ID
      SPAM.append(user_id)
-     if message.chat.type == enums.ChatType.PRIVATE:
+     if message.chat.type == enum.ChatType.PRIVATE:
            await message.forward(config.OWNER_ID)
      mention = f"[{name}](tg://user?id={id})"
      BUTTON=InlineKeyboardMarkup([[
-     InlineKeyboardButton("Source ⬅️", url=config.SOURCE),InlineKeyboardButton("GROUP ⬅️", url=config.GROUP_LINK)]])
+     InlineKeyboardButton("GROUP ⬅️", url=config.GROUP_LINK)]])
      await message.reply_animation(
           animation=animation,
           caption=lang['bot_start_01'].format(mention, applive,botlive), quote=True, reply_markup=BUTTON)
