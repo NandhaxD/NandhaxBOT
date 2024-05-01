@@ -21,7 +21,7 @@ async def start(_, message):
             if user:
                ignore = ['_id', 'user_id']
                user_tokens = [ token for token in user if token not in ignore]
-               if token in user_token:
+               if token in user_tokens:
                     file_ids = user[token]
                     
                     for file_id in file_ids:
