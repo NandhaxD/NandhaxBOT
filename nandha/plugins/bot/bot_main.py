@@ -26,7 +26,7 @@ async def start(_, message):
                     
                     for file_id in file_ids:
                         await bot.send_document(
-                             chat_id, document=file_id, quote=True
+                             chat_id=user_id, document=file_id, quote=True
                         )
                     return await message.reply(
                          f'**Successfully uploaded {len(file_ids)} thank you for using Me.**')
