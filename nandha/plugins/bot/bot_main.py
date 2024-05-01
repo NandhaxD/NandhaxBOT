@@ -32,7 +32,7 @@ async def start(_, message):
                     BUTTON=InlineKeyboardMarkup([[InlineKeyboardButton("GROUP ⬅️", url=config.GROUP_LINK)]])
 
                     return await message.reply(
-                         f'**Successfully uploaded {len(file_ids)} file, Thank you for using me ❤️.**',
+                         f'**Successfully uploaded {len(file_ids)} file, Thank you for using me ❤️. @NandhaXBOT**',
                     reply_markup=BUTTON)
           
 
