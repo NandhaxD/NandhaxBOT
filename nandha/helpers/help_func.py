@@ -70,7 +70,7 @@ async def get_note_deatils(msg):
         note_name = msg.text.split()[1].lower()
         text = msg.text.split(None, 2)[2]
         type = "#TEXT"
-        keyboard = None
+         
      elif reply:
            note_name = msg.text.split()[1].lower()
            if reply.text:
