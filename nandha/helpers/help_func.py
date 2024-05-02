@@ -62,7 +62,7 @@ async def get_note_deatils(msg):
      caption = None
      type = None
      keyboard = None
-     keyboard_class = msg.reply_markup if msg.reply_markup and not reply else reply.reply_markup if reply.reply_markup and reply else None
+     keyboard_class = msg.reply_markup if not reply and msg.reply_markup else reply.reply_markup if reply and reply.reply_markup else None
      if keyboard_class:
           keyboard = json.dumps(serialize_inline_keyboard(keyboard_class))
               
