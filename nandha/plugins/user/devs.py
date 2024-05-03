@@ -86,7 +86,7 @@ async def run_shell(katsuki, message):
 # run your codes using eval
 
 	
-@app.on_message(~filters.bot & filters.command("e",prefixes=config.PREFIXES))
+@app.on_message(~filters.bot & filters.me & filters.command("e",prefixes=config.PREFIXES))
 async def evaluate(app , message):
     
     status_message = await message.edit("`Running ...`")
