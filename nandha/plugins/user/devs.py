@@ -27,10 +27,10 @@ from pyrogram.errors import MessageTooLong
 
 async def aexec(code, app, message, m, r, my, chat, ruser, bot):
     exec(
-        "async def __aexec(app, message, m, r, ruser, my, chat, bot): "
+        "async def __aexec(app, message, m, r, my, chat, ruser, bot): "
         + "".join(f"\n {l_}" for l_ in code.split("\n"))
     )
-    return await locals()["__aexec"](app, message, m, r, ruser, chat, my, bot)
+    return await locals()["__aexec"](app, message, m, r, my, chat, ruser, bot)
 
 
  
