@@ -72,10 +72,12 @@ async def get_gif(_, message):
    reply = message.reply_to_message
    user_id = message.from_user.id
    if reply and reply.sticker and reply.sticker.is_video:
+        msg = await message.reply('Wait, downloading...')
         path = await reply.download()
         clip = VideoFileClip(path)
         animation = f'{user_id}.gif'
         clip.write_gif(animation, fps=10)
+        await msg.delete()
         return await message.reply_animation(
               animation=animation, quote=True
         )
