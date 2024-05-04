@@ -16,7 +16,7 @@ import base64
 
 
 from nandha import app, MODULE, bot, lang, StartTime
-from nandha.helpers.help_func import grap, get_readable_time, make_carbon
+from nandha.helpers.help_func import grap, get_readable_time, make_carbon, get as async_get
 from pyrogram import filters, enums
 from gpytranslate import Translator
 from urllib.parse import quote
@@ -88,8 +88,6 @@ async def alive(_, message):
     await message.edit(lang['alive'])
 
 
-#ai_models = { 'bard': 'gemini', 'gpt': 'chatgpt' }
-
 
 @app.on_message(filters.me & filters.command(['bard','gpt', 'palm'], prefixes=""))
 async def artificial_intelligent(_, message):
@@ -99,12 +97,10 @@ async def artificial_intelligent(_, message):
         
 	reply = await message.edit(lang['thinking'])
 	model = message.text.split()[0]
-	#model = ai_models[model]
 	prompt = message.text.split(None, 1)[1]
 	api = f"https://nandha-api.onrender.com/ai/{model}/{quote(prompt, safe='')}"	
-	#api = f"https://tofu-node-apis.onrender.com/api/{model}?prompt={quote(prompt, safe='')}"	
 	try:		
-	    response = requests.get(api).json()
+	    response = await async_get(api)
 	    ok = response.get('content')		
 	except Exception as e:
 		 return await reply.edit(lang['error'].format(str(e)), parse_mode=enums.ParseMode.HTML)				
