@@ -1,8 +1,12 @@
 import config
 import time
+import os
+
 
 from nandha import bot, lang
 from nandha.helpers.help_func import progress 
+from moviepy.editor import VideoFileClip
+from PIL import Image
 from pyrogram import filters
 
 
@@ -63,7 +67,27 @@ async def rename(_, message):
             )
                     
                                                              
-      
+@bot.on_message(filters.command('getgif'))
+async def get_gif(_, message):
+   reply = message.reply_to_message
+   user_id = message.from_user.id
+   if reply and reply.sticker and reply.sticker.is_video:
+        path = await reply.download()
+        clip = VideoFileClip(path)
+        animation = f'{user_id}.gif'
+        clip.write_gif(animation, fps=10)
+        return await message.reply_animation(
+              animation=animation, quote=True
+        )
+   else:
+       return await message.reply(
+           'Reply to the Animated Sticker 🤔'
+       )
+             
+        
+
+
+  
 @bot.on_message(filters.command('getsticker'))
 async def get_sticker(_, message):
      reply = message.reply_to_message
@@ -74,14 +98,7 @@ async def get_sticker(_, message):
             )
               return await message.reply_document(
                file, quote=True
-            )
-        elif reply.sticker and reply.sticker.is_video:
-              file = await reply.download(
-              file_name=reply.sticker.file_name.split('.')[0]+'.mkv'
-               )
-              return await message.reply_document(
-                      file, quote=True
-             )       
+            )      
         elif reply.photo:
              file = await reply.download(
                file_name=reply.photo.file_unique_id+'.webp'
