@@ -35,7 +35,7 @@ async def artificial_intelligent(_, message):
 @bot.on_inline_query(filters.regex('ok'))
 async def ok(_, query):
     msg = await bot.answer_inline_query(
-    query.inline_query_id,
+    query.id,
     results=[
 	    pyrogram.types.InlineQueryResultDocument(
 		    url='https://github.com/nandhaxd/vegetarobot/archive/main.zip', 
