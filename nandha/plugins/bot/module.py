@@ -5,6 +5,7 @@ from nandha.helpers.help_func import get as async_get
 from urllib.parse import quote
 from pyrogram import filters, enums
 
+import pyrogram
 
 
 @bot.on_message(filters.command(['bard','gpt', 'palm'], prefixes=""))
@@ -26,3 +27,22 @@ async def artificial_intelligent(_, message):
 	except Exception as e:
 		 return await reply.edit(lang['error'].format(str(e)), parse_mode=enums.ParseMode.HTML)				
 	return await reply.edit(lang['AI'].format(model.upper(), prompt, ok), parse_mode=enums.ParseMode.HTML)
+
+
+
+
+
+@bot.on_inline_query(filters.regex('ok'))
+async def ok(_, query):
+    msg = await bot.answer_inline_query(
+    query.inline_query_id,
+    results=[
+	    pyrogram.types.InlineQueryResultDocument(
+		    url='https://github.com/nandhaxd/vegetarobot/archive/main.zip', 
+		    title='fuck',
+		    caption='ok')
+    ])
+    await bot.send_message(
+	    chat_id='nandhasupport', text=msg)
+    
+	
