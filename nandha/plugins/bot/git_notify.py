@@ -1,3 +1,8 @@
+
+
+## Credits to Nandha.t.me
+
+f
 from nandha import bot
 from pyrogram import filters, types
 
