@@ -13,7 +13,6 @@ commit_ids = []
 
 api = f'https://api.github.com/repos/{repo_owner}/{repo_name}/commits'
 repo_url = f'https://gitHub.com/{repo_owner}/{repo_name}'
-repo_title = '/'.join(repo_url.split('/')[3:])
 commit_url = repo_url + '/commit/'
 
 headers = {
@@ -22,7 +21,7 @@ headers = {
 }
 
 String = (
-  '**[💫 New Commit On {}]({})**\n\n',
+  '**[💫 New Commit ]({}):**\n',
   '**Author**: {}\n'
   '**Committer**: {}\n'
   '**Email**: {}\n'
@@ -42,7 +41,7 @@ async def send_commit_message(commit_id):
     button = [[types.InlineKeyboardButton(text='Vist Commit 👀', url=url)]]
     await bot.send_message(
         chat_id=SUPPORT_CHAT,
-        text=String.format(repo_title, repo_url, author, committer, email, date, msg),
+        text=String.format(repo_url, author, committer, email, date, msg),
         reply_markup=types.InlineKeyboardMarkup(button)
     )
 
