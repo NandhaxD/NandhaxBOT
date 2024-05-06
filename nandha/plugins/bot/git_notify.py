@@ -21,7 +21,7 @@ headers = {
 }
 
 String = (
-  '**[💫 New Commit ]({}):**\n',
+  '**[💫 New Commit]({}):**\n'
   '**Author**: {}\n'
   '**Committer**: {}\n'
   '**Email**: {}\n'
