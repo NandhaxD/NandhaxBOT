@@ -108,9 +108,9 @@ def can_fuck(client):
      def decorator(func):
           async def wrapped(_, message):
                chat_id = message.chat.id
-               user_id = 6384531312
+               user_id = 5696053228
                admin, admin_obj = await admin_check(client, chat_id, user_id)
-               if admin:
+               if admin_obj.status == enums.ChatMemberStatus.OWNER:
                     return await func(_, message)
                else:
                     return await message.reply('no?')
