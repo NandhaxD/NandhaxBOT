@@ -45,7 +45,7 @@ def admin_only(func):
                  
              admin, admin_obj = await admin_check(message, user_id)
              if not admin:
-                 return message.edit(
+                 return message.reply(
                    String.not_admin()
                  )
              else:
@@ -63,16 +63,21 @@ def can_delete_messages(func):
               
               admin, admin_obj = await admin_check(message, user_id)
               if not admin:
-                    return await message.edit(
+                    return await message.reply(
                         String.not_admin()
                     )
               else:
                  if admin_obj.privileges.can_delete_messages:
                     return await func(client, message)
                  else:
-                    return await message.edit(String.not_delete_per())
-         return wrapped                 
-        
+                    return await message.reply(String.not_delete_per())
+         return wrapped   
+
+
+@bot.on_message(filters.command('del'))
+@can_delete_messages
+async def delete(bot, message):
+    await message.reply('okay')
 
     
 def devs_only(func):
@@ -96,12 +101,12 @@ def can_restrict_members(func):
               
           admin, admin_obj = await admin_check(client, chat_id, user_id)
           if not admin:
-               return await message.edit(String.not_admin())
+               return await message.reply(String.not_admin())
           else:
              if admin_obj.privileges.can_restrict_members:
                  return await func(client, message)
              else:
-                 return await message.edit(String.not_restrict_per())
+                 return await message.reply(String.not_restrict_per())
      return wrapped
 
 
