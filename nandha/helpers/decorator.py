@@ -43,7 +43,7 @@ async def admin_check(client, chat_id, user_id):
            
 
 def admin_only(func): 
-         async def wrapped(client, message: Message): 
+         async def wrapped(client, message): 
              chat_id=message.chat.id 
              user_id=message.from_user.id 
 
