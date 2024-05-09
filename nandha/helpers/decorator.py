@@ -30,15 +30,13 @@ class String:
 async def admin_check(client, chat_id, user_id):
       results = []
       userinfo = await client.get_chat_member(chat_id, user_id)
-      admin = userinfo.status == enums.ChatMemberStatus.ADMINISTRATOR
-      owner = userinfo.status == enums.ChatMemberStatus.OWNER
-      if (admin or owner):
+      if userinfo.status in (enums.ChatMemberStatus.ADMINISTRATOR or enums.ChatMemberStatus.OWNER):
            results.append(True)
            results.append(userinfo)
            return results
       else:
            results.append(False)
-           results.append(False)
+           results.append(userinfo)
            return results
            
 
