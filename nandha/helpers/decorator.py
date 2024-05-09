@@ -28,16 +28,11 @@ class String:
 """ CHECK YOUR ACC HAS ADMIN IN CHAT """
 
 async def admin_check(client, chat_id, user_id):
-      results = []
       userinfo = await client.get_chat_member(chat_id, user_id)
       if userinfo.status in (enums.ChatMemberStatus.ADMINISTRATOR or enums.ChatMemberStatus.OWNER):
-           results.append(True)
-           results.append(userinfo)
-           return results
+           return True, userinfo
       else:
-           results.append(False)
-           results.append(userinfo)
-           return results
+           return False, userinfo
            
 
 def admin_only(func): 
@@ -48,8 +43,8 @@ def admin_only(func):
              if message.chat.type == enums.ChatType.PRIVATE:
                   return await func(client, message)
                  
-             is_admin = await admin_check(client, chat_id, user_id)
-             if not is_admin[0]:
+             admin, admin_obj = await admin_check(client, chat_id, user_id)
+             if not admin:
                  return await message.edit(
                    String.not_admin()
                  )
@@ -59,7 +54,7 @@ def admin_only(func):
 
 
 def can_delete_messages(client, message):
-     async def decorator(func):
+     def decorator(func):
          async def wrapped(*args, **kwargs):
               chat_id = message.chat.id 
               user_id = message.from_user.id 
@@ -67,11 +62,11 @@ def can_delete_messages(client, message):
               if message.chat.type == enums.ChatType.PRIVATE:
                   return await func(*args, **kwargs)
               
-              nandha = await admin_check(client, chat_id, user_id)
-              if not nandha[0]:
+              admin, admin_obj = await admin_check(client, chat_id, user_id)
+              if not admin:
                     return await message.edit(String.not_admin())
               else:
-                 if nandha[1].privileges.can_delete_messages:
+                 if admin_obj.privileges.can_delete_messages:
                     return await func(*args, **kwargs)
                  else:
                     return await message.edit(String.not_delete_per())
@@ -105,11 +100,11 @@ def can_restrict_members(func):
           if message.chat.type == enums.ChatType.PRIVATE:
               return await func(client, message)
               
-          nandha = await admin_check(client, chat_id, user_id)
-          if not nandha[0]:
+          admin, admin_obj = await admin_check(client, chat_id, user_id)
+          if not admin:
                return await message.edit(String.not_admin())
           else:
-             if nandha[1].privileges.can_restrict_members:
+             if admin_obj.privileges.can_restrict_members:
                  return await func(client, message)
              else:
                  return await message.edit(String.not_restrict_per())
