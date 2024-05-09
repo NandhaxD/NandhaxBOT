@@ -6,7 +6,7 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 import config
 from pyrogram import enums
 from pyrogram.types import Message 
-from nandha import lang
+from nandha import lang, bot
 from nandha.database.devs import get_users
 
 
@@ -79,7 +79,14 @@ def can_delete_messages(client, message):
                  else:
                     return await message.edit(String.not_delete_per())
          return wrapped                 
-     return decorator         
+     return decorator      
+
+
+
+@bot.on_message(filters.command('candel'))
+@can_delete_messages(client=bot, message=Message)
+async def candel(_, message):
+      return await message.reply('yes i can delete')
       
     
 def devs_only(func):
