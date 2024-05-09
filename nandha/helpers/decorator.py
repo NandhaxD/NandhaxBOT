@@ -6,7 +6,7 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 import config
 from pyrogram import enums, filters
 from pyrogram.types import Message 
-from nandha import lang, bot
+from nandha import lang
 from nandha.database.devs import get_users
 
 
@@ -23,12 +23,10 @@ class String:
          
       
 
-
-
 """ CHECK YOUR ACC HAS ADMIN IN CHAT """
 
-async def admin_check(message, user_id):
-      userinfo = await message.chat.get_member(user_id)
+async def admin_check(client, chat_id, user_id):
+      userinfo = await client.get_chat_member(chat_id, user_id)
       if userinfo.status in (enums.ChatMemberStatus.ADMINISTRATOR, enums.ChatMemberStatus.OWNER):
            return True, userinfo
       else:
@@ -43,9 +41,9 @@ def admin_only(func):
              if message.chat.type == enums.ChatType.PRIVATE:
                   return await func(client, message)
                  
-             admin, admin_obj = await admin_check(message, user_id)
+             admin, admin_obj = await admin_check(client, chat_id, user_id)
              if not admin:
-                 return message.reply(
+                 return message.edit(
                    String.not_admin()
                  )
              else:
@@ -61,23 +59,18 @@ def can_delete_messages(func):
               if message.chat.type == enums.ChatType.PRIVATE:
                   return await func(client, message)
               
-              admin, admin_obj = await admin_check(message, user_id)
+              admin, admin_obj = await admin_check(client, chat_id, user_id)
               if not admin:
-                    return await message.reply(
+                    return await message.edit(
                         String.not_admin()
                     )
               else:
                  if admin_obj.privileges.can_delete_messages:
                     return await func(client, message)
                  else:
-                    return await message.reply(String.not_delete_per())
+                    return await message.edit(String.not_delete_per())
          return wrapped   
 
-
-@bot.on_message(filters.command('del'))
-@can_delete_messages
-async def delete(bot, message):
-    await message.reply('okay')
 
     
 def devs_only(func):
@@ -101,12 +94,12 @@ def can_restrict_members(func):
               
           admin, admin_obj = await admin_check(client, chat_id, user_id)
           if not admin:
-               return await message.reply(String.not_admin())
+               return await message.edit(String.not_admin())
           else:
              if admin_obj.privileges.can_restrict_members:
                  return await func(client, message)
              else:
-                 return await message.reply(String.not_restrict_per())
+                 return await message.edit(String.not_restrict_per())
      return wrapped
 
 
