@@ -46,6 +46,10 @@ def admin_only(func):
          async def wrapped(app: app, message: Message): 
              chat_id=message.chat.id 
              user_id=message.from_user.id 
+
+             if message.chat.type == enums.ChatType.PRIVATE:
+                  return await func(app, message)
+                 
              is_admin = await admin_check(chat_id, user_id)
              if not is_admin[0]:
                  return await message.edit(
@@ -61,7 +65,10 @@ def can_delete_messages(func):
      async def wrapped(app: app, message: Message):
           chat_id=message.chat.id 
           user_id=message.from_user.id 
-       
+
+          if message.chat.type == enums.ChatType.PRIVATE:
+              return await func(app, message)
+              
           nandha = await admin_check(chat_id, user_id)
           if not nandha[0]:
                return await message.edit(String.not_admin())
@@ -89,7 +96,10 @@ def can_restrict_members(func):
      async def wrapped(app: app, message: Message):
           chat_id=message.chat.id 
           user_id=message.from_user.id 
-       
+
+          if message.chat.type == enums.ChatType.PRIVATE:
+              return await func(app, message)
+              
           nandha = await admin_check(chat_id, user_id)
           if not nandha[0]:
                return await message.edit(String.not_admin())
