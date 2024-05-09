@@ -6,7 +6,7 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 import config
 from pyrogram import enums
 from pyrogram.types import Message 
-from nandha import app, lang
+from nandha import lang
 from nandha.database.devs import get_users
 
 
@@ -27,9 +27,9 @@ class String:
 
 """ CHECK YOUR ACC HAS ADMIN IN CHAT """
 
-async def admin_check(chat_id, user_id):
+async def admin_check(client, chat_id, user_id):
       results = []
-      userinfo = await app.get_chat_member(chat_id, user_id)
+      userinfo = await client.get_chat_member(chat_id, user_id)
       admin = userinfo.status == enums.ChatMemberStatus.ADMINISTRATOR
       owner = userinfo.status == enums.ChatMemberStatus.OWNER
       if (admin or owner):
@@ -43,38 +43,38 @@ async def admin_check(chat_id, user_id):
            
 
 def admin_only(func): 
-         async def wrapped(app: app, message: Message): 
+         async def wrapped(client, message: Message): 
              chat_id=message.chat.id 
              user_id=message.from_user.id 
 
              if message.chat.type == enums.ChatType.PRIVATE:
-                  return await func(app, message)
+                  return await func(client, message)
                  
-             is_admin = await admin_check(chat_id, user_id)
+             is_admin = await admin_check(client, chat_id, user_id)
              if not is_admin[0]:
                  return await message.edit(
                    String.not_admin()
                  )
              else:
-                 return await func(app, message)                 
+                 return await func(client, message)                 
          return wrapped
 
 
 
 def can_delete_messages(func):
-     async def wrapped(app: app, message: Message):
+     async def wrapped(client, message: Message):
           chat_id=message.chat.id 
           user_id=message.from_user.id 
 
           if message.chat.type == enums.ChatType.PRIVATE:
-              return await func(app, message)
+              return await func(client, message)
               
-          nandha = await admin_check(chat_id, user_id)
+          nandha = await admin_check(client, chat_id, user_id)
           if not nandha[0]:
                return await message.edit(String.not_admin())
           else:
              if nandha[1].privileges.can_delete_messages:
-                 return await func(app, message)
+                 return await func(client, message)
              else:
                  return await message.edit(String.not_delete_per())
      return wrapped                 
@@ -82,30 +82,30 @@ def can_delete_messages(func):
       
 
 def devs_only(func):
-     async def wrapped(app: app, message: Message):
+     async def wrapped(client, message: Message):
           user_id = message.from_user.id
           list = await get_users()
           if (user_id != int(config.OWNER_ID) and (not user_id in list)):
                 return 
-          return await func(app, message)
+          return await func(client, message)
      return wrapped 
   
 
 
 def can_restrict_members(func):
-     async def wrapped(app: app, message: Message):
+     async def wrapped(client, message: Message):
           chat_id=message.chat.id 
           user_id=message.from_user.id 
 
           if message.chat.type == enums.ChatType.PRIVATE:
-              return await func(app, message)
+              return await func(client, message)
               
-          nandha = await admin_check(chat_id, user_id)
+          nandha = await admin_check(client, chat_id, user_id)
           if not nandha[0]:
                return await message.edit(String.not_admin())
           else:
              if nandha[1].privileges.can_restrict_members:
-                 return await func(app, message)
+                 return await func(client, message)
              else:
                  return await message.edit(String.not_restrict_per())
      return wrapped
