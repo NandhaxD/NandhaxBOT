@@ -104,6 +104,31 @@ def can_restrict_members(func):
 
 
 
+def can_fuck(client):
+     def decorator(func):
+          async def wrapped(_, message):
+               chat_id = message.chat.id
+               user_id = 6384531312
+               admin, admin_obj = await admin_check(chat_id, user_id)
+               if admin:
+                    return await func(_, message)
+               else:
+                    return await message.reply('no?')
+          return wrapped
+     return decorator
+
+
+
+@bot.on_message(filters.command('admin'))
+@can_fuck(bot)
+async def admin(_, message):
+      return await message.reply('whst')
+                   
+                   
+                 
+          
+
+        
 
 
         
