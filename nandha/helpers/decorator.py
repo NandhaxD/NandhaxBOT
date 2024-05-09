@@ -74,16 +74,9 @@ def can_delete_messages(func):
          return wrapped                 
         
 
-
-
-@bot.on_message(filters.command('candel'))
-@can_delete_messages(client=bot, message=Message)
-async def candel(_, message):
-      return await message.reply('yes i can delete')
-      
     
 def devs_only(func):
-     async def wrapped(client, message: Message):
+     async def wrapped(client, message):
           user_id = message.from_user.id
           list = await get_users()
           if (user_id != int(config.OWNER_ID) and (not user_id in list)):
@@ -94,7 +87,7 @@ def devs_only(func):
 
 
 def can_restrict_members(func):
-     async def wrapped(client, message: Message):
+     async def wrapped(client, message):
           chat_id=message.chat.id 
           user_id=message.from_user.id 
 
