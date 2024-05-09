@@ -29,7 +29,7 @@ class String:
 
 async def admin_check(message, user_id):
       userinfo = await message.chat.get_member(user_id)
-      if userinfo.status in (enums.ChatMemberStatus.ADMINISTRATOR or enums.ChatMemberStatus.OWNER):
+      if userinfo.status in (enums.ChatMemberStatus.ADMINISTRATOR, enums.ChatMemberStatus.OWNER):
            return True, userinfo
       else:
            return False, userinfo
