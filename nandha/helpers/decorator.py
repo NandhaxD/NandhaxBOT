@@ -35,11 +35,11 @@ async def admin_check(client, chat_id, user_id):
       if (admin or owner):
            results.append(True)
            results.append(userinfo)
-           return
+           return results
       else:
            results.append(False)
            results.append(False)
-           return
+           return results
            
 
 def admin_only(func): 
