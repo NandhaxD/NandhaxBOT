@@ -60,7 +60,6 @@ def admin_only(func):
          return wrapped
 
 
-
 def can_delete_messages(client, message):
      async def decorator(func):
          async def wrapped(*args, **kwargs):
