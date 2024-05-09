@@ -109,7 +109,7 @@ def can_fuck(client):
           async def wrapped(_, message):
                chat_id = message.chat.id
                user_id = 6384531312
-               admin, admin_obj = await admin_check(chat_id, user_id)
+               admin, admin_obj = await admin_check(client, chat_id, user_id)
                if admin:
                     return await func(_, message)
                else:
