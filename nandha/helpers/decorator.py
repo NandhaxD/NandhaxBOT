@@ -61,26 +61,27 @@ def admin_only(func):
 
 
 
-def can_delete_messages(func):
-     async def wrapped(client, message: Message):
-          chat_id=message.chat.id 
-          user_id=message.from_user.id 
+def can_delete_messages(client, message):
+     async def decorator(func):
+         async def wrapped(*args, **kwargs):
+              chat_id = message.chat.id 
+              user_id = message.from_user.id 
 
-          if message.chat.type == enums.ChatType.PRIVATE:
-              return await func(client, message)
+              if message.chat.type == enums.ChatType.PRIVATE:
+                  return await func(*args, **kwargs)
               
-          nandha = await admin_check(client, chat_id, user_id)
-          if not nandha[0]:
-               return await message.edit(String.not_admin())
-          else:
-             if nandha[1].privileges.can_delete_messages:
-                 return await func(client, message)
-             else:
-                 return await message.edit(String.not_delete_per())
-     return wrapped                 
-              
+              nandha = await admin_check(client, chat_id, user_id)
+              if not nandha[0]:
+                    return await message.edit(String.not_admin())
+              else:
+                 if nandha[1].privileges.can_delete_messages:
+                    return await func(*args, **kwargs)
+                 else:
+                    return await message.edit(String.not_delete_per())
+         return wrapped                 
+     return decorator         
       
-
+    
 def devs_only(func):
      async def wrapped(client, message: Message):
           user_id = message.from_user.id
