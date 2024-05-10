@@ -10,7 +10,7 @@ import random
 
 
 BinString = (
-  '**#{}**\n'
+  '#{}\n'
   '🌍 **Country**: {} {}\n'
   '🏦 **Bank**: {}\n'
   '💳 **Card type**: {}\n'
@@ -62,12 +62,12 @@ async def generate_random_cc(bin_code, limit: int):
 
 
 
-@bot.on_message(filters.command('gen'))
+@bot.on_message(filters.command('gencc'))
 async def cc_generator(_, message):
      if len(message.text.split()) < 2:
          return await message.reply(
            '**Example**:\n'
-           '/gen 123456 5'
+           '/gencc 123456 5'
          )
      else:
          code = message.text.split()[1]
@@ -76,7 +76,7 @@ async def cc_generator(_, message):
          except:
              return await message.reply(
            '**Example**:\n'
-           '/gen 123456 5'
+           '/gencc 123456 5'
              )
          if not code.isdigit():
               return await message.reply(
@@ -95,7 +95,7 @@ async def cc_generator(_, message):
             else:
                cc = await generate_random_cc(code, limit)
                credit_cards = '\n'.join(card for card in cc)
-               String = f'```Credit Cards: {limit}\n{credit_cards}```\n' + bin
+               String = f'```Credit Cards: {limit}\n{credit_cards}```\n\n' + bin
                return await message.reply(String)
             
   
