@@ -15,7 +15,7 @@ BinString = (
   '🔒 **Prepaid**: {}\n'
 )
 
-async def bin_checker(code):
+async def bin_info(code):
     api = f'https://lookup.binlist.net/{code}'
     req = requests.get(api)
     if req.status_code == 200:
@@ -57,7 +57,7 @@ async def bin_checker(_, message):
                  'Only 6 digit are Known for Bin.'
                )
          else:
-             nandha = await bin_checker(code)
+             nandha = await bin_info(code)
              if not nandha:
                  return await message.reply(
                    'Sorry Maybe the card is invalid type check again.'
