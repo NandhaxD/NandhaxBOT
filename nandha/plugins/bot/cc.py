@@ -95,7 +95,7 @@ async def cc_generator(_, message):
             else:
                cc = await generate_random_cc(code, limit)
                credit_cards = '\n'.join(card for card in cc)
-               String = f'**Credit Cards**: ``{limit}``\n```{credit_cards}```\n' + bin
+               String = f'```Credit Cards: {limit}\n{credit_cards}```\n' + bin
                return await message.reply(String)
             
   
