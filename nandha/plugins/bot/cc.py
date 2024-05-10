@@ -7,6 +7,7 @@ import requests
 
 
 BinString = (
+  '**#{}**\n'
   '🌍 **Country**: {} {}\n'
   '🏦 **Bank**: {}\n'
   '💳 **Card type**: {}\n'
@@ -31,7 +32,7 @@ async def bin_info(code):
            scheme = data.get("scheme", "")
            prepaid = data.get("prepaid", False)
            return BinString.format(
-             emoji, country, bank, card_type, card_brand, scheme, prepaid
+             code, emoji, country, bank, card_type, card_brand, scheme, prepaid
            )
     else:
        return False
