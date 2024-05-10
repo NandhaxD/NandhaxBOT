@@ -47,7 +47,7 @@ async def bin_checker(_, message):
            '/bcheck 123456'
          )
      else:
-         code = message.text.split(None, 1)
+         code = message.text.split()[1]
          if not code.isdigit():
               return await message.reply(
                 'Please only digit are allowed.'
