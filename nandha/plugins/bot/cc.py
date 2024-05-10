@@ -87,16 +87,17 @@ async def cc_generator(_, message):
                  'Only 6 digit are Known for Bin.'
                )
          else:
+            msg = await message.reply('Please wait a movement...')
             bin = await bin_info(code)
             if not bin:
-                return await message.reply(
+                return await msg.edit(
                   'Double check your cc maybe itz invalid.'
                 )
             else:
                cc = await generate_random_cc(code, limit)
                credit_cards = '\n'.join(card for card in cc)
                String = f'```Credit Cards: {limit}\n{credit_cards}```\n\n' + bin
-               return await message.reply(String)
+               return await msg.edit(String)
             
   
 
@@ -118,13 +119,14 @@ async def bin_checker(_, message):
                  'Only 6 digit are Known for Bin.'
                )
          else:
+             msg = await message.reply('Please wait a movement...')
              nandha = await bin_info(code)
              if not nandha:
-                 return await message.reply(
+                 return await msg.edit(
                    'Sorry Maybe the card is invalid type check again.'
                  )
              else:
-                 await message.reply(nandha)
+                 await msg.edit(nandha)
 
 
            
