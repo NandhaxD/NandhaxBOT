@@ -41,7 +41,7 @@ async def bin_info(code):
        return False
 
 
-async def generate_random_cc(bin_code, limit):
+async def generate_random_cc(bin_code, limit: int):
     bin_length = len(bin_code)
     if bin_length != 6 or not bin_code.isdigit():
         return "Invalid BIN code format. Please provide a 6-digit number."
@@ -67,10 +67,17 @@ async def cc_generator(_, message):
      if len(message.text.split()) < 2:
          return await message.reply(
            '**Example**:\n'
-           '/gen 123456'
+           '/gen 123456 5'
          )
      else:
          code = message.text.split()[1]
+         try:
+            limit = int(message.text.split()[2])
+         except:
+             return await message.reply(
+           '**Example**:\n'
+           '/gen 123456 5'
+             )
          if not code.isdigit():
               return await message.reply(
                 'Please only digit are allowed.'
@@ -86,7 +93,7 @@ async def cc_generator(_, message):
                   'Double check your cc maybe itz invalid.'
                 )
             else:
-               cc = await generate_random_cc(code)
+               cc = await generate_random_cc(code, limit)
                String = bin + "\n\n" + cc
                return await message.reply(String)
             
