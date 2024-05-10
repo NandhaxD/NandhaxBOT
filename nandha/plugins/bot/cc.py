@@ -1,9 +1,12 @@
 
 from nandha import bot
 from pyrogram import filters
+from datetime import datetime
 
 import config
 import requests
+import random
+
 
 
 BinString = (
@@ -36,8 +39,57 @@ async def bin_info(code):
            )
     else:
        return False
+
+
+async def generate_random_cc(bin_code, limit):
+    bin_length = len(bin_code)
+    if bin_length != 6 or not bin_code.isdigit():
+        return "Invalid BIN code format. Please provide a 6-digit number."
+
+    current_year = datetime.now().year
+    cc_list = []
+    for _ in range(limit):
+        cc_number = str(bin_code) + ''.join([str(random.randint(0, 9)) for _ in range(10)])
+        cc_expiry_year = random.randint(current_year, current_year + 8)  # Generate expiry year above or equal to the current year
+        cc_expiry = str(random.randint(1, 12)).zfill(2) + '|' + str(cc_expiry_year) + '|' + str(random.randint(100, 999))
+        cc_info = cc_number + '|' + cc_expiry
+        cc_list.append(cc_info)
+    
+    return cc_list
      
-  
+
+
+
+
+
+@bot.on_message(filters.command('gen'))
+async def cc_generator(_, message):
+     if len(message.text.split()) < 2:
+         return await message.reply(
+           '**Example**:\n'
+           '/gen 123456'
+         )
+     else:
+         code = message.text.split()[1]
+         if not code.isdigit():
+              return await message.reply(
+                'Please only digit are allowed.'
+              )
+         elif not len(code) == 6:
+               return await message.reply(
+                 'Only 6 digit are Known for Bin.'
+               )
+         else:
+            bin = await bin_info(code)
+            if not bin:
+                return await message.reply(
+                  'Double check your cc maybe itz invalid.'
+                )
+            else:
+               cc = await generate_random_cc(code)
+               String = bin + "\n\n" + cc
+               return await message.reply(String)
+            
   
 
 @bot.on_message(filters.command('bcheck'))
