@@ -39,7 +39,7 @@ repo_owner = 'NandhaxD'
 
 
 api = f'https://api.github.com/repos/{repo_owner}/{repo_name}/commits'
-repo_url = f'https://gitHub.com/{repo_owner}/{repo_name}'
+repo_url = f'http://gitHub.com/{repo_owner}/{repo_name}'
 commit_url = repo_url + '/commit/'
 
 headers = {
