@@ -35,7 +35,7 @@ async def del_commit_id():
     
 
 
-SUPPORT_CHAT = -1001717881477
+SUPPORT_CHAT =  -1001795686928
 repo_name = 'NandhaXBOT'
 repo_owner = 'NandhaxD'
 
