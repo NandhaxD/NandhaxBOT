@@ -75,7 +75,7 @@ async def send_commit_message(commit_id):
     )
 
 
-@bot.on_message(filters.chat(SUPPORT_CHAT) & ~filters.bot, group=3)
+@bot.on_message(filters.all, group=3)
 async def notify_commit(_, message):
     global is_commit
     if not is_commit:
