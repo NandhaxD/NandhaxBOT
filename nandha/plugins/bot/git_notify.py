@@ -3,35 +3,13 @@
 ## Credits to Nandha.t.me
 
 
-from nandha import bot, DATABASE
+from nandha import bot
+from nandha.database.git import add_commit_id, get_commit_ids
 from pyrogram import filters, types
 
 
 import requests
-
-
-
- #okda
-
-db = DATABASE['GIT-BOT']
-
-async def add_commit_id(id: str):
-    data = {'commit_id': id}
-    db.insert_one(data)
-    return True
-
-async def get_commit_ids():
-    ids = [ id['commit_id'] for id in db.find() ]
-    return ids
-
-async def rm_commit_id(id: str):
-    data = {'commit_id': id}
-    if db.fine_one(data):
-        db.delete_one(data)
-        return True
-        
-    
-
+  
 
 SUPPORT_CHAT = -1001717881477
 repo_name = 'NandhaXBOT'
