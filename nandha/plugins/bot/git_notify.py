@@ -85,8 +85,9 @@ async def notify_commit(_, message):
         is_commit = True
     else:
         latest_commit_id = requests.get(api, headers=headers).json()[0]['sha']
+        is_commit = True
         if (await get_commit_id()) != latest_commit_id:
             await send_commit_message(latest_commit_id)
             await del_commit_id()
             await add_commit_id(latest_commit_id)
-            is_commit = True
+            
