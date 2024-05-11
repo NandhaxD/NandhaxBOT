@@ -33,7 +33,7 @@ async def rm_commit_id(id: str):
     
 
 
-SUPPORT_CHAT =  -1001795686928
+SUPPORT_CHAT = -1001717881477
 repo_name = 'NandhaXBOT'
 repo_owner = 'NandhaxD'
 
