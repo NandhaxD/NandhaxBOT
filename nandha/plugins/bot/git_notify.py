@@ -11,7 +11,7 @@ import requests
 
 
 
-is_commit = False #okda
+ #okda
 
 db = DATABASE['GIT-BOT']
 
@@ -20,17 +20,15 @@ async def add_commit_id(id: str):
     db.insert_one(data)
     return True
 
-async def get_commit_id():
-    data = db.find_one({})
-    if data and data['commit_id']:
-         return [data['commit_id']]
-        
+async def get_commit_ids():
+    ids = [ id['commit_id'] for id in db.find() ]
+    return ids
 
-async def del_commit_id():
-    data = db.find_one({})
-    if data and data['commit_id']:
-         return db.delete_one(data)
-    
+async def rm_commit_id(id: str):
+    data = {'commit_id': id}
+    if db.fine_one(data):
+        db.delete_one(data)
+        return True
         
     
 
@@ -74,20 +72,21 @@ async def send_commit_message(commit_id):
         reply_markup=types.InlineKeyboardMarkup(button)
     )
 
+OK = False
 
 @bot.on_message(filters.all, group=3)
 async def notify_commit(_, message):
-    global is_commit
-    if not is_commit:
+    global OK
+    if not OK:
         commit_id = requests.get(api, headers=headers).json()[0]['sha']
         await send_commit_message(commit_id)
         await add_commit_id(commit_id)
-        is_commit = True
+        OK = True
     else:
         latest_commit_id = requests.get(api, headers=headers).json()[0]['sha']
-        is_commit = True
-        if (await get_commit_id()) != latest_commit_id:
+        commit_ids = await get_commit_ids()
+        OK = True
+        if not latest_commit_id in commit_ids:
             await send_commit_message(latest_commit_id)
-            await del_commit_id()
             await add_commit_id(latest_commit_id)
             
