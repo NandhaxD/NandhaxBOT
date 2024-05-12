@@ -10,7 +10,7 @@ import random
 
 
 BinString = (
-  '#{}\n'
+  '📛 BIN: #{}\n'
   '🌍 **Country**: {} {}\n'
   '🏦 **Bank**: {}\n'
   '💳 **Card type**: {}\n'
@@ -70,7 +70,7 @@ async def cc_generator(_, message):
            '/gencc 123456 5'
          )
      else:
-         code = message.text.split()[1]
+         code = message.text.split()[1][:6]
          try:
             limit = int(message.text.split()[2])
          except:
@@ -82,21 +82,22 @@ async def cc_generator(_, message):
               return await message.reply(
                 'Please only digit are allowed.'
               )
-         elif not len(code) == 6:
-               return await message.reply(
-                 'Only 6 digit are Known for Bin.'
-               )
+         #elif not len(code) == 6:
+              # return await message.reply(
+               #  'Only 6 digit are Known for Bin.'
+             #  )
          else:
             msg = await message.reply('Please wait a movement...')
+           
             bin = await bin_info(code)
             if not bin:
                 return await msg.edit(
-                  'Double check your cc maybe itz invalid.'
+                  'Double check your bin maybe itz invalid.'
                 )
             else:
                cc = await generate_random_cc(code, limit)
                credit_cards = '\n'.join(card for card in cc)
-               String = f'```Credit Cards: {limit}\n{credit_cards}```\n\n' + bin
+               String = f'```\nCredit Cards: {limit}\n{credit_cards}```\n\n' + bin
                return await msg.edit(String)
             
   
@@ -109,15 +110,15 @@ async def bin_checker(_, message):
            '/bcheck 123456'
          )
      else:
-         code = message.text.split()[1]
+         code = message.text.split()[1][:6]
          if not code.isdigit():
               return await message.reply(
                 'Please only digit are allowed.'
               )
-         elif not len(code) == 6:
-               return await message.reply(
-                 'Only 6 digit are Known for Bin.'
-               )
+         #elif not len(code) == 6:
+            #   return await message.reply(
+                # 'Only 6 digit are Known for Bin.'
+            #   )
          else:
              msg = await message.reply('Please wait a movement...')
              nandha = await bin_info(code)
