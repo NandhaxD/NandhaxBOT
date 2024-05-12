@@ -50,15 +50,15 @@ async def send_commit_message(commit_id):
         reply_markup=types.InlineKeyboardMarkup(button)
     )
 
-OK = False
+Nandha = False
 
 @bot.on_message(filters.all, group=3)
 async def notify_commit(_, message):
-    global OK
-    if not OK:
+    global Nandha
+    if not Nandha:
         commit_id = requests.get(api, headers=headers).json()[0]['sha']
         commit_ids = await get_commit_ids()
-        OK = True
+        Nandha = True
         if not commit_id in commit_ids:
            await send_commit_message(commit_id)
            await add_commit_id(commit_id)
@@ -66,7 +66,7 @@ async def notify_commit(_, message):
     else:
         latest_commit_id = requests.get(api, headers=headers).json()[0]['sha']
         commit_ids = await get_commit_ids()
-        OK = True
+        Nandha = True
         if not latest_commit_id in commit_ids:
             await send_commit_message(latest_commit_id)
             await add_commit_id(latest_commit_id)
