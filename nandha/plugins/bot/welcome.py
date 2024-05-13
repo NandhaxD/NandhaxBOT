@@ -83,6 +83,7 @@ async def welcome(_, update):
      is_welcome = await check_welcome(chat_id)
      if (
           not update.old_chat_member
+          and update.new_chat_member.user 
           and not update.new_chat_member.user.is_bot
           and is_welcome 
      ):
