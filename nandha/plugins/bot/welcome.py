@@ -9,18 +9,18 @@ from pyrogram import filters, types
 
 temp = {}
 
-def cvt_btn(list, user_id):
-    button_groups = [list[i:i+3] for i in range(0, len(list), 3)]
+async def cvt_btn(lst, user_id):
+    button_groups = [lst[i:i+3] for i in range(0, len(lst), 3)]
     btns = []
     for group in button_groups:
         row = []
         for text in group:
              row.append(types.InlineKeyboardButton(text, callback_data=f'wel:{text}:{user_id}'))
-    btns.append(row)
+        btns.append(row)  # Move this line inside the outer loop
     return types.InlineKeyboardMarkup(btns)
+    
 
-
-def check_token(chat_id: int, user_id: int, token):
+async def check_token(chat_id: int, user_id: int, token):
    token_d = None
    for key, value in temp.items():
        if value[0] == user_id and key == chat_id:
@@ -66,7 +66,7 @@ async def welcome(_, update):
           
            mention = update.new_chat_member.user.mention()
            photo, token, alt = await make_captcha(user_id, chat_id)
-           button = cvt_btn(alt, user_id)
+           button = await cvt_btn(alt, user_id)
           
            text = f'Hello, {mention} solve the captcha.'
            await bot.send_photo(
