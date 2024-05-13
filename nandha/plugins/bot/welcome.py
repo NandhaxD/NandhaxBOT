@@ -32,30 +32,18 @@ def cvt_btn(lst, user_id):
     return types.InlineKeyboardMarkup(btns)
     
 
-def remove_token(user_id, chat_id):
-    done = False
-    for key, value in temp.items():
-        if value[0] == user_id and key == chat_id:
-            del temp[key]
-            break
-            done = True
-    return done
-            
+def remove_entry(temp, user_id, chat_id):
+    if user_id in temp and temp[user_id][0] == chat_id:
+        del temp[user_id]
 
 
-def check_token(chat_id: int, user_id: int, token):
-   token_d = None
-   for key, value in temp.items():
-       if value[0] == user_id and key == chat_id:
-           token_d = value[1]
-           break
+def check_token(temp, user_id, chat_id, token):
+    for value in temp.values():
+        if value[0] == chat_id and value[1] == token:
+            return True
+    return False
 
-   if not token_d:
-        return False
-   elif token != token_d:
-        return False
-   else:
-        return True
+
 
 
 
@@ -67,7 +55,7 @@ async def wel_approve(_, query):
      if query.from_user.id != user_id:
           return await query.answer("You cannot verify for others.")
      
-     approved = check_token(chat_id, user_id, token)
+     approved = check_token(temp, chat_id, user_id, token)
     
      if approved:
           name = query.from_user.mention
@@ -82,7 +70,7 @@ async def wel_approve(_, query):
           except Exception as e:
                pass
           await query.message.edit(f'**Hey {name}, Welcome to {chatname} ❤️**')
-          remove_token(chat_id, user_id)
+          remove_entry(temp, chat_id, user_id)
      else:
           return await query.answer('What the fuck Itz wrong are you that much noob?', show_alert=True)
           
@@ -107,7 +95,7 @@ async def welcome(_, update):
              await bot.restrict_chat_member(chat_id, user_id, types.ChatPermissions())
            except Exception as e:
                  pass
-           remove_token(chat_id, user_id)
+           remove_entry(temp, chat_id, user_id)
            temp[chat_id] = (user_id, token)
            msg = await bot.send_photo(
                 photo=photo,
@@ -116,8 +104,9 @@ async def welcome(_, update):
                 reply_markup=button
            )
            await asyncio.sleep(2*60)
-           if check_token(chat_id, user_id, token):
-               remove_token(chat_id, user_id)
+           token_exsit = check_token(temp, chat_id, user_id, token)
+           if token_exsit:
+               remove_entry(temp, chat_id, user_id)
                await kick_chat_member(chat_id, user_id)
                await msg.edit(f'**{mention} was kicked for unable to solve captcha.**')
                await asyncio.sleep(60)
