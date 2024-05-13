@@ -63,7 +63,7 @@ def admin_rights(client, premission):
                   chat_id = message.chat.id
                   user_id = message.from_user.id
                   admin, admin_obj = await admin_check(client, chat_id, user_id)
-                  if admin and admin.privileges:
+                  if admin and admin_obj.privileges:
                       privileges_dict = admin_obj.privileges.__dict__
                       if privileges_dict.get(premission):
                             await func(_, message)
