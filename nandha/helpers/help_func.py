@@ -13,12 +13,47 @@ import datetime
 import pytz
 import re, io
 import time
+import random
+import string
 import json
 
 from telegraph import upload_file
 from nandha import aiohttpsession
-
 from pyrogram import types
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
+
+
+
+
+
+
+
+
+async def make_captcha(user_id: int, chat_id: int):
+    
+   generate_token = lambda: ''.join(random.choices(string.ascii_letters + string.digits, k=5))
+   token = generate_token()
+   alt = [ generate_token() for _ in range(9) ]
+   alt[random.randint(0, 8)] = token
+   image_width = 200
+   image_height = 100
+   image = Image.new('RGB', (image_width, image_height), color='white')
+   ImageDraw.Draw(
+    image  # Image
+     ).text(
+        (60, 40),  # Coordinates
+        token,  # Text
+        (0, 0, 0)  # Color
+       )
+   #image = image.filter(ImageFilter.GaussianBlur(1))
+   path = f'{user_id}{chat_id}'
+   image.save(path)
+   return path, token, alt
+   
+
+
+
+     
 
 async def make_carbon(code):
     url = "https://carbonara.solopov.dev/api/cook"
