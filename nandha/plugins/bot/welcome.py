@@ -4,6 +4,7 @@
 from nandha import bot
 from nandha.database.welcome import set_welcome, check_welcome
 from nandha.helpers.help_func import make_captcha
+from nandha.helpers.decorator import admin_only
 from pyrogram import filters, types, enums
 
 
@@ -129,6 +130,7 @@ async def welcome(_, update):
 
 
 @bot.on_message(filters.command('captcha'))
+@admin_only(bot) #bot client
 async def captcha(_, message):
     chat_id = message.chat.id
     
