@@ -49,7 +49,7 @@ async def wel_approve(_, query):
      if approved:
           name = query.from_user.mention
           chatname = query.message.chat.title
-          await query.message.edit(f'Hey {name}, welcome to {chatname}')
+          await query.message.edit(f'Hey {name}, Welcome to {chatname}')
      else:
           return await query.answer('What the fuck itz wrong are you that much noob?', show_alert=True)
           
