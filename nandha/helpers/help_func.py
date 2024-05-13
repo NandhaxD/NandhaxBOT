@@ -46,7 +46,7 @@ async def make_captcha(user_id: int, chat_id: int):
         (0, 0, 0)  # Color
        )
    #image = image.filter(ImageFilter.GaussianBlur(1))
-   path = f'{user_id}{chat_id}'
+   path = f'{user_id}{chat_id}.jpeg'
    image.save(path)
    return path, token, alt
    
