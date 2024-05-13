@@ -10,6 +10,11 @@ async def add_commit_id(id: str):
     db.insert_one(data)
     return True
 
+async def clear_commits():
+    for x in db.find():
+        db.delete_one(x)
+    return True
+
 async def get_commit_ids():
     ids = [ id['commit_id'] for id in db.find() ]
     return ids
