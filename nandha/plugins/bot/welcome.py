@@ -118,7 +118,7 @@ async def welcome(_, update):
            if check_token(chat_id, user_id, token):
                remove_token(chat_id, user_id)
                await kick_chat_member(chat_id, user_id)
-               await msg.edit(f'**{name} was kicked for unable to solve captcha.**')
+               await msg.edit(f'**{mention} was kicked for unable to solve captcha.**')
                await asyncio.sleep(20)
                await msg.delete()
                
