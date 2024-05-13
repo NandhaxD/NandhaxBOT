@@ -160,7 +160,7 @@ async def captcha(_, message):
                  return await message.reply(
                         f'**Successfully captcha turn on in {name}.** ✅')
              elif mode == 'off':
-                  await set_welcome(chat_id, True)
+                  await set_welcome(chat_id, False)
                   return await message.reply(
                         f'**Successfully captcha turn off in {name}.** ✅')
         else:
