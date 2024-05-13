@@ -71,7 +71,7 @@ async def wel_approve(_, query):
           except Exception as e:
                pass
           text = f'**Hey {name}, Welcome to {chatname} ❤️**'
-          await query.message.edit_media(media=(InputMediaAnimation(media=welcome_gif, caption=text)))
+          await query.message.edit_media(media=(types.InputMediaAnimation(media=welcome_gif, caption=text)))
           remove_entry(temp, chat_id, user_id)
      else:
           return await query.answer('What the fuck Itz wrong are you that much noob?', show_alert=True)
