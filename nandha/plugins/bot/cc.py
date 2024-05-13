@@ -22,11 +22,10 @@ BinString = (
 async def bin_info(code):
     api = f'https://lookup.binlist.net/{code}'
     req = requests.get(api)
-    if req.status_code == 200:
-           try:
-             data = req.json()
-           except:
-             return False          
+    if req.status_code == 200:           
+           data = req.json()
+           if not data.get('country'):
+                return False          
            country = data.get("country", {}).get("name", "")
            emoji = data.get("country", {}).get("emoji", "")
            card_type = data.get("type", "")
@@ -97,7 +96,7 @@ async def cc_generator(_, message):
             else:
                cc = await generate_random_cc(code, limit)
                credit_cards = '\n'.join(card for card in cc)
-               String = f'```\nCredit Cards: {limit}\n{credit_cards}```\n\n' + bin
+               String = f'```\n{credit_cards}```\n💳 Credit Cards: {limit}\n\n' + bin
                return await msg.edit(String)
             
   
@@ -121,10 +120,10 @@ async def bin_checker(_, message):
             #   )
          else:
              msg = await message.reply('Please wait a movement...')
-             nandha = await bin_info(code)
-             if not nandha:
+             bin = await bin_info(code)
+             if not bin:
                  return await msg.edit(
-                   'Sorry Maybe the card is invalid type check again.'
+                   'Maybe the bin is invalid try other.'
                  )
              else:
                  await msg.edit(nandha)
