@@ -87,9 +87,13 @@ async def welcome(_, update):
      user_id = update.from_user.id
      
      is_welcome = await check_welcome(chat_id)
+
      
+    not update.old_chat_member
+    or  is ChatMemberStatus.BANNED 
+ 
      if (
-          not update.old_chat_member
+          not update.old_chat_member           
           and update.new_chat_member
           and not update.new_chat_member.user.is_bot
           and is_welcome 
