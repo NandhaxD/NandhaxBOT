@@ -101,13 +101,14 @@ async def welcome(_, update):
            chatname = update.chat.title
            photo, token, alt = await make_captcha(user_id, chat_id)
            button = cvt_btn(alt, user_id)
-           temp[chat_id] = (user_id, token)
+           
            text = f'**Hello, {mention} solve the captcha to chat in {chatname}**'
            try:
              await bot.restrict_chat_member(chat_id, user_id, types.ChatPermissions())
            except Exception as e:
                  pass
-                
+           remove_token(chat_id, user_id)
+           temp[chat_id] = (user_id, token)
            msg = await bot.send_photo(
                 photo=photo,
                 chat_id=chat_id, 
@@ -119,7 +120,7 @@ async def welcome(_, update):
                remove_token(chat_id, user_id)
                await kick_chat_member(chat_id, user_id)
                await msg.edit(f'**{mention} was kicked for unable to solve captcha.**')
-               await asyncio.sleep(20)
+               await asyncio.sleep(60)
                await msg.delete()
                
           
