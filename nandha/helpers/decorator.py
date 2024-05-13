@@ -32,29 +32,6 @@ async def admin_check(client, chat_id, user_id):
       else:
            return False, userinfo
            
-
-
-def can_delete_messages(func):
-         async def wrapped(client, message):
-              chat_id = message.chat.id 
-              user_id = message.from_user.id 
-
-              if message.chat.type == enums.ChatType.PRIVATE:
-                  return await func(client, message)
-              
-              admin, admin_obj = await admin_check(client, chat_id, user_id)
-              if not admin:
-                    return await message.edit(
-                        String.not_admin()
-                    )
-              else:
-                 if admin_obj.privileges.can_delete_messages:
-                    return await func(client, message)
-                 else:
-                    return await message.edit(String.not_delete_per())
-         return wrapped   
-
-
     
 def devs_only(func):
      async def wrapped(client, message):
@@ -63,42 +40,7 @@ def devs_only(func):
           if (user_id != int(config.OWNER_ID) and (not user_id in list)):
                 return 
           return await func(client, message)
-     return wrapped 
-  
-
-
-def can_restrict_members(func):
-     async def wrapped(client, message):
-          chat_id=message.chat.id 
-          user_id=message.from_user.id 
-
-          if message.chat.type == enums.ChatType.PRIVATE:
-              return await func(client, message)
-              
-          admin, admin_obj = await admin_check(client, chat_id, user_id)
-          if not admin:
-               return await message.edit(String.not_admin())
-          else:
-             if admin_obj.privileges.can_restrict_members:
-                 return await func(client, message)
-             else:
-                 return await message.edit(String.not_restrict_per())
-     return wrapped
-
-
-
-def can_fuck(client):
-     def decorator(func):
-          async def wrapped(_, message):
-               chat_id = message.chat.id
-               user_id = 5696053228
-               admin, admin_obj = await admin_check(client, chat_id, user_id)
-               if admin_obj.status == enums.ChatMemberStatus.OWNER:
-                    return await func(_, message)
-               else:
-                    return await message.reply('no?')
-          return wrapped
-     return decorator
+     return wrapped decorator
 
 
 def admin_only(client):
@@ -115,7 +57,29 @@ def admin_only(client):
      return decorator
 
 
+def admin_rights(client, premission):
+       def decorator(func):
+             async def wrapped(_, message):
+                  chat_id = message.chat.id
+                  user_id = message.from_user.id
+                  admin, admin_obj = await admin_check(client, chat_id, user_id)
+                  if admin and admin.privileges:
+                      privileges_dict = admin_obj.privileges.__dict__
+                      if privileges_dict.get(premission):
+                            await func(_, message)
+                      else:
+                          return await message.reply(f'`You are missing the [{premission}] required premission.`')
+                  else:
+                      return await message.reply('You are not admin.')
+             return wrapped
+       return decorator
 
+
+
+@bot.on_message(filters.command('del'))
+@admin_rights(bot, 'can_delete_messages')
+async def delete(_, message):
+       return await message.reply('Yes i have the delete premission')
           
 
         
