@@ -125,4 +125,37 @@ async def welcome(_, update):
                await msg.delete()
                
           
-           
+
+
+
+@bot.on_message(filters.command('captcha'))
+async def captcha(_, message):
+    chat_id = message.chat.id
+    
+    if message.chat.type == enums.ChatType.PRIVATE:
+          return await message.reply(
+               'Only captcha can be used in groups.')
+    if len(message.text.split()) < 2:
+          return await message.reply(
+               'Example:\n- /captcha on|off')
+    else:
+        modes = ('on', 'off')
+        mode = message.text.split()[1].lower()
+        if mode in modes:
+             name = message.chat.title
+             if mode == 'on':
+                 await set_welcome(chat_id, True)
+                 return await message.reply(
+                        f'**Successfully captcha turn on in {name}.** ✅')
+             elif mode == 'off':
+                  await set_welcome(chat_id, True)
+                  return await message.reply(
+                        f'**Successfully captcha turn off in {name}.** ✅')
+        else:
+           return await message.reply(
+                'Example:\n- /captcha on|off')
+             
+             
+     
+
+     
