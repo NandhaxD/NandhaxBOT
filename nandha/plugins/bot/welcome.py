@@ -96,7 +96,7 @@ async def welcome(_, update):
            except Exception as e:
                  pass
            remove_entry(temp, chat_id, user_id)
-           temp[chat_id] = (user_id, token)
+           temp[user_id] = (chat_id, token)
            msg = await bot.send_photo(
                 photo=photo,
                 chat_id=chat_id, 
