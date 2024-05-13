@@ -9,9 +9,10 @@ from pyrogram import filters, types
 
 
 import requests
+import config
   
 
-SUPPORT_CHAT = -1001717881477
+SUPPORT_CHAT = config.GROUP_ID
 repo_name = 'NandhaXBOT'
 repo_owner = 'NandhaxD'
 
@@ -69,5 +70,11 @@ async def notify_commit(_, message):
         Nandha = True
         if not latest_commit_id in commit_ids:
             await send_commit_message(latest_commit_id)
+            if len(commit_ids) > 15:
+                await clear_commits()
+                await bot.send_message(
+                  chat_id=SUPPORT_CHAT,
+                  text='**Successfully cleared some junk commits.**')
+                  
             await add_commit_id(latest_commit_id)
             
