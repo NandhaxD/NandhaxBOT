@@ -62,8 +62,7 @@ async def wel_approve(_, query):
               await bot.restrict_chat_member(chat_id, user_id, types.ChatPermissions(
                can_send_messages=True,
                can_send_media_messages=True,
-               can_send_other_messages=True,
-               can_send_polls=True
+               can_send_polls=True,
                ))
           except Exception as e:
                pass
