@@ -126,7 +126,7 @@ async def bin_checker(_, message):
                    'Maybe the bin is invalid try other.'
                  )
              else:
-                 await msg.edit(nandha)
+                 await msg.edit(bin)
 
 
            
