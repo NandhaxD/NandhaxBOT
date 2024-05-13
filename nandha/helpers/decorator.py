@@ -40,7 +40,7 @@ def devs_only(func):
           if (user_id != int(config.OWNER_ID) and (not user_id in list)):
                 return 
           return await func(client, message)
-     return wrapped decorator
+     return wrapped
 
 
 def admin_only(client):
