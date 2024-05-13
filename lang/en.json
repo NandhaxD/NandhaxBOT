@@ -34,7 +34,7 @@
     "math_01": "<b>Result</b>:\n<b>Pertten</b>: {}\n<b>Query</b>: {}\n <pre>{}</pre>",
     "shell_01": "<pre>Command:</pre><pre> {}</pre> \n<pre language='python'>{}</pre>",
     "shell_02": "<pre code: {}</pre>",
-    "eval_01": "<pre>Command:</pre><pre language='python'>{}</pre> \n<pre>Takem Time To Output: {}'s:</pre><pre language='python'> {}</pre>",
+    "eval_01": "<pre>Command:</pre><pre language='python'>{}</pre> \n<pre>Takem Time To Output: {}'s:</pre><pre language='python'>\n{}</pre>",
     "bot_start_01": "Hello, I am Assistant for <b>{}</b>\nYou can deploy Your Own, To Use Me.\n\n🤖 Bot Status:  {}\n\n👤 User Status: {}",
     "bot_start_02": "Please refrain from spamming in this chat. Thank you!",
     "bot_restart": "Successfully Restarted ❗\n\nDATE: {}\nTIME: {}",
