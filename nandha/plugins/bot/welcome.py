@@ -67,7 +67,7 @@ async def welcome(_, update):
            mention = update.new_chat_member.user.mention()
            photo, token, alt = await make_captcha(user_id, chat_id)
            button = await cvt_btn(alt, user_id)
-          
+           temp[chat_id] = (user_id, token)
            text = f'Hello, {mention} solve the captcha.'
            await bot.send_photo(
                 photo=photo,
