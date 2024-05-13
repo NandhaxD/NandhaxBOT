@@ -30,7 +30,7 @@ def cvt_btn(lst, user_id):
     return types.InlineKeyboardMarkup(btns)
     
 
-def remove_entry(temp, user_id, chat_id):
+def remove_entry(temp, chat_id, user_id):
     if user_id in temp and temp[user_id][0] == chat_id:
         del temp[user_id]
 
