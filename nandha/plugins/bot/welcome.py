@@ -7,6 +7,10 @@ from nandha.helpers.help_func import make_captcha
 from pyrogram import filters, types
 
 
+
+
+import asyncio
+
 temp = {}
 
 
@@ -14,8 +18,8 @@ async def kick_chat_member(chat_id: int, user_id: int):
      try:
         await bot.ban_chat_member(chat_id, user_id)
         await bot.unban_chat_member(chat_id, user_id)
-     except Exception as e:
-            return e
+     except:
+          pass
 
 def cvt_btn(lst, user_id):
     button_groups = [lst[i:i+3] for i in range(0, len(lst), 3)]
@@ -68,8 +72,13 @@ async def wel_approve(_, query):
      if approved:
           name = query.from_user.mention
           chatname = query.message.chat.title
-          await bot.restrict_chat_member(chat_id, user_id, types.ChatPermissions(can_send_messages=True))
-          await query.message.edit(f'**Hey {name}, Welcome to {chatname}** ❤️')
+          await bot.restrict_chat_member(chat_id, user_id, types.ChatPermissions(
+               can_send_messages=True,
+               can_send_media_messages=True,
+               can_send_other_messages=True,
+               can_send_polls=True
+               ))
+          await query.message.edit(f'**Hey {name}, Welcome to {chatname} ❤️**')
           remove_token(chat_id, user_id)
      else:
           return await query.answer('What the fuck Itz wrong are you that much noob?', show_alert=True)
