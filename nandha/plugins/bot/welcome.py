@@ -7,8 +7,6 @@ from nandha.helpers.help_func import make_captcha
 from pyrogram import filters, types
 
 
-
-
 import asyncio
 
 temp = {}
@@ -83,8 +81,11 @@ async def welcome(_, update):
      user_id = update.from_user.id
      
      is_welcome = await check_welcome(chat_id)
-     if update.new_chat_member and is_welcome:
-          
+     if (
+        not (update.old_chat_member
+        or update.old_chat_member.status == enums.ChatMemberStatus.BANNED) and not update.new_chat_member.user.is_bot and is_welcome 
+     ):
+              
            mention = update.new_chat_member.user.mention()   
            chatname = update.chat.title
            photo, token, alt = await make_captcha(user_id, chat_id)
