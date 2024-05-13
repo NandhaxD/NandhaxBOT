@@ -3,6 +3,7 @@
 
 from nandha import bot
 from nandha.database.welcome import set_welcome, check_welcome
+from nandha.helpers.help_func import make_captcha
 from pyrogram import filters, types
 
 
@@ -44,8 +45,9 @@ async def wel_approve(_, query):
           return await query.answer("You cannot verify for others.")
      
      approved = await check_token(chat_id, user_id, token)
+    
      if approved:
-          name = query.from_user.first_name
+          name = query.from_user.mention
           chatname = query.message.chat.title
           await query.message.edit(f'Hey {name}, welcome to {chatname}')
      else:
