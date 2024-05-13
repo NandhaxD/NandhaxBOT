@@ -9,7 +9,15 @@ from pyrogram import filters, types
 
 temp = {}
 
-async def cvt_btn(lst, user_id):
+
+async def kick_chat_member(chat_id: int, user_id: int):
+     try:
+        await bot.ban_chat_member(chat_id, user_id)
+        await bot.unban_chat_member(chat_id, user_id)
+     except Exception as e:
+            return e
+
+def cvt_btn(lst, user_id):
     button_groups = [lst[i:i+3] for i in range(0, len(lst), 3)]
     btns = []
     for group in button_groups:
@@ -20,7 +28,18 @@ async def cvt_btn(lst, user_id):
     return types.InlineKeyboardMarkup(btns)
     
 
-async def check_token(chat_id: int, user_id: int, token):
+def remove_token(user_id, chat_id):
+    done = False
+    for key, value in temp.items():
+        if value[0] == user_id and key == chat_id:
+            del temp[key]
+            break
+            done = True
+    return done
+            
+
+
+def check_token(chat_id: int, user_id: int, token):
    token_d = None
    for key, value in temp.items():
        if value[0] == user_id and key == chat_id:
@@ -44,14 +63,16 @@ async def wel_approve(_, query):
      if query.from_user.id != user_id:
           return await query.answer("You cannot verify for others.")
      
-     approved = await check_token(chat_id, user_id, token)
+     approved = check_token(chat_id, user_id, token)
     
      if approved:
           name = query.from_user.mention
           chatname = query.message.chat.title
-          await query.message.edit(f'Hey {name}, Welcome to {chatname}')
+          await bot.restrict_chat_member(chat_id, user_id, types.ChatPermissions(can_send_messages=True))
+          await query.message.edit(f'**Hey {name}, Welcome to {chatname}** ❤️')
+          remove_token(chat_id, user_id)
      else:
-          return await query.answer('What the fuck itz wrong are you that much noob?', show_alert=True)
+          return await query.answer('What the fuck Itz wrong are you that much noob?', show_alert=True)
           
      
 
@@ -64,14 +85,26 @@ async def welcome(_, update):
      is_welcome = await check_welcome(chat_id)
      if update.new_chat_member and is_welcome:
           
-           mention = update.new_chat_member.user.mention()
+           mention = update.new_chat_member.user.mention()   
+           chatname = update.chat.title
            photo, token, alt = await make_captcha(user_id, chat_id)
-           button = await cvt_btn(alt, user_id)
+           button = cvt_btn(alt, user_id)
            temp[chat_id] = (user_id, token)
-           text = f'Hello, {mention} solve the captcha.'
-           await bot.send_photo(
+           text = f'**Hello, {mention} solve the captcha to chat in {chatname}**'
+           await bot.restrict_chat_member(chat_id, user_id, types.ChatPermissions())
+           msg = await bot.send_photo(
                 photo=photo,
                 chat_id=chat_id, 
                 caption=text,
                 reply_markup=button
            )
+           await asyncio.sleep(2*60)
+           if check_token(chat_id, user_id, token):
+               remove_token(chat_id, user_id)
+               await kick_chat_member(chat_id, user_id)
+               await msg.edit(f'**{name} was kicked for unable to solve captcha.**')
+               await asyncio.sleep(20)
+               await msg.delete()
+               
+          
+           
