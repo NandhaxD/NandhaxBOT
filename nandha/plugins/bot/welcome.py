@@ -143,9 +143,9 @@ async def captcha(_, message):
     
     if len(message.text.split()) < 2:
           kk = await check_welcome(chat_id)
+         
           text = 'Example:\n- /captcha on|off'
-          if not kk:
-               text += f'\n\n**Chat welcome captcha: {ok}**'
+          text += f'\n\n**Chat welcome captcha: {kk}**'
                
           return await message.reply(text
                )
