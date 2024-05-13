@@ -29,7 +29,7 @@ async def check_token(chat_id: int, user_id: int, token):
 
    if not token_d:
         return False
-   elif taken != token_d:
+   elif token != token_d:
         return False
    else:
         return True
