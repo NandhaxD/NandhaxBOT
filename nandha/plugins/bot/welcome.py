@@ -9,7 +9,7 @@ from pyrogram import filters, types
 
 temp = {}
 
-def covt_btn(list, user_id):
+def cvt_btn(list, user_id):
     button_groups = [list[i:i+3] for i in range(0, len(list), 3)]
     btns = []
     for group in button_groups:
