@@ -33,23 +33,6 @@ async def admin_check(client, chat_id, user_id):
            return False, userinfo
            
 
-def admin_only(func): 
-         async def wrapped(client, message): 
-             chat_id = message.chat.id 
-             user_id = message.from_user.id 
-
-             if message.chat.type == enums.ChatType.PRIVATE:
-                  return await func(client, message)
-                 
-             admin, admin_obj = await admin_check(client, chat_id, user_id)
-             if not admin:
-                 return message.edit(
-                   String.not_admin()
-                 )
-             else:
-                 return await func(client, message)                 
-         return wrapped
-
 
 def can_delete_messages(func):
          async def wrapped(client, message):
@@ -118,14 +101,21 @@ def can_fuck(client):
      return decorator
 
 
+def admin_only(client):
+     def decorator(func):
+         async def wrapped(_, message):
+             chat_id = message.chat.id
+             user_id = message.from_user.id
+             admin, admin_obj = await admin_check(client, chat_id, user_id)
+             if admin:
+                 return await func(_, message)
+             else:
+                 return await message.reply("`You need be admin to do this.`")
+         return wrapped
+     return decorator
 
-@bot.on_message(filters.command('admin'))
-@can_fuck(bot)
-async def admin(_, message):
-      return await message.reply('whst')
-                   
-                   
-                 
+
+
           
 
         
