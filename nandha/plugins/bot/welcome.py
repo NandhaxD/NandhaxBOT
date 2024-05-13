@@ -82,10 +82,12 @@ async def wel_approve(_, query):
 
 @bot.on_chat_member_updated(group=4)
 async def welcome(_, update):
+     
      chat_id = update.chat.id
      user_id = update.from_user.id
      
      is_welcome = await check_welcome(chat_id)
+     
      if (
           not update.old_chat_member
           and update.new_chat_member.user 
@@ -132,19 +134,27 @@ async def welcome(_, update):
 @bot.on_message(filters.command('captcha'))
 @admin_only(bot) #bot client
 async def captcha(_, message):
-    chat_id = message.chat.id
     
     if message.chat.type == enums.ChatType.PRIVATE:
           return await message.reply(
                'Only captcha can be used in groups.')
+
+    chat_id = message.chat.id
+    
     if len(message.text.split()) < 2:
-          return await message.reply(
-               'Example:\n- /captcha on|off')
+          kk = await check_welcome(chat_id)
+          text = 'Example:\n- /captcha on|off'
+          if not kk:
+               text += f'\n\n**Chat welcome captcha: {ok}**'
+               
+          return await message.reply(text
+               )
     else:
         modes = ('on', 'off')
         mode = message.text.split()[1].lower()
         if mode in modes:
              name = message.chat.title
+             
              if mode == 'on':
                  await set_welcome(chat_id, True)
                  return await message.reply(
