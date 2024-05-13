@@ -37,7 +37,7 @@ def remove_entry(temp, user_id, chat_id):
         del temp[user_id]
 
 
-def check_token(temp, user_id, chat_id, token):
+def check_token(temp, chat_id, user_id, token):
     for value in temp.values():
         if value[0] == chat_id and value[1] == token:
             return True
