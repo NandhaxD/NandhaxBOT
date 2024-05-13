@@ -72,12 +72,15 @@ async def wel_approve(_, query):
      if approved:
           name = query.from_user.mention
           chatname = query.message.chat.title
-          await bot.restrict_chat_member(chat_id, user_id, types.ChatPermissions(
+          try:
+              await bot.restrict_chat_member(chat_id, user_id, types.ChatPermissions(
                can_send_messages=True,
                can_send_media_messages=True,
                can_send_other_messages=True,
                can_send_polls=True
                ))
+          except Exception as e:
+               pass
           await query.message.edit(f'**Hey {name}, Welcome to {chatname} ❤️**')
           remove_token(chat_id, user_id)
      else:
@@ -100,7 +103,11 @@ async def welcome(_, update):
            button = cvt_btn(alt, user_id)
            temp[chat_id] = (user_id, token)
            text = f'**Hello, {mention} solve the captcha to chat in {chatname}**'
-           await bot.restrict_chat_member(chat_id, user_id, types.ChatPermissions())
+           try:
+             await bot.restrict_chat_member(chat_id, user_id, types.ChatPermissions())
+           except Exception as e:
+                 pass
+                
            msg = await bot.send_photo(
                 photo=photo,
                 chat_id=chat_id, 
