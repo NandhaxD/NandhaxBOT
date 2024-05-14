@@ -95,7 +95,7 @@ def admin_rights(client, premission):
                       if privileges_dict.get(premission):
                             await func(_, message)
                       else:
-                          return await message.reply(String.not_permission(who='You', premission=premission))
+                          return await message.reply(String.not_premission(who='You', premission=premission))
                   else:
                       return await message.reply(String.not_admin(who='You'))
              return wrapped
