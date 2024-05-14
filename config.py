@@ -2,7 +2,7 @@
 Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modification, distribution, or republication of this file without prior written permission from @NandhaBots is strictly prohibited. The Katsuki Telegram user bot has been developed with the Pyrogram library and utilizing Python programming language, making it a safe and secure option for users. Unauthorized use of this bot or any part of it may result in legal action. This project is owned by @Nandha, and any unauthorized use or distribution of this bot is strictly prohibited.
 """
 
-import os, sys 
+import os, sys, requests, pyrogram
 
 
 """ CHANGE TO FALSE IF YOU DON'T WANNA ADD VARIABLES IN HOSTING SITE """
@@ -33,15 +33,24 @@ else:
    LANG_CODE = 'en'
 
 
-# DEFAULT VARIABLES 
+
+### BOT INFO ###
+bot_info = requests.get(f'https://api.telegram.org/bot{BOT_TOKEN}/getme').json()['result']
+BOT_ID = bot_info['id']
+BOT_USERNAME = bot_info['username']
+BOT_NAME = NAME = bot_info['first_name']
+
 
 
 PREFIXES = ["~", ".","!","?","@","$"] 
-NAME = "NandhaXBOT"
-BOT_ID = int(BOT_TOKEN.split(':')[0])  
-
-# REQUIRED VARIABLES
-
 SOURCE = "https://github.com/nandhaxd/katsuki"
 
 
+def command(cmd: Union[str, list]):
+    commands = []
+    if isinstance(cmd, str):
+        commands.extend([cmd, f'@{bot_username}'])
+    elif isinstance(cmd, list):
+        for comm in cmd:
+            commands.extend([comm, f'@{bot_username}'])
+    return pyrogram.filters.command(commands, prefixes=PREFIXES)
