@@ -79,7 +79,7 @@ def admin_rights(client, premission):
                            privileges_dict = bot_obj.privileges.__dict__
                            if not privileges_dict.get(premission):
                                 return await message.reply(
-                                    text=String.not_premission(who='I', premission=premission)
+                                    text=String.not_premission(who='I', premission=premission))
                                  
                   admin, admin_obj = await admin_check(client, chat_id, user_id)
                   if admin and admin_obj.privileges:
