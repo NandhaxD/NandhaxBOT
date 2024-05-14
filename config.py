@@ -52,8 +52,8 @@ SOURCE = "https://github.com/nandhaxd/katsuki"
 def command(cmd: typing.Union[str, list]):
     commands = []
     if isinstance(cmd, str):
-        commands.extend([cmd, f'@{bot_username}'])
+        commands.extend([cmd, f'@{BOT_USERNAME}'])
     elif isinstance(cmd, list):
         for comm in cmd:
-            commands.extend([comm, f'@{bot_username}'])
+            commands.extend([comm, f'@{BOT_USERNAME}'])
     return pyrogram.filters.command(commands, prefixes=PREFIXES)
