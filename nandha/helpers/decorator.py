@@ -12,10 +12,10 @@ from nandha.database.devs import get_users
 
 class String:
     def not_admin(who):
-        text = f"{who} don't have admin rights."
+        text = f"**{who} don't have admin rights.**"
         return text
     def not_premission(who, premission):
-        text = f"{who} don't have the {premission} "
+        text = f"**{who} don't have the {premission} premission rights.**"
         return text
          
       
@@ -95,13 +95,7 @@ def admin_rights(client, premission):
 
 
 
-@bot.on_message(filters.command('del'))
-@admin_rights(bot, 'can_delete_messages')
-async def delete(_, message):
-       return await message.reply('Yes i have the delete premission')
-          
 
-        
 
 
         
