@@ -11,14 +11,11 @@ from nandha.database.devs import get_users
 
 
 class String:
-    def not_admin():
-        text = "You're not admin."
+    def not_admin(who):
+        text = f"{who} don't have admin rights."
         return text
-    def not_delete_per():
-         text = "You don't have delete permission."
-         return text
-    def not_restrict_per():
-        text = "You don't have rights to restrict members here."
+    def not_premission(who, premission):
+        text = f"{who} don't have the {premission} "
         return text
          
       
@@ -48,11 +45,20 @@ def admin_only(client):
          async def wrapped(_, message):
              chat_id = message.chat.id
              user_id = message.from_user.id
+             client_info = await client.get_me()
+             if client_info.is_bot:
+                  bot_admin , bot_obj = await admin_check(bot, chat_id, config.BOT_ID)
+                  if not bot_admin:
+                      return await message.reply_text(
+                         text=String.not_admin(who='I'))
+                      
              admin, admin_obj = await admin_check(client, chat_id, user_id)
              if admin:
                  return await func(_, message)
              else:
-                 return await message.reply("`You need be admin to do this.`")
+                 return await message.reply_text(
+                     text=String.not_admin(who='You')
+                 )
          return wrapped
      return decorator
 
@@ -62,6 +68,19 @@ def admin_rights(client, premission):
              async def wrapped(_, message):
                   chat_id = message.chat.id
                   user_id = message.from_user.id
+                  client_info = await client.get_me()
+                 
+                  if client_info.is_bot:
+                      bot_admin , bot_obj = await admin_check(bot, chat_id, client_info.id)
+                      if not bot_admin:
+                          return await message.reply_text(
+                             text=String.not_admin(who='I'))
+                      elif bot_obj.privileges:
+                           privileges_dict = bot_obj.privileges.__dict__
+                           if not privileges_dict.get(premission):
+                                return await message.reply(
+                                    text=String.not_premission(who='I', premission=premission)
+                                 
                   admin, admin_obj = await admin_check(client, chat_id, user_id)
                   if admin and admin_obj.privileges:
                       privileges_dict = admin_obj.privileges.__dict__
