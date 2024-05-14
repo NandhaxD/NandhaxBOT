@@ -46,10 +46,11 @@ def admin_only(client):
          async def wrapped(_, message):
 
              if message.chat.type == enums.ChatType.PRIVATE:
-                        return True
+                  return await func(_, message)
                  
              chat_id = message.chat.id
              user_id = message.from_user.id
+             
              client_info = await client.get_me()
              if client_info.is_bot:
                   bot_admin , bot_obj = await admin_check(bot, chat_id, config.BOT_ID)
@@ -59,7 +60,7 @@ def admin_only(client):
                       
              admin, admin_obj = await admin_check(client, chat_id, user_id)
              if admin:
-                 return await func(_, message)
+                  return await func(_, message)
              else:
                  return await message.reply_text(
                      text=String.not_admin(who='You')
