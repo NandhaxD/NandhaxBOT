@@ -2,13 +2,13 @@
 import asyncio
 
 
-async def send_auto_del_msg(client, media, chat_id: int, text, reply_to_message_id: int, time: int):
+async def send_auto_del_msg(client, method, chat_id: int, text, reply_to_message_id: int, time: int):
     # await send_auto_del_msg(bot, 'message', chat.id, 'ok', None, 5)
   
-    method_name = f'send_{media}'
+    method_name = f'send_{method}'
     if hasattr(client, method_name):
         send_method = getattr(client, method_name)
-        if media == 'message':
+        if method == 'message':
             msg = await send_method(chat_id=chat_id, text=text, reply_to_message_id=reply_to_message_id)
             await asyncio.sleep(time)
             await msg.delete()
