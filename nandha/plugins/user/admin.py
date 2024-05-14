@@ -24,7 +24,7 @@ async def delete_msg(_, message):
          await message.delete()
     else:
       return await send_auto_del_msg(
-           client=bot, 
+           client=app, 
            method='message', 
            chat_id=chat_id, 
            text='`Reply message to delete.`',
