@@ -7,6 +7,7 @@ Copyright © [2023-2024] @NandhaBots. All rights reserved. Reproduction, modific
 from pyrogram import enums, filters
 from nandha.database.devs import get_users
 
+
 import config
 
 
@@ -72,7 +73,7 @@ def admin_rights(client, premission):
              async def wrapped(_, message):
 
                   if message.chat.type == enums.ChatType.PRIVATE:
-                        return await True
+                        return True
                       
                   chat_id = message.chat.id
                   user_id = message.from_user.id
