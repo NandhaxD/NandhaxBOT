@@ -47,6 +47,7 @@ def admin_only(client):
 
              if message.chat.type == enums.ChatType.PRIVATE:
                   return await func(_, message)
+                  return
                  
              chat_id = message.chat.id
              user_id = message.from_user.id
@@ -74,7 +75,8 @@ def admin_rights(client, premission):
              async def wrapped(_, message):
 
                   if message.chat.type == enums.ChatType.PRIVATE:
-                        return True
+                        return func(_, message)
+                        return
                       
                   chat_id = message.chat.id
                   user_id = message.from_user.id
