@@ -133,7 +133,7 @@ async def welcome(_, update):
 
 
 @bot.on_message(filters.command('captcha'))
-@admin_only(bot) #bot client
+@admin_only
 async def captcha(_, message):
     
     if message.chat.type == enums.ChatType.PRIVATE:
