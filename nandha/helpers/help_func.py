@@ -167,7 +167,7 @@ async def get(url: str, *args, **kwargs):
 
 
 
-async def match_text(pattern, text):
+def match_text(pattern, text):
     regex = re.compile(pattern, re.IGNORECASE)
     return bool(regex.match(text))
      
