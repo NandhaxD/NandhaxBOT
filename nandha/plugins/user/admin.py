@@ -5,7 +5,8 @@
 from nandha import app, bot
 from nandha.helpers.function import send_auto_del_msg
 from nandha.helpers.decorator import admin_rights
-from pyrogram import filters, types
+from nandha.helpers.help_func import match_text
+from pyrogram import filters, types, enums
 
 
 import config
@@ -81,7 +82,9 @@ async def ban_member(client, message):
       if message.chat.type == enums.ChatType.PRIVATE:
             return await message.reply(
                 'You cannot use in private.')
-        
+
+      reply = message.reply_to_message
+    
       if len(message.text.split()) == 2:
            user_id = message.text.split()[1]          
       elif reply:
@@ -111,6 +114,132 @@ async def ban_member(client, message):
 
             
             
+@app.on_message(filters.me & config.command(['promote', 'fpromote']))
+@admin_rights('can_promote_members')
+async def promote_member(client, message):
+
+      chat_id = message.chat.id
+    
+      if message.chat.type == enums.ChatType.PRIVATE:
+            return await message.reply(
+                'You cannot use in private.')
+          
+      reply = message.reply_to_message
+      
+      if len(message.text.split()) == 2:
+            user_id = message.text.split()[1]
+        
+      elif reply:
+            user_id = reply.from_user.id
+        
+      else:
+           ask = "promote the user by replying the user or give id/name."
+           return await send_auto_del_msg(
+           client=client,
+           method='message', 
+           chat_id=chat_id, 
+           text=ask,
+           reply_to_message_id=message.id, 
+           time=5)
+
+      user_info = await client.get_users(user_id)
+      user_id = user_info.id
+      name = user_info
+
+      cmd = message.command[0]
+      text = f"**{name} Successfully {cmd.upper()} in {message.chat.title}.**"
+
+      
+      if match_text('fpromote', cmd):
+           
+           privileges = await client.get_chat_member(
+                 chat_id=chat_id, 
+                 user_id=client.me.id)
+           try:
+              await client.promote_chat_member(
+                   chat_id=chat_id, user_id=user_id, privileges=privileges)
+           except Exception as e:
+                return await message.reply(str(e))
+           return await message.reply(
+               text=text)
+      
+      elif match_text('promote', cmd):
+           
+           privileges = types.ChatPrivileges(
+               can_delete_messages=True,
+               can_manage_video_chats=True,
+               can_restrict_members=True,
+               can_invite_users=True,
+               can_pin_messages=True)
+        
+           try:
+              await client.promote_chat_member(
+                   chat_id=chat_id, user_id=user_id, privileges=privileges)
+           except Exception as e:
+                return await message.reply(str(e))
+           return await message.reply(
+               text=text)
+             
+             
+           
+
+
+
+@app.on_message(filters.me & config.command('demote'))
+@admin_rights('can_promote_members')
+async def demote_member(client, message):
+
+      chat_id = message.chat.id
+    
+      if message.chat.type == enums.ChatType.PRIVATE:
+            return await message.reply(
+                'You cannot use in private.')
+          
+      reply = message.reply_to_message
+      
+      if len(message.text.split()) == 2:
+            user_id = message.text.split()[1]
+        
+      elif reply:
+            user_id = reply.from_user.id
+        
+      else:
+           ask = "Demote the admin by replying the admin or give id/name."
+           return await send_auto_del_msg(
+           client=client,
+           method='message', 
+           chat_id=chat_id, 
+           text=ask,
+           reply_to_message_id=message.id, 
+           time=5)
+
+      user_info = await client.get_users(user_id)
+      user_id = user_info.id
+      name = user_info
+
+      cmd = message.command[0]
+      text = f"**{name} Successfully {cmd.upper()} in {message.chat.title}.**"
+
+      privileges = types.ChatPrivileges(
+               can_change_info=False,
+               can_delete_messages=False,
+               can_manage_video_chats=False,
+               can_restrict_members=False,
+               can_invite_users=False,
+               can_pin_messages=False,
+        
+               )
+
+      try:
+          await client.promote_chat_member(
+                 chat_id=chat_id,
+                 user_id=user_id,
+                 privileges=privileges)
+      except Exception as e:
+           return await message.reply(str(e))
+      return await message.reply(
+           text=text)
+              
     
 
 
