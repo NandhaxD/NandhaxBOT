@@ -13,8 +13,8 @@ import config
 
 
 @app.on_message(config.command('del'))
-@admin_rights(app, 'can_delete_messages')
-async def delete_msg(_, message):
+@admin_rights('can_delete_messages')
+async def delete_msg(client, message):
 
     chat_id = message.chat.id
     
