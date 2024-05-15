@@ -41,9 +41,9 @@ def devs_only(func):
      return wrapped
 
 
-def admin_only(client):
+def admin_only():
      def decorator(func):
-         async def wrapped(_, message):
+         async def wrapped(client, message):
 
              if message.chat.type in (enums.ChatType.PRIVATE, enums.ChatType.BOT):
                        return await func(_, message)
@@ -69,9 +69,9 @@ def admin_only(client):
      return decorator
 
 
-def admin_rights(client, premission):
+def admin_rights(premission):
        def decorator(func):
-             async def wrapped(_, message):
+             async def wrapped(client, message):
 
                   if message.chat.type in (enums.ChatType.PRIVATE, enums.ChatType.BOT):
                        return await func(_, message)
