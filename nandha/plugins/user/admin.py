@@ -252,7 +252,7 @@ async def demote_member(client, message):
 
       user_info = await client.get_users(user_id)
       user_id = user_info.id
-      name = user_info
+      name = user_info.first_name
 
       cmd = message.command[0]
       text = f"**{name} Successfully {cmd.upper()} in {message.chat.title}.**"
