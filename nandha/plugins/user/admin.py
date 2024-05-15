@@ -59,7 +59,7 @@ async def purge_msg(client, message):
            
 
       else:
-         ask = '`Reply message to delete.`'
+         ask = '`Reply message to purge.`'
          return await send_auto_del_msg(
            client=client,
            method='message', 
