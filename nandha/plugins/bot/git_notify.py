@@ -4,7 +4,7 @@
 
 
 from nandha import bot
-from nandha.database.git import add_commit_id, get_commit_ids
+from nandha.database.git import add_commit_id, get_commit_ids, clear_commits
 from pyrogram import filters, types
 
 
