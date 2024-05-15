@@ -13,7 +13,6 @@ import config
 
 
 @app.on_message(filters.me & config.command('del'))
-@bot.on_message(config.command('del'))
 @admin_rights('can_delete_messages')
 async def delete_msg(client, message):
 
