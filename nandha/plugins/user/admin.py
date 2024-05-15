@@ -112,6 +112,43 @@ async def ban_member(client, message):
         text=text)
      
 
+@app.on_message(filters.me & config.command('unban'))
+@admin_rights('can_restrict_members')
+async def ban_member(client, message):
+
+      chat_id = message.chat.id
+      if message.chat.type == enums.ChatType.PRIVATE:
+            return await message.reply(
+                'You cannot use in private.')
+
+      reply = message.reply_to_message
+    
+      if len(message.text.split()) == 2:
+           user_id = message.text.split()[1]          
+      elif reply:
+           user_id = reply.sender_chat.id if reply.sender_chat else reply.from_user.id
+      else:
+          ask = "Reply to the user or give the user name/id to unban."
+          return await send_auto_del_msg(
+           client=client,
+           method='message', 
+           chat_id=chat_id, 
+           text=ask,
+           reply_to_message_id=message.id, 
+           time=5)
+        
+      info = await client.get_chat(user_id)
+      name = info.first_name if info.first_name else info.title
+      user_id = info.id
+      
+      try:
+          await client.unban_chat_member(chat_id, user_id)
+      except Exception as e:
+           return await message.reply(str(e))
+      text = f"**{name} unbanned in {message.chat.title}.**"
+      return await message.reply(
+        text=text)
+
             
             
 @app.on_message(filters.me & config.command(['promote', 'fpromote']))
@@ -144,7 +181,7 @@ async def promote_member(client, message):
 
       user_info = await client.get_users(user_id)
       user_id = user_info.id
-      name = user_info
+      name = user_info.first_name
 
       cmd = message.command[0]
       text = f"**{name} Successfully {cmd.upper()} in {message.chat.title}.**"
@@ -152,9 +189,9 @@ async def promote_member(client, message):
       
       if match_text('fpromote', cmd):
            
-           privileges = await client.get_chat_member(
+           privileges = (await client.get_chat_member(
                  chat_id=chat_id, 
-                 user_id=client.me.id)
+                 user_id=client.me.id)).privileges
            try:
               await client.promote_chat_member(
                    chat_id=chat_id, user_id=user_id, privileges=privileges)
