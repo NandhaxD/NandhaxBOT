@@ -52,7 +52,7 @@ def admin_only(func):
              
              client_info = await client.get_me()
              if client_info.is_bot:
-                  bot_admin , bot_obj = await admin_check(bot, chat_id, config.BOT_ID)
+                  bot_admin , bot_obj = await admin_check(client, chat_id, config.BOT_ID)
                   if not bot_admin:
                       return await message.reply_text(
                          text=String.not_admin(who='I'))
