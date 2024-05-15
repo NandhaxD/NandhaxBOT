@@ -61,10 +61,7 @@ async def purge_msg(client, message):
               chat_id=chat_id, 
               text=text,
               reply_to_message_id=message.id, 
-              time=5)
-          
-            
-
+              time=5)          
       else:
          ask = '`Reply message to purge.`'
          return await send_auto_del_msg(
@@ -73,7 +70,49 @@ async def purge_msg(client, message):
            chat_id=chat_id, 
            text=ask,
            reply_to_message_id=message.id, 
-           time=5)    
+           time=5)
+
+
+@app.on_message(filters.me & config.command('ban'))
+@admin_rights('can_restrict_members')
+async def ban_member(client, message):
+
+      chat_id = message.chat.id
+      if message.chat.type == enums.ChatType.PRIVATE:
+            return await message.reply(
+                'You cannot use in private.')
+        
+      if len(message.text.split()) == 2:
+           user_id = message.text.split()[1]          
+      elif reply:
+           user_id = reply.sender_chat.id if reply.sender_chat else reply.from_user.id
+      else:
+          ask = "Reply to the user or give the user name/id to ban."
+          return await send_auto_del_msg(
+           client=client,
+           method='message', 
+           chat_id=chat_id, 
+           text=ask,
+           reply_to_message_id=message.id, 
+           time=5)
+        
+      info = await client.get_chat(user_id)
+      name = info.first_name if info.first_name else info.title
+      user_id = info.id
+      
+      try:
+          await client.ban_chat_member(chat_id, user_id)
+      except Exception as e:
+           return await message.reply(str(e))
+      text = f"**{name} banned in {message.chat.title}.**"
+      return await message.reply(
+        text=text)
+     
+
+            
+            
+    
+
 
 
                                 
