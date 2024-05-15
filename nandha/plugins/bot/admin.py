@@ -10,5 +10,5 @@ import config
 
 
 
-bot.add_handler(MessageHandler(delete_msg), config.command('del'))
+bot.add_handler(MessageHandler(delete_msg, config.command('del')))
 
