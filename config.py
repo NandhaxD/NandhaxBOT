@@ -18,7 +18,7 @@ if ENV:
    API_ID = os.getenv("API_ID", 13257951)
    API_HASH = os.getenv("API_HASH", "d8ea642aedb736d40035bc05f0cfd477")
    BOT_TOKEN = os.getenv("BOT_TOKEN")
-   SESSION = os.getenv("SESSION", "BQC2APYAHqwOg0xnpCOjZBx54qnlmbf3ILwbcZeaM_9QlL-aXNbfZnRgoJpV7vFtBcqxrf56WbpgrkgbbL-ozzFTxVaygRcybQwcY-p76ulo8JMi599NBk-kb_jwRwSvUwRjwMODYKnP23fE0F2EkSh7fzMaG0QwY9oWDllPThSzKGYtM3x0T8O73ArdYcGUphCOs0Fxgc1kfqACrk6kyuuaKZoS_kzi9amf03DJLMXlPKpQoLJhLhLRQt8QznB5-9Ehf4luVLDee5YKWxrKxO9rXE2ibnbItciKg54XC4rVzZl6BTrsBMo5cbyI8nKvs2EqOCj6qDJ5TvGsue62-lC0Z6KPVgAAAAF8SLkwAA")
+   SESSION = "BQC2APYAHqwOg0xnpCOjZBx54qnlmbf3ILwbcZeaM_9QlL-aXNbfZnRgoJpV7vFtBcqxrf56WbpgrkgbbL-ozzFTxVaygRcybQwcY-p76ulo8JMi599NBk-kb_jwRwSvUwRjwMODYKnP23fE0F2EkSh7fzMaG0QwY9oWDllPThSzKGYtM3x0T8O73ArdYcGUphCOs0Fxgc1kfqACrk6kyuuaKZoS_kzi9amf03DJLMXlPKpQoLJhLhLRQt8QznB5-9Ehf4luVLDee5YKWxrKxO9rXE2ibnbItciKg54XC4rVzZl6BTrsBMo5cbyI8nKvs2EqOCj6qDJ5TvGsue62-lC0Z6KPVgAAAAF8SLkwAA"
    GROUP_ID = os.getenv("GROUP_ID", -1001717881477)
    OWNER_ID = os.getenv('OWNER_ID', 5696053228)
    GROUP_LINK = os.getenv('GROUP_LINK', "nandhasupport.t.me")
