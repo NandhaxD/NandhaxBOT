@@ -45,11 +45,8 @@ def admin_only(client):
      def decorator(func):
          async def wrapped(_, message):
 
-             if message.chat.type == enums.ChatType.PRIVATE:
-                  return await message.reply(
-                      "Don't use in private")
-                  #await func(_, message)
-                  #return True
+             if message.chat.type in (enums.ChatType.PRIVATE, enums.ChatType.BOT):
+                       return await func(_, message)
                  
              chat_id = message.chat.id
              user_id = message.from_user.id
@@ -76,11 +73,8 @@ def admin_rights(client, premission):
        def decorator(func):
              async def wrapped(_, message):
 
-                  if message.chat.type == enums.ChatType.PRIVATE:
-                      return await message.reply(
-                      "Don't use in private")
-                  #await func(_, message)
-                  #return True
+                  if message.chat.type in (enums.ChatType.PRIVATE, enums.ChatType.BOT):
+                       return await func(_, message)
                  
                       
                   chat_id = message.chat.id
