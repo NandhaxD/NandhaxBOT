@@ -1,6 +1,6 @@
 
 
-
+from nandha import bot
 from nandha.plugins.user.admin import (
 delete_msg 
 )
