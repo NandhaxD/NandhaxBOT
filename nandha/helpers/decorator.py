@@ -41,12 +41,11 @@ def devs_only(func):
      return wrapped
 
 
-def admin_only():
-     def decorator(func):
+def admin_only(func):
          async def wrapped(client, message):
 
              if message.chat.type in (enums.ChatType.PRIVATE, enums.ChatType.BOT):
-                       return await func(_, message)
+                       return await func(client, message)
                  
              chat_id = message.chat.id
              user_id = message.from_user.id
@@ -60,21 +59,21 @@ def admin_only():
                       
              admin, admin_obj = await admin_check(client, chat_id, user_id)
              if admin:
-                  return await func(_, message)
+                  return await func(client, message)
              else:
                  return await message.reply_text(
                      text=String.not_admin(who='You')
                  )
          return wrapped
-     return decorator
+     
 
 
 def admin_rights(premission):
-       def decorator(func):
+      def decorator(func)
              async def wrapped(client, message):
 
                   if message.chat.type in (enums.ChatType.PRIVATE, enums.ChatType.BOT):
-                       return await func(_, message)
+                       return await func(client, message)
                  
                       
                   chat_id = message.chat.id
@@ -96,13 +95,13 @@ def admin_rights(premission):
                   if admin and admin_obj.privileges:
                       privileges_dict = admin_obj.privileges.__dict__
                       if privileges_dict.get(premission):
-                            await func(_, message)
+                            await func(client, message)
                       else:
                           return await message.reply(String.not_premission(who='You', premission=premission))
                   else:
                       return await message.reply(String.not_admin(who='You'))
              return wrapped
-       return decorator
+      return decorator
 
 
 
