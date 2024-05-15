@@ -2,7 +2,7 @@
 
 
 
-from nandha import app
+from nandha import app, bot
 from nandha.helpers.function import send_auto_del_msg
 from nandha.helpers.decorator import admin_rights
 from pyrogram import filters, types
