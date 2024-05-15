@@ -81,7 +81,7 @@ def admin_rights(premission):
                   client_info = await client.get_me()
                  
                   if client_info.is_bot:
-                      bot_admin , bot_obj = await admin_check(bot, chat_id, client_info.id)
+                      bot_admin , bot_obj = await admin_check(client, chat_id, client_info.id)
                       if not bot_admin:
                           return await message.reply_text(
                              text=String.not_admin(who='I'))
