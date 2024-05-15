@@ -54,9 +54,16 @@ async def purge_msg(client, message):
            except Exception as e:
                return await message.reply(str(e))
           taken_time = round(time.time() - start, 3)
-          return await message.reply(
-            "**Successfully deleted {dels} message's in {message.chat.title}\nTaken time: {taken_time}**") 
-           
+          text = f"**Successfully deleted {dels} message's in {message.chat.title}\nTaken time: {taken_time}**" 
+          return await send_auto_del_msg(
+           client=client,
+           method='message', 
+           chat_id=chat_id, 
+           text=text,
+           reply_to_message_id=message.id, 
+           time=5)
+          
+            
 
       else:
          ask = '`Reply message to purge.`'
