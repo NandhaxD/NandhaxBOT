@@ -69,7 +69,7 @@ def admin_only(func):
 
 
 def admin_rights(premission):
-      def decorator(func)
+      def decorator(func):
              async def wrapped(client, message):
 
                   if message.chat.type in (enums.ChatType.PRIVATE, enums.ChatType.BOT):
