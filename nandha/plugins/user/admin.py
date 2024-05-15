@@ -9,6 +9,7 @@ from pyrogram import filters, types
 
 
 import config
+import time
 
 
 
@@ -32,7 +33,40 @@ async def delete_msg(client, message):
            time=5)
       
 
-     
+
+@app.on_message(filters.me & config.command('purge'))
+@admin_rights('can_delete_messages')
+async def purge_msg(client, message):
+
+      chat_id = message.chat.id
+      reply = message.reply_to_message
+      if reply:
+           reply_msg_id = reply.id
+           message_id = message.id
+           msg_ids = []
+           start = time.time()
+           for id in range(reply_msg_id, message_id+1):
+                msg_ids.append(id)
+           try:
+             dels = await client.delete_messages(
+                  chat_id, message_ids=msg_ids
+              )
+           except Exception as e:
+               return await message.reply(str(e))
+          taken_time = round(time.time() - start, 3)
+          return await message.reply(
+            "**Successfully deleted {dels} message's in {message.chat.title}\nTaken time: {taken_time}**") 
+           
+
+      else:
+         ask = '`Reply message to delete.`'
+         return await send_auto_del_msg(
+           client=client,
+           method='message', 
+           chat_id=chat_id, 
+           text=ask,
+           reply_to_message_id=message.id, 
+           time=5)    
 
 
                                 
