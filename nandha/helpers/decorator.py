@@ -77,8 +77,10 @@ def admin_rights(client, premission):
              async def wrapped(_, message):
 
                   if message.chat.type == enums.ChatType.PRIVATE:
-                     await func(_, message)
-                     return True
+                  return await message.reply(
+                      "Don't use in private")
+                  #await func(_, message)
+                  #return True
                  
                       
                   chat_id = message.chat.id
