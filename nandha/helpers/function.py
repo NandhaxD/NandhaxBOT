@@ -2,7 +2,7 @@
 import asyncio
 
 
-async def send_auto_del_msg(client, method, chat_id: int, text, reply_to_message_id: int, time: int):
+async def send_auto_del_msg(client, method, chat_id: int, text, reply_to_message_id: int, time: int = 7):
     # await send_auto_del_msg(bot, 'message', chat.id, 'ok', None, 5)
   
     method_name = f'send_{method}'
