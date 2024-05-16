@@ -41,7 +41,7 @@ def p(*args, **kwargs):
 
 
 
-THUMB_ID = "./IMG_20220701_185623_542.jpg"
+THUMB_ID = "./nandha/nandha.jpg"
 
 # get bot logging
 
