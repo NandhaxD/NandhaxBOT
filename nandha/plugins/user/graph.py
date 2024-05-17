@@ -37,7 +37,7 @@ async def graph_text(_, message):
      if message.from_user:
           first_name = message.from_user.first_name
      else:
-          first_name = config.name
+          first_name = config.NAME
      if len(message.text.split()) >= 2:
            text = message.text.split(maxsplit=1)[1]
      else:
