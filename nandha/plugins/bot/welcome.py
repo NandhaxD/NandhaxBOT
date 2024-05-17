@@ -80,7 +80,7 @@ async def wel_approve(_, query):
      
 
 
-@bot.on_chat_member_updated(group=4)
+@bot.on_chat_member_updated(filters.new_chat_member, group=4)
 async def welcome(_, update):
      
      chat_id = update.chat.id
@@ -89,18 +89,7 @@ async def welcome(_, update):
      welcome_users = await check_welcome(chat_id)
 
      
-     if (
-          update.old_chat_member   
-          and not update.old_chat_member.status in ( 
-               enums.ChatMemberStatus.OWNER, 
-               enums.ChatMemberStatus.LEFT, 
-               enums.ChatMemberStatus.RESTRICTED, 
-               enums.ChatMemberStatus.BANNED
-          ) 
-          or update.new_chat_member
-          and not update.new_chat_member.user.is_bot 
-          and welcome_users
-     ):
+     if welcome_users:
               
            mention = update.new_chat_member.user.mention()   
            chatname = update.chat.title
