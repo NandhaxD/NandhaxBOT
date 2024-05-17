@@ -90,7 +90,8 @@ async def welcome(_, update):
 
      
      if (
-          not update.old_chat_member           
+          update.old_chat_member   
+          not update.old_chat_member.status == enums.ChatMemberStatus.BANNED
           and update.new_chat_member
           and not update.new_chat_member.user.is_bot
           and welcome_users
