@@ -80,7 +80,7 @@ async def wel_approve(_, query):
      
 
 
-@bot.on_chat_member_updated(filters.new_chat_member, group=4)
+@bot.on_chat_member_updated(filters.new_chat_members, group=4)
 async def welcome(_, update):
      
      chat_id = update.chat.id
