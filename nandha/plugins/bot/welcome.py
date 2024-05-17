@@ -80,18 +80,18 @@ async def wel_approve(_, query):
      
 
 
-@bot.on_chat_member_updated(filters.new_chat_members, group=4)
+@bot.on_message(filters.new_chat_members, group=4)
 async def welcome(_, update):
      
      chat_id = update.chat.id
-     user_id = update.from_user.id
+     user_id = update.new_chat_members[0].id
      
      welcome_users = await check_welcome(chat_id)
 
      
      if welcome_users:
               
-           mention = update.new_chat_member.user.mention()   
+           mention = update.new_chat_members[0].mention
            chatname = update.chat.title
            photo, token, alt = await make_captcha(user_id, chat_id)
            button = cvt_btn(alt, user_id)
