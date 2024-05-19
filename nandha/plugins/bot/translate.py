@@ -9,7 +9,7 @@ from nandha.helpers.trhozory import AsyncHozoryTranslator
 
 @bot.on_message(filters.command('tr'))
 async def translate (_, message):
-     usage = '**Example**: `/tr ja`\n (reply to the message)'
+     usage = "**Example**: `/tr ja`\nreply to the message and here the [translation code's](https://telegra.ph/Lang-Codes-03-19-3)"
      reply = message.reply_to_message
      if len(message.text.split()) < 2:
          return await message.reply(usage)
@@ -20,15 +20,10 @@ async def translate (_, message):
              hozory_engine =  AsyncHozoryTranslator()
              resp = await hozory_engine.translate(text, code)
              tr_text = resp.translated_text
-             audio = resp.voice_link
-             try:
-                 await message.reply_audio(
-                       audio=audio, caption=(f'🧾 Code:\n`{code}`'
-                       f'\n🧾 Translate:\n{tr_text}'))
-             except:
-                 await message.reply_text(
-                       text=(f'🧾 Code:\n`{code}`'
-                       f'\n🧾 Translate:\n{tr_text}'))
+             # audio = resp.voice_link ( useless )
+             await message.reply_text(
+                       text=(f'🧾** Code**:`{code}`'
+                       f'\n💫** Translate**:\n\n{tr_text}'))
           except Exception as e:
                return await message.reply(str(e))
      else:
