@@ -17,8 +17,8 @@ async def translate (_, message):
           text = reply.text or reply.caption
           code = message.text.split()[1]
           try:
-             hozory_engine = await AsyncHozoryTranslator()
-             resp = hozory_engine.translate(text, code)
+             hozory_engine =  AsyncHozoryTranslator()
+             resp = await hozory_engine.translate(text, code)
              tr_text = resp['translated_text']
              audio = resp['voice_link']
              try:
