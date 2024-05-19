@@ -22,8 +22,8 @@ async def translate (_, message):
              tr_text = resp.translated_text
              # audio = resp.voice_link ( useless )
              await message.reply_text(
-                       text=(f'🧾** Code**:`{code}`'
-                       f'\n💫** Translate**:\n\n{tr_text}'))
+                       text=(f'🧾** Code**: `{code}`'
+                       f'\n\n💫** Translate**:\n\n{tr_text}'))
           except Exception as e:
                return await message.reply(str(e))
      else:
