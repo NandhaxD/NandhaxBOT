@@ -7,6 +7,20 @@ from json import dumps
 class ApiException(Exception):
     pass
 
+class Base:
+    @staticmethod
+    def default(obj: "Base"):
+        return {
+            **{
+                attr: (getattr(obj, attr))
+                for attr in filter(lambda x: not x.startswith("_"), obj.__dict__)
+                if getattr(obj, attr) is not None
+            },
+        }
+
+    def __str__(self) -> str:
+        return dumps(self, indent=4, default=Base.default, ensure_ascii=False)
+        
 @dataclass
 class HozoryTranslateResult(Base):
     translated_text: str
