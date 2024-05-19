@@ -266,7 +266,7 @@ def get_readable_time(seconds: int) -> str:
     count = 0
     ping_time = ""
     time_list = []
-    time_suffix_list = ["seconds", "minutes", "hours", "days"]
+    time_suffix_list = ["Seconds", "Minutes", "Hours", "Days"]
     while count < 4:
         count += 1
         remainder, result = divmod(seconds, 60) if count < 3 else divmod(seconds, 24)
