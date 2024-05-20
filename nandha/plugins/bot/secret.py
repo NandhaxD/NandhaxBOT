@@ -73,7 +73,7 @@ async def inline_secret(_, inline_query):
     try:
         info = await bot.get_users(to_user)
     except Exception:
-                await bot.answer_inline_query(
+          await bot.answer_inline_query(
             inline_query_id=inline_query.id,
             results=[
                 InlineQueryResultArticle(
@@ -82,7 +82,7 @@ async def inline_secret(_, inline_query):
                 )
             ]
         )
-        return
+          return
 
     to_name = info.first_name
     to_mention = info.mention
