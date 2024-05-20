@@ -11,7 +11,7 @@ temp = {}
 async def clear_secret(user_id: int, to_user_id: int):
     if user_id not in temp:
         temp[user_id] = []
-    data = temp.get([user_id], [])
+    data = temp.get(user_id, [])
     if not data:
         return
     for user in data:
