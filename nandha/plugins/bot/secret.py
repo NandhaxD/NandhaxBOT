@@ -116,7 +116,7 @@ async def cb_secret(_, query):
     to_user = int(query.data.split(':')[2])
 
     if query.from_user.id not in [from_user, to_user]:
-        await query.answer("You can't see others' secrets!")
+        await query.answer("You can't see others secrets!")
         return
 
     secret = await get_secret(from_user, to_user)
@@ -129,3 +129,4 @@ async def cb_secret(_, query):
         f'{secret[1]}\n\nSecret message by {info.full_name}'
     )
     await query.answer(text, show_alert=True)
+    
