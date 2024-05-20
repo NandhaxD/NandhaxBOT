@@ -4,7 +4,7 @@ from pyrogram import filters, types, enums
 from pyrogram.types import InlineQueryResultArticle, InputTextMessageContent
 
 
-switch_btn = InlineKeyboardMarkup([[InlineKeyboardButton("〔 Secret 〕", switch_inline_query_current_chat="wspr ")]])
+switch_btn = types.InlineKeyboardMarkup([[types.inlineKeyboardButton("〔 Secret 〕", types.switch_inline_query_current_chat="secret ")]])
 
 
 temp = {}
