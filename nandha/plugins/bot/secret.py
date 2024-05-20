@@ -2,6 +2,9 @@ from nandha import bot
 from pyrogram import filters, types, enums
 from pyrogram.types import InlineQueryResultArticle, InputTextMessageContent
 
+
+import config
+
 switch_btn = types.InlineKeyboardMarkup(
     [[types.InlineKeyboardButton("〔 Secret 〕", switch_inline_query_current_chat="secret ")]]
 )
@@ -50,7 +53,7 @@ async def inline_secret(_, inline_query):
 
     usage = (
         'Invalid Method! ❌\n'
-        '**Example**:\n@botusername secret nandha <message>'
+        f'**Example**:\n`@{config.BOT_USERNAME} secret <username/id> <message>`'
     )
 
     try:
@@ -70,6 +73,15 @@ async def inline_secret(_, inline_query):
     try:
         info = await bot.get_users(to_user)
     except Exception:
+                await bot.answer_inline_query(
+            inline_query_id=inline_query.id,
+            results=[
+                InlineQueryResultArticle(
+                    title="❌ Secret Username or ID 🥸",
+                    input_message_content=InputTextMessageContent(usage)
+                )
+            ]
+        )
         return
 
     to_name = info.first_name
@@ -114,6 +126,6 @@ async def cb_secret(_, query):
 
     info = await bot.get_users(from_user)
     text = (
-        f'{secret[1]}\n👀 Secret message by {info.full_name}'
+        f'{secret[1]}\n\nSecret message by {info.full_name}'
     )
     await query.answer(text, show_alert=True)
