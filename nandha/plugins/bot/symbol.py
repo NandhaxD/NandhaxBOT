@@ -105,7 +105,7 @@ async def cb_symbols(_, query):
     user_id = int(query.data.split(':')[1])
     target_index = int(query.data.split(':')[2])
     if query.from_user.id != user_id:
-          return await message.reply(
+          return await query.answer(
               'Sorry, this is not your Query.')
     text = ''
     for index, (title, content) in enumerate(data.items()):
