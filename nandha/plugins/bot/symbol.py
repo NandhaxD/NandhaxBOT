@@ -15,7 +15,7 @@ async def symbols(_, message):
      chat_id = message.chat.id
      buttons = []
      for index, ( title, content) in enumerate(data.items()):
-          if index >= 4:
+          if index >= 5:
                break
           buttons.append(
             types.InlineKeyboardButton(
@@ -26,7 +26,7 @@ async def symbols(_, message):
      reply_markup = types.InlineKeyboardMarkup(columns_btn)
 
      return await bot.send_message(
-             chat_is=chat_id, text='Here the list of symbols, i hope you can find something awesome.',
+             chat_id=chat_id, text='Here the list of symbols, i hope you can find something awesome.',
              reply_markup=reply_markup)
 
 
