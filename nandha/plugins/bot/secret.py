@@ -4,7 +4,7 @@ from pyrogram import filters, types, enums
 from pyrogram.types import InlineQueryResultArticle, InputTextMessageContent
 
 
-switch_btn = types.InlineKeyboardMarkup([[types.inlineKeyboardButton("〔 Secret 〕", switch_inline_query_current_chat="secret ")]])
+switch_btn = types.InlineKeyboardMarkup([[types.InlineKeyboardButton("〔 Secret 〕", switch_inline_query_current_chat="secret ")]])
 
 
 temp = {}
@@ -62,7 +62,9 @@ async def cb_secret(_, inline_query):
       try:
         info = await bot.get_users(to_user)
       except:
-         pass
+         to_name = 'Unkown'
+         to_user_id = to_user
+         
       to_name = info.first_name
       to_user_id = info.id
   
