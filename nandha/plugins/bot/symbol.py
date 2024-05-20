@@ -122,8 +122,8 @@ async def cb_symbols(_, query):
 
     return await query.message.edit_text(
          text=text,
-    reply_markup=types.InlineKeyboardMarkup(types.InlineKeyboardButton(
+    reply_markup=types.InlineKeyboardMarkup([[types.InlineKeyboardButton(
         text='Back ⬅️', callback_data=f'syback:{user_id}:{target_index}'
-    ))
+    )]])
     )
   
