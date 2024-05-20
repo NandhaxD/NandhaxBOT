@@ -59,7 +59,7 @@ async def sym_next_back(_, query):
     reply_markup = types.InlineKeyboardMarkup(columns_btn)
 
     await query.message.edit_text(
-        'Here is the list of symbols, I hope you can find something awesome.',
+        '**Here is the list of symbols, I hope you can find something today.**',
         reply_markup=reply_markup
     )
 
@@ -105,17 +105,21 @@ async def cb_symbols(_, query):
     user_id = int(query.data.split(':')[1])
     target_index = int(query.data.split(':')[2])
     if query.from_user.id != user_id:
-          return await query.answer(
-              'Sorry, this is not your Query.', show_alert=True)
+        return await query.answer(
+            'Sorry, this is not your Query.', show_alert=True)
+
     text = ''
+    num_columns = 5
+
     for index, (title, content) in enumerate(data.items()):
-       if index == target_index:
-           text += f'**{title}**:\n\n'
-           for i in range(0, len(content.split()), num_columns):
-                 text += '  '.join(content.split()[i:i + num_columns])
-           break
-    return await query.message.edit(text)
-    
+        if index == target_index:
+            text += f'**{title}**:\n\n'
+            symbols = content.split()
+            for i in range(0, len(symbols), num_columns):
+                row = symbols[i:i + num_columns]
+                formatted_row = '  '.join(f'`{symbol}`' for symbol in row)
+                text += f'{formatted_row}\n'
+            break
 
-
-
+    return await query.message.edit_text(text)
+  
