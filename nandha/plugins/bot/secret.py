@@ -53,7 +53,7 @@ async def cb_secret(_, inline_query):
           message = inline_query.query.split(None, 2)[1]
       except IndexError:
           await bot.answer_inline_query(
-              inline_query_id,
+              inline_query_id=inline_query.id,
               results=[
              InlineQueryResultArticle(
                  "Secret 🥸",
@@ -69,7 +69,7 @@ async def cb_secret(_, inline_query):
       to_user_id = info.id
   
       await bot.answer_inline_query(
-              inline_query_id,
+              inline_query_id=inline_query.id,
               results=[
              InlineQueryResultArticle(
                  f"✅ Send Secret messages to  {to_name}",
