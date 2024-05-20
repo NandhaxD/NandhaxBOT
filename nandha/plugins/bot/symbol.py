@@ -59,7 +59,7 @@ async def sym_next_back(_, query):
     reply_markup = types.InlineKeyboardMarkup(columns_btn)
 
     await query.message.edit_text(
-        '**Here is the list of symbols, I hope you can find something today.**',
+        "**Here are some symbols for you to explore. I hope you find something special today!**",
         reply_markup=reply_markup
     )
 
@@ -95,7 +95,7 @@ async def symbols(_, message):
 
     await bot.send_message(
         chat_id=chat_id,
-        text='Here is the list of symbols, I hope you can find something awesome.',
+        text="**Here are some symbols for you to explore. I hope you find something special today!**",
         reply_markup=reply_markup
     )
     
