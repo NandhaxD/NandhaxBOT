@@ -5,9 +5,7 @@ from pyrogram.types import InlineQueryResultArticle, InputTextMessageContent
 
 import config
 
-switch_btn = types.InlineKeyboardMarkup(
-    [[types.InlineKeyboardButton("〔 Secret 〕", switch_inline_query_current_chat="secret ")]]
-)
+
 
 temp = {}
 
@@ -37,6 +35,10 @@ async def get_secret(user_id, to_user_id):
 
 @bot.on_message(filters.command('secret'))
 async def send_secret(_, message):
+  
+    switch_btn = types.InlineKeyboardMarkup(
+    [[types.InlineKeyboardButton("〔 Secret 〕", switch_inline_query_current_chat="secret name/id hi")]]
+    )
     if message.chat.type != enums.ChatType.PRIVATE:
         await message.reply(
             text='Click the button to send secret messages',
