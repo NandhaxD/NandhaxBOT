@@ -112,7 +112,7 @@ async def cb_secret(_, query):
           else:
               info = await bot.get_users(from_user)
               text = (
-                  secret,
+                  secret_text,
                   f'\n\n👀 Secret message by {info.full_name}'
               )
               return await query.answer(text, show_alert=True)
