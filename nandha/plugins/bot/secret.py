@@ -10,23 +10,22 @@ switch_btn = types.InlineKeyboardMarkup([[types.InlineKeyboardButton("〔 Secret
 temp = {}
 
 
-async def clear_secret(user_id, to_user_id):
+async def clear_secret(user_id: int, to_user_id: int):
     if not user_id in temp:
         temp[user_id] = []
     data = temp[user_id]
     if not data:
        return
     for user in data:
-       if to_user_id in user:
+       if user[0] == to_user_id:
              data.remove(user)
              break
+           
 
+async def add_secret(user_id: int, to_user_id: int, message: str):
+    await clear_secret(user_id, to_user_id)
+    temp[user_id].append((to_user_id, message))
 
-
-async def add_secret(user_id, to_user_id, message):
-      await clear_secret(user_id, to_user_id)
-      temp[user_id] = (to_user_id, message)
-  
 
 @bot.on_message(filters.command('secret'))
 async def send_secret(_, message):
@@ -46,7 +45,7 @@ async def cb_secret(_, inline_query):
       mention = inline_query.from_user.mention
   
       usage = (
-        'Invliad Method!\n'
+        'Invliad Method! ❌\n'
         '**Example**:\n@botusername secret nandha fuck'
       )
       try:
@@ -70,9 +69,9 @@ async def cb_secret(_, inline_query):
       to_user_id = info.id
   
       text = (
-        '**👀 {name} send a secret message to {to_mention} only she/he can view the message.**'
+        f'**👀 {mention} send a secret message to {to_mention} only she/he can view the message. 🚫**'
       )
-      await bot.answer_inline_query(
+      ok = await bot.answer_inline_query(
               inline_query_id=inline_query.id,
               results=[
              InlineQueryResultArticle(
@@ -80,10 +79,11 @@ async def cb_secret(_, inline_query):
              InputTextMessageContent(text),
              reply_markup=types.InlineKeyboardMarkup([[
                 types.InlineKeyboardButton(
-                  'Secret 💀', callback_data=f'secret:{user_id}:{to_user_id}'
+                  'Secret 👀', callback_data=f'secret:{user_id}:{to_user_id}'
                 )]]
              ))])
-      await add_secret(user_id, to_user_id, message)
+      if ok:
+          await add_secret(user_id, to_user_id, message)
 
 
 
