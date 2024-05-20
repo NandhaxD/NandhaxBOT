@@ -33,7 +33,7 @@ async def send_secret(_, message):
     if message.chat.type != enums.ChatType.PRIVATE:
          await message.reply(
           text='click the button to send secret messages',
-          reply_markup=types.InlineKeyboardMarkup(switch_btn))
+          reply_markup=switch_btn)
     else:
        return await message.reply(
            'Only for chats!')
