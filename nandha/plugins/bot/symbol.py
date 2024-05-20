@@ -44,8 +44,8 @@ async def cb_symbols(_, query):
     for index, (title, content) in enumerate(data.items()):
        if index == target_index:
            text += f'**{title}**:\n\n'
-           for i in range(0, len(content), num_columns):
-                 text += ' '.join(content[i:i + num_columns])
+           for i in range(0, len(content.split()), num_columns):
+                 text += ' '.join(content.split()[i:i + num_columns])
            break
     return await query.message.edit(text)
     
