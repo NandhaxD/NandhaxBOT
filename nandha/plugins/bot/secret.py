@@ -43,7 +43,8 @@ async def send_secret(_, message):
 async def cb_secret(_, inline_query):
       user_id = inline_query.from_user.id
       name = inline_query.from_user.first_name
-    
+      mention = inline_query.from_user.mention
+  
       usage = (
         'Invliad Method!\n'
         '**Example**:\n@botusername secret nandha fuck'
@@ -56,24 +57,27 @@ async def cb_secret(_, inline_query):
               inline_query_id=inline_query.id,
               results=[
              InlineQueryResultArticle(
-                 "Secret 🥸",
+                 "❌ Secret invalid 🥸",
              InputTextMessageContent(usage))])
 
       try:
-        info = await bot.get_users(to_user)
+         info = await bot.get_users(to_user)
       except:
-         to_name = 'Unkown'
-         to_user_id = to_user
+         return
          
       to_name = info.first_name
+      to_mention = info.mention
       to_user_id = info.id
   
+      text = (
+        '**👀 {name} send a secret message to {to_mention} only she/he can view the message.**'
+      )
       await bot.answer_inline_query(
               inline_query_id=inline_query.id,
               results=[
              InlineQueryResultArticle(
-                 f"✅ Send Secret messages to  {to_name}",
-             InputTextMessageContent(usage),
+                 f"✅ Secret messages to  {to_name}",
+             InputTextMessageContent(text),
              reply_markup=types.InlineKeyboardMarkup([[
                 types.InlineKeyboardButton(
                   'Secret 💀', callback_data=f'secret:{user_id}:{to_user_id}'
