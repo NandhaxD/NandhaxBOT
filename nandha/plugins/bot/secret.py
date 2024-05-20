@@ -1,123 +1,119 @@
-
 from nandha import bot
 from pyrogram import filters, types, enums
 from pyrogram.types import InlineQueryResultArticle, InputTextMessageContent
 
-
-switch_btn = types.InlineKeyboardMarkup([[types.InlineKeyboardButton("〔 Secret 〕", switch_inline_query_current_chat="secret ")]])
-
+switch_btn = types.InlineKeyboardMarkup(
+    [[types.InlineKeyboardButton("〔 Secret 〕", switch_inline_query_current_chat="secret ")]]
+)
 
 temp = {}
 
-
 async def clear_secret(user_id: int, to_user_id: int):
-    if not user_id in temp:
+    if user_id not in temp:
         temp[user_id] = []
-    data = temp[user_id]
+    data = temp.get([user_id], [])
     if not data:
-       return
+        return
     for user in data:
-       if user[0] == to_user_id:
-             data.remove(user)
-             break
-           
+        if user[0] == to_user_id:
+            data.remove(user)
+            break
 
 async def add_secret(user_id: int, to_user_id: int, message: str):
     await clear_secret(user_id, to_user_id)
     temp[user_id].append((to_user_id, message))
 
-
 async def get_secret(user_id, to_user_id):
-     data = temp[user_id]
-     if not data:
-        return 
-     for user in data:
-       if user[0] == to_user_id:
-           return user
-       
-           
-    
+    data = temp.get(user_id, [])
+    if not data:
+        return None
+    for user in data:
+        if user[0] == to_user_id:
+            return user
+    return None
+
 @bot.on_message(filters.command('secret'))
 async def send_secret(_, message):
     if message.chat.type != enums.ChatType.PRIVATE:
-         await message.reply(
-          text='click the button to send secret messages',
-          reply_markup=switch_btn)
+        await message.reply(
+            text='Click the button to send secret messages',
+            reply_markup=switch_btn
+        )
     else:
-       return await message.reply(
-           'Only for chats!')
-
+        await message.reply('Only for chats!')
 
 @bot.on_inline_query(filters.regex('secret'))
 async def inline_secret(_, inline_query):
-      user_id = inline_query.from_user.id
-      name = inline_query.from_user.first_name
-      mention = inline_query.from_user.mention
-  
-      usage = (
-        'Invliad Method! ❌\n'
-        '**Example**:\n@botusername secret nandha fuck'
-      )
-      try:
-          to_user = inline_query.query.split()[1]
-          message = inline_query.query.split(None, 2)[1]
-      except IndexError:
-          await bot.answer_inline_query(
-              inline_query_id=inline_query.id,
-              results=[
-             InlineQueryResultArticle(
-                 "❌ Secret invalid 🥸",
-             InputTextMessageContent(usage))])
+    user_id = inline_query.from_user.id
+    name = inline_query.from_user.first_name
+    mention = inline_query.from_user.mention
 
-      try:
-         info = await bot.get_users(to_user)
-      except:
-         return
-         
-      to_name = info.first_name
-      to_mention = info.mention
-      to_user_id = info.id
-  
-      text = (
-        f'**👀 {mention} send a secret message to {to_mention} only she/he can view the message. 🚫**'
-      )
-      ok = await bot.answer_inline_query(
-              inline_query_id=inline_query.id,
-              results=[
-             InlineQueryResultArticle(
-                 f"✅ Secret messages to  {to_name}",
-             InputTextMessageContent(text),
-             reply_markup=types.InlineKeyboardMarkup([[
-                types.InlineKeyboardButton(
-                  'Secret 👀', callback_data=f'secret:{user_id}:{to_user_id}'
-                )]]
-             ))])
-      if ok:
-          await add_secret(user_id, to_user_id, message)
+    usage = (
+        'Invalid Method! ❌\n'
+        '**Example**:\n@botusername secret nandha <message>'
+    )
 
+    try:
+        _, to_user, message = inline_query.query.split(None, 2)
+    except ValueError:
+        await bot.answer_inline_query(
+            inline_query_id=inline_query.id,
+            results=[
+                InlineQueryResultArticle(
+                    title="❌ Secret invalid 🥸",
+                    input_message_content=InputTextMessageContent(usage)
+                )
+            ]
+        )
+        return
 
+    try:
+        info = await bot.get_users(to_user)
+    except Exception:
+        return
+
+    to_name = info.first_name
+    to_mention = info.mention
+    to_user_id = info.id
+
+    text = (
+        f'**👀 {mention} sent a secret message to {to_mention}. Only they can view the message. 🚫**'
+    )
+
+    ok = await bot.answer_inline_query(
+        inline_query_id=inline_query.id,
+        results=[
+            InlineQueryResultArticle(
+                title=f"✅ Secret message to {to_name}",
+                input_message_content=InputTextMessageContent(text),
+                reply_markup=types.InlineKeyboardMarkup([[
+                    types.InlineKeyboardButton(
+                        'Secret 👀', callback_data=f'secret:{user_id}:{to_user_id}'
+                    )
+                ]])
+            )
+        ]
+    )
+
+    if ok:
+        await add_secret(user_id, to_user_id, message)
 
 @bot.on_callback_query(filters.regex('^secret'))
 async def cb_secret(_, query):
-      from_user = int(query.data.split(':')[1])
-      to_user = int(query.data.split(':')[2])
-      if not query.from_user.id in [from_user, to_user]:
-          return await query.answer(
-              "wah you can't see others secret nigga!")
-      else:
-          secret = await get_secret(from_user, to_user)
-          if not secret:
-               return await query.answer(
-                   "Uff your secret message is vanished 😭")
-          else:
-              info = await bot.get_users(from_user)
-              text = (
-                  str(secret[1]),
-                  f'\n👀 Secret message by {info.full_name}'
-              )
-              return await query.answer(text, show_alert=True)
-                  
+    from_user = int(query.data.split(':')[1])
+    to_user = int(query.data.split(':')[2])
 
+    if query.from_user.id not in [from_user, to_user]:
+        await query.answer("You can't see others' secrets!")
+        return
 
-      
-      
+    secret = await get_secret(from_user, to_user)
+    if not secret:
+        await query.answer("Your secret message has vanished 😭")
+        return
+
+    info = await bot.get_users(from_user)
+    text = (
+        f'{secret[1]}\n👀 Secret message by {info.full_name}'
+    )
+    await query.answer(text, show_alert=True)
