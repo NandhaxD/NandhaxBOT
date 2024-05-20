@@ -33,7 +33,7 @@ async def get_secret(user_id, to_user_id):
         return 
      for user in data:
        if user[0] == to_user_id:
-           return user[1]
+           return user
        
            
     
@@ -105,15 +105,15 @@ async def cb_secret(_, query):
           return await query.answer(
               "wah you can't see others secret nigga!")
       else:
-          secret_text = await get_secret(from_user, to_user)
-          if not secret_text:
+          secret = await get_secret(from_user, to_user)
+          if not secret:
                return await query.answer(
                    "Uff your secret message is vanished 😭")
           else:
               info = await bot.get_users(from_user)
               text = (
-                  secret_text,
-                  f'\n\n👀 Secret message by {info.full_name}'
+                  str(secret[1]),
+                  f'\n👀 Secret message by {info.full_name}'
               )
               return await query.answer(text, show_alert=True)
                   
