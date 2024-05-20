@@ -29,9 +29,9 @@ async def add_secret(user_id: int, to_user_id: int, message: str):
 
 async def get_secret(user_id, to_user_id):
      data = temp[user_id]
-    if not data:
-       return 
-    for user in data:
+     if not data:
+        return 
+     for user in data:
        if user[0] == to_user_id:
            return user[1]
        
