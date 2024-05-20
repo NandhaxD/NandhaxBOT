@@ -16,7 +16,7 @@ async def sym_next_back(_, query):
     target_index = int(query.data.split(':')[2])
 
     if query.from_user.id != user_id:
-        return await query.message.reply('Sorry, this is not your Query.')
+        return await query.answer('Sorry this is not your Query.')
 
     # Calculate the start index of the current page
     if query.data.startswith('syback'):
@@ -120,5 +120,10 @@ async def cb_symbols(_, query):
                 text += f'{formatted_row}\n'
             break
 
-    return await query.message.edit_text(text)
+    return await query.message.edit_text(
+         text=text
+    reply_markup=types.InlineKeyboardMarkup(types.InlineKeyboardButton(
+        text='Back ⬅️', callback_data=f'syback:{user_id}:{target_index}'
+    ))
+    )
   
