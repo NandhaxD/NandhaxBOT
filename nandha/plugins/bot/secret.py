@@ -27,6 +27,16 @@ async def add_secret(user_id: int, to_user_id: int, message: str):
     temp[user_id].append((to_user_id, message))
 
 
+async def get_secret(user_id, to_user_id):
+     data = temp[user_id]
+    if not data:
+       return 
+    for user in data:
+       if user[0] == to_user_id:
+           return user[1]
+       
+           
+    
 @bot.on_message(filters.command('secret'))
 async def send_secret(_, message):
     if message.chat.type != enums.ChatType.PRIVATE:
@@ -39,7 +49,7 @@ async def send_secret(_, message):
 
 
 @bot.on_inline_query(filters.regex('secret'))
-async def cb_secret(_, inline_query):
+async def inline_secret(_, inline_query):
       user_id = inline_query.from_user.id
       name = inline_query.from_user.first_name
       mention = inline_query.from_user.mention
@@ -87,7 +97,26 @@ async def cb_secret(_, inline_query):
 
 
 
-
+@bot.on_callback_query(filters.regex('^secret'))
+async def cb_secret(_, query):
+      from_user = int(query.data.split(':')[1])
+      to_user = int(query.data.split(':')[2])
+      if not query.from_user.id in [from_user, to_user]:
+          return await query.answer(
+              "wah you can't see others secret nigga!")
+      else:
+          secret_text = await get_secret(from_user, to_user)
+          if not secret_text:
+               return await query.answer(
+                   "Uff your secret message is vanished 😭")
+          else:
+              info = await bot.get_users(from_user)
+              text = (
+                  secret,
+                  f'\n\n👀 Secret message by {info.full_name}'
+              )
+              return await query.answer(text, show_alert=True)
+                  
 
 
       
