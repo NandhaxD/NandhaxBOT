@@ -61,14 +61,13 @@ async def wel_approve(_, query):
           name = query.from_user.mention
           chatname = query.message.chat.title
           try:
+               
+              permissions = (await bot.get_chat(chat_id)).permissions         
               await bot.restrict_chat_member(
                    chat_id=chat_id, 
                    user_id=user_id, 
-                   permissions=types.ChatPermissions(
-               can_send_messages=True,
-               can_send_media_messages=True,
-               can_send_polls=True,
-               ))
+                   permissions=permissions
+              )
           except Exception as e:
                pass
           text = f'**Hey {name}, Welcome to {chatname} ❤️**'
@@ -87,9 +86,11 @@ async def welcome(_, update):
      user_id = update.new_chat_members[0].id
      
      welcome_users = await check_welcome(chat_id)
-
      
-     if welcome_users:
+     if (
+welcome_users
+and not update.new_chat_members[0].is_bot
+     ):
               
            mention = update.new_chat_members[0].mention
            chatname = update.chat.title
@@ -98,6 +99,7 @@ async def welcome(_, update):
            
            text = f'**Hello, {mention} solve the captcha to chat in {chatname}**'
            try:
+                
              await bot.restrict_chat_member(
                   chat_id=chat_id,
                   user_id=user_id, 
