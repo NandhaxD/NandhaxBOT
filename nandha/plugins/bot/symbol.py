@@ -109,7 +109,6 @@ async def cb_symbols(_, query):
             'Sorry, this is not your Query.', show_alert=True)
 
     text = ''
-    num_columns = 5
 
     for index, (title, content) in enumerate(data.items()):
         if index == target_index:
