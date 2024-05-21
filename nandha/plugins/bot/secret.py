@@ -158,14 +158,17 @@ async def cb_del_secret(_, query: CallbackQuery):
          await query.answer(
            "You can't delete others secrets!")
          return
-    await clear_secret(from_user, to_user)
     try:
+       await query.message.reply('hmm?')
        await query.message.edit(f"~~Secret message deleted by {name}~~")
-    except AttributeError:
+    except:
         await query.answer(
           "I couldn't delete the secret 🤔"
         )
-  
+    await clear_secret(from_user, to_user)
+
+
+
 @bot.on_callback_query(filters.regex('^secret'))
 async def cb_secret(_, query: CallbackQuery):
     from_user = int(query.data.split(':')[1])
