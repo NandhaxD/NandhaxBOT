@@ -98,7 +98,7 @@ async def inline_secret(_, inline_query):
           return
 
     if info.is_bot or info.id == user_id:
-        await send_inline_query_article(
+         await send_inline_query_article(
             bot=bot, inline_query_id=inline_query.id, 
             title='❌ You cannot do you that.', 
             message_content=(
@@ -106,6 +106,7 @@ async def inline_secret(_, inline_query):
             ), 
             reply_markup=switch_btn
          )
+         return
     to_name = info.first_name
     to_mention = info.mention
     to_user_id = info.id
