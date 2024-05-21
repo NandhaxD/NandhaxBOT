@@ -1,6 +1,6 @@
 from nandha import bot
 from pyrogram import filters, types, enums, errors
-from pyrogram.types import InlineQueryResultArticle, InputTextMessageContent
+from pyrogram.types import InlineQueryResultArticle, InputTextMessageContent, CallbackQuery
 
 import config
 
@@ -149,22 +149,25 @@ async def inline_secret(_, inline_query):
 
 
 @bot.on_callback_query(filters.regex('^delsecret'))
-async def cb_del_secret(_, query):
+async def cb_del_secret(_, query: CallbackQuery):
     from_user = int(query.data.split(':')[1])
     to_user = int(query.data.split(':')[2])
     name = query.from_user.first_name
   
     if query.from_user.id not in [from_user, to_user]:
-         await query.answer("You can't delete others secrets!")
+         await query.answer(
+           "You can't delete others secrets!")
          return
     await clear_secret(from_user, to_user)
-    await query.message.edit_text(
-              text=f"~~Secret message deleted by {name}~~"
-    )
-
+    try:
+       await query.message.edit(f"~~Secret message deleted by {name}~~")
+    except AttributeError:
+        await query.answer(
+          "I couldn't delete the secret 🤔"
+        )
   
 @bot.on_callback_query(filters.regex('^secret'))
-async def cb_secret(_, query):
+async def cb_secret(_, query: CallbackQuery):
     from_user = int(query.data.split(':')[1])
     to_user = int(query.data.split(':')[2])
 
@@ -174,7 +177,7 @@ async def cb_secret(_, query):
 
     secret = await get_secret(from_user, to_user)
     if not secret:
-        await query.answer("Your secret message has vanished 😭")
+        await query.answer("Your secret message was vanished 😭")
         return
 
     info = await bot.get_users(from_user)
