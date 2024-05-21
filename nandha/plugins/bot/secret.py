@@ -2,12 +2,28 @@ from nandha import bot
 from pyrogram import filters, types, enums
 from pyrogram.types import InlineQueryResultArticle, InputTextMessageContent
 
-
 import config
 
-
-
 temp = {}
+
+switch_btn = types.InlineKeyboardMarkup(
+    [[types.InlineKeyboardButton("〔 Secret 〕", switch_inline_query_current_chat=f"secret")]])
+ 
+async def send_inline_query_article(bot, inline_query_id, title, message_content, reply_markup=None):
+    await bot.answer_inline_query(
+        inline_query_id=inline_query_id,
+        results=[
+            InlineQueryResultArticle(
+                title=title,
+                input_message_content=InputTextMessageContent(message_content),
+                reply_markup=reply_markup
+            )
+        ]
+    )
+
+
+
+
 
 async def clear_secret(user_id: int, to_user_id: int):
     if user_id not in temp:
@@ -35,10 +51,8 @@ async def get_secret(user_id, to_user_id):
 
 @bot.on_message(filters.command('secret'))
 async def send_secret(_, message):
-  
-    switch_btn = types.InlineKeyboardMarkup(
-    [[types.InlineKeyboardButton("〔 Secret 〕", switch_inline_query_current_chat="secret name/id hi")]]
-    )
+    user = message.from_user.username or message.from_user.id
+    
     if message.chat.type != enums.ChatType.PRIVATE:
         await message.reply(
             text='Click the button to send secret messages',
@@ -61,31 +75,37 @@ async def inline_secret(_, inline_query):
     try:
         _, to_user, message = inline_query.query.split(None, 2)
     except ValueError:
-        await bot.answer_inline_query(
-            inline_query_id=inline_query.id,
-            results=[
-                InlineQueryResultArticle(
-                    title="❌ Secret invalid 🥸",
-                    input_message_content=InputTextMessageContent(usage)
-                )
-            ]
+        await send_inline_query_article(
+          bot=bot, inline_query_id=inline_query.id, 
+          title='❌ Invalid method', 
+          message_content=usage, 
+          reply_markup=switch_btn
         )
+          
         return
 
     try:
         info = await bot.get_users(to_user)
     except Exception:
-          await bot.answer_inline_query(
-            inline_query_id=inline_query.id,
-            results=[
-                InlineQueryResultArticle(
-                    title="❌ Secret Username or ID 🥸",
-                    input_message_content=InputTextMessageContent(usage)
-                )
-            ]
-        )
+          await send_inline_query_article(
+          bot=bot, inline_query_id=inline_query.id, 
+          title='❌ PEER ID INVALID', 
+          message_content=(
+            "⛔ Double check the username or id maybe itz invalid!")
+          ), 
+          reply_markup=switch_btn
+          )
           return
 
+    if info.is_bot or info.id == user_id:
+        await send_inline_query_article(
+            bot=bot, inline_query_id=inline_query.id, 
+            title='❌ You cannot do you that.', 
+            message_content=(
+              "🚫 You can't send secret message to a bot or yourself beware 💀"
+            ), 
+            reply_markup=switch_btn
+         )
     to_name = info.first_name
     to_mention = info.mention
     to_user_id = info.id
@@ -128,7 +148,7 @@ async def cb_secret(_, query):
 
     info = await bot.get_users(from_user)
     text = (
-        f'{secret[1]}\n\nSecret message by {info.full_name}'
+        f'{secret[1]}\n\nSecret message by {info.first_name}'
     )
     await query.answer(text, show_alert=True)
     
