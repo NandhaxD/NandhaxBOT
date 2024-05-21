@@ -158,9 +158,9 @@ async def cb_del_secret(_, query):
          await query.answer("You can't delete others secrets!")
          return
     await clear_secret(from_user, to_user)
-    await query.message.edit(
-              f'~~Secret message deleted by {name}~~'
-                            )
+    await query.message.edit_text(
+              text=f"~~Secret message deleted by {name}~~"
+    )
 
   
 @bot.on_callback_query(filters.regex('^secret'))
