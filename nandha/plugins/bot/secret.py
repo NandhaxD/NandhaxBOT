@@ -74,7 +74,18 @@ async def inline_secret(_, inline_query):
     )
 
     try:
-        _, to_user, message = inline_query.query.split(None, 2)
+        _, to_user, str(message) = inline_query.query.split(None, 2)
+    if len(message) > 180:
+        await send_inline_query_article(
+          bot=bot, 
+          inline_query_id=inline_query.id, 
+          title='❌ Invalid message too long', 
+          message_content=(
+              "🚫 The message you try to send is too large only 170 characters are supposed to sent."), 
+          reply_markup=switch_btn
+        )  
+        return
+        
     except ValueError:
         await send_inline_query_article(
           bot=bot, 
