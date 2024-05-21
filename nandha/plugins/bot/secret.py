@@ -128,11 +128,14 @@ async def inline_secret(_, inline_query):
         f'**👀 {mention} sent a secret message to {to_mention}. Only they can view the message. 🚫**'
     )
 
-    button = reply_markup=types.InlineKeyboardMarkup([[
-                    types.InlineKeyboardButton(
-                        text='Read 👀', callback_data=f'secret:{user_id}:{to_user_id}')
-                        text='del ⛔', callback_data=f'delsecret:{user_id}:{to_user_id}')
-                ]])
+    button = types.InlineKeyboardMarkup(
+      [[
+              types.InlineKeyboardButton(
+                        text='Read 👀', callback_data=f'secret:{user_id}:{to_user_id}'),
+              types.InlineKeyboardButton(
+                          text='Del ⛔', callback_data=f'delsecret:{user_id}:{to_user_id}')
+      ]]
+)
     
     ok = await send_inline_query_article(
           bot=bot, 
