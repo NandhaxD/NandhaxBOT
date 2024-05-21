@@ -126,7 +126,7 @@ async def inline_secret(_, inline_query):
           )
           return
 
-    if info.is_bot or info.id == user_id or message.chat.type == enums.ChatType.PRIVATE:
+    if info.is_bot or info.id == user_id or inline_query.chat.type == enums.ChatType.PRIVATE:
          await send_inline_query_article(
             bot=bot, 
             inline_query_id=inline_query.id, 
