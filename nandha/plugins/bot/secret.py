@@ -1,5 +1,5 @@
 from nandha import bot
-from pyrogram import filters, types, enums
+from pyrogram import filters, types, enums, errors
 from pyrogram.types import InlineQueryResultArticle, InputTextMessageContent
 
 import config
@@ -10,17 +10,18 @@ switch_btn = types.InlineKeyboardMarkup(
     [[types.InlineKeyboardButton("〔 Secret 〕", switch_inline_query_current_chat=f"secret")]])
  
 async def send_inline_query_article(bot, inline_query_id, title, message_content, reply_markup=None):
-    ok = await bot.answer_inline_query(
+    try:
+         ok = await bot.answer_inline_query(
         inline_query_id=inline_query_id,
         results=[
             InlineQueryResultArticle(
                 title=title,
                 input_message_content=InputTextMessageContent(message_content),
-                reply_markup=reply_markup
-            )
-        ]
-    )
-    return ok
+                reply_markup=reply_markup)])
+         return ok
+    except errors.EntityBoundsInvalid:
+          pass
+          return
 
 
 
