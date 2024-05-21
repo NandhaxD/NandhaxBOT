@@ -1,6 +1,6 @@
 from nandha import bot
 from pyrogram import filters, types, enums, errors
-from pyrogram.types import InlineQueryResultArticle, InputTextMessageContent, CallbackQuery
+from pyrogram.types import InlineQueryResultArticle, InputTextMessageContent, CallbackQuery, InlineQuery
 
 import config
 
@@ -87,7 +87,7 @@ async def send_secret(_, message):
         await message.reply("You can't use in private chats")
 
 @bot.on_inline_query(filters.regex('secret'))
-async def inline_secret(_, inline_query):
+async def inline_secret(_, inline_query: InlineQuery):
     user_id = inline_query.from_user.id
     name = inline_query.from_user.first_name
     mention = inline_query.from_user.mention
@@ -126,7 +126,7 @@ async def inline_secret(_, inline_query):
           )
           return
 
-    if info.is_bot or info.id == user_id or inline_query.chat.type == enums.ChatType.PRIVATE:
+    if info.is_bot or info.id == user_id or inline_query.chat_type == enums.ChatType.PRIVATE:
          await send_inline_query_article(
             bot=bot, 
             inline_query_id=inline_query.id, 
