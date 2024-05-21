@@ -10,7 +10,7 @@ switch_btn = types.InlineKeyboardMarkup(
     [[types.InlineKeyboardButton("〔 Secret 〕", switch_inline_query_current_chat=f"secret")]])
  
 async def send_inline_query_article(bot, inline_query_id, title, message_content, reply_markup=None):
-    await bot.answer_inline_query(
+    ok = await bot.answer_inline_query(
         inline_query_id=inline_query_id,
         results=[
             InlineQueryResultArticle(
@@ -20,6 +20,7 @@ async def send_inline_query_article(bot, inline_query_id, title, message_content
             )
         ]
     )
+    return ok
 
 
 
@@ -76,33 +77,34 @@ async def inline_secret(_, inline_query):
         _, to_user, message = inline_query.query.split(None, 2)
     except ValueError:
         await send_inline_query_article(
-          bot=bot, inline_query_id=inline_query.id, 
+          bot=bot, 
+          inline_query_id=inline_query.id, 
           title='❌ Invalid method', 
           message_content=usage, 
           reply_markup=switch_btn
-        )
-          
+        )  
         return
 
     try:
         info = await bot.get_users(to_user)
     except Exception:
           await send_inline_query_article(
-          bot=bot, inline_query_id=inline_query.id, 
+          bot=bot, 
+          inline_query_id=inline_query.id, 
           title='❌ PEER ID INVALID', 
           message_content=(
-            "⛔ Double check the username or id maybe itz invalid!")
-          ), 
+            "⛔ Double check the username or id maybe itz invalid!"),
           reply_markup=switch_btn
           )
           return
 
     if info.is_bot or info.id == user_id:
          await send_inline_query_article(
-            bot=bot, inline_query_id=inline_query.id, 
+            bot=bot, 
+            inline_query_id=inline_query.id, 
             title='❌ You cannot do you that.', 
             message_content=(
-              "🚫 You can't send secret message to a bot or yourself beware 💀"
+              "🚫 You can't send a secret message to bots or yourself beware 💀"
             ), 
             reply_markup=switch_btn
          )
@@ -115,21 +117,19 @@ async def inline_secret(_, inline_query):
         f'**👀 {mention} sent a secret message to {to_mention}. Only they can view the message. 🚫**'
     )
 
-    ok = await bot.answer_inline_query(
-        inline_query_id=inline_query.id,
-        results=[
-            InlineQueryResultArticle(
-                title=f"✅ Secret message to {to_name}",
-                input_message_content=InputTextMessageContent(text),
-                reply_markup=types.InlineKeyboardMarkup([[
+    button = reply_markup=types.InlineKeyboardMarkup([[
                     types.InlineKeyboardButton(
                         'Secret 👀', callback_data=f'secret:{user_id}:{to_user_id}'
                     )
                 ]])
-            )
-        ]
+    
+    ok = await send_inline_query_article(
+          bot=bot, 
+          inline_query_id=inline_query.id, 
+          title=f'✅ Secret message to {to_name}\nTap here to sent.', 
+          message_content=text, 
+          reply_markup=button
     )
-
     if ok:
         await add_secret(user_id, to_user_id, message)
 
