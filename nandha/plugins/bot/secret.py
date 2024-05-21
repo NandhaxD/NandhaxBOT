@@ -159,8 +159,7 @@ async def cb_del_secret(_, query: CallbackQuery):
            "You can't delete others secrets!")
          return
     try:
-       await query.message.reply('hmm?')
-       await query.message.edit(f"~~Secret message deleted by {name}~~")
+       await query.edit_message_text(f"~~Secret message deleted by {name}~~")
     except:
         await query.answer(
           "I couldn't delete the secret 🤔"
