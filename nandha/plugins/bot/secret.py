@@ -6,6 +6,28 @@ import config
 
 temp = {}
 
+
+example= f"""
+*Secret Message*:
+This type of message is used in public chat to contact people for one-on-one conversations.
+No one else can see these messages except the intended recipient, using the bot features.
+
+*Example*:
+`{config.BOT_USERNAME} secret username message`
+*Username*: Provide the username of the person to send the secret message to.
+*Message*: The secret message text.
+Copy the example above and edit it as needed.
+
+*You will receive this message again if you do any of the following*:
+Username: Must be a user and not a bot or yourself. Alternatively, you can use the user's ID.
+Message: Text must be no longer than 180 characters (e.g., "hello" is 5 characters).
+
+*This module only works for group chats.*
+"""
+
+
+
+
 switch_btn = types.InlineKeyboardMarkup(
     [[types.InlineKeyboardButton("〔 Secret 〕", switch_inline_query_current_chat=f"secret")]])
  
@@ -66,12 +88,6 @@ async def inline_secret(_, inline_query):
     user_id = inline_query.from_user.id
     name = inline_query.from_user.first_name
     mention = inline_query.from_user.mention
-
-    usage = (
-        'Invalid Method! ❌\n'
-        f'**Example**:\n`@{config.BOT_USERNAME} secret <username/id> <message>`'
-    )
-
     try:
         _, to_user, message = inline_query.query.split(None, 2)
       
@@ -79,9 +95,8 @@ async def inline_secret(_, inline_query):
              await send_inline_query_article(
                 bot=bot, 
                 inline_query_id=inline_query.id, 
-                title='❌ Invalid message too long', 
-                message_content=(
-                "🚫 The message you try to send is too large only 170 characters are supposed to sent."), 
+                title='❌ Invalid! message too long', 
+                message_content=example, 
                 reply_markup=switch_btn
              )  
              return
@@ -90,8 +105,8 @@ async def inline_secret(_, inline_query):
         await send_inline_query_article(
           bot=bot, 
           inline_query_id=inline_query.id, 
-          title='❌ Invalid method', 
-          message_content=usage, 
+          title='❌ Invalid! method', 
+          message_content=example, 
           reply_markup=switch_btn
         )  
         return
@@ -102,21 +117,18 @@ async def inline_secret(_, inline_query):
           await send_inline_query_article(
           bot=bot, 
           inline_query_id=inline_query.id, 
-          title='❌ PEER ID INVALID', 
-          message_content=(
-            "⛔ Double check the username or id maybe itz invalid!"),
-          reply_markup=switch_btn
+          title='❌ No username found', 
+          message_content=example,
+            reply_markup=switch_btn
           )
           return
 
-    if info.is_bot or info.id == user_id:
+    if info.is_bot or info.id == user_id or message.chat.type == enums.ChatType.PRIVATE:
          await send_inline_query_article(
             bot=bot, 
             inline_query_id=inline_query.id, 
             title='❌ You cannot do you that.', 
-            message_content=(
-              "🚫 You can't send a secret message to bots or yourself beware 💀"
-            ), 
+            message_content=example, 
             reply_markup=switch_btn
          )
          return
