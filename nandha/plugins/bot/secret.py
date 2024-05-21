@@ -25,8 +25,6 @@ async def send_inline_query_article(bot, inline_query_id, title, message_content
 
 
 
-
-
 async def clear_secret(user_id: int, to_user_id: int):
     if user_id not in temp:
         temp[user_id] = []
@@ -55,13 +53,13 @@ async def get_secret(user_id, to_user_id):
 async def send_secret(_, message):
     user = message.from_user.username or message.from_user.id
     
-    if message.chat.type != enums.ChatType.PRIVATE:
+    if not message.chat.type in (enums.ChatType.PRIVATE, enums.ChatType.BOT):
         await message.reply(
             text='Click the button to send secret messages',
             reply_markup=switch_btn
         )
     else:
-        await message.reply('Only for chats!')
+        await message.reply("You can't use in private chats")
 
 @bot.on_inline_query(filters.regex('secret'))
 async def inline_secret(_, inline_query):
@@ -132,8 +130,8 @@ async def inline_secret(_, inline_query):
 
     button = reply_markup=types.InlineKeyboardMarkup([[
                     types.InlineKeyboardButton(
-                        'Secret 👀', callback_data=f'secret:{user_id}:{to_user_id}'
-                    )
+                        text='Read 👀', callback_data=f'secret:{user_id}:{to_user_id}')
+                        text='del ⛔', callback_data=f'delsecret:{user_id}:{to_user_id}')
                 ]])
     
     ok = await send_inline_query_article(
@@ -146,6 +144,22 @@ async def inline_secret(_, inline_query):
     if ok:
         await add_secret(user_id, to_user_id, message)
 
+
+@bot.on_callback_query(filters.regex('^delsecret'))
+async def cb_del_secret(_, query):
+    from_user = int(query.data.split(':')[1])
+    to_user = int(query.data.split(':')[2])
+    name = query.from_user.first_name
+  
+    if query.from_user.id not in [from_user, to_user]:
+         await query.answer("You can't delete others secrets!")
+         return
+    await clear_secret(from_user, to_user)
+    await query.message.edit(
+              f'~~Secret message deleted by {name}~~'
+                            )
+
+  
 @bot.on_callback_query(filters.regex('^secret'))
 async def cb_secret(_, query):
     from_user = int(query.data.split(':')[1])
@@ -166,3 +180,4 @@ async def cb_secret(_, query):
     )
     await query.answer(text, show_alert=True)
     
+
