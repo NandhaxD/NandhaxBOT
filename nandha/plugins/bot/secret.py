@@ -8,28 +8,31 @@ temp = {}
 
 
 example= f"""
-*Secret Message*:
+**Secret Message**:
 This type of message is used in public chat to contact people for one-on-one conversations.
 No one else can see these messages except the intended recipient, using the bot features.
 
-*Example*:
-`{config.BOT_USERNAME} secret username message`
+**Example**:
+`@{config.BOT_USERNAME} secret username message`
+
 *Username*: Provide the username of the person to send the secret message to.
 *Message*: The secret message text.
-Copy the example above and edit it as needed.
 
-*You will receive this message again if you do any of the following*:
+**Copy the example above and edit it as needed.**
+
+**You will receive this message again if you do any mistakes of the following**:
+
 Username: Must be a user and not a bot or yourself. Alternatively, you can use the user's ID.
 Message: Text must be no longer than 180 characters (e.g., "hello" is 5 characters).
 
-*This module only works for group chats.*
+**This module only works for group chats.**
 """
 
 
 
 
 switch_btn = types.InlineKeyboardMarkup(
-    [[types.InlineKeyboardButton("〔 Secret 〕", switch_inline_query_current_chat=f"secret")]])
+    [[types.InlineKeyboardButton("〔 Send Secret 〕", switch_inline_query_current_chat=f"secret")]])
  
 async def send_inline_query_article(bot, inline_query_id, title, message_content, reply_markup=None):
     try:
