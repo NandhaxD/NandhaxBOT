@@ -24,7 +24,7 @@ def get_user(message):
     return user_id
         
 
-@app.on_message(filters.command(filters.me & config.command(['mute','tmute']))
+@app.on_message(filters.command(filters.me & config.command(['mute','tmute'])))
 @admin_rights('can_restrict_members')
 async def mute_member(_, message):
      chat_id = message.chat.id
