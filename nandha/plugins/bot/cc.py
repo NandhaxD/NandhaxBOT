@@ -1,6 +1,6 @@
 
 from nandha import bot
-from pyrogram import filters
+from pyrogram import filters, types
 from datetime import datetime
 
 import config
@@ -159,7 +159,7 @@ def fake_generator(county_name: str):
         'gens': ['streetAddress', 'name', 'phone', 'company', 'credit']}
        json_payload = json.dumps(payload)
        response = requests.post(url, headers=headers, data=json_payload)
-        if response.status_code == 200:
+       if response.status_code == 200:
             data = response.json()
             return data
 
@@ -168,8 +168,7 @@ def fake_generator(county_name: str):
 async def fake_info(_, message):
     
      
-     example = '**Example**:\n`/fake United State`\n **Countries**:' + '\n'.join(f"**{name.capitalize()}**" for name in langs.keys())
-    
+     example = "**Example**:\n`/fake United State`\n"    
      if len(message.text.split()) == 2:
           data = fake_generator(message.text.split()[1])
           formatted_data = ""
@@ -184,7 +183,8 @@ async def fake_info(_, message):
               ))
      else:
         return await message.reply_text(
-          text=example)
+          text=example+'**Countries**:'+'\n'.join(f"**{name.capitalize()}**" for name in langs.keys())
+)
 
              
  
