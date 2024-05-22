@@ -1,0 +1,27 @@
+name: Notify Telegram on New Commit
+
+on:
+  push:
+    branches:
+      - main  # You can specify any branches you want to monitor
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Send notification to Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: '6913439784:AAEhIjZm-oSavOqtR1RXHQ3F__KqDDfCQRw'
+          TELEGRAM_CHAT_ID: '-1001995603469'
+        run: |
+          COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")
+          COMMIT_AUTHOR=$(git log -1 --pretty=format:"%an")
+          COMMIT_URL=${{ github.event.head_commit.url }}
+          curl -s -X POST https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage \
+            -d chat_id=$TELEGRAM_CHAT_ID \
+            -d text="*New Commit*\n\n*Author:* $COMMIT_AUTHOR\n*Message:* $COMMIT_MESSAGE\n[View Commit]($COMMIT_URL)" \
+            -d parse_mode=Markdow
