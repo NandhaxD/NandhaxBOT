@@ -2,6 +2,7 @@
 from nandha import bot
 from pyrogram import filters, types
 from datetime import datetime
+from urllib import request
 
 import config
 import requests
@@ -146,22 +147,26 @@ langs = {
 
 
 def fake_generator(country_name: str):
-   match = next((country for country in langs.keys() if re.search(re.escape(country_name), country, re.IGNORECASE)), None)
-   if match:
-       url = 'https://www.softo.org/api/fakeAddressGenerator'
-       headers = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json, text/javascript, */*; q=0.01',
-        'X-Requested-With': 'XMLHttpRequest'}
-       payload = {
-        'lang': langs[match],
-        'length': 1,
-        'gens': ['streetAddress', 'name', 'phone', 'company', 'credit']}
-       json_payload = json.dumps(payload)
-       response = requests.post(url, headers=headers, data=json_payload)
-       if response.status_code == 200:
-            data = response.json()
-            return data
+    match = next((country for country in langs.keys() if re.search(re.escape(country_name), country, re.IGNORECASE)), None)
+    if match:
+        url = 'https://www.softo.org/api/fakeAddressGenerator'
+        headers = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json, text/javascript, */*; q=0.01',
+            'X-Requested-With': 'XMLHttpRequest',
+            'User-Agent': 'Mozilla/5.0 (Linux; Android 11; Infinix X6816C) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.98 Mobile Safari/537.36'
+        }
+        payload = {
+            'lang': langs[match],
+            'length': 1,
+            'gens': ['streetAddress', 'name', 'phone', 'company', 'credit']
+        }
+        json_payload = json.dumps(payload).encode('utf-8')
+        req = request.Request(url, data=json_payload, headers=headers)
+        with request.urlopen(req) as response:
+            if response.status == 200:
+                data = json.loads(response.read().decode('utf-8'))
+                return data
 
 
 @bot.on_message(filters.command(['fk','fake']))
@@ -170,9 +175,9 @@ async def fake_info(_, message):
      
      example = "**Example**:\n`/fake United State`\n"  
   
-     if len(message.text.split()) == 2:
+     if len(message.text.split()) >= 2:
           try:
-             data = fake_generator(message.text.split()[1])
+             data = fake_generator(message.text.split(None, 1)[1].lower())
           except Exception as e:
               return await message.reply(str(e))
             
