@@ -1,5 +1,9 @@
 
 
+
+#funny nodule
+
+
 import random
 
 from pyrogram import filters
