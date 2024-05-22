@@ -1,6 +1,6 @@
 
 from nandha import bot
-from pyrogram import filters, types
+from pyrogram import filters, types, enums
 from datetime import datetime
 from urllib import request
 
@@ -186,11 +186,9 @@ async def fake_info(_, message):
                   # Add the key-value pair to the formatted string
                 formatted_data += f"**{key.capitalize()}**: {value}\n"
           await message.reply_text(
-              text=formatted_data, reply_markup=types.InlineKeyboardMarkup([[
-                types.InlineKeyboardButton(
-                  text='NandhaBots', url='NandhaBots.t.me'
-                )
-              ]]))
+              text=formatted_data, 
+              parse_mode=enums.PraseMode.MARKDOWN
+          )
      else:
         return await message.reply_text(
           text=example+'\n\n**Countries**:\n'+'\n'.join(f"➲ **{name.capitalize()}**" for name in langs.keys())
