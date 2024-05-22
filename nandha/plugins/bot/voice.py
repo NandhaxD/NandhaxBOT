@@ -6,6 +6,9 @@ import requests
 import json
 
 
+url = "https://play.ht/api/transcribe"
+
+
 headers = {
     "Content-Type": "application/json",
     "User-Agent": "Mozilla/5.0 (Linux; Android 11; Infinix X6816C) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.98 Mobile Safari/537.36"
