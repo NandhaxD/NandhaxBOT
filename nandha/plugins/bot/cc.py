@@ -146,7 +146,7 @@ langs = {
 
 
 def fake_generator(county_name: str):
-   match = next((country for country in lang.keys() if re.search(re.escape(county_name), county, re.IGNORECASE)), None)
+   match = next((country for country in langs.keys() if re.search(re.escape(county_name), county, re.IGNORECASE)), None)
    if match:
        url = 'https://www.softo.org/api/fakeAddressGenerator'
        headers = {
