@@ -146,7 +146,7 @@ langs = {
 
 
 def fake_generator(county_name: str):
-   match = next((country for country in langs.keys() if re.search(re.escape(county_name), county, re.IGNORECASE)), None)
+   match = next((country for country in langs.keys() if re.search(re.escape(county_name), country, re.IGNORECASE)), None)
    if match:
        url = 'https://www.softo.org/api/fakeAddressGenerator'
        headers = {
@@ -171,7 +171,11 @@ async def fake_info(_, message):
      example = "**Example**:\n`/fake United State`\n"  
   
      if len(message.text.split()) == 2:
-          data = fake_generator(message.text.split()[1])
+          try:
+             data = fake_generator(message.text.split()[1])
+          except Exception as e:
+              return await message.reply(str(e))
+            
           formatted_data = ""
           for key, value in data[0].items():
                   # Add the key-value pair to the formatted string
@@ -184,7 +188,7 @@ async def fake_info(_, message):
               ))
      else:
         return await message.reply_text(
-          text=example+'**Countries**:'+'\n'.join(f"**{name.capitalize()}**" for name in langs.keys())
+          text=example+'\n\n**Countries**\n:'+'\n'.join(f"**{name.capitalize()}**" for name in langs.keys())
 )
 
              
