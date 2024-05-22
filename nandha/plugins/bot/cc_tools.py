@@ -13,7 +13,7 @@ import re
 
 
 BinString = (
-  '📛 BIN: #{}\n'
+  '📛 Bin: #{}\n'
   '🌍 **Country**: {} {}\n'
   '🏦 **Bank**: {}\n'
   '💳 **Card type**: {}\n'
@@ -184,10 +184,9 @@ async def fake_info(_, message):
           formatted_data = ""
           for key, value in data[0].items():
                   # Add the key-value pair to the formatted string
-                formatted_data += f"**{key.capitalize()}**: {value}\n"
+                formatted_data += f"**{key.capitalize()}**: `{value}`\n"
           await message.reply_text(
-              text=formatted_data, 
-              parse_mode=enums.ParseMode.MARKDOWN
+              text=formatted_data
           )
      else:
         return await message.reply_text(
