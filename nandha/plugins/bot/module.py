@@ -6,6 +6,28 @@ from urllib.parse import quote
 from pyrogram import filters, enums
 
 import pyrogram
+import speedtest
+
+
+def convert(speed):
+    return round(int(speed) / 1_000_000, 3)
+	
+@bot.on_message(filters.command("speedtest"))
+async def speedtest_func(client, message):
+    speed = speedtest.Speedtest()
+    speed.get_best_server()
+    speed.download()
+    speed.upload()
+    speedtest_image = speed.results.share()
+
+    result = speed.results.dict()
+    msg = f"""
+    **Download**: {convert(result['download'])}Mb/s
+    **Upload**: {convert(result['upload'])}Mb/s
+    **Ping**: {result['ping']}
+    """
+    await message.reply_photo(speedtest_image, caption=msg)
+
 
 
 @bot.on_message(filters.command(['bard','gpt', 'palm'], prefixes=""))
