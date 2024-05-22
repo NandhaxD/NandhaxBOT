@@ -270,7 +270,7 @@ async def promote_member(client, message):
       
       elif match_text('promote', cmd):
            
-               privileges = types.ChatPrivileges(
+           privileges = types.ChatPrivileges(
                can_delete_messages=True,
                can_manage_video_chats=True,
                can_restrict_members=True,
@@ -279,8 +279,7 @@ async def promote_member(client, message):
         
            try:
               await client.promote_chat_member(
-                   chat_id=chat_id, user_id=user_id, privileges=privileges)
-               
+                   chat_id=chat_id, user_id=user_id, privileges=privileges) 
            except Exception as e:
                 return await message.reply(str(e))
            return await message.reply(
