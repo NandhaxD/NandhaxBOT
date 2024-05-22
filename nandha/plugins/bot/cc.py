@@ -154,7 +154,7 @@ def fake_generator(county_name: str):
         'Accept': 'application/json, text/javascript, */*; q=0.01',
         'X-Requested-With': 'XMLHttpRequest'}
        payload = {
-        'lang': langs[county_name],
+        'lang': langs[country_name],
         'length': 1,
         'gens': ['streetAddress', 'name', 'phone', 'company', 'credit']}
        json_payload = json.dumps(payload)
