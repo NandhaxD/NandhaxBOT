@@ -6,6 +6,8 @@ from datetime import datetime
 import config
 import requests
 import random
+import json
+import re
 
 
 
@@ -131,5 +133,62 @@ async def bin_checker(_, message):
 
            
 
+
+
+langs = {
+    'United State': 'en_US', 'Hong Kong': 'en_HK', 'Nigeria': 'en_NG', 'New Zealand': 'en_NZ', 'South Africa': 'en_ZA', 
+    'Saudi Arbia': 'ar_SA', 'Austria': 'at_AT', 'Czech': 'cs_CZ', 'Denmark': 'da_DK', 'Germany': 'de_DE', 'Spain': 'es_ES', 
+    'Peru': 'es_PE', 'Iran': 'fa_IR', 'Finland': 'fi_FI', 'Belgium': 'nl_BE', 'Venezuela': 'es_VE', 'France': 'fr_FR', 
+    'Israel': 'he_IL', 'Croatia': 'hr_HR', 'Hungary': 'hu_HU', 'Indonesia': 'id_ID', 'Italy': 'it_IT', 'Japan': 'ja_JP', 
+    'South Korea': 'ko_KR', 'Lithuania': 'lt_LT', 'Latvia': 'lv_LV', 'Malaysia': 'ms_MY', 'Nepal': 'ne_NP', 
+    'Netherlands': 'nl_NL'
+}
+
+
+def fake_generator(county_name: str):
+   match = next((country for country in lang.keys() if re.search(re.escape(county_name), county, re.IGNORECASE)), None)
+   if match:
+       url = 'https://www.softo.org/api/fakeAddressGenerator'
+       headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json, text/javascript, */*; q=0.01',
+        'X-Requested-With': 'XMLHttpRequest'}
+       payload = {
+        'lang': langs[county_name],
+        'length': 1,
+        'gens': ['streetAddress', 'name', 'phone', 'company', 'credit']}
+       json_payload = json.dumps(payload)
+       response = requests.post(url, headers=headers, data=json_payload)
+        if response.status_code == 200:
+            data = response.json()
+            return data
+
+
+@bot.on_message(filters.command(['fk','fake']))
+async def fake_info(_, message):
+
+     example = (
+       '**Example**:\n
+    
+     if len(message.text.split()) == 2:
+          data = fake_generator(message.text.split()[1])
+          formatted_data = ""
+             for key, value in data[0].items():
+                  # Add the key-value pair to the formatted string
+                  formatted_data += f"**{key.capitalize()}**: `{value}`\n"
+          await message.reply_text(
+              text=formatted_data, reply_markup=types.InlineKeyboardMarkup(
+                types.InlineKeyboardButton(
+                  text='By NandhaBots', url='NandhaBots.t.me'
+                )
+              ))
+     else:
+        return await message.reply_text(
+          text=example)
+
+             
+ 
+
+    
 
                 
