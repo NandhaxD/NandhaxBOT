@@ -168,13 +168,14 @@ def fake_generator(county_name: str):
 async def fake_info(_, message):
     
      
-     example = "**Example**:\n`/fake United State`\n"    
+     example = "**Example**:\n`/fake United State`\n"  
+  
      if len(message.text.split()) == 2:
           data = fake_generator(message.text.split()[1])
           formatted_data = ""
-             for key, value in data[0].items():
+          for key, value in data[0].items():
                   # Add the key-value pair to the formatted string
-                  formatted_data += f"**{key.capitalize()}**: `{value}`\n"
+                formatted_data += f"**{key.capitalize()}**: `{value}`\n"
           await message.reply_text(
               text=formatted_data, reply_markup=types.InlineKeyboardMarkup(
                 types.InlineKeyboardButton(
