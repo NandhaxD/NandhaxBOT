@@ -154,7 +154,7 @@ def fake_generator(country_name: str):
         'Accept': 'application/json, text/javascript, */*; q=0.01',
         'X-Requested-With': 'XMLHttpRequest'}
        payload = {
-        'lang': langs[country_name],
+        'lang': langs[match],
         'length': 1,
         'gens': ['streetAddress', 'name', 'phone', 'company', 'credit']}
        json_payload = json.dumps(payload)
@@ -188,7 +188,7 @@ async def fake_info(_, message):
               ))
      else:
         return await message.reply_text(
-          text=example+'\n\n**Countries**\n:'+'\n'.join(f"**{name.capitalize()}**" for name in langs.keys())
+          text=example+'\n\n**Countries**:\n'+'\n'.join(f"➲ **{name.capitalize()}**" for name in langs.keys())
 )
 
              
