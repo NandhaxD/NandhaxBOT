@@ -47,8 +47,9 @@ async def voice(_, message):
                      
         except Exception as e:
              return await message.reply(str(e))
-    return await message.reply(
-       Usage
+    else:
+        return await message.reply_text(
+           text=Usage
    )
 
 
