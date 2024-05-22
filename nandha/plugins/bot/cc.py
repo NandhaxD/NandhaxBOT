@@ -166,9 +166,9 @@ def fake_generator(county_name: str):
 
 @bot.on_message(filters.command(['fk','fake']))
 async def fake_info(_, message):
-
-     example = (
-       '**Example**:\n
+    
+     
+     example = '**Example**:\n`/fake United State`\n **Countries**:' + '\n'.join(f"**{name.capitalize()}**" for name in langs.keys())
     
      if len(message.text.split()) == 2:
           data = fake_generator(message.text.split()[1])
