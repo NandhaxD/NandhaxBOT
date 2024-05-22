@@ -13,6 +13,34 @@ import config
 import time
 
 
+def get_user(message):
+    reply = message.reply_to_message
+    if len(message.text.split()) >= 2:
+         user_id = message.text.split()[1]
+    elif reply and reply.from_user:
+         user_id = reply.from_user.id  
+    else:
+         user_id = False
+    return user_id
+        
+
+@app.on_message(filters.command(filters.me & config.command(['mute','tmute']))
+@admin_rights('can_restrict_members')
+async def mute_member(_, message):
+     chat_id = message.chat.id
+     reply = message.reply_to_message
+     if message.chat.type == enums.ChatType.PRIVATE:
+            return await message.reply(
+                'You cannot use in private.')
+     else:
+         if message.command[0] == 'mute':
+              user_id = get_user(message)
+               
+         
+
+
+
+                
 
 @app.on_message(filters.me & config.command('del'))
 @admin_rights('can_delete_messages')
@@ -97,7 +125,8 @@ async def ban_member(client, message):
            chat_id=chat_id, 
            text=ask,
            reply_to_message_id=message.id, 
-           time=5)
+           time=5
+          )
         
       info = await client.get_chat(user_id)
       name = info.first_name if info.first_name else info.title
@@ -241,7 +270,7 @@ async def promote_member(client, message):
       
       elif match_text('promote', cmd):
            
-           privileges = types.ChatPrivileges(
+               privileges = types.ChatPrivileges(
                can_delete_messages=True,
                can_manage_video_chats=True,
                can_restrict_members=True,
@@ -251,6 +280,7 @@ async def promote_member(client, message):
            try:
               await client.promote_chat_member(
                    chat_id=chat_id, user_id=user_id, privileges=privileges)
+               
            except Exception as e:
                 return await message.reply(str(e))
            return await message.reply(
@@ -298,6 +328,9 @@ async def demote_member(client, message):
 
       privileges = types.ChatPrivileges(
                can_change_info=False,
+               can_manage_chat=False,
+               can_manage_topics=False,
+               can_post_messages=False,
                can_delete_messages=False,
                can_manage_video_chats=False,
                can_restrict_members=False,
