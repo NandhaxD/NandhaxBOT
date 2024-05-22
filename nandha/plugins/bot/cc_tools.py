@@ -173,7 +173,7 @@ def fake_generator(country_name: str):
 async def fake_info(_, message):
     
      
-     example = "**Example**:\n`/fake United State`\n"  
+     example = "**Example**:\n\n`/fake United State`\n"  
   
      if len(message.text.split()) >= 2:
           try:
@@ -187,7 +187,7 @@ async def fake_info(_, message):
                 formatted_data += f"**{key.capitalize()}**: {value}\n"
           await message.reply_text(
               text=formatted_data, 
-              parse_mode=enums.PraseMode.MARKDOWN
+              parse_mode=enums.ParseMode.MARKDOWN
           )
      else:
         return await message.reply_text(
