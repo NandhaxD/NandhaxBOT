@@ -184,11 +184,11 @@ async def fake_info(_, message):
           formatted_data = ""
           for key, value in data[0].items():
                   # Add the key-value pair to the formatted string
-                formatted_data += f"**{key.capitalize()}**: `{value}`\n"
+                formatted_data += f"**{key.capitalize()}**: {value}\n"
           await message.reply_text(
               text=formatted_data, reply_markup=types.InlineKeyboardMarkup([[
                 types.InlineKeyboardButton(
-                  text='By NandhaBots', url='NandhaBots.t.me'
+                  text='NandhaBots', url='NandhaBots.t.me'
                 )
               ]]))
      else:
