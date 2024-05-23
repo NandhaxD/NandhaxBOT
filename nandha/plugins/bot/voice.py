@@ -4,11 +4,15 @@ from pyrogram import Client, filters, types
 # Initialize your bot with the proper API credentials
 from nandha import bot
 
+import config
+
 PLAY_HT_API_KEY = "4458780d19c84de08371651cc4ddb1eb"
 PLAY_HT_USER_ID = "fMXjbY62nuZwdXsk5etM7SLlJKU2"
 
 # Define the endpoint URL
 url = "https://api.play.ht/api/v2/tts/stream"
+
+temp = []
 
 # Define the request headers
 headers = {
@@ -31,16 +35,24 @@ voices = {
     'aurther': 's3://voice-cloning-zero-shot/509221d8-9e2d-486c-9b3c-97e52d86e63d/arthuradvertisingsaad/manifest.json'
 }
 
-@bot.on_message(filters.command('voice') & filters.user(5696053228))
+@bot.on_message(filters.command('voice'))
 async def voice(_, message):
     Usage = "Reply to a message with the text you want to convert to voice."
     user_id = message.from_user.id
-  
+    if not user_id == config.OWNER_ID and user_id in temp:
+        count = temp.count(user_id)
+        if count >= 7:
+            return await message.reply(
+                "Sorry you have generated more than 7 voices, to get more voice request ask in support chat"
+            )
+        else:
+            temp.append(user_id)
+                
     reply = message.reply_to_message
     if reply and reply.text:
         try:
             buttons = [
-                types.InlineKeyboardButton(name, callback_data=f'voice:{user_id}:{name}') 
+                types.InlineKeyboardButton(name.capitalize(), callback_data=f'voice:{user_id}:{name}') 
                 for name in voices.keys()
             ]
             buttons = [buttons[i:i + 3] for i in range(0, len(buttons), 3)]
@@ -93,6 +105,7 @@ async def cb_voice(_, query):
         await bot.send_audio(
             chat_id=chat_id,
             audio=path,
+            caption=f'**Requested by {query.from_user.mention}**',
             reply_to_message_id=query.message.id
         )
         await query.message.delete()
