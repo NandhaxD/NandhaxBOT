@@ -19,30 +19,44 @@ data = {
     "userId": "public-access",
     "platform": "landing_demo",
     "ssml": "okay",
-    "voice": "en-US-AshleyNeural",
+    "voice": "en-US-{}Neural",
     "narrationStyle": "Neural",
     "method": "file"
 }
 
 
+english_voices = [
+   'Guy', 'Amber', 'Eric', 'Lucas',
+   'Sara', 'Tony', 'Victoria'
+]
+  
 @bot.on_message(filters.command('voice'))
 async def voice(_, message):
 
     Usage = (
       "Reply to the message text"
     )
-    
+
+    user_id = message.from_user.id
+  
     reply = message.reply_to_message
     if reply and reply.text:
-        data["ssml"] = reply.text
         try:
-           response = requests.post(url, headers=headers, json=data, timeout=60)
-           resp = response.json()
-           voice = resp["file"]
-           await bot.send_voice(
+           buttons = [
+types.InlineKeyboardButton(str(x), callback_data=str(f'voice:{user_id}:{x}')) for x in (english_voices)
+]
+
+           buttons = [buttons[i:i + 3] for i in range(0, len(buttons), 3)]
+          
+           await bot.send_message(
               chat_id=message.chat.id,
-              voice=voice,
-              reply_to_message_id=message.id
+              text=(
+                reply.text+"\n\n**➲ Click the voice you wanted ❤️**"
+              ),
+              reply_to_message_id=message.id,
+              reply_markup=types.InlineKeyboardMarkup(
+                  buttons
+              )
                  )
                      
         except Exception as e:
@@ -53,4 +67,31 @@ async def voice(_, message):
    )
 
 
+@bot.on_callback_query(filters.regex('^voice'))
+async def cb_voice(_, query):
+     user_id = int(query.data.split(":")[1])
+     char_id = query.data.split(":")[1]
+     if query.from_user.id != user_id:
+         return await query.answer(
+                'You cannot access other requests.'
+            )
+     else:
+        data["ssml"] = query.message.text.split('➲')[0]
+        character = data['voice'].format(char_id)
+        data['voice'] = character
+        try:
+            response = requests.post(url, headers=headers, json=data, timeout=60)
+            resp = response.json()
+            voice = resp["file"]
+            chat_id = query.message.chat.id
+            await bot.send_voice(
+                chat_id, voice, reply_to_message_id=query.message.id
+            )
+            await query.message.delete()
+        
+        except Exception as e:
+            return await query.message.edit(str(e))
+     
+      
+     
 
