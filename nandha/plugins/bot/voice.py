@@ -85,12 +85,13 @@ async def cb_voice(_, query):
         response = requests.post(url, headers=headers, json=payload, timeout=60)
         response.raise_for_status()
 
+        chat_id = query.message.chat.id
         path = f'{user_id}{chat_id}_voice.mp3'
         with open(path, 'wb') as f:
             f.write(response.content)
 
         await bot.send_audio(
-            chat_id=query.message.chat.id,
+            chat_id=chat_id,
             audio=path,
             reply_to_message_id=query.message.id
         )
