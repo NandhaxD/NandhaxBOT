@@ -59,9 +59,9 @@ async def wiki(client, message):
         return
 
     buttons = [
-        [InlineKeyboardButton(result['title'], callback_data=f"wiki:{json.dumps(result)}")] for result in search_results
+        [ types.InlineKeyboardButton(result['title'], callback_data=f"wiki:{json.dumps(result)}")] for result in search_results
     ]
-    reply_markup = InlineKeyboardMarkup(buttons)
+    reply_markup = types.InlineKeyboardMarkup(buttons)
     await message.reply_text("Choose a result:", reply_markup=reply_markup)
 
 # Function to handle callback queries
