@@ -59,15 +59,15 @@ async def wiki(client, message):
         return
 
     buttons = [
-        [types.InlineKeyboardButton(title, callback_data=identifier)] for title, identifier in search_results
+        [types.InlineKeyboardButton(title, callback_data=f"wiki:{identifier}")] for title, identifier in search_results
     ]
     reply_markup = types.InlineKeyboardMarkup(buttons)
     await message.reply_text("Choose a result:", reply_markup=reply_markup)
 
 # Callback handler for wiki
-@bot.on_callback_query()
+@bot.on_callback_query(filters.regex('^wiki:'))
 async def button(client, query):
-    identifier = query.data
+    identifier = query.data.split(":", 1)[1]
     result = search_results_dict.get(identifier)
 
     if result:
