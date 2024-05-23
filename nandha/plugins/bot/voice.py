@@ -70,7 +70,7 @@ types.InlineKeyboardButton(str(x), callback_data=str(f'voice:{user_id}:{x}')) fo
 @bot.on_callback_query(filters.regex('^voice'))
 async def cb_voice(_, query):
      user_id = int(query.data.split(":")[1])
-     char_id = query.data.split(":")[1]
+     char_id = query.data.split(":")[2]
      if query.from_user.id != user_id:
          return await query.answer(
                 'You cannot access other requests.'
