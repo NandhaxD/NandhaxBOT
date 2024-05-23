@@ -10,7 +10,7 @@ import string
 search_results_dict = {}
 
 # Function to fetch Wikipedia search results
-def fetch_wikipedia_search_results(query, limit=5):
+def fetch_wikipedia_search_results(query, limit=8):
     url = f"https://en.m.wikipedia.org/w/index.php?search={query}&title=Special%3ASearch&profile=advanced&fulltext=1&ns0=1"
     try:
         response = requests.get(url)
