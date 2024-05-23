@@ -1,31 +1,27 @@
-
-
-
 from nandha import bot
-from pyrogram import filters, types, enums
-
-
+from pyrogram import filters, types
 from bs4 import BeautifulSoup
 import requests
 import json
+import random
+import string
 
+# Dictionary to store search results
+search_results_dict = {}
 
+# Function to fetch Wikipedia search results
 def fetch_wikipedia_search_results(query, limit=5):
     url = f"https://en.m.wikipedia.org/w/index.php?search={query}&title=Special%3ASearch&profile=advanced&fulltext=1&ns0=1"
-    response = requests.get(url)
-    
-    if response.status_code != 200:
-        print("Error fetching the page")
+    try:
+        response = requests.get(url)
+        response.raise_for_status()  # Raise exception for invalid response status
+    except requests.RequestException as e:
+        print("Error fetching the page:", e)
         return None
-    
+
     soup = BeautifulSoup(response.text, 'html.parser')
 
     results = []
-
-    # Check if there are search results
-    no_results_tag = soup.find('p', class_='mw-search-nonefound')
-    if no_results_tag:
-        return results
 
     # Extract the search results
     search_results = soup.find_all('div', class_='mw-search-result-heading')
@@ -37,21 +33,25 @@ def fetch_wikipedia_search_results(query, limit=5):
             title = title_tag.get('title')
             url = "https://en.wikipedia.org" + title_tag.get('href')
             description = descriptions[i].get_text(strip=True) if i < len(descriptions) else ""
-            results.append({
+            # Generate unique identifier for the search result
+            identifier = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
+            # Store search result in dictionary
+            search_results_dict[identifier] = {
                 'title': title,
                 'description': description,
                 'url': url
-            })
+            }
+            results.append((title, identifier))
+
     return results
 
-
-
+# Command handler for /wiki
 @bot.on_message(filters.command("wiki"))
 async def wiki(client, message):
     if len(message.command) == 1:
-        return await message.reply(
-           "What do you want to search?"
-        )
+        await message.reply("Please provide a search query.")
+        return
+
     query = ' '.join(message.command[1:])
     search_results = fetch_wikipedia_search_results(query)
     if not search_results:
@@ -59,15 +59,19 @@ async def wiki(client, message):
         return
 
     buttons = [
-        [ types.InlineKeyboardButton(result['title'], callback_data=f"wiki:{json.dumps(result)}")] for result in search_results
+        [types.InlineKeyboardButton(title, callback_data=identifier)] for title, identifier in search_results
     ]
     reply_markup = types.InlineKeyboardMarkup(buttons)
     await message.reply_text("Choose a result:", reply_markup=reply_markup)
 
-# Function to handle callback queries
-@bot.on_callback_query(filters.regex('^wiki'))
+# Callback handler for wiki
+@bot.on_callback_query()
 async def button(client, query):
-    result = json.loads(query.data.split(":", 1)[1])
-  
-    message = f"{result['title']}\n\n{result['description']}\n\nURL: {result['url']}"
-    await query.edit_message_text(text=message)
+    identifier = query.data
+    result = search_results_dict.get(identifier)
+
+    if result:
+        message = f"{result['title']}\n\n{result['description']}\n\nURL: {result['url']}"
+        await query.edit_message_text(text=message)
+    else:
+        await query.answer("Invalid selection")
