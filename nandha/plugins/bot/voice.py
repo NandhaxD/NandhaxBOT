@@ -15,14 +15,7 @@ headers = {
 }
 
 
-data = {
-    "userId": "public-access",
-    "platform": "landing_demo",
-    "ssml": "okay",
-    "voice": "en-US-{}Neural",
-    "narrationStyle": "Neural",
-    "method": "file"
-}
+
 
 
 english_voices = [
@@ -76,10 +69,20 @@ async def cb_voice(_, query):
                 'You cannot access other requests.'
             )
      else:
-        data["ssml"] = query.message.text.split('➲')[0]
-        character = data['voice'].format(char_id)
-        data['voice'] = character
+
+        text =  query.message.text.split('➲')[0]
+        data = {
+    "userId": "public-access",
+    "platform": "landing_demo",
+    "ssml": text,
+    "voice": f"en-US-{char_id}Neural",
+    "narrationStyle": "Neural",
+    "method": "file"
+        }
         try:
+            await query.message.edit(
+              f"**Sending {char_id} voice ❤️.**"
+            )
             response = requests.post(url, headers=headers, json=data, timeout=60)
             resp = response.json()
             voice = resp["file"]
