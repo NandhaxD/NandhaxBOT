@@ -48,7 +48,7 @@ def delete_token(user_id, token):
     return result.modified_count > 0
 
 
-@bot.on_message(filters.command(['cleartoken', 'ctoken'])
+@bot.on_message(filters.command(['cleartoken','ctoken']))
 async def clear_token(_, message):
      m = message
      if len(message.command) != 2:
@@ -70,7 +70,7 @@ async def GetTokens(_, message):
      tokens = get_user_tokens(user_id)
      String = f"**🌟 Stored token in {message.from_user.mention}**:\n"
      for i, (token, file) in enumerate(tokens):
-          String += f"{i+1}, `{token}`: `{file}`"
+          String += f"{i+1}, `{token}`: `{file}`\n"
      return await message.reply_text(
            text=String, quote=True
      )
