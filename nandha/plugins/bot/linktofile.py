@@ -25,11 +25,61 @@ def decode(string: str):
     decoded_bytes = base64.b64decode(string.encode('utf-8'))
     return decoded_bytes.decode('utf-8')
 
+
+
 db = DATABASE['LINK_TO_FILE']
     
 link = 'nandhaxbot.t.me?start=getfile-{}'    
 
-@bot.on_message(filters.command('getlink'))
+
+
+def get_user_tokens(user_id):
+    user_data = db.find_one({'user_id': user_id})
+    if user_data:
+        tokens_with_count = [(key, len(value)) for key, value in user_data.items() if key not in ['_id', 'user_id']]
+        return tokens_with_count
+    return None
+
+def delete_token(user_id, token):
+    result = db.update_one(
+        {'user_id': user_id},
+        {'$unset': {token: ""}}
+    )
+    return result.modified_count > 0
+
+
+@bot.on_message(filters.command(['cleartoken', 'ctoken'])
+async def clear_token(_, message):
+     m = message
+     if len(message.command) != 2:
+          return await m.reply_text("Ok! but where token to delete?")
+     else:
+          user_id = m.from_user.id
+          if delete_token(user_id, m.text.split()[1]):
+              return await m.reply_text(
+                  "Token deleted!"
+                                       )
+          else:
+              return await m.reply_text(
+                  "Token doesn't exsit in database."
+              )         
+                
+@bot.on_message(filters.command(['gettokens', 'gettk']))
+async def GetTokens(_, message):
+     user_id = message.from_user.id
+     tokens = get_user_tokens(user_id)
+     String = f"**🌟 Stored token in {message.from_user.mention}**:\n"
+     for i, (token, file) in enumerate(tokens):
+          String += f"{i+1}, `{token}`: `{file}`"
+     return await message.reply_text(
+           text=String, quote=True
+     )
+
+
+
+         
+
+@bot.on_message(filters.command(['addfile', 'getlink']))
 @devs_only
 async def Getlink(_, message):
        user_id = message.from_user.id
