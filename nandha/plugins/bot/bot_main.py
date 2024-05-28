@@ -49,14 +49,21 @@ async def start(_, message):
                     
             if file_ids:
                  
-                 for file_id in file_ids:
+                 for i, file_id in enumerate(file_ids):
+                      file_num = f"File No: {i+1}"
                       try:
                          await bot.send_document(
-                             chat_id=message.from_user.id, document=file_id, reply_to_message_id=message.id
+                             chat_id=message.from_user.id,
+                             document=file_id,
+                             caption=file_num,
+                             reply_to_message_id=message.id
                         )
                       except ValueError:
                           await bot.send_video(
-                             chat_id=message.from_user.id, video=file_id, reply_to_message_id=message.id
+                             chat_id=message.from_user.id, 
+                             video=file_id, 
+                             caption=file_num,
+                             reply_to_message_id=message.id
                           )
                       await asyncio.sleep(2)
                    
