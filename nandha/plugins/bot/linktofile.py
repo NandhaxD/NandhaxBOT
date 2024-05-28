@@ -40,11 +40,10 @@ def decode(string: str):
     decoded_bytes = base64.b64decode(string.encode('utf-8'))
     return decoded_bytes.decode('utf-8')
 
-
-def delete_file(user_id, token, index):
+def delete_file(user_id, token, file_id):
     result = db.update_one(
         {'user_id': user_id, token: {'$exists': True}},
-        {'$unset': {f"{token}.{index}": ""}}
+        {'$pull': {token: file_id}}
     )
     return result.modified_count == 1
   
