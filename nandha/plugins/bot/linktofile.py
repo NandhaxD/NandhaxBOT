@@ -64,7 +64,7 @@ async def clear_file(_, message):
      m = message
      r = message.reply_to_message
 
-     usage = "❌ Reply to the file with token `/cfile <token>` or use `/cfile <token> <file_id>`"
+     usage = "❌ Reply to the file with token `/cfile token` or use `/cfile token file_id`"
      if len(message.command) == 2 and r and (r.document or r.video):
           token = m.text.split()[1]
           file_id = r.document.file_id or r.video.file_id
