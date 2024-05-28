@@ -65,10 +65,11 @@ async def clear_file(_, message):
      r = message.reply_to_message
 
      usage = "❌ Reply to the file with token `/cfile token` or use `/cfile token file_id`"
+  
      if len(message.command) == 2 and r and (r.document or r.video):
           token = m.text.split()[1]
-          file_id = r.document.file_id or r.video.file_id
-          
+          file_id = (r.document.file_id if r.document else None) or (r.video.file_id if r.video else None)
+       
      elif not r and len(message.command) == 3:
           token = m.text.split()[1]
           file_id = m.text.split()[2]
@@ -82,11 +83,11 @@ async def clear_file(_, message):
      
      if delete_file(user_id, token, file_id):
           return await m.reply_text(
-               f"⛔ file deleted from token {token}"
+               f"⛔ File deleted from token {token}"
                                        )
      else:
           return await m.reply_text(
-                "❌ Token doesn't exsit in database."
+                "❌ File doesn't exsit in Token."
               )             
 
 
