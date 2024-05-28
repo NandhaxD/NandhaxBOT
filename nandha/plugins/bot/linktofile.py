@@ -91,9 +91,11 @@ async def GetTokens(_, message):
 async def Getlink(_, message):
        user_id = message.from_user.id
        reply = message.reply_to_message
-       document = reply.document if reply and reply.document else False
-       if document:
-            file_id = document.file_id
+       file = reply.document or reply.video if reply and reply.document or reply.video else False
+
+       if file:
+        
+            file_id = file.file_id
             user_json = {'user_id': user_id}
             if db.find_one(user_json) and len(message.text.split()) == 2:
                  token = message.text.split(None, 1)[1]
@@ -104,7 +106,7 @@ async def Getlink(_, message):
                         user_json, {'$push': {token: file_id}})
                  
                      return await message.reply(
-                         '**Successfully file added in token.**\n**🌟 Token**: `{token}`',
+                         f'**Successfully file added in token.**\n**🌟 Token**: `{token}`',
                    reply_markup=types.InlineKeyboardMarkup(
                        [[types.InlineKeyboardButton('Click here', url=link.format(token))]]
                    ))
@@ -119,7 +121,7 @@ async def Getlink(_, message):
                    upsert=True
                 )                
                 return await message.reply(
-                   '**Successfully new token generated and added file.**\n**🌟 Token**: `{token}`',
+                   f'**Successfully new token generated and added file.**\n**🌟 Token**: `{token}`',
                     reply_markup=types.InlineKeyboardMarkup(
                         [[types.InlineKeyboardButton('click here', url=link.format(token))]]
                     ))
