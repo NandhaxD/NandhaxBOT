@@ -12,6 +12,10 @@ from nandha.helpers.decorator import devs_only
 
 from pyrogram import filters, types
 
+db = DATABASE['LINK_TO_FILE']
+    
+link = 'nandhaxbot.t.me?start=getfile-{}'    
+
 
 #def gen_token():
 #    random_hex = secrets.token_hex(16)
@@ -32,13 +36,12 @@ def decode(string: str):
     decoded_bytes = base64.b64decode(string.encode('utf-8'))
     return decoded_bytes.decode('utf-8')
 
-
-
-db = DATABASE['LINK_TO_FILE']
-    
-link = 'nandhaxbot.t.me?start=getfile-{}'    
-
-
+def delete_file(user_id, token, file_id):
+    result = db.update_one(
+        {'user_id': user_id, token: file_id},
+        {'$pull': {token: file_id}}
+    )
+    return result.modified_count > 0
 
 def get_user_tokens(user_id):
     user_data = db.find_one({'user_id': user_id})
@@ -53,6 +56,35 @@ def delete_token(user_id, token):
         {'$unset': {token: ""}}
     )
     return result.modified_count > 0
+
+
+@bot.on_message(filters.command(['clearfile','cfile']))
+async def clear_token(_, message):
+     m = message
+     r = message.reply_to_message
+
+     usage = ("❌ Reply to the file with token `/cfile <token>` or use `/cfile <token> <file_id>`")
+     if len(message.command) == 2 and r and reply.document or reply.video:
+          token = m.text.split()[1]
+          file_id = r.document.file_id or r.video.file_id
+          
+     elif not r and len(message.command) == 3:
+          token = m.text.split()[1]
+          file_id = m.text.split()[2]
+     
+     else:
+         return await m.reply_text(text=usage)
+      
+     user_id = m.from_user.id
+     
+     if delete_file(user_id, token, file_id):
+          return await m.reply_text(
+               f"⛔ file deleted from token {token}"
+                                       )
+     else:
+          return await m.reply_text(
+                "❌ Token doesn't exsit in database."
+              )             
 
 
 @bot.on_message(filters.command(['cleartoken','ctoken']))
