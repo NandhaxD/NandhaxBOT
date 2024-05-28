@@ -36,12 +36,11 @@ def decode(string: str):
     decoded_bytes = base64.b64decode(string.encode('utf-8'))
     return decoded_bytes.decode('utf-8')
 
-def delete_file(user_id, token, file_id):
-    result = db.update_one(
-        {'user_id': user_id, token: file_id},
-        {'$pull': {token: file_id}}
-    )
-    return result.modified_count > 0
+
+def delete_file(user_id, token, index):
+    result = db.update_one({'user_id': user_id}, {'$pull': {key: index}})
+    return result.modified_count == 1
+
 
 def get_user_tokens(user_id):
     user_data = db.find_one({'user_id': user_id})
@@ -49,6 +48,7 @@ def get_user_tokens(user_id):
         tokens_with_count = [(key, len(value)) for key, value in user_data.items() if key not in ['_id', 'user_id']]
         return tokens_with_count
     return None
+
 
 def delete_token(user_id, token):
     result = db.update_one(
@@ -64,16 +64,16 @@ async def clear_file(_, message):
      m = message
      r = message.reply_to_message
 
-     usage = "❌ Reply to the file with token `/cfile token` or use `/cfile token file_id`"
+     usage = "❌ Give the token with number `/cfile token 0`"
   
-     if len(message.command) == 2 and r and (r.document or r.video):
+     if len(message.command) == 3:
           token = m.text.split()[1]
-          file_id = (r.document.file_id if r.document else None) or (r.video.file_id if r.video else None)
-       
-     elif not r and len(message.command) == 3:
-          token = m.text.split()[1]
-          file_id = m.text.split()[2]
-     
+          try:
+             file_id = int(m.text.split()[2])-1
+          except ValueError:
+             return await m.reply_text(
+               text=usage
+) 
      else:
          return await m.reply_text(
              text=usage
