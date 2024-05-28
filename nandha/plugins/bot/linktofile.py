@@ -38,9 +38,12 @@ def decode(string: str):
 
 
 def delete_file(user_id, token, index):
-    result = db.update_one({'user_id': user_id}, {'$pull': {token: index}})
+    result = db.update_one(
+        {'user_id': user_id, token: {'$exists': True}},
+        {'$unset': {f"{token}.{index}": ""}}
+    )
     return result.modified_count == 1
-
+  
 
 def get_user_tokens(user_id):
     user_data = db.find_one({'user_id': user_id})
