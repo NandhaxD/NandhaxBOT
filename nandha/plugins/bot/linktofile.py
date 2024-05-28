@@ -13,9 +13,16 @@ from nandha.helpers.decorator import devs_only
 from pyrogram import filters, types
 
 
-def gen_token():
-    random_hex = secrets.token_hex(16)
-    return random_hex
+#def gen_token():
+#    random_hex = secrets.token_hex(16)
+ #   return random_hex
+
+def gen_token(length=10):
+    # Define the characters to choose from (letters and digits only)
+    characters = string.ascii_letters + string.digits
+    # Generate a random string using list comprehension
+    random_string = ''.join([random.choice(characters) for _ in range(length)])
+    return random_string
     
 def encode(string: str):
     encoded_bytes = base64.b64encode(string.encode('utf-8'))
@@ -68,9 +75,9 @@ async def clear_token(_, message):
 async def GetTokens(_, message):
      user_id = message.from_user.id
      tokens = get_user_tokens(user_id)
-     String = f"**🌟 Stored token in {message.from_user.mention}**:\n"
+     String = f"**🌟 Stored tokens in {message.from_user.mention}**:\n"
      for i, (token, file) in enumerate(tokens):
-          String += f"{i+1}, `{token}`: `{file}`\n"
+          String += f"{i+1}, `{token}`: **{file}**\n"
      return await message.reply_text(
            text=String, quote=True
      )
@@ -97,9 +104,9 @@ async def Getlink(_, message):
                         user_json, {'$push': {token: file_id}})
                  
                      return await message.reply(
-                         '**Successfully file added in token.**',
+                         '**Successfully file added in token.**\n**🌟 Token**: `{token}`',
                    reply_markup=types.InlineKeyboardMarkup(
-                       [[types.InlineKeyboardButton('click here', url=link.format(token))]]
+                       [[types.InlineKeyboardButton('Click here', url=link.format(token))]]
                    ))
                  else:
                      return await message.reply(
@@ -112,7 +119,7 @@ async def Getlink(_, message):
                    upsert=True
                 )                
                 return await message.reply(
-                   '**Successfully new token generated and added file.**',
+                   '**Successfully new token generated and added file.**\n**🌟 Token**: `{token}`',
                     reply_markup=types.InlineKeyboardMarkup(
                         [[types.InlineKeyboardButton('click here', url=link.format(token))]]
                     ))
