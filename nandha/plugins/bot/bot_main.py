@@ -50,9 +50,16 @@ async def start(_, message):
             if file_ids:
                  
                  for file_id in file_ids:
-                        await bot.send_document(
+                      try:
+                         await bot.send_document(
                              chat_id=message.from_user.id, document=file_id, reply_to_message_id=message.id
                         )
+                      except ValueError:
+                          await bot.send_video(
+                             chat_id=message.from_user.id, video=file_id, reply_to_message_id=message.id
+                          )
+                      await asyncio.sleep(2)
+                   
             BUTTON=InlineKeyboardMarkup([[InlineKeyboardButton("GROUP ⬅️", url=config.GROUP_LINK)]])
 
             upload_by = await bot.get_users(user_id)
@@ -80,7 +87,7 @@ async def start(_, message):
            await message.forward(config.OWNER_ID)
      mention = f"[{name}](tg://user?id={id})"
      BUTTON=InlineKeyboardMarkup([[
-     InlineKeyboardButton("Group ❤️", url=config.GROUP_LINK)]])
+     InlineKeyboardButton("𝗚𝗥𝗢𝗨𝗣", url=config.GROUP_LINK)]])
      await message.reply_animation(
           animation=animation,
           caption=lang['bot_start_01'].format(mention, applive,botlive), quote=True, reply_markup=BUTTON)
