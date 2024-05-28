@@ -38,7 +38,7 @@ def decode(string: str):
 
 
 def delete_file(user_id, token, index):
-    result = db.update_one({'user_id': user_id}, {'$pull': {key: index}})
+    result = db.update_one({'user_id': user_id}, {'$pull': {token: index}})
     return result.modified_count == 1
 
 
