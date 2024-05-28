@@ -59,6 +59,7 @@ def delete_token(user_id, token):
 
 
 @bot.on_message(filters.command(['clearfile','cfile']))
+@devs_only
 async def clear_token(_, message):
      m = message
      r = message.reply_to_message
@@ -88,6 +89,7 @@ async def clear_token(_, message):
 
 
 @bot.on_message(filters.command(['cleartoken','ctoken']))
+@devs_only
 async def clear_token(_, message):
      m = message
      if len(message.command) != 2:
@@ -104,6 +106,7 @@ async def clear_token(_, message):
               )         
                 
 @bot.on_message(filters.command(['gettokens', 'gettk']))
+@devs_only
 async def GetTokens(_, message):
      user_id = message.from_user.id
      tokens = get_user_tokens(user_id)
