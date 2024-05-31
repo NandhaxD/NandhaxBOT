@@ -103,7 +103,7 @@ async def calc_cb(self, query):
             else:
                 text = result
         text += f"\n\nMade by @{self.me.username}"
-        await query.message.edit_msg(
+        await query.message.edit_text(
             text=text,
             disable_web_page_preview=True,
             reply_markup=calc_btn(query.from_user.id)
