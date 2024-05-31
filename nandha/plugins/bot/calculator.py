@@ -6,7 +6,11 @@ from pyrogram import filters, types, enums, errors
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
-LOGGER = getLogger("NandhaXBOT")
+import logging
+import re
+
+
+LOGGER = logging.getLogger("NandhaXBOT")
 
 def calcExpression(text):
     try:
