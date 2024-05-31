@@ -3,7 +3,10 @@
 
 from nandha import bot as app
 from pyrogram import filters, types, enums, errors
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
+
+LOGGER = getLogger("NandhaXBOT")
 
 def calcExpression(text):
     try:
@@ -13,7 +16,7 @@ def calcExpression(text):
     except TypeError:
         return float(eval(text.replace('(', '*(')))
     except Exception as e:
-        logger.error(e, exc_info=True)
+        LOGGER.error(e, exc_info=True)
         return ""
 
 def calc_btn(uid):
