@@ -167,7 +167,7 @@ async def gsearch(_, message):
         gs = fetch.get(
             f"https://www.google.com/search?q={query}&gl=id&hl=id&num=17",
         )
-        soup = BeautifulSoup(gs.text, "html.parser")
+        soup = BeautifulSoup(gs.text, "lxml")
 
         # collect data
         data = []
