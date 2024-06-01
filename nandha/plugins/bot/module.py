@@ -47,7 +47,7 @@ async def speedtest_func(client, message):
 
 
 
-@bot.on_message(filters.command(['bard','gpt', 'palm'])
+@bot.on_message(filters.command(['bard','gpt', 'palm']))
 async def artificial_intelligent(_, message):
 
 	reply = message.reply_to_message
