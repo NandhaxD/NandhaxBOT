@@ -5,9 +5,10 @@ from nandha.helpers.help_func import get as async_get
 from urllib.parse import quote
 from pyrogram import filters, enums
 from bs4 import BeautifulSoup
-from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from telegraph.aio import Telegraph
 from typing import Union
+
 
 import pyrogram
 import speedtest
@@ -273,9 +274,13 @@ def extract_user(message: Message) -> Union[int, str]:
 async def who_is(client, message):
     # https://github.com/SpEcHiDe/PyroGramBot/blob/master/pyrobot/plugins/admemes/whois.py#L19
     if message.sender_chat:
-        return await message.reply_msg("Not supported channel..")
+        return await message.reply_text(
+          "Not supported channel.."
+        )
     status_message = await message.reply_text("`Fetching user info...`")
-    await status_message.edit("`Processing user info...`")
+    await status_message.edit(
+      "`Processing user info...`"
+    )
     from_user = None
     from_user_id, _ = extract_user(message)
     try:
@@ -283,7 +288,9 @@ async def who_is(client, message):
     except Exception as error:
         return await status_message.edit(str(error))
     if from_user is None:
-        return await status_message.edit("No valid user_id / message specified")
+        return await status_message.edit(
+          "No valid user_id / message specified"
+        )
     message_out_str = ""
     username = f"@{from_user.username}" or "<b>No Username</b>"
     dc_id = from_user.dc_id or "<i>[User Doesn't Have Profile Pic]</i>"
@@ -385,7 +392,7 @@ async def ocr(_, ctx: Message):
                 follow_redirects=True,
             )
         ).json()
-        await msg.edit_text(strings("result_ocr").format(result=req["text"]))
+        await msg.edit_text(req["text"])
         if os.path.exists(file_path):
             os.remove(file_path)
     except Exception as e:
