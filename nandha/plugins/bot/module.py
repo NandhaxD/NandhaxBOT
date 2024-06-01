@@ -9,6 +9,12 @@ from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, 
 from telegraph.aio import Telegraph
 from typing import Union
 
+from pyrogram.errors import (
+    ChatAdminRequired,
+    MessageTooLong,
+    QueryIdInvalid,
+    UserNotParticipant,
+)
 
 import pyrogram
 import speedtest
@@ -73,7 +79,7 @@ async def readqr(c, m):
     foto = await m.reply_to_message.download()
     myfile = {"file": (foto, open(foto, "rb"), "application/octet-stream")}
     url = "http://api.qrserver.com/v1/read-qr-code/"
-    r = await fetch.post(url, files=myfile)
+    r = fetch.post(url, json=myfile)
     os.remove(foto)
     if res := r.json()[0]["symbol"][0]["data"] is None:
         return await m.reply_text(res)
@@ -111,7 +117,7 @@ async def stackoverflow(_, message):
     if len(message.command) == 1:
         return await message.reply("Give a query to search in StackOverflow!")
     r = (
-        await fetch.get(
+        fetch.get(
             f"https://api.stackexchange.com/2.3/search/excerpts?order=asc&sort=relevance&q={message.command[1]}&accepted=True&migrated=False¬ice=False&wiki=False&site=stackoverflow"
         )
     ).json()
@@ -144,7 +150,7 @@ async def gsearch(_, message):
     query = message.text.split(maxsplit=1)[1]
     msg = await message.reply_text(f"**Googling** for `{query}` ...")
     try:
-        gs = await fetch.get(
+        gs = fetch.get(
             f"https://www.google.com/search?q={query}&gl=id&hl=id&num=17",
         )
         soup = BeautifulSoup(gs.text, "lxml")
@@ -348,7 +354,7 @@ async def who_is(client, message):
             quote=True,
             disable_notification=True,
         )
-    await status_message.delete_msg()
+    await status_message.delete()
 
 
 @bot.on_callback_query(filters.regex("^close"))
@@ -360,8 +366,8 @@ async def close_callback(_, query: CallbackQuery):
     with contextlib.redirect_stdout(Exception):
         await query.answer("Deleting this message in 5 seconds.")
         await asyncio.sleep(5)
-        await query.message.delete_msg()
-        await query.message.reply_to_message.delete_msg()
+        await query.message.delete()
+        await query.message.reply_to_message.delete()
 
 
 
@@ -386,12 +392,9 @@ async def ocr(_, ctx: Message):
             )
         response = await Telegraph().upload_file(file_path)
         url = f"https://img.yasirweb.eu.org{response[0]['src']}"
-        req = (
-            await fetch.get(
-                f"https://script.google.com/macros/s/AKfycbwURISN0wjazeJTMHTPAtxkrZTWTpsWIef5kxqVGoXqnrzdLdIQIfLO7jsR5OQ5GO16/exec?url={url}",
-                follow_redirects=True,
-            )
-        ).json()
+        req = fetch.get(
+                f"https://script.google.com/macros/s/AKfycbwURISN0wjazeJTMHTPAtxkrZTWTpsWIef5kxqVGoXqnrzdLdIQIfLO7jsR5OQ5GO16/exec?url={url}"
+                 ).json()
         await msg.edit_text(req["text"])
         if os.path.exists(file_path):
             os.remove(file_path)
