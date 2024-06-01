@@ -7,6 +7,7 @@ from pyrogram import filters, enums
 from bs4 import BeautifulSoup
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 from telegraph.aio import Telegraph
+from typing import Union
 
 import pyrogram
 import speedtest
