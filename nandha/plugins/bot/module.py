@@ -157,51 +157,6 @@ async def stackoverflow(_, message):
         await msg.edit(e)
 
 
-@bot.on_message(filters.command(["google"]))
-async def gsearch(_, message):
-    if len(message.command) == 1:
-        return await message.reply("Give a query to search in Google!")
-    query = message.text.split(maxsplit=1)[1]
-    msg = await message.reply_text(f"**Googling** for `{query}` ...")
-    try:
-        gs = fetch.get(
-            f"https://www.google.com/search?q={query}&gl=id&hl=id&num=17",
-        )
-        soup = BeautifulSoup(gs.text, "lxml")
-
-        # collect data
-        data = []
-
-        for result in soup.select(".tF2Cxc"):
-            link = result.select_one(".yuRUbf a")["href"]
-            title = result.select_one(".DKV0Md").text
-            try:
-                snippet = result.find(class_="kb0PBd cvP2Ce A9Y9g").get_text()
-            except:
-                snippet = "-"
-
-            # appending data to an array
-            data.append(
-                {
-                    "title": html.escape(title),
-                    "link": link,
-                    "snippet": html.escape(snippet),
-                }
-            )
-        arr = json.dumps(data, indent=2, ensure_ascii=False)
-        parse = json.loads(arr)
-        total = len(parse)
-        res = "".join(
-            f"<a href='{i['link']}'>{i['title']}</a>\n{i['snippet']}\n\n" for i in parse
-        )
-    except Exception:
-        exc = traceback.format_exc()
-        return await msg.edit(exc)
-    await msg.edit(
-        text=f"<b>🔍 Found {total} results from query: {query}:</b>\n{res}<b>GoogleSearch by @{_.me.username}</b>",
-        disable_web_page_preview=True,
-    )
-
 
 
 
