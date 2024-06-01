@@ -47,7 +47,7 @@ async def speedtest_func(client, message):
 
 
 
-@bot.on_message(filters.command(['bard','gpt', 'palm'], prefixes=""))
+@bot.on_message(filters.command(['bard','gpt', 'palm'])
 async def artificial_intelligent(_, message):
 
 	reply = message.reply_to_message
@@ -73,18 +73,32 @@ async def artificial_intelligent(_, message):
 @bot.on_message(filters.command("readqr"))
 async def readqr(c, m):
     if not m.reply_to_message:
-        return await m.reply("Please reply photo that contain valid QR Code.")
+        return await m.reply("Please reply with a photo that contains a valid QR Code.")
     if not m.reply_to_message.photo:
-        return await m.reply("Please reply photo that contain valid QR Code.")
+        return await m.reply("Please reply with a photo that contains a valid QR Code.")
+    
+    # Download the photo
     foto = await m.reply_to_message.download()
-    myfile = {"file": (foto, open(foto, "rb"), "application/octet-stream")}
-    url = "http://api.qrserver.com/v1/read-qr-code/"
-    r = fetch.post(url, json=myfile)
+    
+    # Prepare the file for upload
+    with open(foto, "rb") as f:
+        files = {"file": f}
+        url = "http://api.qrserver.com/v1/read-qr-code/"
+        
+        # Post the request
+        r = requests.post(url, files=files)
+    
+    # Remove the downloaded photo
     os.remove(foto)
-    if res := r.json()[0]["symbol"][0]["data"] is None:
-        return await m.reply_text(res)
+    
+    # Check the response
+    response = r.json()
+    data = response[0]["symbol"][0]["data"]
+    if data is None:
+        return await m.reply_text("Could not read the QR code.")
+    
     await m.reply_text(
-        f"<b>QR Code Reader by @{c.me.username}:</b> <code>{r.json()[0]['symbol'][0]['data']}</code>",
+        f"<b>QR Code Reader by @{c.me.username}:</b> <code>{data}</code>",
         quote=True,
     )
 
@@ -153,7 +167,7 @@ async def gsearch(_, message):
         gs = fetch.get(
             f"https://www.google.com/search?q={query}&gl=id&hl=id&num=17",
         )
-        soup = BeautifulSoup(gs.text, "lxml")
+        soup = BeautifulSoup(gs.text, "html.parser")
 
         # collect data
         data = []
@@ -184,7 +198,7 @@ async def gsearch(_, message):
         exc = traceback.format_exc()
         return await msg.edit(exc)
     await msg.edit(
-        text=f"<b>Ada {total} Hasil Pencarian dari {query}:</b>\n{res}<b>GoogleSearch by @{BOT_USERNAME}</b>",
+        text=f"<b>🔍 Found {total} results from query: {query}:</b>\n{res}<b>GoogleSearch by @{BOT_USERNAME}</b>",
         disable_web_page_preview=True,
     )
 
