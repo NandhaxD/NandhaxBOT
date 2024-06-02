@@ -3,7 +3,7 @@
 
 
 from nandha import app, bot
-from nandha.helpers.function import send_auto_del_msg
+from nandha.helpers.function import auto_del_msg
 from nandha.helpers.decorator import admin_rights
 from nandha.helpers.help_func import match_text
 from pyrogram import filters, types, enums
@@ -53,13 +53,8 @@ async def delete_msg(client, message):
          await message.delete()
     else:
       ask = '`Reply message to delete.`'
-      return await send_auto_del_msg(
-           client=client,
-           method='message', 
-           chat_id=chat_id, 
-           text=ask,
-           reply_to_message_id=message.id, 
-           time=5)
+      msg = await message.reply_text(text=ask)
+      await auto_del_msg(msg)
       
 
 
@@ -93,13 +88,8 @@ async def purge_msg(client, message):
               time=5)          
       else:
          ask = '`Reply message to purge.`'
-         return await send_auto_del_msg(
-           client=client,
-           method='message', 
-           chat_id=chat_id, 
-           text=ask,
-           reply_to_message_id=message.id, 
-           time=5)
+         msg = await message.reply_text(text=ask)
+         await auto_del_msg(msg)
 
 
 @app.on_message(filters.me & config.command('ban'))
@@ -119,14 +109,8 @@ async def ban_member(client, message):
            user_id = reply.sender_chat.id if reply.sender_chat else reply.from_user.id
       else:
           ask = "Reply to the user or give the user name/id to ban."
-          return await send_auto_del_msg(
-           client=client,
-           method='message', 
-           chat_id=chat_id, 
-           text=ask,
-           reply_to_message_id=message.id, 
-           time=5
-          )
+          msg = await message.reply_text(text=ask)
+          await auto_del_msg(msg)
         
       info = await client.get_chat(user_id)
       name = info.first_name if info.first_name else info.title
@@ -157,13 +141,9 @@ async def kick_member(client, message):
            user_id = reply.sender_chat.id if reply.sender_chat else reply.from_user.id
       else:
           ask = "Reply to the user or give the user name/id to kick."
-          return await send_auto_del_msg(
-           client=client,
-           method='message', 
-           chat_id=chat_id, 
-           text=ask,
-           reply_to_message_id=message.id, 
-           time=5)
+          msg = await message.reply_text(text=ask)
+          await auto_del_msg(msg)
+        
         
       info = await client.get_chat(user_id)
       name = info.first_name if info.first_name else info.title
@@ -196,13 +176,9 @@ async def ban_member(client, message):
            user_id = reply.sender_chat.id if reply.sender_chat else reply.from_user.id
       else:
           ask = "Reply to the user or give the user name/id to unban."
-          return await send_auto_del_msg(
-           client=client,
-           method='message', 
-           chat_id=chat_id, 
-           text=ask,
-           reply_to_message_id=message.id, 
-           time=5)
+          msg = await message.reply_text(text=ask)
+          await auto_del_msg(msg)
+        
         
       info = await client.get_chat(user_id)
       name = info.first_name if info.first_name else info.title
@@ -239,13 +215,9 @@ async def promote_member(client, message):
         
       else:
            ask = f"{cmd} the user by replying the user or give id/name."
-           return await send_auto_del_msg(
-           client=client,
-           method='message', 
-           chat_id=chat_id, 
-           text=ask,
-           reply_to_message_id=message.id, 
-           time=5)
+           msg = await message.reply_text(text=ask)
+           await auto_del_msg(msg)
+        
 
       user_info = await client.get_users(user_id)
       user_id = user_info.id
@@ -310,13 +282,9 @@ async def demote_member(client, message):
         
       else:
            ask = "Demote the admin by replying the admin or give id/name."
-           return await send_auto_del_msg(
-           client=client,
-           method='message', 
-           chat_id=chat_id, 
-           text=ask,
-           reply_to_message_id=message.id, 
-           time=5)
+           msg = await message.reply_text(text=ask)
+           await auto_del_msg(msg)
+        
 
       user_info = await client.get_users(user_id)
       user_id = user_info.id
