@@ -69,7 +69,7 @@ async def callbackgenstring(bot, callback_query):
         await callback_query.message.reply(
             ask_ques, reply_markup=InlineKeyboardMarkup(buttons_ques)
         )
-    elif query.startswith("pyrogram") or query.startswith("telethon"):
+    elif query.startswith("pyrogram"):
         try:
             if query == "pyrogram":
                 await callback_query.answer()
@@ -243,4 +243,4 @@ async def generate_session(bot, msg, is_bot: bool = False):
     await client.disconnect()
     await bot.send_message(
         msg.chat.id,
-        f'» Successfully generated your Pyrogram String Session.\n\nPlease check saved messages to get it ! \n\n**A String Generator bot by ** @NandhaBots',
+        f'» Successfully generated your Pyrogram String Session.\n\nPlease check saved messages to get it ! \n\n**A String Generator bot by ** @NandhaBots')
