@@ -1,6 +1,8 @@
 
 import asyncio
 
+from typing import Union
+from pyrogram.types import Message
 
 async def auto_del(msg, time: int = 7):        
        await asyncio.sleep(time)
