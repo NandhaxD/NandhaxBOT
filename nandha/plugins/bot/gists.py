@@ -38,18 +38,19 @@ async def DeleteGist(bot, message):
       
 @bot.on_message(filters.command("gistlist") & filters.user(config.OWNER_ID))
 async def GistList(bot, message):
-       msg = await message.reply_text("Getting gists list....")
+       msg = await message.reply_text("Analyzing gist....")
 
        if len(message.text.split()) == 2:
              GITHUB_USERNAME = message.text.split()[1]
-             
-       response = requests.get(f'https://api.github.com/users/{GITHUB_USERNAME}/gists').json()
+       else:
+             GITHUB_USERNAME = GITHUB_USERNAME      
+       response = requests.get(f'https://api.github.com/users/{GITHUB_USERNAME}/gists')
        text = f"**✨ [{GITHUB_USERNAME}]({PROFILE_LINK.format(GITHUB_USERNAME)}) List of Gists**:\n\n"
        if response.status_code != 200:
             return await msg.edit("Validation failed, or the endpoint has been spammed, or not found")
        if not response:
            return await msg.edit("🤔 Seems like nothing in that user gist")
-       for idx, gist in enumerate(response, start=1):
+       for idx, gist in enumerate(response.json(), start=1):
            for file_name in gist['files'].keys():
                text += f"{idx}. [{file_name}]({gist['html_url']}), `{gist['id']}`\n"
        await msg.edit(text)
