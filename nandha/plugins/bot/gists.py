@@ -38,6 +38,8 @@ async def DeleteGist(bot, message):
       
 @bot.on_message(filters.command("gistlist") & filters.user(config.OWNER_ID))
 async def GistList(bot, message):
+       global GITHUB_USERNAME
+  
        msg = await message.reply_text("Analyzing gist....")
 
        if len(message.text.split()) == 2:
