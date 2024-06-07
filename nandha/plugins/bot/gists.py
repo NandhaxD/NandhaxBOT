@@ -78,7 +78,7 @@ async def GistPaste(bot, message):
              file = await reply.download()
              with open(file, 'r') as f:
                  text = f.read()
-             file_name = reply.document.file_name
+            # file_name = reply.document.file_name
              extension = FILE_TYPES(reply.document.mime_type)
            
          else:
