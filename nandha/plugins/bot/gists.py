@@ -9,7 +9,6 @@ from nandha import bot
 from nandha.helpers.help_func import generate_random_code
 
 
-GITHUB_USERNAME = "NandhaXD"
 API_URL = "https://api.github.com/gists"
 PROFILE_LINK = "https://github.com/{}"
 
@@ -53,7 +52,7 @@ async def GistList(bot, message):
        if len(message.text.split()) == 2:
              GITHUB_USERNAME = message.text.split()[1]
        else:
-             GITHUB_USERNAME = GITHUB_USERNAME      
+             GITHUB_USERNAME = "NandhaXD"      
        response = requests.get(f'https://api.github.com/users/{GITHUB_USERNAME}/gists')
        text = f"**✨ [{GITHUB_USERNAME}]({PROFILE_LINK.format(GITHUB_USERNAME)}) List of Gists**:\n\n"
        if response.status_code != 200:
