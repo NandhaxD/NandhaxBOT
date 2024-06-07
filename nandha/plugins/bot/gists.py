@@ -48,7 +48,7 @@ async def GistList(bot, message):
        if response.status_code != 200:
             return await msg.edit("Validation failed, or the endpoint has been spammed, or not found")
        if not response:
-           return awsit msg.edit("🤔 Seems like nothing in that user gist")
+           return await msg.edit("🤔 Seems like nothing in that user gist")
        for idx, gist in enumerate(response, start=1):
            for file_name in gist['files'].keys():
                text += f"{idx}. [{file_name}]({gist['html_url']}), `{gist['id']}`\n"
