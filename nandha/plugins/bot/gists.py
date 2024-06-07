@@ -9,9 +9,9 @@ from nandha import bot
 from nandha.helpers.help_func import generate_random_code
 
 
-
+GITHUB_USERNAME = "NandhaXD"
 API_URL = "https://api.github.com/gists"
-
+PROFILE_LINK = f"https://github.com/{GITHUB_USERNAME}"
 
 headers = {
     "Accept": "application/vnd.github+json",
@@ -20,9 +20,20 @@ headers = {
 }
 
 
+      
+@bot.on_message(filters.command("gistlist") & filters.user(config.OWNER_ID))
+async def GistList(bot, message):
+       msg = await message.reply_text("Getting gists list....")
+       response = requests.get(f'https://api.github.com/users/{GITHUB_USERNAME}/gists').json()
+       text = f"**✨ [{GITHUB_USERNAME}]({PROFILE_LINK}) List of Gists**:\n\n" 
+       for idx, gist in enumerate(response, start=1):
+           for file_name in gist['files'].keys():
+               text += f"{idx}. [{file_name}]({gist['html_url']}), `{gist['id']}`\n"
+       await msg.edit(text)
+                
 
-@bot.on_message(filters.command("gists") & filters.user(config.OWNER_ID))
-async def gists_paste(bot, message):
+@bot.on_message(filters.command("gist") & filters.user(config.OWNER_ID))
+async def GistPaste(bot, message):
      reply = message.reply_to_message
      name = message.from_user.first_name
      
@@ -33,8 +44,13 @@ async def gists_paste(bot, message):
                  text = f.read()
              file_name = reply.document.file_name
          else:
+              if len(message.text.split()) == 1:
+                    return await message.reply_text(
+                      "Can you please provide the extension for the file? Eg: py, txt, js ect..."
+                    )
+              extension = message.text.split()[1]
               text = reply.text
-              file_name = generate_random_code() + '.py'
+              file_name = generate_random_code() + '.' + extension if not '.' in extension else extension.split('.')[1]
          data = {
     "description": f"Code posted by {name}",
     "public": True,
