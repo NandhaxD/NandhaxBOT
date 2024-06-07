@@ -58,7 +58,7 @@ async def artificial_intelligent(_, message):
 
 	reply_func = reply.reply_text if reply else message.reply_text
 	reply = await reply_func(lang['thinking'])
-	model = message.text.split()[0]
+	model = message.command[0]
 	prompt = message.text.split(None, 1)[1]
 	api = f"https://nandha-api.onrender.com/ai/{model}/{quote(prompt)}"	
 	try:		
