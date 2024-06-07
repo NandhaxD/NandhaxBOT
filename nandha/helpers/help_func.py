@@ -28,6 +28,11 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 
 
+def generate_random_code(length: int = 10) -> str:
+    characters = string.ascii_letters
+    random_code = ''.join(random.choice(characters) for _ in range(length))
+    return random_code
+
 
 async def make_captcha(user_id: int, chat_id: int):
     
