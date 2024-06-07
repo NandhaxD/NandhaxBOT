@@ -21,6 +21,14 @@ headers = {
 
 
 
+FILE_TYPES = {
+  'text/plain': 'txt',
+  'application/json': 'json',
+  'text/x-python': 'py',
+  'application/javascript': 'js',
+  'text/html': 'html'
+}
+
 @bot.on_message(filters.command("delgist") & filters.user(config.OWNER_ID))
 async def DeleteGist(bot, message):
 
@@ -50,7 +58,7 @@ async def GistList(bot, message):
        text = f"**✨ [{GITHUB_USERNAME}]({PROFILE_LINK.format(GITHUB_USERNAME)}) List of Gists**:\n\n"
        if response.status_code != 200:
             return await msg.edit("Validation failed, or the endpoint has been spammed, or not found")
-       if not response:
+       if not response.json():
            return await msg.edit("🤔 Seems like nothing in that user gist")
        for idx, gist in enumerate(response.json(), start=1):
            for file_name in gist['files'].keys():
@@ -64,13 +72,15 @@ async def GistPaste(bot, message):
      name = message.from_user.first_name
 
      msg = await message.reply_text("⏳ Pasting In Gist.....")
-     if reply and (reply.text or (reply.document and reply.document.mime_type.split('/')[0] == 'text')):
+     if reply and (reply.text or (reply.document and reply.document.mime_type in FILE_TYPES)):
          if reply.document:
              await msg.edit("Downloading the file.....")
              file = await reply.download()
              with open(file, 'r') as f:
                  text = f.read()
              file_name = reply.document.file_name
+             extension = FILE_TYPES(reply.document.mime_type)
+           
          else:
               if len(message.text.split()) == 1:
                     return await msg.edit_text(
@@ -78,7 +88,8 @@ async def GistPaste(bot, message):
                     )
               extension = message.text.split()[1]
               text = reply.text
-              file_name = generate_random_code() + '.' + extension if not '.' in extension else extension.split('.')[1]
+           
+         file_name = generate_random_code() + '.' + extension if not '.' in extension else extension.split('.')[1]     
          data = {
     "description": f"Code posted by {name}",
     "public": True,
@@ -93,7 +104,7 @@ async def GistPaste(bot, message):
          if response.status_code == 201:
               data = response.json()
               url = data['html_url']
-              return await msg.edit_text(url)
+              return await msg.edit_text(url, reply_markup=types.InlineKeyboardMarkup([[types.InlineKeyboardButton('✨ Click', url=url)]]))
          else:
             return await msg.edit_text(f"❌ Something went wrong status code: {response.status_code}")
      else:
