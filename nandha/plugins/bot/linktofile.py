@@ -131,7 +131,6 @@ async def GetTokens(_, message):
          
 
 @bot.on_message(filters.command(['addfile', 'getlink']))
-@devs_only
 async def Getlink(_, message):
        user_id = message.from_user.id
        reply = message.reply_to_message
