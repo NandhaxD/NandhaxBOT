@@ -23,7 +23,7 @@ async def inline_query(bot, query: types.InlineQuery):
                    types.InputTextMessageContent("The Token You given it's Invalid 🐍"))
                   )
            else:
-               user = await bot.get_user(user_id)
+               user = await bot.get_users(user_id)
                results.extend([types.InlineQueryResultCachedDocument(title=f"No: {idx} File by {user.first_name}",document_file_id=id) for idx, id in enumerate(file_ids, start=1)])
               
       await bot.answer_inline_query(
