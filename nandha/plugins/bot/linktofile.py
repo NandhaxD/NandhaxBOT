@@ -9,8 +9,6 @@ from nandha import bot, DATABASE
 from nandha.helpers.decorator import devs_only
 from pyrogram import filters, types
 
-import base64
-import secrets
 import string
 import random
 
@@ -21,27 +19,12 @@ db = DATABASE['LINK_TO_FILE']
 link = 'nandhaxbot.t.me?start=getfile-{}'    
 
 
-#def gen_token():
-#    random_hex = secrets.token_hex(16)
- #   return random_hex
 
 def gen_token(length=10):
-    # Define the characters to choose from (letters and digits only)
     characters = string.ascii_letters + string.digits
-    # Generate a random string using list comprehension
     random_string = ''.join([random.choice(characters) for _ in range(length)])
     return random_string
     
-def encode(string: str):
-    encoded_bytes = base64.b64encode(string.encode('utf-8'))
-    return encoded_bytes.decode('utf-8')
-
-def decode(string: str):
-    decoded_bytes = base64.b64decode(string.encode('utf-8'))
-    return decoded_bytes.decode('utf-8')
-
-
-
 def delete_file(user_id, token, index):
     result = db.update_one(
         {'user_id': user_id, token: {'$exists': True}},
@@ -70,7 +53,6 @@ def delete_token(user_id, token):
 
       
 @bot.on_message(filters.command(['clearfile','cfile']))
-@devs_only
 async def clear_file(_, message):
      m = message
      r = message.reply_to_message
@@ -102,8 +84,7 @@ async def clear_file(_, message):
               )             
 
 
-@bot.on_message(filters.command(['cleartoken','ctoken']))
-@devs_only
+@bot.on_message(filters.command(['cleartoken','deltoken']))
 async def clear_token(_, message):
      m = message
      if len(message.command) != 2:
@@ -118,9 +99,23 @@ async def clear_token(_, message):
               return await m.reply_text(
                   "Token doesn't exsit in database."
               )         
-                
+
+@bot.on_message(filters.command(["ctoken","checkt"]))
+async def CheckToken(bot, message):
+     if not len(message.text.split()) == 2:
+           return await message.reply_text("Can you provide me token?\n```Example\n/checkt token```")
+     token = message.text.split()[1]
+     if token not in (await get_user_tokens(user_id)):
+           return await message.reply("Token Seems like invalid 🤔")
+     button = types.InlineKeyboardMarkup([[types.InlineKeyboardButton("✨ Click here", url=link.format(token))]])
+     return await message.reply_text(
+         text="Click the below button to Get the all file's..",
+         reply_markup=button
+     )
+                                      
+
+
 @bot.on_message(filters.command(['gettokens', 'gettk']))
-@devs_only
 async def GetTokens(_, message):
      user_id = message.from_user.id
      tokens = get_user_tokens(user_id)
