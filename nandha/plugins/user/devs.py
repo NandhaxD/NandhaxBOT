@@ -126,8 +126,8 @@ async def evaluate(app , message):
  #       exc = traceback.format_exc()
   #  except Exception as e:
  #        exc = traceback.format_exception_only(type(e), e)[-1].strip()
-     except Exception as e:
-         exc = ''.join(traceback.format_exception(type(e), e, e.__traceback__)).strip()
+    except Exception as e:
+        exc = ''.join(traceback.format_exception(type(e), e, e.__traceback__)).strip()
 
     stdout = redirected_output.getvalue()
     stderr = redirected_error.getvalue()
