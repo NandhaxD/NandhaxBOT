@@ -3,21 +3,7 @@
 
 from pyrogram import filters, types, enums, errors
 from nandha import bot, DATABASE
-
-
-
-async def get_token_file_ids(token: str):
-    db = DATABASE['LINK_TO_FILE']
-    file_ids = []
-    for tokens in db.find():
-       if token in tokens:
-          user_id = tokens['user_id']
-          file_ids = tokens[token]
-          return file_ids
-    return file_ids
-     
-        
-           
+from nandha.plugins.bot.linktofile import get_file_ids_by_token
 
 
 
@@ -29,7 +15,7 @@ async def inline_query(bot, query: types.InlineQuery):
            if not len(data.split()) == 2:
                 return
            token = data.split()[1]
-           file_ids = await get_token_file_ids(token)
+           user_id, file_ids = get_file_ids_by_token(token)
            if not file_ids:
                results.append(
                    types.InlineQueryResultArticle(
@@ -37,7 +23,8 @@ async def inline_query(bot, query: types.InlineQuery):
                    types.InputTextMessageContent("The Token You given it's Invalid 🐍"))
                   )
            else:
-               results.extend([types.InlineQueryResultCachedDocument(title=f"File: {idx}",document_file_id=id) for idx, id in enumerate(file_ids, start=1)])
+               user = await bot.get_user(user_id)
+               results.extend([types.InlineQueryResultCachedDocument(title=f"No: {idx} File by {user.first_name}",document_file_id=id) for idx, id in enumerate(file_ids, start=1)])
               
       await bot.answer_inline_query(
              inline_query_id=query.id,
