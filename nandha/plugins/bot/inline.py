@@ -23,7 +23,7 @@ async def get_token_file_ids(token: str):
 
 @bot.on_inline_query()
 async def inline_query(bot, query: types.InlineQuery):
-      data = query.query.lower()
+      data = query.query
       results = []
       if data and data.split()[0] == 'fs':
            if not len(data.split()) == 2:
