@@ -102,6 +102,10 @@ async def clear_token(_, message):
 
 @bot.on_message(filters.command(["ctoken","checkt"]))
 async def CheckToken(bot, message):
+
+     if not message.from_user:
+         return
+     user_id = message.from_user.id
      if not len(message.text.split()) == 2:
            return await message.reply_text("Can you provide me token?\n```Example\n/checkt token```")
      token = message.text.split()[1]
