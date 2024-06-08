@@ -29,7 +29,7 @@ async def inline_query(bot, query: types.InlineQuery):
            if not len(data.split()) == 2:
                 return
            token = data.split()[1]
-           file_ids = get_token_file_ids(token)
+           file_ids = await get_token_file_ids(token)
            if not file_ids:
                results.append(
                    types.InlineQueryResultArticle(
@@ -37,7 +37,6 @@ async def inline_query(bot, query: types.InlineQuery):
                    types.InputTextMessageContent("The Token You given it's Invalid 🐍"))
                   )
            else:
-               file_ids = get_token_file_ids(token)
                results.extend([types.InlineQueryResultCachedDocument(document_file_id=id) for id in file_ids])
               
       await bot.answer_inline_query(
