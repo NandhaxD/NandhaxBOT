@@ -6,7 +6,7 @@ from nandha import bot, DATABASE
 
 
 
-def check_token(token: str):
+def get_token_file_ids(token: str):
    db = DATABASE['LINK_TO_FILE']
    file_ids = []
    for tokens in db.find():
@@ -26,14 +26,15 @@ async def inline_query(bot, query: types.InlineQuery):
            if not len(query.split()) == 2:
                 return
            token = query.split()[1]
-           if not check_token(token):
+           if not get_token_file_ids(token):
                results.append(
                    types.InlineQueryResultArticle(
                         "❌ Token Not found!",
                    types.InputTextMessageContent("The Token You given it's Invalid 🐍"))
                   )
            else:
-               print('ok')
+               file_ids = get_token_file_ids(token)
+               results.extend([types.InlineQueryResultCachedDocument(document_file_id=id) for id in file_ids])
                 
                     
            
