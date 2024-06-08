@@ -24,7 +24,18 @@ def gen_token(length=10):
     characters = string.ascii_letters + string.digits
     random_string = ''.join([random.choice(characters) for _ in range(length)])
     return random_string
-    
+
+
+def get_file_ids_by_token(token):
+    for user_data in db.find():
+        if token in user_data:
+            user_id = user_data['user_id']
+            file_ids = user_data[token]
+            return user_id, file_ids
+    return None, None
+
+
+
 def delete_file(user_id, token, index):
     result = db.update_one(
         {'user_id': user_id, token: {'$exists': True}},
