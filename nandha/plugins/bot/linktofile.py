@@ -109,7 +109,7 @@ async def CheckToken(bot, message):
      if not len(message.text.split()) == 2:
            return await message.reply_text("Can you provide me token?\n```Example\n/checkt token```")
      token = message.text.split()[1]
-     if token not in (await get_user_tokens(user_id)):
+     if token not in get_user_tokens(user_id):
            return await message.reply("Token Seems like invalid 🤔")
      button = types.InlineKeyboardMarkup([[types.InlineKeyboardButton("✨ Click here", url=link.format(token))]])
      return await message.reply_text(
