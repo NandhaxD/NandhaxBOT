@@ -10,10 +10,12 @@ def get_token_file_ids(token: str):
    db = DATABASE['LINK_TO_FILE']
    file_ids = []
    for tokens in db.find():
-      if token in tokens:
-          user_id = tokens['user_id']
-          file_ids = tokens[token]
-   return file_ids
+     if token in tokens:
+        user_id = tokens['user_id']
+        file_ids = tokens[token]
+     return file_ids
+     
+        
            
 
 
@@ -22,7 +24,7 @@ def get_token_file_ids(token: str):
 async def inline_query(bot, query: types.InlineQuery):
       data = query.query.lower()
       results = []
-      if data.split()[0] == 'fs':
+      if data.split()[0] and data.split()[0] == 'fs':
            if not len(data.split()) == 2:
                 return
            token = data.split()[1]
