@@ -6,14 +6,15 @@ from nandha import bot, DATABASE
 
 
 
-def get_token_file_ids(token: str):
-   db = DATABASE['LINK_TO_FILE']
-   file_ids = []
-   for tokens in db.find():
-     if token in tokens:
-        user_id = tokens['user_id']
-        file_ids = tokens[token]
-     return file_ids
+async def get_token_file_ids(token: str):
+    db = DATABASE['LINK_TO_FILE']
+    file_ids = []
+    for tokens in db.find():
+       if token in tokens:
+          user_id = tokens['user_id']
+          file_ids = tokens[token]
+          return file_ids
+    return file_ids
      
         
            
@@ -24,14 +25,15 @@ def get_token_file_ids(token: str):
 async def inline_query(bot, query: types.InlineQuery):
       data = query.query.lower()
       results = []
-      if data.split()[0] and data.split()[0] == 'fs':
+      if data and data.split()[0] == 'fs':
            if not len(data.split()) == 2:
                 return
            token = data.split()[1]
-           if not get_token_file_ids(token):
+           file_ids = get_token_file_ids(token)
+           if not file_ids:
                results.append(
                    types.InlineQueryResultArticle(
-                        "❌ Token Not found!",
+                        f"❌ Token {token} not found!",
                    types.InputTextMessageContent("The Token You given it's Invalid 🐍"))
                   )
            else:
@@ -41,9 +43,9 @@ async def inline_query(bot, query: types.InlineQuery):
       await bot.answer_inline_query(
              inline_query_id=query.id,
              results=results,
-             switch_pm_text=f"Total file in token: {len(results)}",
+             switch_pm_text=f"Total Results: {len(results)}",
              switch_pm_parameter="start",
-             cache_time=2
+             cache_time=1
       )
                     
            
