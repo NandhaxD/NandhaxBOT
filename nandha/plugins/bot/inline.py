@@ -20,12 +20,12 @@ def get_token_file_ids(token: str):
 
 @bot.on_inline_query()
 async def inline_query(bot, query: types.InlineQuery):
-      query = query.query.lower()
+      data = query.query.lower()
       results = []
-      if query.split()[0] == 'fs':
-           if not len(query.split()) == 2:
+      if data.split()[0] == 'fs':
+           if not len(data.split()) == 2:
                 return
-           token = query.split()[1]
+           token = data.split()[1]
            if not get_token_file_ids(token):
                results.append(
                    types.InlineQueryResultArticle(
@@ -35,6 +35,13 @@ async def inline_query(bot, query: types.InlineQuery):
            else:
                file_ids = get_token_file_ids(token)
                results.extend([types.InlineQueryResultCachedDocument(document_file_id=id) for id in file_ids])
-                
+              
+      await bot.answer_inline_query(
+             inline_query_id=query.id,
+             results=results,
+             switch_pm_text=f"Total file in token: {len(results)}",
+             switch_pm_parameter="start",
+             cache_time=2
+      )
                     
            
