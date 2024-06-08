@@ -5,8 +5,8 @@ import requests
 from pyrogram import filters, enums
 from nandha import bot ,app, lang, DATABASE
 from nandha.helpers.help_func import emoji_convert, anime_gif_key, get_anime_gif
+from nandha.plugins.bot.linktofile import get_file_ids_by_token
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-
 from pyrogram.raw.functions.messages import SetTyping
 from pyrogram.raw.types import SendMessageEmojiInteraction, DataJSON
 
@@ -38,14 +38,7 @@ async def start(_, message):
                  return await message.reply(
                       'Your method is invalid try t.me/{botusername}?start=getfile-{token} 🤔.')
                  
-            db = DATABASE['LINK_TO_FILE']
-            for tokens in db.find():
-                 if token in tokens:
-                    user_id = tokens['user_id']
-                    file_ids = tokens[token]
-                 else:
-                     return await message.reply(
-                          'Invaid token check again 🤔.')
+            user_id, file_ids = get_file_ids_by_token(token)
                     
             if file_ids:
                  
@@ -89,7 +82,7 @@ async def start(_, message):
      if message.chat.type == enums.ChatType.PRIVATE:
            msg = await message.reply(random.choice(emoji))
            await click_interaction(bot, msg)
-           await asyncio.sleep(4)
+           await asyncio.sleep(2)
            
            await message.forward(config.OWNER_ID)
      mention = f"[{name}](tg://user?id={id})"
