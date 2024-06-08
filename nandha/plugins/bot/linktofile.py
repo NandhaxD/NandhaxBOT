@@ -47,13 +47,21 @@ def delete_file(user_id, token, index):
     )
     return result.modified_count == 1
 
-def get_user_tokens(user_id):
+def get_user_token_and_index(user_id):
     user_data = db.find_one({'user_id': user_id})
     if user_data:
         tokens_with_count = [(key, len(value)) for key, value in user_data.items() if key not in ['_id', 'user_id']]
         return tokens_with_count
     return None
 
+def get_user_tokens(user_id):
+    user_data = db.find_one({'user_id': user_id})
+    if user_data:
+        tokens = [ key for key, value in user_data.items() if key not in ['_id', 'user_id']]
+        return tokens
+    else:
+        return None
+      
 
 def delete_token(user_id, token):
     result = db.update_one(
@@ -133,7 +141,7 @@ async def CheckToken(bot, message):
 @bot.on_message(filters.command(['gettokens', 'gettk']))
 async def GetTokens(_, message):
      user_id = message.from_user.id
-     tokens = get_user_tokens(user_id)
+     tokens = get_user_token_and_index(user_id)
      String = f"**🌟 Stored tokens in {message.from_user.mention}**:\n"
      for i, (token, file) in enumerate(tokens):
           String += f"{i+1}, `{token}`: **{file}**\n"
