@@ -15,15 +15,19 @@ async def inline_query(bot, query: types.InlineQuery):
       
       if data and data.split()[0] == 'fs':
            if not len(data.split()) == 2:
+              
                tokens = get_user_tokens(query.from_user.id)
                if not tokens:
                    text = "You haven't generate any token it 🐍"
                else:
                    text = f"{query.from_user.first_name}'s Token:\n× " + "\n× ".join(tokens)
+               print(f"Getting {query.from_user.first_name}'s token.")
                results.append(
                    types.InlineQueryResultArticle(
-                        f"✨ View Your Tokens Here.",
-                   types.InputTextMessageContent(text))
+                        title=f"✨ View Your Tokens Here.",
+                   input_message_content=types.InputTextMessageContent(
+                         message_text=text
+                   ))
                )
             
            
