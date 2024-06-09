@@ -10,7 +10,9 @@ from nandha.plugins.bot.linktofile import get_file_ids_by_token
 @bot.on_inline_query()
 async def inline_query(bot, query: types.InlineQuery):
       data = query.query
+      BotInfo = await bot.get_me()
       results = []
+      
       if data and data.split()[0] == 'fs':
            if not len(data.split()) == 2:
                 return
@@ -24,12 +26,13 @@ async def inline_query(bot, query: types.InlineQuery):
                   )
            else:
                user = await bot.get_users(user_id)
-               results.extend([types.InlineQueryResultCachedDocument(title=f"No: {idx} File by {user.first_name}",document_file_id=id) for idx, id in enumerate(file_ids, start=1)])
-              
+               results.extend([types.InlineQueryResultCachedDocument(title=f"No: {idx}, File by {user.first_name}",document_file_id=id) for idx, id in enumerate(file_ids, start=1)])
+               results = [result for i in range(0, len(results), 4) for result in results[i:i + 4]]
+                 
       await bot.answer_inline_query(
              inline_query_id=query.id,
              results=results,
-             switch_pm_text=f"Total Results: {len(results)}",
+             switch_pm_text=f"Powered by @{BotInfo.id}",
              switch_pm_parameter="start",
              cache_time=1
       )
