@@ -157,7 +157,7 @@ async def GetTokens(_, message):
 async def Getlink(_, message):
        user_id = message.from_user.id
        reply = message.reply_to_message
-       file = reply.document or reply.video if reply and reply.document or reply.video else False
+       file = (reply.document or reply.video) if reply and (reply.document or reply.video) else False
 
        if file:
         
