@@ -20,7 +20,7 @@ async def inline_query(bot, query: types.InlineQuery):
                if not tokens:
                    text = "You haven't generate any token it 🐍"
                else:         
-                   text = f"✨ {query.from_user.first_name}'s Token:\n➡️"
+                   text = f"✨** {query.from_user.first_name}'s Token**:\n\n➡️ "
                    text += "\n➡️ ".join(tokens)
                      
                print(f"Getting {query.from_user.first_name}'s token.")
@@ -53,7 +53,7 @@ async def inline_query(bot, query: types.InlineQuery):
       await bot.answer_inline_query(
                   inline_query_id=query.id,
                   results=results,
-                  switch_pm_text=f"Powered by @{BotInfo.first_name}",
+                  switch_pm_text=f"Powered by {BotInfo.first_name}",
                   switch_pm_parameter="start",
                   cache_time=1
                    )
