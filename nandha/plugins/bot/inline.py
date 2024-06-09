@@ -3,7 +3,7 @@
 
 from pyrogram import filters, types, enums, errors
 from nandha import bot, DATABASE
-from nandha.plugins.bot.linktofile import get_file_ids_by_token
+from nandha.plugins.bot.linktofile import get_file_ids_by_token, get_user_tokens
 
 
 
@@ -15,7 +15,16 @@ async def inline_query(bot, query: types.InlineQuery):
       
       if data and data.split()[0] == 'fs':
            if not len(data.split()) == 2:
-                return
+               tokens =  get_user_tokens(query.from_user.id)
+               if not tokens:
+                   text = "You haven't generate any token it 🐍"
+               text = f"{query.from_user.first_name}'s Token:\n× " + "\n× ".join(tokens)
+               results.append(
+                   types.InlineQueryResultArticle(
+                        f"✨ View Your Tokens Here.",
+                   types.InputTextMessageContent(text))
+               )
+            
            token = data.split()[1]
            user_id, file_ids = get_file_ids_by_token(token)
            if not file_ids:
