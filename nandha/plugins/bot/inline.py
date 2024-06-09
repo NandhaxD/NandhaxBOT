@@ -20,8 +20,8 @@ async def inline_query(bot, query: types.InlineQuery):
                if not tokens:
                    text = "You haven't generate any token it 🐍"
                else:         
-                   text = f"{query.from_user.first_name}'s Token:\n×"
-                   text += "\n× ".join(tokens)
+                   text = f"✨ {query.from_user.first_name}'s Token:\n➡️"
+                   text += "\n➡️ ".join(tokens)
                      
                print(f"Getting {query.from_user.first_name}'s token.")
                results.append(
@@ -50,7 +50,7 @@ async def inline_query(bot, query: types.InlineQuery):
                        name = user_id
                    results.extend([types.InlineQueryResultCachedDocument(title=f"No: {idx}, File by {name}",document_file_id=id) for idx, id in enumerate(file_ids, start=1)])
                    
-               await bot.answer_inline_query(
+      await bot.answer_inline_query(
                   inline_query_id=query.id,
                   results=results,
                   switch_pm_text=f"Powered by @{BotInfo.first_name}",
