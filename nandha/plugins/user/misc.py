@@ -102,7 +102,6 @@ async def artificial_intelligent(_, message):
   )
 	model = message.text.split()[0]
   prompt = message.text.split(None, 1)[1]
-
   if model.lowercase() == "blackbox":
       api = "https://nandha-api.onrender.com/blackbox"
       payload = {
@@ -110,7 +109,7 @@ async def artificial_intelligent(_, message):
       }
       try:
         response = requests.post(api, json=payload)
-        ok = response.get('reply')
+        ok = response.json().get('reply')
       except Exception as e:
 	    	 return await reply.edit(lang['error'].format(str(e)))				
     	return await reply.edit(lang['AI'].format(model.upper(), prompt, ok))
