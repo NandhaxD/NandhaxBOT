@@ -15,9 +15,10 @@ import time
 import base64
 
 
+
 from nandha import app, MODULE, bot, lang, StartTime
 from nandha.helpers.help_func import grap, get_readable_time, make_carbon, get as async_get
-from pyrogram import filters, enums
+from pyrogram import filters, enums, errors
 from gpytranslate import Translator
 from urllib.parse import quote
 import requests
@@ -106,8 +107,16 @@ async def artificial_intelligent(_, message):
             response = requests.post(api, json=payload)
             ok = response.json().get('reply')
         except Exception as e:
-            return await reply.edit(lang['error'].format(str(e)))				
-        return await reply.edit(lang['AI'].format(model.upper(), prompt, ok))
+            return await reply.edit(lang['error'].format(str(e)))
+        if len(ok) > 4000:
+            path = f"blackbox_{user_id}.txt"
+            with open(path, "w") as file:
+                 file.write(ok)
+            await message.reply_document(path, True)
+            os.remove(path)
+            return
+        else:
+            return await reply.edit(lang['AI'].format(model.upper(), prompt, ok))
 
     api = f"https://nandha-api.onrender.com/ai/{model}/{quote(prompt, safe='')}"
     try:
