@@ -91,6 +91,9 @@ async def alive(_, message):
 
 @app.on_message(filters.me & filters.command(['bard', 'gpt', 'palm', 'blackbox'], prefixes=""))
 async def artificial_intelligent(_, message):
+
+
+    user_id = message.from_user.id if message.from_user else message.sender_chat.id
     if len(message.command) < 2:
         return await message.edit("Give a Query Search 🔍")
 
