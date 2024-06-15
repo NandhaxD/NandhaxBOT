@@ -88,41 +88,34 @@ async def alive(_, message):
     await message.edit(lang['alive'])
 
 
-
-@app.on_message(filters.me & filters.command(['bard','gpt', 'palm', 'blackbox'], prefixes=""))
+@app.on_message(filters.me & filters.command(['bard', 'gpt', 'palm', 'blackbox'], prefixes=""))
 async def artificial_intelligent(_, message):
-	
-	if len(message.command) < 2:
-		return await message.edit(
-      "Give a Query Search 🔍"
-    )
-        
-	reply = await message.edit(
-    "Thinking.... 🧠"
-  )
-	model = message.text.split()[0]
-  prompt = message.text.split(None, 1)[1]
-  if model.lowercase() == "blackbox":
-      api = "https://nandha-api.onrender.com/blackbox"
-      payload = {
-         "prompt": prompt
-      }
-      try:
-        response = requests.post(api, json=payload)
-        ok = response.json().get('reply')
-      except Exception as e:
-	    	 return await reply.edit(lang['error'].format(str(e)))				
-    	return await reply.edit(lang['AI'].format(model.upper(), prompt, ok))
+    if len(message.command) < 2:
+        return await message.edit("Give a Query Search 🔍")
 
-	api = f"https://nandha-api.onrender.com/ai/{model}/{quote(prompt, safe='')}"	
-	try:		
-	    response = await async_get(api)
-	    ok = response.get('content')		
-	except Exception as e:
-		 return await reply.edit(lang['error'].format(str(e)))				
-	return await reply.edit(lang['AI'].format(model.upper(), prompt, ok))
-	
-         
+    reply = await message.edit("Thinking.... 🧠")
+    model = message.text.split()[0]
+    prompt = message.text.split(None, 1)[1]
+    
+    if model.lower() == "blackbox":
+        api = "https://nandha-api.onrender.com/blackbox"
+        payload = {
+            "prompt": prompt
+        }
+        try:
+            response = requests.post(api, json=payload)
+            ok = response.json().get('reply')
+        except Exception as e:
+            return await reply.edit(lang['error'].format(str(e)))				
+        return await reply.edit(lang['AI'].format(model.upper(), prompt, ok))
+
+    api = f"https://nandha-api.onrender.com/ai/{model}/{quote(prompt, safe='')}"
+    try:
+        response = await async_get(api)
+        ok = response.get('content')
+    except Exception as e:
+        return await reply.edit(lang['error'].format(str(e)))				
+    return await reply.edit(lang['AI'].format(model.upper(), prompt, ok))
 
 
 @app.on_message(filters.me & filters.command("git",prefixes=config.PREFIXES)) 
