@@ -89,22 +89,39 @@ async def alive(_, message):
 
 
 
-@app.on_message(filters.me & filters.command(['bard','gpt', 'palm'], prefixes=""))
+@app.on_message(filters.me & filters.command(['bard','gpt', 'palm', 'blackbox'], prefixes=""))
 async def artificial_intelligent(_, message):
 	
-	if len(message.command) <2:
-		return await message.edit(lang['query'])
+	if len(message.command) < 2:
+		return await message.edit(
+      "Give a Query Search 🔍"
+    )
         
-	reply = await message.edit(lang['thinking'])
+	reply = await message.edit(
+    "Thinking.... 🧠"
+  )
 	model = message.text.split()[0]
-	prompt = message.text.split(None, 1)[1]
+  prompt = message.text.split(None, 1)[1]
+
+  if model.lowercase() == "blackbox":
+      api = "https://nandha-api.onrender.com/blackbox"
+      payload = {
+         "prompt": prompt
+      }
+      try:
+        response = requests.post(api, json=payload)
+        ok = response.get('reply')
+      except Exception as e:
+	    	 return await reply.edit(lang['error'].format(str(e)))				
+    	return await reply.edit(lang['AI'].format(model.upper(), prompt, ok))
+
 	api = f"https://nandha-api.onrender.com/ai/{model}/{quote(prompt, safe='')}"	
 	try:		
 	    response = await async_get(api)
 	    ok = response.get('content')		
 	except Exception as e:
-		 return await reply.edit(lang['error'].format(str(e)), parse_mode=enums.ParseMode.HTML)				
-	return await reply.edit(lang['AI'].format(model.upper(), prompt, ok), parse_mode=enums.ParseMode.HTML)
+		 return await reply.edit(lang['error'].format(str(e)))				
+	return await reply.edit(lang['AI'].format(model.upper(), prompt, ok))
 	
          
 
