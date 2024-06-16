@@ -29,7 +29,7 @@ headers = {
 async def interpreter(bot, message):
      m = message
      langs = m.command[0]
-     ok = "!python\n```Example:\nprint('hello world')```"
+     ok = "```Example:\n!python\n\nprint('hello world')```"
      if len(m.text.split(maxsplit=1)) != 2:
           return await m.reply_text(text=ok)
      code = m.text.split(maxsplit=1)[1]
