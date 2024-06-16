@@ -51,7 +51,9 @@ async def interpreter(bot, message):
 f"""\n
 🌐 **Language**: `{language}`
 🖥️ **Version**: `{version}`
+
 🗨️ **Code**:\n`{code}`
+
 ✨ **Result**:\n `{output}`
 """ )
      else:
