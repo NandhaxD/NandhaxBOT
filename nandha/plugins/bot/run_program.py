@@ -32,7 +32,7 @@ async def interpreter(bot, message):
      ok = "!python\n```Example:\nprint('hello world')```"
      if len(m.text.split(maxsplit=1)) != 2:
           return await m.reply_text(text=ok)
-     code = m.text.split(maxsplit=1)
+     code = m.text.split(maxsplit=1)[1]
      data = {
         'code': code,
         'lang': langs
