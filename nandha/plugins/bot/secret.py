@@ -86,7 +86,7 @@ async def send_secret(_, message):
     else:
         await message.reply("You can't use in private chats")
 
-@bot.on_inline_query(filters.regex('secret'))
+@bot.on_inline_query(filters.regex(r'secret|sec'), group=99)
 async def inline_secret(_, inline_query: InlineQuery):
     user_id = inline_query.from_user.id
     name = inline_query.from_user.first_name
