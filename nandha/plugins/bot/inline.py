@@ -7,24 +7,22 @@ from nandha.plugins.bot.linktofile import get_file_ids_by_token, get_user_tokens
 
 
 
-@bot.on_inline_query()
+@bot.on_inline_query(filters.regex('^fs'))
 async def inline_query(bot, query: types.InlineQuery):
       data = query.query
       BotInfo = await bot.get_me()
       results = []
       
-      if data and data.split()[0] == 'fs':
-           if not len(data.split()) == 2:
-              
-               tokens = get_user_tokens(query.from_user.id)
-               if not tokens:
-                   text = "You haven't generate any token it 🐍"
-               else:         
-                   text = f"✨** {query.from_user.first_name}'s Token**:\n\n➡️ "
-                   text += "\n➡️ ".join(tokens)
+      if not len(data.split()) == 2:
+          tokens = get_user_tokens(query.from_user.id)
+          if not tokens:
+              text = "You haven't generate any token it 🐍"
+          else:         
+              text = f"✨** {query.from_user.first_name}'s Token**:\n\n➡️ "
+              text += "\n➡️ ".join(tokens)
                      
-               print(f"Getting {query.from_user.first_name}'s token.")
-               results.append(
+          print(f"Getting {query.from_user.first_name}'s token.")
+          results.append(
                    types.InlineQueryResultArticle(
                         title=f"✨ View Your Tokens Here.",
                    input_message_content=types.InputTextMessageContent(
@@ -33,7 +31,7 @@ async def inline_query(bot, query: types.InlineQuery):
                )
             
            
-           if not results and len(data.split()) == 2:
+          if not results and len(data.split()) == 2:
                  
                token = data.split()[1]
                user_id, file_ids = get_file_ids_by_token(token)
