@@ -31,24 +31,24 @@ async def inline_query(bot, query: types.InlineQuery):
                )
             
            
-          if len(data.split()) == 2:
+      elif len(data.split()) == 2:
                  
-               token = data.split()[2]
-               user_id, file_ids = get_file_ids_by_token(token)
-               print(f"Checking for {token} by {query.from_user.first_name}")
+            token = data.split()[1]
+            user_id, file_ids = get_file_ids_by_token(token)
+            print(f"🔍 Checking for token: {token} by {query.from_user.first_name}")
                                                 
-               if not file_ids:  
+            if not file_ids:  
                     results.append(
                       types.InlineQueryResultArticle(
                         f"❌ Token {token} not found!",
                       types.InputTextMessageContent("The Token You given it's Invalid 🐍"))
                      )
-               else:
-                   try:
-                       name = (await bot.get_users(user_id)).first_name
-                   except:
-                       name = user_id
-                   results.extend([types.InlineQueryResultCachedDocument(title=f"No: {idx}, File by {name}",document_file_id=id) for idx, id in enumerate(file_ids, start=1)])
+            else:
+               try:
+                    name = (await bot.get_users(user_id)).first_name
+               except:
+                    name = user_id
+                    results.extend([types.InlineQueryResultCachedDocument(title=f"No: {idx}, File by {name}",document_file_id=id) for idx, id in enumerate(file_ids, start=1)])
                    
       await bot.answer_inline_query(
                   inline_query_id=query.id,
