@@ -33,8 +33,10 @@ async def inline_query(bot, query: types.InlineQuery):
            
           if len(data.split()) == 2:
                  
-               token = data.split('fs')[1]
+               token = data.split()[2]
                user_id, file_ids = get_file_ids_by_token(token)
+               print(f"Checking for {token} by {query.from_user.first_name}")
+                                                
                if not file_ids:  
                     results.append(
                       types.InlineQueryResultArticle(
