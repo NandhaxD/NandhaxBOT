@@ -48,7 +48,7 @@ async def inline_query(bot, query: types.InlineQuery):
                     name = (await bot.get_users(user_id)).first_name
                except:
                     name = user_id
-                    results.extend([types.InlineQueryResultCachedDocument(title=f"No: {idx}, File by {name}",document_file_id=id) for idx, id in enumerate(file_ids, start=1)])
+               results.extend([types.InlineQueryResultCachedDocument(title=f"No: {idx}, File by {name}",document_file_id=id) for idx, id in enumerate(file_ids, start=1)])
                    
       await bot.answer_inline_query(
                   inline_query_id=query.id,
