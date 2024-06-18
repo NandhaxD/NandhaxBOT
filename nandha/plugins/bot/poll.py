@@ -7,13 +7,14 @@ from nandha import bot as app
 
 
 @app.on_raw_update(group=35)
-async def poll_vote(client, update, users,  _):
+async def poll_vote(client, update, users, chats):
     if not isinstance(update, UpdateMessagePollVote): return 
     voter = User._parse(client, users[update.user_id])
     poll_id = update.poll_id 
     choices = update.options or "retracting vote"
+    print(str(update))
     await client.send_message(
-      chat_id=update.chat.id,
+      chat_id=chats.id,
       text=f'User {voter.first_name} voted on poll_id {poll_id} with {choices}')
 
 
@@ -24,7 +25,11 @@ async def SendPoll(app, message):
 	      await app.send_poll(
 	         chat_id=chat_id, 
 	         question="Is this a poll question?", 
-	         options=["Yes", "No", "Maybe"],
+	         options=[
+             types.PollOption(text="Yes"),
+             types.PollOption(text="No"),
+             types.PollOption(text="Maybe")
+           ],
 	         type=enums.PollType.QUIZ,
 	         correct_option_id=1,
 	         explanation="we don't know"
