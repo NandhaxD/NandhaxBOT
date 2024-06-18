@@ -31,9 +31,9 @@ async def inline_query(bot, query: types.InlineQuery):
                )
             
            
-          if not results and len(data.split()) == 2:
+          if len(data.split()) == 2:
                  
-               token = data.split()[1]
+               token = data.split('fs')[1]
                user_id, file_ids = get_file_ids_by_token(token)
                if not file_ids:  
                     results.append(
@@ -53,7 +53,7 @@ async def inline_query(bot, query: types.InlineQuery):
                   results=results,
                   switch_pm_text=f"Powered by {BotInfo.first_name}",
                   switch_pm_parameter="start",
-                  cache_time=1
+                  cache_time=2
                    )
                     
            
