@@ -110,3 +110,12 @@ async def calc_cb(self, query):
         )
     except Exception as error:
         LOGGER.error(error)
+
+
+__help__ = """
+➩ /calc:
+ To calculate any expression ( math question )
+"""
+
+__module__ = "Calc"
+      
