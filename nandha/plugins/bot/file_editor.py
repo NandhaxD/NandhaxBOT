@@ -119,3 +119,17 @@ async def get_sticker(_, message):
       
         
   
+__help__ = """
+Cmds:
+➩ /getsticker:
+To get sticker at the same time you can change the image file to sticker formatt.
+➩ /getgif: 
+To convert a animated sticker to gif
+➩ /rename: rename your any telegram file.
+"""
+
+__module__ = "Editor"
+
+
+
+
