@@ -65,7 +65,7 @@ async def _help(_, m: Message):
 
     return await m.reply_photo(
         
-        text=text,
+        photo=text,
         reply_markup=keyboard
     )
     
