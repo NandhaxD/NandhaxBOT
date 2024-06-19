@@ -329,3 +329,32 @@ async def ocr(_, ctx: Message):
         if os.path.exists(file_path):
             os.remove(file_path)
 
+
+__module__ = "Misc"
+
+
+__help__ = """
+Cmds:
+➩ /createqr:
+To create a QR Code.
+➩ /ocr:
+Reply to the media
+➩ /info:
+Get user information
+➩ /speedtest:
+Get a speed test of bot server.
+➩ /symbols:
+Get all awesome symbols collection.
+➩ /fonts:
+Change your name to different cool font
+➩ /readeqr:
+To read a qr code.
+➩ /id:
+Get ids a chat or a user includes file ids
+➩ /sof Query:
+Get a search from Stakoverflow com
+➩ AI:
+/bard , /gpt, /palm, /blackbox:
+To assist you
+
+"""
