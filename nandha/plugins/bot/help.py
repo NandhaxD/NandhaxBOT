@@ -65,7 +65,8 @@ async def _help(_, m: Message):
 
     return await m.reply_photo(
         
-        photo=text,
+        photo="https://graph.org/file/102923e804061cc45248b.jpg",
+        caption=text,
         reply_markup=keyboard
     )
     
