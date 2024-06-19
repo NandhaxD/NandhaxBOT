@@ -6,7 +6,7 @@ from pyrogram import filters
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto
 
 from nandha import bot
-from nandha.misc import paginate_modules
+from nandha.helpers.misc import paginate_modules
 from nandha.plugins.bot import ALL_MODULES
 
 
