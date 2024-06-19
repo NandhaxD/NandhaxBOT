@@ -54,7 +54,7 @@ ok
 
 @bot.on_message(filters.command('help'))
 async def _help(_, m: Message):
-    module_name = (parse_com(m.text, "help")).lower()
+    module_name = m.text.split()[1] if len(m.text.split()) == 2 else None
     if module_name:
         if module_name in HELPABLE:
             text, keyboard = await help_parser(module_name)
