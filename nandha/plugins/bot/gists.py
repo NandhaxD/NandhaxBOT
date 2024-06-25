@@ -110,5 +110,13 @@ async def GistPaste(bot, message):
        return await msg.edit_text("`Reply to the message text or a text document file`")
 
 
+__mod_name__ = "Gist"
 
+__help__ = """
+✨ **Github Gist**:
+
+➩ /gist: reply to a text or document text file.
+➩ /gistlist: show all gist post unique id
+➩ /delgist: to delete a gist from account by it's unique id
+"""
 
