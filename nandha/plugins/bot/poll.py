@@ -6,16 +6,26 @@ from pyrogram import filters, types, enums, errors
 from nandha import bot as app
 
 
+@app.on_raw_update(group=9996)
+async def r_poll_answer_s(client: Client, update: Update, users, chats):
+    print(update)
+    print(users)
+    print(chats)
+    if isinstance(update, UpdateMessagePollVote):
+        print("{:0>2x}".format(update.options[0][0]))
+    raise ContinuePropagation
+  
 @app.on_raw_update(group=35)
 async def poll_vote(client, update, users, chats):
-    if not isinstance(update, UpdateMessagePollVote): return 
+ #   if not isinstance(update, UpdateMessagePollVote)
     voter = User._parse(client, users[update.user_id])
     poll_id = update.poll_id 
     choices = update.options or "retracting vote"
     print(str(update))
     await client.send_message(
       chat_id=chats.id,
-      text=f'User {voter.first_name} voted on poll_id {poll_id} with {choices}')
+      text=f'User {voter.first_name} voted on poll_id {poll_id} with {choices}'
+    )
 
 
 
