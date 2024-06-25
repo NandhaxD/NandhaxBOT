@@ -1,4 +1,4 @@
-from nandha import bot
+from nandha import bot, BOT_USERNAME
 from pyrogram import filters, types, enums, errors
 from pyrogram.types import InlineQueryResultArticle, InputTextMessageContent, CallbackQuery, InlineQuery
 
