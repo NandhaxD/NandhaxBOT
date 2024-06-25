@@ -5,7 +5,7 @@
 
 
 
-from nandha import bot, DATABASE
+from nandha import bot, DATABASE, BOT_USERNAME
 from nandha.helpers.decorator import devs_only
 from pyrogram import filters, types
 
@@ -41,6 +41,9 @@ Use it with query `/checktoken token` to get link for share.
 ➩ /gettokens:
 to show your all saved tokens in db.
 
+Also you can share files through inline.
+
+Example: `@{BOT_USERNAME} fs token`
 """
 
 
