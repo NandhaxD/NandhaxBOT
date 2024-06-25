@@ -20,6 +20,32 @@ link = 'nandhaxbot.t.me?start=getfile-{}'
 
 
 
+__mod_name__ = "File Save"
+
+__help__ = """
+✨ **File Store bot**:
+
+➩ /getlink: 
+to upload a file and get a new token
+also you can upload a file to a specific token like `/getlink token` with reply to document or video.
+
+➩ /clearfile:
+to remove a specific file from token using the index and token `/cfile token 0`
+
+➩ /cleartoken:
+To remove a token from user that means all file in the token removd from db.
+
+➩ /checktoken:
+Use it with query `/checktoken token` to get link for share.
+
+➩ /gettokens:
+to show your all saved tokens in db.
+
+"""
+
+
+
+
 def gen_token(length=10):
     characters = string.ascii_letters + string.digits
     random_string = ''.join([random.choice(characters) for _ in range(length)])
