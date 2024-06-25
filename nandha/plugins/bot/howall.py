@@ -63,3 +63,19 @@ async def howall(_, message):
             return await reply_func.reply_animation(
                 animation=url, caption=default
             )
+
+
+__mod_name__ = "Howall"
+
+__help__ = """
+
+✨ **How all bot inspiration commands**:
+
+'stress', 'cringe', 'cute', 'anger', 'wish', 
+'happy', 'sex', 'beauty', 'boobs', 'dick',
+'horny', 'gay', 'lezbian', 'noob',
+'idiot', 'nigga', 'pro'
+
+Reply to the user or do check self.
+
+"""
