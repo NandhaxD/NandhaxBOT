@@ -7,6 +7,20 @@ import config
 temp = {}
 
 
+__mod_name__ = "Secret"
+
+__help__ = """
+
+✨ ** Secret Message**:
+
+Example: 
+⚡ only work in chats or channel.
+
+`@{BOT_USERNAME} sec {target-id} message`
+
+"""
+
+
 example= f"""
 **Secret Message**:
 This type of message is used in public chat to contact people for one-on-one conversations.
