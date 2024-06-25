@@ -19,6 +19,14 @@ API_HASH = "10cfe628ba69479964f570cba8a71bcc"
 API_ID = 11927798
 
 
+__mod_name__ = "String"
+
+__help__ = """
+✨ **Pyro String Session**:
+
+➩ /genstring: will show you buttons and follow them.
+"""
+
 import config
 
 LOGGER = getLogger(config.BOT_NAME)
