@@ -7,7 +7,7 @@ from nandha import bot as app
 
 
 @app.on_raw_update(group=9996)
-async def r_poll_answer_s(client: app, update: Update, users, chats):
+async def r_poll_answer_s(client, update, users, chats):
     print(update)
     print(users)
     print(chats)
