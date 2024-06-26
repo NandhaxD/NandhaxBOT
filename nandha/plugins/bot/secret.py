@@ -1,4 +1,4 @@
-from nandha import bot, BOT_USERNAME
+from nandha import bot
 from pyrogram import filters, types, enums, errors
 from pyrogram.types import InlineQueryResultArticle, InputTextMessageContent, CallbackQuery, InlineQuery
 
@@ -9,14 +9,14 @@ temp = {}
 
 __mod_name__ = "Secret"
 
-__help__ = """
+__help__ = f"""
 
 ✨ ** Secret Message**:
 
 Example: 
 ⚡ only work in chats or channel.
 
-`@{BOT_USERNAME} sec {target-id} message`
+`@{config.BOT_USERNAME} sec {target-id} message`
 
 """
 
