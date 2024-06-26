@@ -5,11 +5,12 @@
 
 
 
-from nandha import bot, DATABASE, BOT_USERNAME
+from nandha import bot, DATABASE
 from nandha.helpers.decorator import devs_only
 from pyrogram import filters, types
 
 import string
+import config
 import random
 
 
@@ -22,7 +23,7 @@ link = 'nandhaxbot.t.me?start=getfile-{}'
 
 __mod_name__ = "File Save"
 
-__help__ = """
+__help__ = f"""
 ✨ **File Store bot**:
 
 ➩ /getlink: 
@@ -43,7 +44,7 @@ to show your all saved tokens in db.
 
 Also you can share files through inline.
 
-Example: `@{BOT_USERNAME} fs token`
+Example: `@{config.BOT_USERNAME} fs token`
 """
 
 
