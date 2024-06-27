@@ -16,7 +16,7 @@ __help__ = f"""
 Example: 
 ⚡ only work in chats or channel.
 
-`@{config.BOT_USERNAME} sec \{target-id} message`
+`@{config.BOT_USERNAME} sec {{target-id}} message`
 
 """
 
