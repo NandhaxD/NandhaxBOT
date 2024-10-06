@@ -21,7 +21,7 @@ link = 'nandhaxbot.t.me?start=getfile-{}'
 
 
 
-__mod_name__ = "File Save"
+__module__ = "File Save"
 
 __help__ = f"""
 ✨ **File Store bot**:
