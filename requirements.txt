@@ -1,6 +1,5 @@
-#pyrogram==2.0.103 
-pyrofork== 2.3.24
-#git+https://github.com/KurimuzonAkuma/pyrogram.git@v2.1.21
+
+https://github.com/KurimuzonAkuma/pyrogram/archive/dev.zip
 pymongo==4.3.3
 moviepy==1.0.3
 pillow==10.2.0
