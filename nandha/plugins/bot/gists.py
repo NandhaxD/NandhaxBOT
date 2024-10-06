@@ -110,7 +110,7 @@ async def GistPaste(bot, message):
        return await msg.edit_text("`Reply to the message text or a text document file`")
 
 
-__mod_name__ = "Gist"
+__module__ = "Gist"
 
 __help__ = """
 ✨ **Github Gist**:
