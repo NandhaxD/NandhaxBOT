@@ -1,1 +1,1 @@
-worker: python3 -m nandha # Fuck
+worker: python3 -m nandha
