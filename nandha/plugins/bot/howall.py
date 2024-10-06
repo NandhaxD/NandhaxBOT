@@ -65,7 +65,7 @@ async def howall(_, message):
             )
 
 
-__mod_name__ = "Howall"
+__module__ = "Howall"
 
 __help__ = """
 
